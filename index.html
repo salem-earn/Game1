@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salem Earn - Advance Earn App</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="theme-color" content="#310d59">
+<style>
+:root{
+  --bg-gradient: linear-gradient(180deg, #230843 0%, #0d0218 100%);
+  --primary-purple: #4a00e0;
+  --accent-gold: #ffd700;
+  --gold-gradient: linear-gradient(135deg, #ffe57f 0%, #ffb300 50%, #ff8f00 100%);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 215, 0, 0.35);
+  --text-light: #ffffff;
+  --text-sub: #d1c4e9;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#0d0218;color:var(--text-light);display:flex;justify-content:center;min-height:100vh}
+.app-container{width:100%;max-width:430px;background:var(--bg-gradient);min-height:100vh;display:flex;flex-direction:column;position:relative;padding-bottom:75px;box-shadow:0 0 25px rgba(0,0,0,.8)}
+.top-bar{background:rgba(26,7,48,.95);backdrop-filter:blur(10px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--accent-gold);object-fit:cover;box-shadow:0 0 8px rgba(255,215,0,.4)}
+.brand-name{font-size:18px;font-weight:800;background:var(--gold-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.status-badge{background:rgba(37,211,102,.15);border:1px solid #25d366;color:#25d366;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+.auth-container{padding:30px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;text-align:center}
+.auth-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:24px;width:100%;backdrop-filter:blur(10px)}
+.wallet-card{background:var(--gold-gradient);margin:16px;border-radius:20px;padding:20px;color:#1a0730;box-shadow:0 8px 24px rgba(255,179,0,.3);position:relative;overflow:hidden}
+.wallet-card::after{content:'';position:absolute;top:-50%;right:-50%;width:200px;height:200px;background:rgba(255,255,255,.2);transform:rotate(45deg);pointer-events:none}
+.balance-label{font-size:11px;font-weight:800;letter-spacing:1px;opacity:.85}
+.balance-amount{font-size:40px;font-weight:900;margin:4px 0 10px 0;line-height:1}
+.user-phone-chip{background:rgba(26,7,48,.15);display:inline-block;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;margin-bottom:12px}
+.btn-checkin{width:100%;background:#1a0730;color:var(--accent-gold);border:none;padding:12px;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .1s}
+.btn-checkin:active{transform:scale(.98)}
+.btn-checkin:disabled{opacity:0.6;cursor:not-allowed}
+.section-title{font-size:15px;font-weight:800;margin:16px 16px 8px 16px;color:var(--accent-gold);display:flex;align-items:center;gap:6px}
+.task-card{background:var(--card-bg);border:1px solid var(--card-border);margin:8px 16px;padding:14px 16px;border-radius:16px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(5px)}
+.task-details h4{font-size:14px;font-weight:700;margin-bottom:4px;color:#fff}
+.task-details p{font-size:11px;color:var(--text-sub)}
+.btn-reward{background:var(--gold-gradient);color:#1a0730;border:none;padding:8px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(255,215,0,.3)}
+.btn-reward:disabled{opacity:0.5;cursor:not-allowed;background:#555;color:#ccc}
+.form-group{padding:0 16px;margin-top:12px}
+.input-box,.select-box{width:100%;background:rgba(255,255,255,.08);border:1px solid var(--card-border);border-radius:12px;padding:14px;color:#fff;font-size:14px;margin-bottom:12px;outline:none}
+.select-box option{background:#1a0730;color:#fff}
+.input-box::placeholder{color:#8a7b9d}
+.tab-content{display:none}.tab-content.active{display:block}
+.bottom-nav{position:fixed;bottom:0;width:100%;max-width:430px;background:rgba(20,5,38,.98);border-top:1px solid var(--card-border);display:flex;justify-content:space-around;padding:8px 0;z-index:100}
+.nav-btn{background:none;border:none;color:#8a7b9d;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.nav-btn.active{color:var(--accent-gold)}
+.nav-icon{font-size:18px}
+.admin-box{background:rgba(255,215,0,.1);border:1px solid var(--accent-gold);margin:16px;padding:16px;border-radius:16px}
+.admin-box h4{color:var(--accent-gold);margin-bottom:8px}
+.admin-box p{font-size:13px;margin:4px 0;color:var(--text-sub)}
+.btn-action{border:none;padding:6px 12px;border-radius:8px;font-weight:bold;font-size:12px;cursor:pointer;margin-top:6px}
+.btn-approve{background:#25d366;color:#000;margin-right:6px}
+.btn-reject{background:#ff4757;color:#fff}
+#toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#ffd700;color:#1a0730;padding:10px 18px;border-radius:20px;font-weight:800;font-size:13px;display:none;z-index:200;text-align:center}
+</style>
+</head>
+<body>
+<div class="app-container">
+<div class="top-bar">
+<div class="brand"><img src="logo.png" alt="Logo" class="brand-logo" onerror="this.src='icon.png'"><span class="brand-name">Salem Earn</span></div>
+<span class="status-badge">• SECURE • LIVE</span>
+</div>
+
+<!-- LOGIN PAGE -->
+<div id="auth-section" class="auth-container">
+<div class="auth-card">
+<img src="logo.png" style="width:70px;height:70px;border-radius:18px;border:2px solid var(--accent-gold);margin-bottom:12px;" onerror="this.style.display='none'">
+<h3 style="color:var(--accent-gold);margin-bottom:8px">Welcome Back! 👋</h3>
+<p style="font-size:12px;color:var(--text-sub);margin-bottom:20px">Enter Mobile Number to Login</p>
+<input type="tel" id="login-phone" class="input-box" placeholder="Enter 10 Digit Mobile" maxlength="10" inputmode="numeric">
+<button class="btn-checkin" style="background:var(--gold-gradient);color:#1a0730" onclick="handleLogin()">Login to Account</button>
+<p style="font-size:11px;color:var(--text-sub);margin-top:12px">Admin? Enter <b style="color:var(--accent-gold)">9942610013</b></p>
+</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app-main" style="display:none">
+
+<!-- TAB 1: HOME -->
+<div id="tab-home" class="tab-content active">
+<div class="wallet-card">
+<div class="balance-label">WALLET BALANCE • SECURED</div>
+<div class="balance-amount">₹<span id="user-balance">0.00</span></div>
+<div class="user-phone-chip">✓ <span id="user-phone">9942610013</span></div>
+<button class="btn-checkin" onclick="claimDaily()">🎁 Daily Check-in +₹5</button>
+</div>
+
+<div class="section-title">⚡ Watch Ads & Earn Money</div>
+<div class="task-card">
+  <div class="task-details">
+    <h4 id="ad-reward-text">Watch Ad & Earn ₹0.30</h4>
+    <p id="ad-status-sub">Daily Limit: 50 Ads | Gap: 10s</p>
+  </div>
+  <button class="btn-reward" id="watch-ad-btn" onclick="watchAd()">Watch Ad</button>
+</div>
+
+<div class="section-title">📱 High Earning App Tasks</div>
+<div class="task-card">
+  <div class="task-details">
+    <h4>Install App & Register</h4>
+    <p>Complete offer & get instant bonus</p>
+  </div>
+  <button class="btn-reward" id="app-install-btn" onclick="installAppTask()">+ ₹20.00</button>
+</div>
+</div>
+
+<!-- TAB 2: TASKS -->
+<div id="tab-tasks" class="tab-content">
+<div class="section-title">📋 Daily Progress</div>
+<div class="task-card">
+  <div class="task-details">
+    <h4>Daily Ad Limit</h4>
+    <p>Complete 50 ads per day</p>
+  </div>
+  <span style="font-weight:800;color:var(--accent-gold);font-size:16px;" id="ad-count">0/50</span>
+</div>
+<div id="tasks-list"></div>
+</div>
+
+<!-- TAB 3: WALLET -->
+<div id="tab-wallet" class="tab-content">
+<div class="wallet-card"><div class="balance-label">WITHDRAWABLE BALANCE</div><div class="balance-amount">₹<span id="withdraw-balance">0.00</span></div></div>
+<div class="section-title">💸 Withdraw • Fast</div>
+<div class="form-group">
+<select id="payout-type" class="select-box" onchange="togglePayoutPlaceholder()"><option value="UPI">UPI (GPay/PhonePe/Paytm)</option><option value="Paytm">Paytm Wallet</option></select>
+<input type="text" id="withdraw-details" class="input-box" placeholder="Enter UPI ID (e.g., name@upi)">
+<input type="number" id="withdraw-amount" class="input-box" placeholder="Min ₹50 - Max ₹5000" inputmode="numeric">
+<button class="btn-checkin" style="background:var(--gold-gradient);color:#1a0730" onclick="requestWithdrawal()">🔒 Secure Withdraw</button>
+<div id="w-msg" style="text-align:center;font-size:12px;margin-top:8px;color:#ffd700"></div>
+</div>
+<div class="section-title">📜 History</div>
+<div id="withdraw-history" style="padding:0 16px"></div>
+</div>
+
+<!-- TAB 4: PROFILE -->
+<div id="tab-profile" class="tab-content">
+<div class="section-title">👤 My Profile</div>
+<div class="task-card" style="flex-direction:column;align-items:flex-start;gap:8px"><p style="font-size:12px;color:var(--text-sub)">Mobile:</p><h3 style="color:var(--accent-gold)" id="profile-phone-display">+91 ----------</h3><p style="font-size:12px;color:var(--text-sub)">Role: <span id="user-role-badge" style="color:#25d366;font-weight:bold">User</span></p></div>
+<div class="section-title">🤝 Refer & Earn</div>
+<div class="task-card" style="flex-direction:column;gap:12px"><p style="font-size:12px;color:var(--text-sub)">Share link - Get <b>₹10</b> bonus!</p><div style="width:100%;display:flex;gap:8px"><input type="text" id="referral-code" class="input-box" style="margin-bottom:0" readonly value="https://salem-earn.app/ref?code=SE9942"><button class="btn-reward" style="white-space:nowrap" onclick="copyReferral()">Copy</button></div><button class="btn-checkin" style="background:#25d366;color:#fff;width:100%;font-weight:bold" onclick="shareWhatsApp()">📲 Invite via WhatsApp</button></div>
+<div class="form-group" style="margin-top:20px"><button class="btn-checkin" style="background:rgba(255,71,87,.2);border:1px solid #ff4757;color:#ff4757" onclick="handleLogout()">🚪 Logout</button></div>
+</div>
+
+<!-- TAB 5: ADMIN (ONLY SHOWN FOR ADMIN NUMBER) -->
+<div id="tab-admin" class="tab-content">
+<div class="section-title">👑 Admin Revenue & Control</div>
+<div class="admin-box"><h4>📊 Live Stats</h4><p>Admin Profit: <b style="color:var(--accent-gold)">₹<span id="admin-profit">0.00</span></b></p><p>Total Requested: <b>₹<span id="total-requested">0.00</span></b></p><p>Total Users: <b><span id="total-users">0</span></b></p></div>
+<div class="section-title">📩 Pending Withdrawals</div>
+<div style="padding:0 16px;display:flex;gap:6px;margin-bottom:10px"><input id="admin-search" class="input-box" style="margin:0" placeholder="Search phone/UPI"><button class="btn-reward" onclick="loadWithdrawals()">Search</button></div>
+<div id="withdrawal-list" style="padding:0 16px"><p style="font-size:12px;color:var(--text-sub)">No pending requests.</p></div>
+</div>
+
+<!-- BOTTOM NAVIGATION BAR -->
+<div class="bottom-nav">
+<button class="nav-btn active" onclick="switchTab('home',this)"><span class="nav-icon">🏠</span>Home</button>
+<button class="nav-btn" onclick="switchTab('tasks',this)"><span class="nav-icon">📋</span>Tasks</button>
+<button class="nav-btn" onclick="switchTab('wallet',this)"><span class="nav-icon">💰</span>Wallet</button>
+<button class="nav-btn" onclick="switchTab('profile',this)"><span class="nav-icon">👤</span>Profile</button>
+<button class="nav-btn" id="admin-nav-btn" style="display:none" onclick="switchTab('admin',this)"><span class="nav-icon">👑</span>Admin</button>
+</div>
+
+</div>
+</div>
+<div id="toast"></div>
+
+<script>
+let currentUserPhone="", isAdmin=false, balance=0, adminProfit=0, adsWatched=0, totalRequested=0;
+let isCooldown = false;
+const ADMIN_MOBILE = "9942610013";
+
+const MONETAG_AD_LINK = "https://your-monetag-direct-link.com"; 
+const APP_OFFER_LINK = "https://your-cpa-offer-link.com";
+
+function toast(m){let t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+
+window.onload=function(){
+    let p=localStorage.getItem('salem_user_phone');
+    if(p) loginUser(p);
+};
+
+function checkDailyReset(){
+    let today = new Date().toDateString();
+    let lastDate = localStorage.getItem('se_last_date_' + currentUserPhone);
+    if(lastDate !== today){
+        adsWatched = 0;
+        localStorage.setItem('se_last_date_' + currentUserPhone, today);
+        localStorage.setItem('se_ads_' + currentUserPhone, 0);
+    }
+}
+
+function loadPersisted(){
+    checkDailyReset();
+    let b=localStorage.getItem('se_bal_'+currentUserPhone);
+    if(b) balance=parseFloat(b);
+    let ap=localStorage.getItem('se_admin_profit');
+    if(ap) adminProfit=parseFloat(ap);
+    let ad=localStorage.getItem('se_ads_'+currentUserPhone);
+    if(ad) adsWatched=parseInt(ad);
+}
+
+function saveBal(){
+    if(currentUserPhone){
+        localStorage.setItem('se_bal_'+currentUserPhone, balance.toFixed(2));
+        localStorage.setItem('se_ads_'+currentUserPhone, adsWatched);
+    }
+    localStorage.setItem('se_admin_profit', adminProfit.toFixed(2));
+}
+
+function handleLogin(){
+    let ph=document.getElementById('login-phone').value.trim();
+    if(ph.length!==10||isNaN(ph)){toast('Enter valid 10-digit number!');return}
+    localStorage.setItem('salem_user_phone',ph);
+    loginUser(ph);
+}
+
+function loginUser(phone){
+    currentUserPhone=phone;
+    isAdmin=(phone===ADMIN_MOBILE);
+    document.getElementById('auth-section').style.display='none';
+    document.getElementById('app-main').style.display='block';
+    document.getElementById('user-phone').innerText=phone;
+    document.getElementById('profile-phone-display').innerText="+91 "+phone;
+    document.getElementById('referral-code').value="https://salem-earn.app/ref?code=SE"+phone.slice(-4);
+    
+    let ab=document.getElementById('admin-nav-btn');
+    let rb=document.getElementById('user-role-badge');
+    
+    // ADMIN TAB RESTRICTION: Sadharana userkaalku Admin tab hide aakum!
+    if(isAdmin){
+        ab.style.display='flex';
+        rb.innerText="Admin 👑";
+        rb.style.color="var(--accent-gold)";
+    } else {
+        ab.style.display='none';
+        rb.innerText="Standard User";
+        rb.style.color="#25d366";
+    }
+    
+    loadPersisted();
+    updateUI();
+    loadTasks();
+    loadWithdrawHistory();
+    if(isAdmin) loadWithdrawals();
+}
+
+function handleLogout(){localStorage.removeItem('salem_user_phone');location.reload()}
+
+function updateUI(){
+    document.getElementById('user-balance').innerText=balance.toFixed(2);
+    document.getElementById('withdraw-balance').innerText=balance.toFixed(2);
+    document.getElementById('admin-profit').innerText=adminProfit.toFixed(2);
+    document.getElementById('total-requested').innerText=totalRequested.toFixed(2);
+    document.getElementById('ad-count').innerText=adsWatched+"/50";
+    
+    let adBtn = document.getElementById('watch-ad-btn');
+    let adText = document.getElementById('ad-reward-text');
+    let adSub = document.getElementById('ad-status-sub');
+
+    if(adsWatched >= 50){
+        adBtn.disabled = true;
+        adBtn.innerText = "Limit Reached";
+        adText.innerText = "Today's 50 Ads Limit Reached!";
+        adSub.innerText = "Come back tomorrow for more ads.";
+    } else {
+        adText.innerText = "Watch Ad & Earn ₹0.30";
+        adSub.innerText = `Ads Left: ${50 - adsWatched} | Gap: 10s`;
+    }
+
+    let isInstalled = localStorage.getItem('se_app_inst_' + currentUserPhone) === '1';
+    let instBtn = document.getElementById('app-install-btn');
+    if(isInstalled){
+        instBtn.disabled = true;
+        instBtn.innerText = "Completed";
+    }
+
+    let users=new Set();
+    for(let i=0;i<localStorage.length;i++){
+        let k=localStorage.key(i);
+        if(k.startsWith('se_bal_')) users.add(k);
+    }
+    document.getElementById('total-users').innerText=users.size;
+    calcTotalRequested();
+}
+
+function calcTotalRequested(){
+    let tot=0;
+    for(let i=0;i<localStorage.length;i++){
+        let k=localStorage.key(i);
+        if(k.startsWith('se_with_')){
+            try{
+                let arr=JSON.parse(localStorage.getItem(k)||'[]');
+                arr.forEach(o=>{if(o.status==='Pending') tot+=parseFloat(o.amt)})
+            }catch(e){}
+        }
+    }
+    totalRequested=tot;
+    document.getElementById('total-requested').innerText=tot.toFixed(2);
+}
+
+function watchAd(){
+    if(isCooldown) return;
+    if(adsWatched >= 50){
+        toast('Daily 50 Ad Limit Reached!');
+        return;
+    }
+
+    window.open(MONETAG_AD_LINK, '_blank');
+
+    let reward = 0.30;
+    adsWatched++;
+    balance += reward;
+    
+    let profitThisAd = 0.70 + (Math.random() * 0.20);
+    adminProfit += profitThisAd;
+
+    saveBal();
+    updateUI();
+    toast(`₹${reward.toFixed(2)} added!`);
+
+    startCooldown(10);
+}
+
+function startCooldown(seconds){
+    isCooldown = true;
+    let btn = document.getElementById('watch-ad-btn');
+    btn.disabled = true;
+    
+    let timer = seconds;
+    let interval = setInterval(()=>{
+        btn.innerText = `Wait ${timer}s`;
+        timer--;
+        if(timer < 0){
+            clearInterval(interval);
+            isCooldown = false;
+            if(adsWatched < 50){
+                btn.disabled = false;
+                btn.innerText = "Watch Ad";
+            } else {
+                btn.innerText = "Limit Reached";
+            }
+        }
+    }, 1000);
+}
+
+// APP INSTALL TASK (User: ₹20, Admin: ₹30 Profit)
+function installAppTask(){
+    if(localStorage.getItem('se_app_inst_' + currentUserPhone) === '1'){
+        toast('Task already completed!');
+        return;
+    }
+
+    window.open(APP_OFFER_LINK, '_blank');
+    toast('Verify registration after install...');
+
+    setTimeout(()=>{
+        localStorage.setItem('se_app_inst_' + currentUserPhone, '1');
+        balance += 20.00;      // User Reward
+        adminProfit += 30.00;  // Admin Profit
+        saveBal();
+        updateUI();
+        toast('App Install Bonus ₹20.00 Added!');
+    }, 12000); 
+}
+
+function claimDaily(){
+    let last=localStorage.getItem('se_daily_'+currentUserPhone);
+    let now=Date.now();
+    if(last && now-parseInt(last)<86400000){
+        toast('Already claimed today!');
+        return;
+    }
+    localStorage.setItem('se_daily_'+currentUserPhone,now.toString());
+    balance+=5;
+    saveBal();
+    updateUI();
+    toast('Daily +₹5 claimed!');
+}
+
+function loadTasks(){
+    let tasks=[
+        {t:'Join Telegram',r:10,d:'Join our channel',doneKey:'tg'},
+        {t:'Follow Instagram',r:15,d:'Follow @salemearn',doneKey:'ig'},
+        {t:'Share App',r:20,d:'Share to 3 friends',doneKey:'share'}
+    ];
+    let html='';
+    tasks.forEach(x=>{
+        let done=localStorage.getItem('se_task_'+currentUserPhone+'_'+x.doneKey)==='1';
+        html+=`<div class="task-card"><div class="task-details"><h4>${x.t} - Rs.${x.r}</h4><p>${x.d}</p></div><button class="btn-reward" ${done?'disabled style=opacity:.5':''} onclick="doTask('${x.doneKey}',${x.r})">${done?'Done':'Do'}</button></div>`
+    });
+    document.getElementById('tasks-list').innerHTML=html;
+}
+
+function doTask(k,r){
+    if(localStorage.getItem('se_task_'+currentUserPhone+'_'+k)==='1'){toast('Already done!');return}
+    localStorage.setItem('se_task_'+currentUserPhone+'_'+k,'1');
+    balance+=r;
+    saveBal();
+    updateUI();
+    loadTasks();
+    toast('+Rs.'+r+' added!');
+}
+
+function requestWithdrawal(){
+    let det=document.getElementById('withdraw-details').value.trim();
+    let amt=parseFloat(document.getElementById('withdraw-amount').value);
+    if(!det){document.getElementById('w-msg').innerText='Enter UPI/Paytm!';return}
+    if(isNaN(amt)||amt<50){document.getElementById('w-msg').innerText='Min Rs.50';return}
+    if(amt>balance){document.getElementById('w-msg').innerText='Insufficient balance!';return}
+    balance-=amt;
+    saveBal();
+    let arr=JSON.parse(localStorage.getItem('se_with_'+currentUserPhone)||'[]');
+    arr.unshift({upi:det,amt:amt,type:document.getElementById('payout-type').value,status:'Pending',date:new Date().toLocaleString(),phone:currentUserPhone});
+    localStorage.setItem('se_with_'+currentUserPhone,JSON.stringify(arr));
+    updateUI();
+    loadWithdrawHistory();
+    document.getElementById('w-msg').innerText='Request sent! Pending approval';
+    toast('Withdraw requested!');
+    document.getElementById('withdraw-details').value='';
+    document.getElementById('withdraw-amount').value='';
+}
+
+function loadWithdrawHistory(){
+    let arr=JSON.parse(localStorage.getItem('se_with_'+currentUserPhone)||'[]');
+    let cont=document.getElementById('withdraw-history');
+    if(arr.length===0){cont.innerHTML='<p style="font-size:12px;color:var(--text-sub)">No withdrawals yet.</p>';return}
+    let h='';
+    arr.forEach(o=>{h+=`<div class="task-card"><div class="task-details"><h4>₹${o.amt} - ${o.type}</h4><p>${o.upi}<br>${o.date}</p></div><span style="font-size:11px;font-weight:800;color:${o.status==='Pending'?'#ffd700':o.status==='Approved'?'#25d366':'#ff4757'}">${o.status}</span></div>`});
+    cont.innerHTML=h;
+}
+
+function loadWithdrawals(){
+    let all=[];
+    for(let i=0;i<localStorage.length;i++){
+        let k=localStorage.key(i);
+        if(k.startsWith('se_with_')){
+            try{
+                let arr=JSON.parse(localStorage.getItem(k)||'[]');
+                arr.forEach((o,idx)=>{all.push({...o,idx,key:k,phone:k.replace('se_with_','')})})
+            }catch(e){}
+        }
+    }
+    let q=(document.getElementById('admin-search')?.value||'').toLowerCase();
+    if(q) all=all.filter(x=>x.phone.includes(q)||x.upi.toLowerCase().includes(q));
+    calcTotalRequested();
+    let list=document.getElementById('withdrawal-list');
+    if(all.length===0){list.innerHTML='<p style="font-size:12px;color:var(--text-sub)">No pending requests.</p>';return}
+    let html='';
+    all.forEach(x=>{
+        html+=`<div class="admin-box"><p><b>Phone:</b> ${x.phone} | <b>${x.type}:</b> ${x.upi}</p><p><b>Amount:</b> ₹${x.amt} | <b>Status:</b> <span style="color:${x.status==='Pending'?'#ffd700':'#25d366'}">${x.status}</span></p><p style="font-size:11px">${x.date}</p>${x.status==='Pending'?`<button class="btn-action btn-approve" onclick="approveWithdraw('${x.key}',${x.idx})">Approve</button><button class="btn-action btn-reject" onclick="rejectWithdraw('${x.key}',${x.idx})">Reject</button>`:''}</div>`
+    });
+    list.innerHTML=html;
+}
+
+function approveWithdraw(k,i){
+    let arr=JSON.parse(localStorage.getItem(k)||'[]');
+    if(arr[i]){
+        arr[i].status='Approved';
+        localStorage.setItem(k,JSON.stringify(arr));
+        toast('Approved!');
+        loadWithdrawals();
+        loadWithdrawHistory();
+    }
+}
+
+function rejectWithdraw(k,i){
+    let arr=JSON.parse(localStorage.getItem(k)||'[]');
+    if(arr[i]){
+        let amt=parseFloat(arr[i].amt);
+        arr[i].status='Rejected';
+        localStorage.setItem(k,JSON.stringify(arr));
+        let ph=k.replace('se_with_','');
+        let balKey='se_bal_'+ph;
+        let b=parseFloat(localStorage.getItem(balKey)||'0');
+        localStorage.setItem(balKey,(b+amt).toFixed(2));
+        if(ph===currentUserPhone){balance+=amt;updateUI()}
+        toast('Rejected & refunded!');
+        loadWithdrawals();
+        loadWithdrawHistory();
+    }
+}
+
+function switchTab(id,el){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    if(el) el.classList.add('active');
+    if(id==='admin') loadWithdrawals();
+    if(id==='wallet') loadWithdrawHistory();
+}
+
+function togglePayoutPlaceholder(){
+    let t=document.getElementById('payout-type').value;
+    document.getElementById('withdraw-details').placeholder=t==='UPI'?'Enter UPI ID (e.g., name@upi)':'Enter Paytm Mobile Number';
+}
+
+function copyReferral(){
+    let inp=document.getElementById('referral-code');
+    inp.select();
+    document.execCommand('copy');
+    toast('Referral link copied!');
+}
+
+function shareWhatsApp(){
+    let code=document.getElementById('referral-code').value;
+    let text=encodeURIComponent('Join Salem Earn & earn daily cash: ' + code);
+    window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+}
+</script>
+</body>
+</html>
