@@ -7,148 +7,230 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4CAF50">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            width: 100%;
-            padding: 15px 0;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .balance-box {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .balance-title {
-            font-size: 14px;
-            color: #555;
-        }
-        .balance-amount {
-            font-size: 28px;
-            color: #2e7d32;
-            font-weight: bold;
-        }
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .btn:active {
-            background-color: #388e3c;
-        }
-        .btn-withdraw {
-            background-color: #ff9800;
-        }
-        .btn-withdraw:active {
-            background-color: #e65100;
-        }
-        input {
-            width: 90%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f0f2f5; padding-bottom: 70px; }
+        
+        /* Header */
+        header { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        
+        /* Sections */
+        .section { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
+        .active-section { display: block; }
+        
+        /* Cards */
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 15px; text-align: center; }
+        .balance-title { font-size: 14px; color: #666; margin-bottom: 5px; }
+        .balance-amount { font-size: 32px; color: #2E7D32; font-weight: bold; }
+        
+        /* Buttons */
+        .btn { background: #4CAF50; color: white; border: none; padding: 14px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; transition: 0.2s; }
+        .btn:active { transform: scale(0.98); background: #388E3C; }
+        .btn-withdraw { background: #FF9800; }
+        .btn-withdraw:active { background: #F57C00; }
+        .btn-danger { background: #f44336; padding: 6px 12px; font-size: 12px; width: auto; margin: 0; }
+        .btn-success { background: #4CAF50; padding: 6px 12px; font-size: 12px; width: auto; margin: 0; }
+
+        /* Inputs */
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+        
+        /* Navigation Bar */
+        .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+        .nav-item { border: none; background: none; font-size: 12px; color: #777; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+        .nav-item.active { color: #4CAF50; font-weight: bold; }
+        .nav-icon { font-size: 20px; margin-bottom: 2px; }
+
+        /* Admin Request List */
+        .req-card { background: #f9f9f9; border-left: 4px solid #FF9800; padding: 10px; margin-bottom: 10px; text-align: left; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
 
-    <header>Earn Money App</header>
+    <header>Earn Money Pro</header>
 
-    <div class="container">
-        <div class="balance-box">
+    <!-- 1. TASKS SECTION -->
+    <div id="task-section" class="section active-section">
+        <div class="card">
             <div class="balance-title">உங்கள் இருப்பு (Balance)</div>
-            <div class="balance-amount">₹<span id="balance">0.00</span></div>
+            <div class="balance-amount">₹<span class="user-balance">0.00</span></div>
         </div>
 
-        <button class="btn" onclick="watchAd()">🎥 Watch Ad (Earn ₹0.30)</button>
+        <div class="card">
+            <h3>🎥 Watch Ad Task</h3>
+            <p style="font-size: 12px; color: #666; margin: 5px 0 10px;">விளம்பரத்தைப் பார்த்து உடனடியாக ₹0.30 பெறுங்கள்!</p>
+            <button class="btn" onclick="watchAd()">Watch Ad (Earn ₹0.30)</button>
+        </div>
 
-        <hr style="margin: 20px 0; border: 0.5px solid #eee;">
+        <div class="card">
+            <h3>📲 App Install Task</h3>
+            <p style="font-size: 12px; color: #666; margin: 5px 0 10px;">புதிய ஆப்பை இன்ஸ்டால் செய்து ₹20.00 பெறுங்கள்!</p>
+            <button class="btn" style="background:#2196F3;" onclick="installTask()">Install App (Earn ₹20.00)</button>
+        </div>
+    </div>
 
-        <h3>வித் டிராவல் கோரிக்கை (Withdrawal)</h3>
-        <p style="font-size: 12px; color: #777;">குறைந்தபட்ச வித் டிராவல்: ₹50<br>(செயலாக்க நேரம்: 24-72 மணி நேரம்)</p>
-        <input type="text" id="upiId" placeholder="UPI ID / PhonePe Number">
-        <input type="number" id="withdrawAmount" placeholder="தொகை (Amount ₹)">
-        <button class="btn btn-withdraw" onclick="requestWithdrawal()">பணம் பெறவும் (Withdraw)</button>
+    <!-- 2. WALLET SECTION -->
+    <div id="wallet-section" class="section">
+        <div class="card">
+            <div class="balance-title">Wallet Balance</div>
+            <div class="balance-amount">₹<span class="user-balance">0.00</span></div>
+        </div>
+
+        <div class="card">
+            <h3>Withdraw Money</h3>
+            <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Min Withdraw: ₹50 | Process Time: 24-72 Hrs</p>
+            <input type="text" id="upiId" placeholder="Enter UPI ID / PhonePe Number">
+            <input type="number" id="withdrawAmount" placeholder="Enter Amount (₹)">
+            <button class="btn btn-withdraw" onclick="requestWithdrawal()">Request Withdrawal</button>
+        </div>
+    </div>
+
+    <!-- 3. PROFILE SECTION -->
+    <div id="profile-section" class="section">
+        <div class="card">
+            <div style="font-size: 50px;">👤</div>
+            <h3 style="margin-top: 10px;">User Profile</h3>
+            <p style="color: #666; font-size: 14px; margin-top: 5px;">Status: Active Member</p>
+        </div>
+        <div class="card" style="text-align: left;">
+            <p><strong>Total Earned:</strong> ₹<span id="total-earned">0.00</span></p>
+            <p style="margin-top: 10px;"><strong>App Version:</strong> 2.0 (PWA)</p>
+        </div>
+    </div>
+
+    <!-- 4. ADMIN SECTION -->
+    <div id="admin-section" class="section">
+        <div id="admin-login-box" class="card">
+            <h3>🔑 Admin Login</h3>
+            <input type="password" id="adminPass" placeholder="Enter Password (Default: 1234)">
+            <button class="btn" onclick="loginAdmin()">Login</button>
+        </div>
+
+        <div id="admin-dashboard" class="card" style="display: none; text-align: left;">
+            <h3>🛡️ Admin Control Panel</h3>
+            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">பயனர்களின் Withdrawal Requests கீழே காட்டப்படும்:</p>
+            
+            <div id="requests-list">
+                <!-- Dynamic Requests -->
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVBAR -->
+    <div class="navbar">
+        <button class="nav-item active" onclick="showSection('task-section', this)">
+            <span class="nav-icon">🎯</span>Task
+        </button>
+        <button class="nav-item" onclick="showSection('wallet-section', this)">
+            <span class="nav-icon">👛</span>Wallet
+        </button>
+        <button class="nav-item" onclick="showSection('profile-section', this)">
+            <span class="nav-icon">👤</span>Profile
+        </button>
+        <button class="nav-item" onclick="showSection('admin-section', this)">
+            <span class="nav-icon">⚙️</span>Admin
+        </button>
     </div>
 
     <script>
-        // Monetag Direct Link
         const MONETAG_AD_LINK = "https://uplcm.com/4/82025129";
 
         let balance = parseFloat(localStorage.getItem('user_balance')) || 0.00;
-        document.getElementById('balance').innerText = balance.toFixed(2);
+        let totalEarned = parseFloat(localStorage.getItem('total_earned')) || balance;
+        let requests = JSON.parse(localStorage.getItem('withdraw_requests')) || [];
+
+        function updateUI() {
+            document.querySelectorAll('.user-balance').forEach(el => el.innerText = balance.toFixed(2));
+            document.getElementById('total-earned').innerText = totalEarned.toFixed(2);
+        }
+        updateUI();
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active-section');
+            btn.classList.add('active');
+            if(sectionId === 'admin-section') renderAdminRequests();
+        }
 
         function watchAd() {
-            // Open Monetag Ad Direct Link in new tab
             window.open(MONETAG_AD_LINK, '_blank');
-            
-            // Add reward of ₹0.30
             balance += 0.30;
-            localStorage.setItem('user_balance', balance);
-            document.getElementById('balance').innerText = balance.toFixed(2);
-            alert("விளம்பரத்தைப் பார்த்ததற்கு ₹0.30 உங்கள் கணக்கில் சேர்க்கப்பட்டது!");
+            totalEarned += 0.30;
+            saveData();
+            alert("₹0.30 சேர்க்கப்பட்டது!");
+        }
+
+        function installTask() {
+            window.open(MONETAG_AD_LINK, '_blank');
+            alert("ஆப்பை இன்ஸ்டால் செய்து முடிக்கவும். Admin சரிபார்த்த பிறகு ₹20 வழங்கப்படும்!");
         }
 
         function requestWithdrawal() {
             const upi = document.getElementById('upiId').value;
             const amount = parseFloat(document.getElementById('withdrawAmount').value);
 
-            if (!upi) {
-                alert("தயவுசெய்து உங்கள் UPI ID அல்லது PhonePe எண்ணை உள்ளிடவும்!");
-                return;
-            }
-
-            if (isNaN(amount) || amount < 50) {
-                alert("குறைந்தபட்சம் ₹50 ரூபாய் மட்டுமே வித் டிரா செய்ய முடியும்!");
-                return;
-            }
-
-            if (amount > balance) {
-                alert("உங்கள் கணக்கில் போதுமான இருப்பு இல்லை!");
+            if (!upi || isNaN(amount) || amount < 50 || amount > balance) {
+                alert("சரியான விவரங்களை உள்ளிடவும்! (Min ₹50 & Sufficient Balance)");
                 return;
             }
 
             balance -= amount;
-            localStorage.setItem('user_balance', balance);
-            document.getElementById('balance').innerText = balance.toFixed(2);
-
-            alert("உங்கள் வித் டிராவல் கோரிக்கை சமர்ப்பிக்கப்பட்டது! 24-72 மணி நேரத்திற்குள் பணம் உங்கள் கணக்கில் வரவு வைக்கப்படும்.");
+            requests.push({ id: Date.now(), upi: upi, amount: amount, status: 'Pending' });
+            saveData();
+            alert("Withdrawal Request அனுப்பப்பட்டது!");
             document.getElementById('upiId').value = '';
             document.getElementById('withdrawAmount').value = '';
         }
 
-        // Service Worker Register for PWA
+        function saveData() {
+            localStorage.setItem('user_balance', balance);
+            localStorage.setItem('total_earned', totalEarned);
+            localStorage.setItem('withdraw_requests', JSON.stringify(requests));
+            updateUI();
+        }
+
+        // Admin Functions
+        function loginAdmin() {
+            const pass = document.getElementById('adminPass').value;
+            if(pass === '1234') {
+                document.getElementById('admin-login-box').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                renderAdminRequests();
+            } else {
+                alert("தவறான பாஸ்வேர்டு!");
+            }
+        }
+
+        function renderAdminRequests() {
+            const list = document.getElementById('requests-list');
+            list.innerHTML = '';
+            if(requests.length === 0) {
+                list.innerHTML = '<p style="font-size:12px; color:#888;">எந்த கோரிக்கையும் இல்லை.</p>';
+                return;
+            }
+            requests.forEach((req, index) => {
+                list.innerHTML += `
+                    <div class="req-card">
+                        <div>
+                            <strong>${req.upi}</strong><br>
+                            <small>Amount: ₹${req.amount} | Status: ${req.status}</small>
+                        </div>
+                        ${req.status === 'Pending' ? `
+                            <div>
+                                <button class="btn btn-success" onclick="actionReq(${index}, 'Paid')">Pay</button>
+                                <button class="btn btn-danger" onclick="actionReq(${index}, 'Rejected')">X</button>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function actionReq(index, status) {
+            requests[index].status = status;
+            saveData();
+            renderAdminRequests();
+        }
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
