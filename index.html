@@ -9,7 +9,6 @@
         body { background: #f4f4f4; color: #333; padding-bottom: 70px; }
         .hidden { display: none !important; }
         
-        /* Login Screen */
         #login-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             height: 100vh; background: linear-gradient(135deg, #007bff, #00c6ff); padding: 20px;
@@ -19,7 +18,6 @@
         .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
         .login-box button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
 
-        /* App Container */
         .header { background: #007bff; color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; }
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
@@ -30,12 +28,10 @@
         .btn-spin { background: #ff9800; }
         .btn:disabled { background: #cccccc; cursor: not-allowed; }
 
-        /* Bottom Nav */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
         .nav-item { text-align: center; cursor: pointer; color: #666; font-size: 14px; }
         .nav-item.active { color: #007bff; font-weight: bold; }
 
-        /* Admin & History Box */
         .admin-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: left; }
         .admin-box h3 { color: #856404; margin-bottom: 10px; }
         .history-list { text-align: left; margin-top: 10px; padding-left: 20px; font-size: 14px; }
@@ -44,79 +40,69 @@
 </head>
 <body>
 
-    <!-- 1. LOGIN SCREEN -->
     <div id="login-screen">
         <div class="login-box">
             <h2>Earn Money Pro</h2>
-            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">தொடங்க உங்கள் மொபைல் எண்ணை உள்ளிடவும்</p>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
             <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10">
             <button onclick="loginUser()">Login / Register</button>
         </div>
     </div>
 
-    <!-- 2. MAIN APP INTERFACE -->
     <div id="app-screen" class="hidden">
         <div class="header">Earn Money Pro</div>
 
-        <!-- TAB 1: TASK / HOME -->
         <div id="tab-task" class="container">
             <div class="balance-box">
-                உங்களின் இருப்பு (Balance): ₹<span id="user-balance">0.00</span>
+                Balance: ₹<span id="user-balance">0.00</span>
             </div>
 
-            <!-- Daily Check-in Bonus Card -->
             <div class="card" style="background: #e3f2fd; border: 1px solid #90caf9;">
                 <h3 style="color: #1565c0;">🎁 Daily Login Bonus</h3>
-                <p style="color: #555; font-size: 13px; margin: 8px 0;">தினமும் ஆப்பிற்கு வந்து இலவசமாக போன்ஸைப் பெறுங்கள்!</p>
+                <p style="color: #555; font-size: 13px; margin: 8px 0;">Dinamo bonus perungal!</p>
                 <button class="btn" style="background: #1976d2;" id="daily-bonus-btn" onclick="claimDailyBonus()">Claim Daily ₹2.00</button>
             </div>
 
-            <!-- Watch Ad Task -->
             <div class="card">
                 <h3>Watch Ad Task</h3>
-                <p style="color: #666; margin: 10px 0;">விளம்பரத்தைப் பார்த்து உடனடியாக ₹0.30 பெறுங்கள்!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="ad-limit-text">இன்றைய வரம்பு: 0/50 Ads</p>
+                <p style="color: #666; margin: 10px 0;">Ads parthu ₹0.30 perungal!</p>
+                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="ad-limit-text">Limit: 0/50 Ads</p>
                 <button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.30)</button>
             </div>
 
-            <!-- Spin & Win Task (Boring-ah irukkathu) -->
             <div class="card">
                 <h3>🎡 Spin & Win Task</h3>
-                <p style="color: #666; margin: 10px 0;">சக்கரத்தைச் சுற்றி அதிர்ஷ்டப் பரிசை வெல்லுங்கள்!</p>
+                <p style="color: #666; margin: 10px 0;">Spin panni prizes vellungal!</p>
                 <button class="btn btn-spin" onclick="spinWheel()">Spin Now (Earn upto ₹1)</button>
             </div>
 
-            <!-- CPA / App Install Task -->
             <div class="card">
                 <h3>App Install Task (CPA)</h3>
-                <p style="color: #666; margin: 10px 0;">பிரத்யேக ஆப் இன்ஸ்டால் செய்து உயர் வருமானம் பெறுங்கள்!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">இன்றைய நிலை: Ready</p>
+                <p style="color: #666; margin: 10px 0;">App install panni ₹5.00 perungal!</p>
+                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Ready</p>
                 <button class="btn btn-install" id="install-app-btn" onclick="installAppCPA()">Install App (Earn ₹5.00)</button>
             </div>
         </div>
 
-        <!-- TAB 2: WALLET & WITHDRAWAL -->
         <div id="tab-wallet" class="container hidden">
             <div class="card">
                 <h3>UPI Withdrawal</h3>
-                <p style="margin: 5px 0 15px 0; color: #666; font-size: 13px;">குறைந்தபட்சம்: ₹50 | அதிகபட்சம்: ₹1000</p>
+                <p style="margin: 5px 0 15px 0; color: #666; font-size: 13px;">Min: ₹50 | Max: ₹1000</p>
                 
-                <input type="text" id="upi-id-input" class="input-field" placeholder="உங்கள் UPI ID (Eg: example@upi)">
-                <input type="number" id="withdraw-amount-input" class="input-field" placeholder="வித்ரா செய்ய வேண்டிய தொகை (₹)">
+                <input type="text" id="upi-id-input" class="input-field" placeholder="UPI ID (Eg: example@upi)">
+                <input type="number" id="withdraw-amount-input" class="input-field" placeholder="Amount (₹)">
 
                 <button class="btn" onclick="requestWithdrawal()">Withdraw Money</button>
             </div>
 
-            <!-- User Withdrawal History -->
             <div class="card" style="text-align: left;">
                 <h3>📜 Withdrawal History</h3>
                 <ol id="user-history-list" class="history-list">
-                    <li>வரலாறு எதுவும் இல்லை.</li>
+                    <li>History empty.</li>
                 </ol>
             </div>
         </div>
 
-        <!-- TAB 3: PROFILE & ADMIN PANEL -->
         <div id="tab-profile" class="container hidden">
             <div class="card">
                 <h3>User Profile</h3>
@@ -124,7 +110,6 @@
                 <button class="btn" style="background: #dc3545;" onclick="logout()">Logout</button>
             </div>
 
-            <!-- Admin Panel (Only for 9942610013) -->
             <div id="admin-panel" class="admin-box hidden">
                 <h3>🛠️ Admin Panel</h3>
                 <p><b>Estimated Monetag Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p>
@@ -136,8 +121,6 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAVIGATION -->
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
         <div class="bottom-nav">
             <div class="nav-item active" onclick="switchTab('task', event)">🎯 Task</div>
             <div class="nav-item" onclick="switchTab('wallet', event)">👛 Wallet</div>
@@ -147,8 +130,8 @@
 
     <script>
         const ADMIN_MOBILE = "9942610013"; 
-        const MONETAG_LINK = "https://uplcm.com/4/12028464"; // Monetag Direct Link
-        const CPALEAD_LINK = "https://www.cpalead.com/"; // உங்கள் CPAlead Offer Link அல்லது Offerwall Link-ஐ இங்கே மாற்றிக் கொள்ளலாம்
+        const MONETAG_LINK = "https://uplcm.com/4/12028464"; 
+        const CPALEAD_LINK = "https://www.cpalead.com/"; 
 
         let currentUser = localStorage.getItem('logged_mobile');
 
@@ -163,7 +146,7 @@
         function loginUser() {
             let mobile = document.getElementById('mobile-input').value.trim();
             if (mobile.length !== 10) {
-                alert("சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்!");
+                alert("Sariana 10 digit mobile number-ai ullidavum!");
                 return;
             }
             localStorage.setItem('logged_mobile', mobile);
@@ -208,7 +191,6 @@
 
             let today = new Date().toDateString();
             
-            // 1. Daily Ad Limit Check
             let lastDate = localStorage.getItem('last_date_' + currentUser);
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
@@ -217,9 +199,8 @@
                 localStorage.setItem('last_date_' + currentUser, today);
                 localStorage.setItem('ad_count_' + currentUser, '0');
             }
-            document.getElementById('ad-limit-text').innerText = `இன்றைய வரம்பு: ${adCount}/50 Ads`;
+            document.getElementById('ad-limit-text').innerText = `Limit: ${adCount}/50 Ads`;
 
-            // 2. Daily Bonus Check
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
             let bonusBtn = document.getElementById('daily-bonus-btn');
             if (lastBonusDate === today) {
@@ -230,20 +211,18 @@
                 bonusBtn.innerText = "Claim Daily ₹2.00";
             }
 
-            // 3. Daily App Install Limit Check
             let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
             let installBtn = document.getElementById('install-app-btn');
             let installText = document.getElementById('install-limit-text');
 
             if (lastInstallDate === today) {
                 installBtn.disabled = true;
-                installText.innerText = "இன்றைய App Install முடிந்துவிட்டது (Completed)";
+                installText.innerText = "Install Completed (Completed)";
             } else {
                 installBtn.disabled = false;
-                installText.innerText = "இன்றைய நிலை: Available (1/1)";
+                installText.innerText = "Status: Available (1/1)";
             }
 
-            // Timer check for ads
             let lastClickTime = parseInt(localStorage.getItem('last_click_' + currentUser) || '0');
             let now = new Date().getTime();
             let diff = (now - lastClickTime) / 1000;
@@ -263,7 +242,7 @@
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
 
             if (lastBonusDate === today) {
-                alert("இன்றைய போனஸ் ஏற்கனவே பெறப்பட்டுவிட்டது!");
+                alert("Bonus already claimed today!");
                 return;
             }
 
@@ -272,7 +251,7 @@
             balance += 2.00;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            alert("தினசரி போனஸ் ₹2.00 வெற்றிகரமாக சேர்க்கப்பட்டது!");
+            alert("Daily bonus ₹2.00 added successfully!");
             updateUI();
         }
 
@@ -280,7 +259,7 @@
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
             if (adCount >= 50) {
-                alert("இன்றைய 50 விளம்பர வரம்பு முடிந்துவிட்டது!");
+                alert("Daily 50 ad limit reached!");
                 return;
             }
 
@@ -295,10 +274,10 @@
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
             let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
-            totalProfit += 0.005; // Admin dollar profit tracking
+            totalProfit += 0.005; 
             localStorage.setItem('admin_monetag_profit', totalProfit.toFixed(3));
 
-            alert("₹0.30 வெற்றிகரமாக சேர்க்கப்பட்டது!");
+            alert("₹0.30 added successfully!");
             updateUI();
             startTimer(10);
         }
@@ -332,7 +311,7 @@
             balance += randomReward;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            alert("🎉 ஸ்பின் வெற்றி! ₹" + randomReward.toFixed(2) + " உங்கள் கணக்கில் சேர்க்கப்பட்டது!");
+            alert("🎉 Spin win! ₹" + randomReward.toFixed(2) + " added!");
             updateUI();
         }
 
@@ -341,20 +320,19 @@
             let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
 
             if (lastInstallDate === today) {
-                alert("இன்றைய CPA App Install டாஸ்க் ஏற்கனவே முடிந்துவிட்டது!");
+                alert("CPA App install already completed today!");
                 return;
             }
 
-            // CPAlead link-ai open seyyum (Ithu moolamum ad/lead commission admin-ku varum)
             window.open(CPALEAD_LINK, '_blank');
 
             localStorage.setItem('last_install_date_' + currentUser, today);
 
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            balance += 5.00; // User-ku safe-aana reward (Admin-ku CPAlead-la irundhu periya dollar profit varum)
+            balance += 5.00; 
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            alert("CPA ஆப் இன்ஸ்டால் செய்ததற்கான ₹5.00 சேர்க்கப்பட்டது!");
+            alert("App install reward ₹5.00 added!");
             updateUI();
         }
 
@@ -364,15 +342,15 @@
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
 
             if (!upiId) {
-                alert("தயவுசெய்து உங்கள் UPI ID-ஐ உள்ளிடவும்!");
+                alert("Please enter UPI ID!");
                 return;
             }
             if (isNaN(amount) || amount < 50 || amount > 1000) {
-                alert("தொகை ₹50 முதல் ₹1000 வரை மட்டுமே இருக்க வேண்டும்!");
+                alert("Amount must be between ₹50 and ₹1000!");
                 return;
             }
             if (amount > balance) {
-                alert("உங்களிடம் போதுமான பேலன்ஸ் இல்லை!");
+                alert("Insufficient balance!");
                 return;
             }
 
@@ -388,9 +366,8 @@
             adminReqs.push({ mobile: currentUser, upi: upiId, amount: amount, date: new Date().toLocaleString() });
             localStorage.setItem('admin_requests', JSON.stringify(adminReqs));
 
-            alert("₹" + amount + " வித்ராவல் கோரிக்கை வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!");
+            alert("₹" + amount + " withdrawal request submitted!");
             document.getElementById('upi-id-input').value = "";
-            document.getElementById('withdraw-amount-input-input") || '';
             document.getElementById('withdraw-amount-input').value = "";
             updateUI();
             loadUserHistory();
@@ -400,7 +377,7 @@
             let userHistory = JSON.parse(localStorage.getItem('history_' + currentUser) || '[]');
             let listHTML = "";
             if (userHistory.length === 0) {
-                listHTML = "<li>வரலாறு எதுவும் இல்லை.</li>";
+                listHTML = "<li>No history yet.</li>";
             } else {
                 userHistory.forEach(item => {
                     listHTML += `<li><b>₹${item.amount}</b> -> UPI: ${item.upi} (${item.date})</li>`;
@@ -414,4 +391,18 @@
                 document.getElementById('admin-panel').classList.remove('hidden');
                 document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
                 
-                let adminReqs = JSON.parse(localStorage.
+                let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
+                let listHTML = "";
+                if (adminReqs.length === 0) {
+                    listHTML = "<li>No requests yet.</li>";
+                } else {
+                    adminReqs.forEach(req => {
+                        listHTML += `<li><b>Mob:</b> ${req.mobile} | <b>UPI:</b> ${req.upi} | <b>Amt:</b> ₹${req.amount}</li>`;
+                    });
+                }
+                document.getElementById('admin-withdrawal-list').innerHTML = listHTML;
+            }
+        }
+    </script>
+</body>
+</html>
