@@ -4,279 +4,297 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Money Pro</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4CAF50">
-    
     <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
-        body { background-color: #f0f2f5; padding-bottom: 70px; }
-        header { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .section { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
-        .active-section { display: block; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 15px; text-align: center; }
-        .balance-title { font-size: 14px; color: #666; margin-bottom: 5px; }
-        .balance-amount { font-size: 32px; color: #2E7D32; font-weight: bold; }
-        .btn { background: #4CAF50; color: white; border: none; padding: 14px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; transition: 0.2s; }
-        .btn:active { transform: scale(0.98); background: #388E3C; }
-        .btn-withdraw { background: #FF9800; }
-        .btn-withdraw:active { background: #F57C00; }
-        .btn-danger { background: #f44336; padding: 6px 12px; font-size: 12px; width: auto; margin: 0; text-decoration: none; color: white; border-radius: 4px; }
-        .btn-success { background: #4CAF50; padding: 6px 12px; font-size: 12px; width: auto; margin: 0; text-decoration: none; color: white; border-radius: 4px; display: inline-block; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
-        .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
-        .nav-item { border: none; background: none; font-size: 12px; color: #777; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
-        .nav-item.active { color: #4CAF50; font-weight: bold; }
-        .nav-icon { font-size: 20px; margin-bottom: 2px; }
-        .req-card { background: #f9f9f9; border-left: 4px solid #FF9800; padding: 10px; margin-bottom: 10px; text-align: left; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f4f4f4; color: #333; padding-bottom: 70px; }
+        .hidden { display: none !important; }
+        
+        /* Login Screen */
+        #login-screen {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; background: linear-gradient(135deg, #007bff, #00c6ff); padding: 20px;
+        }
+        .login-box { background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .login-box h2 { margin-bottom: 20px; color: #007bff; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+        .login-box button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .login-box button:hover { background: #0056b3; }
+
+        /* App Container */
+        .header { background: #007bff; color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; }
+        .container { padding: 15px; max-width: 600px; margin: auto; }
+        .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .balance-box { background: #e8f5e9; color: #2e7d32; font-size: 24px; font-weight: bold; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .btn { background: #28a745; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
+        .btn-install { background: #17a2b8; }
+        .btn:disabled { background: #cccccc; cursor: not-allowed; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+        .nav-item { text-align: center; cursor: pointer; color: #666; font-size: 14px; }
+        .nav-item.active { color: #007bff; font-weight: bold; }
+
+        /* Admin Panel */
+        .admin-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: left; }
+        .admin-box h3 { color: #856404; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <header>Earn Money Pro</header>
-
-    <!-- LOGIN SCREEN -->
-    <div id="login-screen" class="section active-section">
-        <div class="card" style="margin-top: 30px;">
-            <h2>📱 User Login</h2>
-            <p style="font-size: 12px; color: #666; margin: 10px 0;">உங்கள் Mobile Number உள்ளிட்டு உள்நுழையவும்:</p>
-            <input type="tel" id="userMobile" placeholder="Enter 10 Digit Mobile Number" maxlength="10">
-            <button class="btn" onclick="loginUser()">Login / Sign Up</button>
+    <!-- 1. MOBILE LOGIN SCREEN -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Earn Money Pro</h2>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">தொடங்க உங்கள் மொபைல் எண்ணை உள்ளிடவும்</p>
+            <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10">
+            <button onclick="loginUser()">Login / Register</button>
         </div>
     </div>
 
-    <!-- MAIN APP WRAPPER -->
-    <div id="main-app" style="display: none;">
-        
-        <!-- 1. TASKS SECTION -->
-        <div id="task-section" class="section active-section">
-            <div class="card">
-                <div class="balance-title">உங்கள் இருப்பு (Balance)</div>
-                <div class="balance-amount">₹<span class="user-balance">0.00</span></div>
+    <!-- 2. MAIN APP INTERFACE -->
+    <div id="app-screen" class="hidden">
+        <div class="header">Earn Money Pro</div>
+
+        <!-- TAB 1: TASK / HOME -->
+        <div id="tab-task" class="container">
+            <div class="balance-box">
+                உங்களின் இருப்பு (Balance): ₹<span id="user-balance">0.00</span>
             </div>
 
+            <!-- Watch Ad Task -->
             <div class="card">
-                <h3>🎥 Watch Ad Task</h3>
-                <p style="font-size: 12px; color: #666; margin: 5px 0 10px;">விளம்பரத்தைப் பார்த்து உடனடியாக ₹0.30 பெறுங்கள்!</p>
-                <button class="btn" onclick="watchAd()">Watch Ad (Earn ₹0.30)</button>
+                <h3>Watch Ad Task</h3>
+                <p style="color: #666; margin: 10px 0;">விளம்பரத்தைப் பார்த்து உடனடியாக ₹0.30 பெறுங்கள்!</p>
+                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="ad-limit-text">இன்றைய வரம்பு: 0/50 Ads</p>
+                <button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.30)</button>
             </div>
 
+            <!-- App Install Task -->
             <div class="card">
-                <h3>📲 App Install Task</h3>
-                <p style="font-size: 12px; color: #666; margin: 5px 0 10px;">புதிய ஆப்பை இன்ஸ்டால் செய்து ₹20.00 பெறுங்கள்!</p>
-                <button class="btn" style="background:#2196F3;" onclick="installTask()">Install App (Earn ₹20.00)</button>
+                <h3>App Install Task</h3>
+                <p style="color: #666; margin: 10px 0;">புதிய ஆப்பை இன்ஸ்டால் செய்து ₹20.00 பெறுங்கள்!</p>
+                <button class="btn btn-install" onclick="installApp()">Install App (Earn ₹20.00)</button>
             </div>
         </div>
 
-        <!-- 2. WALLET SECTION -->
-        <div id="wallet-section" class="section">
+        <!-- TAB 2: WALLET & WITHDRAWAL -->
+        <div id="tab-wallet" class="container hidden">
             <div class="card">
-                <div class="balance-title">Wallet Balance</div>
-                <div class="balance-amount">₹<span class="user-balance">0.00</span></div>
+                <h3>Wallet & Withdrawal</h3>
+                <p style="margin: 15px 0; color: #666;">குறைந்தபட்ச வித்ராவல்: ₹100</p>
+                <button class="btn" onclick="requestWithdrawal()">Withdraw to PayPal / Bank</button>
             </div>
+        </div>
 
+        <!-- TAB 3: PROFILE & ADMIN PANEL -->
+        <div id="tab-profile" class="container hidden">
             <div class="card">
-                <h3>Withdraw Money</h3>
-                <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Min Withdraw: ₹50 | Process Time: 24-72 Hrs</p>
-                <input type="text" id="upiId" placeholder="Enter UPI ID / PhonePe Number">
-                <input type="number" id="withdrawAmount" placeholder="Enter Amount (₹)">
-                <button class="btn btn-withdraw" onclick="requestWithdrawal()">Request Withdrawal</button>
+                <h3>User Profile</h3>
+                <p style="margin: 10px 0;">Mobile: <span id="profile-mobile"></span></p>
+                <button class="btn" style="background: #dc3545;" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Admin Panel (Visible only if mobile is admin number e.g. 9876543210) -->
+            <div id="admin-panel" class="admin-box hidden">
+                <h3>🛠️ Admin Panel</h3>
+                <p><b>Total Users Logged In:</b> <span id="admin-user-count">1</span></p>
+                <p><b>Estimated Monetag Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p>
+                <hr style="margin: 10px 0;">
+                <p><b>Pending Withdrawals Requests:</b></p>
+                <ul id="admin-withdrawal-list" style="padding-left: 20px; font-size: 14px; margin-top: 5px;">
+                    <li>No requests yet.</li>
+                </ul>
             </div>
         </div>
 
-        <!-- 3. PROFILE SECTION -->
-        <div id="profile-section" class="section">
-            <div class="card">
-                <div style="font-size: 50px;">👤</div>
-                <h3 id="profile-phone" style="margin-top: 10px;">+91 -</h3>
-                <p style="color: #666; font-size: 14px; margin-top: 5px;">Status: Active Member</p>
-            </div>
-            <div class="card" style="text-align: left;">
-                <p><strong>Total Earned:</strong> ₹<span id="total-earned">0.00</span></p>
-                <p style="margin-top: 10px;"><strong>App Version:</strong> 3.2 (PWA)</p>
-                <button class="btn btn-withdraw" style="margin-top: 15px;" onclick="logoutUser()">Logout</button>
-            </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button onclick="openAdminModal()" style="background:none; border:none; color:#bbb; font-size:12px; cursor:pointer;">🔒 Admin Access</button>
-            </div>
+        <!-- BOTTOM NAVIGATION -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('task')">🎯 Task</div>
+            <div class="nav-item" onclick="switchTab('wallet')">👛 Wallet</div>
+            <div class="nav-item" onclick="switchTab('profile')">👤 Profile</div>
         </div>
-
-        <!-- 4. ADMIN SECTION -->
-        <div id="admin-section" class="section">
-            <div class="card" style="text-align: left;">
-                <h3>🛡️ Admin Control Panel</h3>
-                <p style="font-size: 12px; color: #666; margin-bottom: 15px;">பயனர்களின் Withdrawal Requests கீழே காட்டப்படும்:</p>
-                
-                <div id="requests-list">
-                    <!-- Dynamic Requests -->
-                </div>
-                <button class="btn" style="background:#555; margin-top:15px;" onclick="showSection('profile-section', document.querySelectorAll('.nav-item')[2])">Close Admin Panel</button>
-            </div>
-        </div>
-
-        <!-- BOTTOM NAVBAR -->
-        <div class="navbar">
-            <button class="nav-item active" onclick="showSection('task-section', this)">
-                <span class="nav-icon">🎯</span>Task
-            </button>
-            <button class="nav-item" onclick="showSection('wallet-section', this)">
-                <span class="nav-icon">👛</span>Wallet
-            </button>
-            <button class="nav-item" onclick="showSection('profile-section', this)">
-                <span class="nav-icon">👤</span>Profile
-            </button>
-        </div>
-
     </div>
 
     <script>
-        // Updated New Monetag Direct Link
-        const MONETAG_AD_LINK = "https://uplcm.com/4/12028464";
-        
-        let currentUser = localStorage.getItem('current_user') || null;
-        let userData = {};
+        const ADMIN_MOBILE = "9876543210"; // உங்கள் Admin மொபைல் எண்ணை இங்கே மாற்றிக் கொள்ளலாம்
+        const DIRECT_LINK = "https://uplcm.com/4/12028464";
 
-        function initApp() {
-            if(currentUser) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-                loadUserData();
-            } else {
-                document.getElementById('login-screen').style.display = 'block';
-                document.getElementById('main-app').style.display = 'none';
+        let currentUser = localStorage.getItem('logged_mobile');
+
+        window.onload = function() {
+            if (currentUser) {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('app-screen').classList.remove('hidden');
+                updateUI();
             }
-        }
+        };
 
         function loginUser() {
-            const phone = document.getElementById('userMobile').value;
-            if(phone.length !== 10 || isNaN(phone)) {
-                alert("தயவுசெய்து 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்!");
+            let mobile = document.getElementById('mobile-input').value.trim();
+            if (mobile.length !== 10) {
+                alert("சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்!");
                 return;
             }
-            currentUser = phone;
-            localStorage.setItem('current_user', currentUser);
-            
-            let allUsers = JSON.parse(localStorage.getItem('all_users_data')) || {};
-            if(!allUsers[currentUser]) {
-                allUsers[currentUser] = { balance: 0.00, totalEarned: 0.00 };
-                localStorage.setItem('all_users_data', JSON.stringify(allUsers));
+            localStorage.setItem('logged_mobile', mobile);
+            if (!localStorage.getItem('balance_' + mobile)) {
+                localStorage.setItem('balance_' + mobile, '0.00');
             }
-            
-            initApp();
-        }
-
-        function logoutUser() {
-            localStorage.removeItem('current_user');
-            currentUser = null;
-            initApp();
-        }
-
-        function loadUserData() {
-            let allUsers = JSON.parse(localStorage.getItem('all_users_data')) || {};
-            userData = allUsers[currentUser] || { balance: 0.00, totalEarned: 0.00 };
+            currentUser = mobile;
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('app-screen').classList.remove('hidden');
             updateUI();
+        }
+
+        function logout() {
+            localStorage.removeItem('logged_mobile');
+            location.reload();
+        }
+
+        function switchTab(tabName) {
+            document.getElementById('tab-task').classList.add('hidden');
+            document.getElementById('tab-wallet').classList.add('hidden');
+            document.getElementById('tab-profile').classList.add('hidden');
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            if (tabName === 'task') {
+                document.getElementById('tab-task').classList.remove('hidden');
+                event.currentTarget.classList.add('active');
+            } else if (tabName === 'wallet') {
+                document.getElementById('tab-wallet').classList.remove('hidden');
+                event.currentTarget.classList.add('active');
+            } else if (tabName === 'profile') {
+                document.getElementById('tab-profile').classList.remove('hidden');
+                event.currentTarget.classList.add('active');
+                checkAdminAccess();
+            }
         }
 
         function updateUI() {
-            document.querySelectorAll('.user-balance').forEach(el => el.innerText = userData.balance.toFixed(2));
-            document.getElementById('total-earned').innerText = userData.totalEarned.toFixed(2);
-            document.getElementById('profile-phone').innerText = "+91 " + currentUser;
-        }
+            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
+            document.getElementById('user-balance').innerText = balance.toFixed(2);
+            document.getElementById('profile-mobile').innerText = currentUser;
 
-        function saveData() {
-            let allUsers = JSON.parse(localStorage.getItem('all_users_data')) || {};
-            allUsers[currentUser] = userData;
-            localStorage.setItem('all_users_data', JSON.stringify(allUsers));
-            updateUI();
-        }
+            // Daily Ad Count Check
+            let today = new Date().toDateString();
+            let lastDate = localStorage.getItem('last_date_' + currentUser);
+            let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
-        function showSection(sectionId, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active-section');
-            if(btn) btn.classList.add('active');
+            if (lastDate !== today) {
+                adCount = 0;
+                localStorage.setItem('last_date_' + currentUser, today);
+                localStorage.setItem('ad_count_' + currentUser, '0');
+            }
+
+            document.getElementById('ad-limit-text').innerText = `இன்றைய வரம்பு: ${adCount}/50 Ads`;
+
+            // Timer check
+            let lastClickTime = parseInt(localStorage.getItem('last_click_' + currentUser) || '0');
+            let now = new Date().getTime();
+            let diff = (now - lastClickTime) / 1000;
+
+            if (diff < 10 && lastClickTime > 0) {
+                startTimer(10 - Math.floor(diff));
+            }
+
+            if (adCount >= 50) {
+                document.getElementById('watch-ad-btn').disabled = true;
+                document.getElementById('watch-ad-btn').innerText = "Today's Limit Reached (50/50)";
+            }
         }
 
         function watchAd() {
-            window.open(MONETAG_AD_LINK, '_blank');
-            userData.balance += 0.30;
-            userData.totalEarned += 0.30;
-            saveData();
-            alert("₹0.30 சேர்க்கப்பட்டது!");
+            let today = new Date().toDateString();
+            let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
+
+            if (adCount >= 50) {
+                alert("இன்றைய 50 விளம்பர வரம்பு முடிந்துவிட்டது!");
+                return;
+            }
+
+            // Open Monetag Link
+            window.open(DIRECT_LINK, '_blank');
+
+            // Update Counts & Timer
+            adCount++;
+            localStorage.setItem('ad_count_' + currentUser, adCount);
+            localStorage.setItem('last_click_' + currentUser, new Date().getTime());
+
+            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
+            balance += 0.30;
+            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
+
+            // Track estimated profit for Admin (Assume each ad = $0.005 approx)
+            let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
+            totalProfit += 0.005;
+            localStorage.setItem('admin_monetag_profit', totalProfit.toFixed(3));
+
+            alert("₹0.30 வெற்றிகரமாக சேர்க்கப்பட்டது!");
+            updateUI();
+            startTimer(10);
         }
 
-        function installTask() {
-            window.open(MONETAG_AD_LINK, '_blank');
-            alert("ஆப்பை இன்ஸ்டால் செய்து முடிக்கவும். Admin சரிபார்த்த பிறகு ₹20 வழங்கப்படும்!");
+        function startTimer(seconds) {
+            let btn = document.getElementById('watch-ad-btn');
+            btn.disabled = true;
+            let timeLeft = seconds;
+
+            let interval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
+                    if (adCount < 50) {
+                        btn.disabled = false;
+                        btn.innerText = "Watch Ad (Earn ₹0.30)";
+                    }
+                } else {
+                    btn.innerText = `Next Ad in ${timeLeft}s`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        function installApp() {
+            window.open(DIRECT_LINK, '_blank');
+            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
+            balance += 20.00;
+            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
+            alert("ஆப் இன்ஸ்டால் செய்ததற்கான ₹20.00 சேர்க்கப்பட்டது!");
+            updateUI();
         }
 
         function requestWithdrawal() {
-            const upi = document.getElementById('upiId').value;
-            const amount = parseFloat(document.getElementById('withdrawAmount').value);
-
-            if (!upi || isNaN(amount) || amount < 50 || amount > userData.balance) {
-                alert("சரியான விவரங்களை உள்ளிடவும்! (Min ₹50 & Sufficient Balance)");
+            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
+            if (balance < 100) {
+                alert("குறைந்தபட்ச வித்ராவல் தொகை ₹100 இருக்க வேண்டும்!");
                 return;
             }
 
-            userData.balance -= amount;
-            saveData();
+            // Save withdrawal request for admin view
+            let requests = JSON.parse(localStorage.getItem('admin_withdrawal_requests') || '[]');
+            requests.push({ mobile: currentUser, amount: balance, date: new Date().toLocaleString() });
+            localStorage.setItem('admin_withdrawal_requests', JSON.stringify(requests));
 
-            let requests = JSON.parse(localStorage.getItem('withdraw_requests')) || [];
-            requests.push({ id: Date.now(), phone: currentUser, upi: upi, amount: amount, status: 'Pending' });
-            localStorage.setItem('withdraw_requests', JSON.stringify(requests));
-
-            alert("Withdrawal Request அனுப்பப்பட்டது!");
-            document.getElementById('upiId').value = '';
-            document.getElementById('withdrawAmount').value = '';
+            alert("வித்ராவல் கோரிக்கை வெற்றிகரமாக அட்மினுக்கு அனுப்பப்பட்டது!");
         }
 
-        function openAdminModal() {
-            const pass = prompt("Enter Admin Password:");
-            if(pass === '1234') {
-                showSection('admin-section', null);
-                renderAdminRequests();
-            } else if(pass) {
-                alert("தவறான பாஸ்வேர்டு!");
+        function checkAdminAccess() {
+            if (currentUser === ADMIN_MOBILE) {
+                document.getElementById('admin-panel').classList.remove('hidden');
+                document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
+                
+                let requests = JSON.parse(localStorage.getItem('admin_withdrawal_requests') || '[]');
+                let listHTML = "";
+                if (requests.length === 0) {
+                    listHTML = "<li>No requests yet.</li>";
+                } else {
+                    requests.forEach(req => {
+                        listHTML += `<li><b>Ph:</b> ${req.mobile} | <b>Amt:</b> ₹${req.amount} (${req.date})</li>`;
+                    });
+                }
+                document.getElementById('admin-withdrawal-list').innerHTML = listHTML;
             }
         }
-
-        function renderAdminRequests() {
-            const list = document.getElementById('requests-list');
-            let requests = JSON.parse(localStorage.getItem('withdraw_requests')) || [];
-            list.innerHTML = '';
-            
-            if(requests.length === 0) {
-                list.innerHTML = '<p style="font-size:12px; color:#888;">எந்த கோரிக்கையும் இல்லை.</p>';
-                return;
-            }
-
-            requests.forEach((req, index) => {
-                list.innerHTML += `
-                    <div class="req-card">
-                        <div>
-                            <strong>Mobile: ${req.phone}</strong><br>
-                            <small>UPI: ${req.upi} | ₹${req.amount}</small><br>
-                            <small style="color:${req.status === 'Paid' ? 'green' : 'orange'}">Status: ${req.status}</small>
-                        </div>
-                        ${req.status === 'Pending' ? `
-                            <div>
-                                <a class="btn-success" href="upi://pay?pa=${req.upi}&pn=User&am=${req.amount}&cu=INR" target="_blank">Pay UPI</a>
-                                <button class="btn-danger" onclick="markPaid(${index})">Done</button>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            });
-        }
-
-        function markPaid(index) {
-            let requests = JSON.parse(localStorage.getItem('withdraw_requests')) || [];
-            requests[index].status = 'Paid';
-            localStorage.setItem('withdraw_requests', JSON.stringify(requests));
-            renderAdminRequests();
-        }
-
-        initApp();
     </script>
 </body>
 </html>
