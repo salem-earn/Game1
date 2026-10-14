@@ -18,13 +18,13 @@
         .login-box h2 { margin-bottom: 20px; color: #007bff; }
         .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
         .login-box button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
-        .login-box button:hover { background: #0056b3; }
 
         /* App Container */
         .header { background: #007bff; color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; }
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
         .balance-box { background: #e8f5e9; color: #2e7d32; font-size: 24px; font-weight: bold; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .input-field { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
         .btn { background: #28a745; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
         .btn-install { background: #17a2b8; }
         .btn:disabled { background: #cccccc; cursor: not-allowed; }
@@ -34,14 +34,16 @@
         .nav-item { text-align: center; cursor: pointer; color: #666; font-size: 14px; }
         .nav-item.active { color: #007bff; font-weight: bold; }
 
-        /* Admin Panel */
+        /* Admin & History Box */
         .admin-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: left; }
         .admin-box h3 { color: #856404; margin-bottom: 10px; }
+        .history-list { text-align: left; margin-top: 10px; padding-left: 20px; font-size: 14px; }
+        .history-list li { margin-bottom: 5px; color: #555; }
     </style>
 </head>
 <body>
 
-    <!-- 1. MOBILE LOGIN SCREEN -->
+    <!-- 1. LOGIN SCREEN -->
     <div id="login-screen">
         <div class="login-box">
             <h2>Earn Money Pro</h2>
@@ -80,9 +82,21 @@
         <!-- TAB 2: WALLET & WITHDRAWAL -->
         <div id="tab-wallet" class="container hidden">
             <div class="card">
-                <h3>Wallet & Withdrawal</h3>
-                <p style="margin: 15px 0; color: #666;">குறைந்தபட்ச வித்ராவல்: ₹100</p>
-                <button class="btn" onclick="requestWithdrawal()">Withdraw to PayPal / Bank</button>
+                <h3>UPI Withdrawal</h3>
+                <p style="margin: 5px 0 15px 0; color: #666; font-size: 13px;">குறைந்தபட்சம்: ₹50 | அதிகபட்சம்: ₹1000</p>
+                
+                <input type="text" id="upi-id-input" class="input-field" placeholder="உங்கள் UPI ID (Eg: example@upi)">
+                <input type="number" id="withdraw-amount-input" class="input-field" placeholder="வித்ரா செய்ய வேண்டிய தொகை (₹)">
+
+                <button class="btn" onclick="requestWithdrawal()">Withdraw Money</button>
+            </div>
+
+            <!-- User Withdrawal History -->
+            <div class="card" style="text-align: left;">
+                <h3>📜 Withdrawal History</h3>
+                <ol id="user-history-list" class="history-list">
+                    <li>வரலாறு எதுவும் இல்லை.</li>
+                </ol>
             </div>
         </div>
 
@@ -94,14 +108,13 @@
                 <button class="btn" style="background: #dc3545;" onclick="logout()">Logout</button>
             </div>
 
-            <!-- Admin Panel (Visible only if mobile is admin number e.g. 9876543210) -->
+            <!-- Admin Panel (Only for 9942610013) -->
             <div id="admin-panel" class="admin-box hidden">
                 <h3>🛠️ Admin Panel</h3>
-                <p><b>Total Users Logged In:</b> <span id="admin-user-count">1</span></p>
                 <p><b>Estimated Monetag Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p>
                 <hr style="margin: 10px 0;">
-                <p><b>Pending Withdrawals Requests:</b></p>
-                <ul id="admin-withdrawal-list" style="padding-left: 20px; font-size: 14px; margin-top: 5px;">
+                <p><b>User Withdrawal Requests (UPI):</b></p>
+                <ul id="admin-withdrawal-list" style="padding-left: 20px; font-size: 13px; margin-top: 5px;">
                     <li>No requests yet.</li>
                 </ul>
             </div>
@@ -109,14 +122,15 @@
 
         <!-- BOTTOM NAVIGATION -->
         <div class="bottom-nav">
-            <div class="nav-item active" onclick="switchTab('task')">🎯 Task</div>
-            <div class="nav-item" onclick="switchTab('wallet')">👛 Wallet</div>
-            <div class="nav-item" onclick="switchTab('profile')">👤 Profile</div>
+            <div class="nav-item active" onclick="switchTab('task', event)">🎯 Task</div>
+            <div class="nav-item" onclick="switchTab('wallet', event)">👛 Wallet</div>
+            <div class="nav-item" onclick="switchTab('profile', event)">👤 Profile</div>
         </div>
     </div>
 
     <script>
-        const ADMIN_MOBILE = "9876543210"; // உங்கள் Admin மொபைல் எண்ணை இங்கே மாற்றிக் கொள்ளலாம்
+        // உங்கள் Admin மொபைல் எண்
+        const ADMIN_MOBILE = "9942610013"; 
         const DIRECT_LINK = "https://uplcm.com/4/12028464";
 
         let currentUser = localStorage.getItem('logged_mobile');
@@ -150,7 +164,7 @@
             location.reload();
         }
 
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             document.getElementById('tab-task').classList.add('hidden');
             document.getElementById('tab-wallet').classList.add('hidden');
             document.getElementById('tab-profile').classList.add('hidden');
@@ -159,15 +173,15 @@
 
             if (tabName === 'task') {
                 document.getElementById('tab-task').classList.remove('hidden');
-                event.currentTarget.classList.add('active');
             } else if (tabName === 'wallet') {
                 document.getElementById('tab-wallet').classList.remove('hidden');
-                event.currentTarget.classList.add('active');
+                loadUserHistory();
             } else if (tabName === 'profile') {
                 document.getElementById('tab-profile').classList.remove('hidden');
-                event.currentTarget.classList.add('active');
                 checkAdminAccess();
             }
+
+            if(event) event.currentTarget.classList.add('active');
         }
 
         function updateUI() {
@@ -175,7 +189,7 @@
             document.getElementById('user-balance').innerText = balance.toFixed(2);
             document.getElementById('profile-mobile').innerText = currentUser;
 
-            // Daily Ad Count Check
+            // Daily Ad Limit Check
             let today = new Date().toDateString();
             let lastDate = localStorage.getItem('last_date_' + currentUser);
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
@@ -204,7 +218,6 @@
         }
 
         function watchAd() {
-            let today = new Date().toDateString();
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
             if (adCount >= 50) {
@@ -212,10 +225,8 @@
                 return;
             }
 
-            // Open Monetag Link
             window.open(DIRECT_LINK, '_blank');
 
-            // Update Counts & Timer
             adCount++;
             localStorage.setItem('ad_count_' + currentUser, adCount);
             localStorage.setItem('last_click_' + currentUser, new Date().getTime());
@@ -224,7 +235,7 @@
             balance += 0.30;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            // Track estimated profit for Admin (Assume each ad = $0.005 approx)
+            // Monetag profit calculation
             let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
             totalProfit += 0.005;
             localStorage.setItem('admin_monetag_profit', totalProfit.toFixed(3));
@@ -264,18 +275,56 @@
         }
 
         function requestWithdrawal() {
+            let upiId = document.getElementById('upi-id-input').value.trim();
+            let amount = parseFloat(document.getElementById('withdraw-amount-input').value);
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            if (balance < 100) {
-                alert("குறைந்தபட்ச வித்ராவல் தொகை ₹100 இருக்க வேண்டும்!");
+
+            if (!upiId) {
+                alert("தயவுசெய்து உங்கள் UPI ID-ஐ உள்ளிடவும்!");
+                return;
+            }
+            if (isNaN(amount) || amount < 50 || amount > 1000) {
+                alert("தொகை ₹50 முதல் ₹1000 வரை மட்டுமே இருக்க வேண்டும்!");
+                return;
+            }
+            if (amount > balance) {
+                alert("உங்களிடம் போதுமான பேலன்ஸ் இல்லை!");
                 return;
             }
 
-            // Save withdrawal request for admin view
-            let requests = JSON.parse(localStorage.getItem('admin_withdrawal_requests') || '[]');
-            requests.push({ mobile: currentUser, amount: balance, date: new Date().toLocaleString() });
-            localStorage.setItem('admin_withdrawal_requests', JSON.stringify(requests));
+            // Deduct balance
+            balance -= amount;
+            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            alert("வித்ராவல் கோரிக்கை வெற்றிகரமாக அட்மினுக்கு அனுப்பப்பட்டது!");
+            // Save to User History
+            let userHistory = JSON.parse(localStorage.getItem('history_' + currentUser) || '[]');
+            let record = { upi: upiId, amount: amount, date: new Date().toLocaleDateString() };
+            userHistory.push(record);
+            localStorage.setItem('history_' + currentUser, JSON.stringify(userHistory));
+
+            // Save to Admin Panel
+            let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
+            adminReqs.push({ mobile: currentUser, upi: upiId, amount: amount, date: new Date().toLocaleString() });
+            localStorage.setItem('admin_requests', JSON.stringify(adminReqs));
+
+            alert("₹" + amount + " வித்ராவல் கோரிக்கை வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!");
+            document.getElementById('upi-id-input').value = "";
+            document.getElementById('withdraw-amount-input').value = "";
+            updateUI();
+            loadUserHistory();
+        }
+
+        function loadUserHistory() {
+            let userHistory = JSON.parse(localStorage.getItem('history_' + currentUser) || '[]');
+            let listHTML = "";
+            if (userHistory.length === 0) {
+                listHTML = "<li>வரலாறு எதுவும் இல்லை.</li>";
+            } else {
+                userHistory.forEach(item => {
+                    listHTML += `<li><b>₹${item.amount}</b> -> UPI: ${item.upi} (${item.date})</li>`;
+                });
+            }
+            document.getElementById('user-history-list').innerHTML = listHTML;
         }
 
         function checkAdminAccess() {
@@ -283,13 +332,13 @@
                 document.getElementById('admin-panel').classList.remove('hidden');
                 document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
                 
-                let requests = JSON.parse(localStorage.getItem('admin_withdrawal_requests') || '[]');
+                let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
                 let listHTML = "";
-                if (requests.length === 0) {
+                if (adminReqs.length === 0) {
                     listHTML = "<li>No requests yet.</li>";
                 } else {
-                    requests.forEach(req => {
-                        listHTML += `<li><b>Ph:</b> ${req.mobile} | <b>Amt:</b> ₹${req.amount} (${req.date})</li>`;
+                    adminReqs.forEach(req => {
+                        listHTML += `<li><b>Mob:</b> ${req.mobile} | <b>UPI:</b> ${req.upi} | <b>Amt:</b> ₹${req.amount}</li>`;
                     });
                 }
                 document.getElementById('admin-withdrawal-list').innerHTML = listHTML;
