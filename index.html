@@ -53,8 +53,8 @@
         <div class="login-box">
             <h2>Earn Money Pro</h2>
             <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
-            <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10">
-            <button onclick="loginUser()">Login / Register</button>
+            <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10" value="9942610013">
+            <button type="button" onclick="loginUser()">Login / Register</button>
         </div>
     </div>
 
@@ -64,10 +64,7 @@
 
         <!-- TAB 1: TASK -->
         <div id="tab-task" class="container">
-            
-            <div class="banner-ad">
-                📢 Sponsored Ad Space (Admin Profit)
-            </div>
+            <div class="banner-ad">📢 Sponsored Ad Space (Admin Profit)</div>
 
             <div class="balance-box">
                 Balance: ₹<span id="user-balance">0.00</span>
@@ -93,10 +90,7 @@
                 <button class="btn btn-install" id="offerwall-btn" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button>
             </div>
 
-            <div class="banner-ad">
-                📢 Sponsored Ad Space (Admin Profit)
-            </div>
-
+            <div class="banner-ad">📢 Sponsored Ad Space (Admin Profit)</div>
         </div>
 
         <!-- TAB 2: WALLET -->
@@ -350,7 +344,6 @@
             balance -= amount;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            // Direct data format matching Google Sheet columns
             let withdrawalData = {
                 Mobile: currentUser,
                 UPI: upiId,
@@ -389,7 +382,6 @@
                     return;
                 }
                 
-                // Read both lowercase and uppercase keys flexible
                 let userReqs = data.filter(item => {
                     let mob = item.Mobile || item.mobile || item.MOBILE || "";
                     return String(mob).trim() === String(currentUser).trim();
@@ -436,4 +428,6 @@
                         let mob = req.Mobile || req.mobile || req.MOBILE || "N/A";
                         let upi = req.UPI || req.upi || "N/A";
                         let amt = req.Amount || req.amount || "0";
-            
+                        let dt = req.Date || req.date || "-";
+                        
+                        listHTML += `<li><b>Mob:</b> ${mob} | <b>UPI:</b> ${upi} | <b>Amt:</b> ₹$
