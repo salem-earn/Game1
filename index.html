@@ -44,7 +44,7 @@
     <div id="login-screen">
         <div class="login-box">
             <h2>Earn Money Pro</h2>
-            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">தொடங்க உங்கள் மொபைல் எண்ணை உள்ளிடவும்</p>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
             <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10">
             <button onclick="loginUser()">Login / Register</button>
         </div>
@@ -62,27 +62,27 @@
 
             <div class="card" style="background: #e3f2fd; border: 1px solid #90caf9;">
                 <h3 style="color: #1565c0;">🎁 Daily Login Bonus</h3>
-                <p style="color: #555; font-size: 13px; margin: 8px 0;">தினசரி போனஸைப் பெறுங்கள்!</p>
+                <p style="color: #555; font-size: 13px; margin: 8px 0;">Dinamo bonus perungal!</p>
                 <button class="btn" style="background: #1976d2;" id="daily-bonus-btn" onclick="claimDailyBonus()">Claim Daily ₹2.00</button>
             </div>
 
             <div class="card">
                 <h3>Watch Ad Task</h3>
-                <p style="color: #666; margin: 10px 0;">Ads பார்த்து ₹0.30 பெறுங்கள்!</p>
+                <p style="color: #666; margin: 10px 0;">Ads parthu ₹0.30 perungal!</p>
                 <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="ad-limit-text">Limit: 0/50 Ads</p>
                 <button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.30)</button>
             </div>
 
             <div class="card">
                 <h3>🎡 Spin & Win Task</h3>
-                <p style="color: #666; margin: 10px 0;">Spin செய்து பரிசுகளை வெல்லுங்கள்!</p>
+                <p style="color: #666; margin: 10px 0;">Spin panni prizes vellungal!</p>
                 <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="spin-limit-text">Spin Limit: 0/5 Spins</p>
                 <button class="btn btn-spin" id="spin-btn" onclick="spinWheel()">Spin Now (Earn upto ₹1)</button>
             </div>
 
             <div class="card">
                 <h3>App Install Task (CPA)</h3>
-                <p style="color: #666; margin: 10px 0;">App இன்ஸ்டால் செய்து ₹5.00 பெறுங்கள்!</p>
+                <p style="color: #666; margin: 10px 0;">App install panni ₹5.00 perungal!</p>
                 <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Ready</p>
                 <button class="btn btn-install" id="install-app-btn" onclick="installAppCPA()">Install App (Earn ₹5.00)</button>
             </div>
@@ -157,7 +157,7 @@
         function loginUser() {
             let mobile = document.getElementById('mobile-input').value.trim();
             if (mobile.length !== 10) {
-                alert("சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்!");
+                alert("Sariana 10 digit mobile number-ai ullidavum!");
                 return;
             }
             localStorage.setItem('logged_mobile', mobile);
@@ -281,7 +281,7 @@
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
 
             if (lastBonusDate === today) {
-                alert("இன்றைய போனஸ் ஏற்கனவே பெறப்பட்டுவிட்டது!");
+                alert("Bonus already claimed today!");
                 return;
             }
 
@@ -360,6 +360,10 @@
             balance += randomReward;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
+            let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
+            totalProfit += 0.005; 
+            localStorage.setItem('admin_monetag_profit', totalProfit.toFixed(3));
+
             alert("🎉 Spin win! ₹" + randomReward.toFixed(2) + " added!");
             updateUI();
         }
@@ -429,10 +433,4 @@
                 listHTML = "<li>No history yet.</li>";
             } else {
                 userHistory.forEach(item => {
-                    listHTML += `<li><b>₹${item.amount}</b> -> UPI: ${item.upi} (${item.date})</li>`;
-                });
-            }
-            document.getElementById('user-history-list').innerHTML = listHTML;
-        }
-
-        functi
+                    listHTML += `<li><b>₹${ite
