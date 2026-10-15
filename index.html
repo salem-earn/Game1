@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Money Pro</title>
 
-    <!-- MONETAG SITE VERIFICATION META TAG -->
     <meta name="monetag" content="d254d70e6f7f65381cada5090f6e6ba9">
-    
-    <!-- MONETAG IN-PAGE PUSH / BANNER SCRIPT -->
     <script>(function(s){s.dataset.zone='12039702',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
     <style>
@@ -53,7 +50,7 @@
         <div class="login-box">
             <h2>Earn Money Pro</h2>
             <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
-            <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10" value="9942610013">
+            <input type="tel" id="mobile-input" value="9942610013" placeholder="Mobile Number (10 digits)" maxlength="10">
             <button type="button" onclick="loginUser()">Login / Register</button>
         </div>
     </div>
@@ -62,7 +59,6 @@
     <div id="app-screen" class="hidden">
         <div class="header">Earn Money Pro</div>
 
-        <!-- TAB 1: TASK -->
         <div id="tab-task" class="container">
             <div class="banner-ad">📢 Sponsored Ad Space (Admin Profit)</div>
 
@@ -93,7 +89,6 @@
             <div class="banner-ad">📢 Sponsored Ad Space (Admin Profit)</div>
         </div>
 
-        <!-- TAB 2: WALLET -->
         <div id="tab-wallet" class="container hidden">
             <div class="card">
                 <h3>UPI Withdrawal</h3>
@@ -113,7 +108,6 @@
             </div>
         </div>
 
-        <!-- TAB 3: PROFILE & ADMIN -->
         <div id="tab-profile" class="container hidden">
             <div class="card">
                 <h3>User Profile</h3>
@@ -132,7 +126,6 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAVIGATION -->
         <div class="bottom-nav">
             <div class="nav-item active" onclick="switchTab('task', event)">🎯 Task</div>
             <div class="nav-item" onclick="switchTab('wallet', event)">👛 Wallet</div>
@@ -158,6 +151,10 @@
 
         function loginUser() {
             let mobileInput = document.getElementById('mobile-input');
+            if (!mobileInput) {
+                alert("Login element not found!");
+                return;
+            }
             let mobile = mobileInput.value.trim();
             
             if (mobile.length !== 10 || isNaN(mobile)) {
@@ -399,6 +396,7 @@
                     let dt = item.Date || item.date || "-";
                     listHTML += `<li><b>₹${amt}</b> -> UPI: ${upi} (${dt})</li>`;
                 });
+                historyList.historyList = listHTML; // syntax fallback
                 historyList.innerHTML = listHTML;
             })
             .catch(err => {
@@ -430,4 +428,6 @@
                         let amt = req.Amount || req.amount || "0";
                         let dt = req.Date || req.date || "-";
                         
-                        listHTML += `<li><b>Mob:</b> ${mob} | <b>UPI:</b> ${upi} | <b>Amt:</b> ₹$
+                        listHTML += `<li><b>Mob:</b> ${mob} | <b>UPI:</b> ${upi} | <b>Amt:</b> ₹${amt} (${dt})</li>`;
+                    });
+ 
