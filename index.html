@@ -89,8 +89,8 @@
             <div class="card">
                 <h3>App & Offer Wall (CPA)</h3>
                 <p style="color: #666; margin: 10px 0;">Neraya apps & offers parthu bonus perungal!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Unlimited Offers</p>
-                <button class="btn btn-install" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button>
+                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Limit: 0/5 Installs Today</p>
+                <button class="btn btn-install" id="offerwall-btn" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button>
             </div>
 
             <div class="banner-ad">
@@ -150,7 +150,7 @@
         const ADMIN_MOBILE = "9942610013"; 
         const MONETAG_LINK = "https://uplcm.com/4/12028464"; 
         const CPALEAD_LINK = "https://www.qckclk.com/wall/f1IBuFU"; 
-        const SHEETDB_API = "https://sheetdb.io/api/v1/71qfs8rxufawk"; // SheetDB API Connected
+        const SHEETDB_API = "https://sheetdb.io/api/v1/71qfs8rxufawk"; 
 
         window.onload = function() {
             let savedUser = localStorage.getItem('logged_mobile');
@@ -220,15 +220,21 @@
             document.getElementById('profile-mobile').innerText = currentUser;
 
             let today = new Date().toDateString();
-            let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
             let lastDate = localStorage.getItem('last_date_' + currentUser);
+
+            let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
+            let installCount = parseInt(localStorage.getItem('install_count_' + currentUser) || '0');
 
             if (lastDate !== today) {
                 adCount = 0;
+                installCount = 0;
                 localStorage.setItem('last_date_' + currentUser, today);
                 localStorage.setItem('ad_count_' + currentUser, '0');
+                localStorage.setItem('install_count_' + currentUser, '0');
             }
+
             document.getElementById('ad-limit-text').innerText = `Limit: ${adCount}/50 Ads`;
+            document.getElementById('install-limit-text').innerText = `Limit: ${installCount}/5 Installs Today`;
 
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
             let bonusBtn = document.getElementById('daily-bonus-btn');
@@ -240,17 +246,18 @@
                 bonusBtn.innerText = "Claim Daily ₹2.00";
             }
 
-            let lastClickTime = parseInt(localStorage.getItem('last_click_' + currentUser) || '0');
-            let now = new Date().getTime();
-            let diff = (now - lastClickTime) / 1000;
-
-            if (diff < 10 && lastClickTime > 0) {
-                startTimer(10 - Math.floor(diff));
-            }
-
             if (adCount >= 50) {
                 document.getElementById('watch-ad-btn').disabled = true;
                 document.getElementById('watch-ad-btn').innerText = "Today's Limit Reached (50/50)";
+            }
+
+            let offerBtn = document.getElementById('offerwall-btn');
+            if (installCount >= 5) {
+                offerBtn.disabled = true;
+                offerBtn.innerText = "Daily Limit Reached (5/5)";
+            } else {
+                offerBtn.disabled = false;
+                offerBtn.innerText = "Open Offer Wall (Earn ₹5.00+)";
             }
         }
 
@@ -286,7 +293,6 @@
 
             adCount++;
             localStorage.setItem('ad_count_' + currentUser, adCount);
-            localStorage.setItem('last_click_' + currentUser, new Date().getTime());
 
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
             balance += 0.20; 
@@ -298,39 +304,27 @@
 
             alert("₹0.20 added successfully!");
             updateUI();
-            startTimer(10);
-        }
-
-        function startTimer(seconds) {
-            let btn = document.getElementById('watch-ad-btn');
-            btn.disabled = true;
-            let timeLeft = seconds;
-
-            let interval = setInterval(() => {
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    let currentUser = localStorage.getItem('logged_mobile');
-                    let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
-                    if (adCount < 50) {
-                        btn.disabled = false;
-                        btn.innerText = "Watch Ad (Earn ₹0.20)";
-                    }
-                } else {
-                    btn.innerText = `Next Ad in ${timeLeft}s`;
-                    timeLeft--;
-                }
-            }, 1000);
         }
 
         function openOfferwall() {
             let currentUser = localStorage.getItem('logged_mobile');
+            let installCount = parseInt(localStorage.getItem('install_count_' + currentUser) || '0');
+
+            if (installCount >= 5) {
+                alert("Daily 5 app install limit reached!");
+                return;
+            }
+
             window.open(CPALEAD_LINK, '_blank');
+
+            installCount++;
+            localStorage.setItem('install_count_' + currentUser, installCount);
 
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
             balance += 5.00; 
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            alert("Offerwall opened! Complete tasks to claim rewards.");
+            alert("Offerwall opened! ₹5.00 bonus added.");
             updateUI();
         }
 
@@ -356,7 +350,7 @@
             balance -= amount;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            // SEND DATA TO SHEETDB (GOOGLE SHEET)
+            // Direct data format matching Google Sheet columns
             let withdrawalData = {
                 Mobile: currentUser,
                 UPI: upiId,
@@ -390,14 +384,28 @@
             fetch(SHEETDB_API)
             .then(res => res.json())
             .then(data => {
-                let userReqs = data.filter(item => item.Mobile === currentUser);
+                if (!Array.isArray(data)) {
+                    historyList.innerHTML = "<li>No history found.</li>";
+                    return;
+                }
+                
+                // Read both lowercase and uppercase keys flexible
+                let userReqs = data.filter(item => {
+                    let mob = item.Mobile || item.mobile || item.MOBILE || "";
+                    return String(mob).trim() === String(currentUser).trim();
+                });
+
                 if (userReqs.length === 0) {
                     historyList.innerHTML = "<li>No history yet.</li>";
                     return;
                 }
+
                 let listHTML = "";
                 userReqs.forEach(item => {
-                    listHTML += `<li><b>₹${item.Amount}</b> -> UPI: ${item.UPI} (${item.Date})</li>`;
+                    let amt = item.Amount || item.amount || "0";
+                    let upi = item.UPI || item.upi || "-";
+                    let dt = item.Date || item.date || "-";
+                    listHTML += `<li><b>₹${amt}</b> -> UPI: ${upi} (${dt})</li>`;
                 });
                 historyList.innerHTML = listHTML;
             })
@@ -418,21 +426,14 @@
                 fetch(SHEETDB_API)
                 .then(res => res.json())
                 .then(data => {
-                    if (data.length === 0) {
+                    if (!Array.isArray(data) || data.length === 0) {
                         adminList.innerHTML = "<li>No requests yet.</li>";
                         return;
                     }
+
                     let listHTML = "";
                     data.forEach(req => {
-                        listHTML += `<li><b>Mob:</b> ${req.Mobile} | <b>UPI:</b> ${req.UPI} | <b>Amt:</b> ₹${req.Amount} (${req.Date})</li>`;
-                    });
-                    adminList.innerHTML = listHTML;
-                })
-                .catch(err => {
-                    adminList.innerHTML = "<li>Failed to load admin requests.</li>";
-                });
-            }
-        }
-    </script>
-</body>
-</html>
+                        let mob = req.Mobile || req.mobile || req.MOBILE || "N/A";
+                        let upi = req.UPI || req.upi || "N/A";
+                        let amt = req.Amount || req.amount || "0";
+            
