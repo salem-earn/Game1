@@ -73,7 +73,8 @@
             <div class="card">
                 <h3>🎡 Spin & Win Task</h3>
                 <p style="color: #666; margin: 10px 0;">Spin panni prizes vellungal!</p>
-                <button class="btn btn-spin" onclick="spinWheel()">Spin Now (Earn upto ₹1)</button>
+                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="spin-limit-text">Spin Limit: 0/5 Spins</p>
+                <button class="btn btn-spin" id="spin-btn" onclick="spinWheel()">Spin Now (Earn upto ₹1)</button>
             </div>
 
             <div class="card">
@@ -191,6 +192,7 @@
 
             let today = new Date().toDateString();
             
+            // 1. Ads Limit
             let lastDate = localStorage.getItem('last_date_' + currentUser);
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
@@ -201,6 +203,27 @@
             }
             document.getElementById('ad-limit-text').innerText = `Limit: ${adCount}/50 Ads`;
 
+            // 2. Spin Limit (5 Spins per day)
+            let lastSpinDate = localStorage.getItem('last_spin_date_' + currentUser);
+            let spinCount = parseInt(localStorage.getItem('spin_count_' + currentUser) || '0');
+            let spinBtn = document.getElementById('spin-btn');
+
+            if (lastSpinDate !== today) {
+                spinCount = 0;
+                localStorage.setItem('last_spin_date_' + currentUser, today);
+                localStorage.setItem('spin_count_' + currentUser, '0');
+            }
+            document.getElementById('spin-limit-text').innerText = `Spin Limit: ${spinCount}/5 Spins`;
+
+            if (spinCount >= 5) {
+                spinBtn.disabled = true;
+                spinBtn.innerText = "Daily Spin Limit Reached (5/5)";
+            } else {
+                spinBtn.disabled = false;
+                spinBtn.innerText = "Spin Now (Earn upto ₹1)";
+            }
+
+            // 3. Daily Bonus
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
             let bonusBtn = document.getElementById('daily-bonus-btn');
             if (lastBonusDate === today) {
@@ -211,6 +234,7 @@
                 bonusBtn.innerText = "Claim Daily ₹2.00";
             }
 
+            // 4. App Install Limit
             let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
             let installBtn = document.getElementById('install-app-btn');
             let installText = document.getElementById('install-limit-text');
@@ -303,7 +327,17 @@
         }
 
         function spinWheel() {
+            let spinCount = parseInt(localStorage.getItem('spin_count_' + currentUser) || '0');
+            if (spinCount >= 5) {
+                alert("Daily 5 spin limit reached!");
+                return;
+            }
+
             window.open(MONETAG_LINK, '_blank');
+
+            spinCount++;
+            localStorage.setItem('spin_count_' + currentUser, spinCount);
+
             let rewards = [0.20, 0.50, 1.00, 0.10];
             let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
 
@@ -397,12 +431,4 @@
                     listHTML = "<li>No requests yet.</li>";
                 } else {
                     adminReqs.forEach(req => {
-                        listHTML += `<li><b>Mob:</b> ${req.mobile} | <b>UPI:</b> ${req.upi} | <b>Amt:</b> ₹${req.amount}</li>`;
-                    });
-                }
-                document.getElementById('admin-withdrawal-list').innerHTML = listHTML;
-            }
-        }
-    </script>
-</body>
-</html>
+                        listHTML += `<l
