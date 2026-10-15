@@ -25,7 +25,6 @@
         .input-field { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
         .btn { background: #28a745; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
         .btn-install { background: #17a2b8; }
-        .btn-spin { background: #ff9800; }
         .btn:disabled { background: #cccccc; cursor: not-allowed; }
 
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); z-index: 100; }
@@ -40,17 +39,17 @@
 </head>
 <body>
 
-    <!-- 1. LOGIN SCREEN -->
+    <!-- LOGIN SCREEN -->
     <div id="login-screen">
         <div class="login-box">
             <h2>Earn Money Pro</h2>
-            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
+            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">தொடங்க உங்கள் மொபைல் எண்ணை உள்ளிடவும்</p>
             <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10">
             <button onclick="loginUser()">Login / Register</button>
         </div>
     </div>
 
-    <!-- 2. MAIN APP SCREEN -->
+    <!-- MAIN APP SCREEN -->
     <div id="app-screen" class="hidden">
         <div class="header">Earn Money Pro</div>
 
@@ -62,27 +61,20 @@
 
             <div class="card" style="background: #e3f2fd; border: 1px solid #90caf9;">
                 <h3 style="color: #1565c0;">🎁 Daily Login Bonus</h3>
-                <p style="color: #555; font-size: 13px; margin: 8px 0;">Dinamo bonus perungal!</p>
+                <p style="color: #555; font-size: 13px; margin: 8px 0;">தினசரி போனஸைப் பெறுங்கள்!</p>
                 <button class="btn" style="background: #1976d2;" id="daily-bonus-btn" onclick="claimDailyBonus()">Claim Daily ₹2.00</button>
             </div>
 
             <div class="card">
                 <h3>Watch Ad Task</h3>
-                <p style="color: #666; margin: 10px 0;">Ads parthu ₹0.30 perungal!</p>
+                <p style="color: #666; margin: 10px 0;">Ads பார்த்து ₹0.30 பெறுங்கள்!</p>
                 <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="ad-limit-text">Limit: 0/50 Ads</p>
                 <button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.30)</button>
             </div>
 
             <div class="card">
-                <h3>🎡 Spin & Win Task</h3>
-                <p style="color: #666; margin: 10px 0;">Spin panni prizes vellungal!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="spin-limit-text">Spin Limit: 0/5 Spins</p>
-                <button class="btn btn-spin" id="spin-btn" onclick="spinWheel()">Spin Now (Earn upto ₹1)</button>
-            </div>
-
-            <div class="card">
                 <h3>App Install Task (CPA)</h3>
-                <p style="color: #666; margin: 10px 0;">App install panni ₹5.00 perungal!</p>
+                <p style="color: #666; margin: 10px 0;">App இன்ஸ்டால் செய்து ₹5.00 பெறுங்கள்!</p>
                 <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Ready</p>
                 <button class="btn btn-install" id="install-app-btn" onclick="installAppCPA()">Install App (Earn ₹5.00)</button>
             </div>
@@ -140,34 +132,32 @@
         const MONETAG_LINK = "https://uplcm.com/4/12028464"; 
         const CPALEAD_LINK = "https://www.cpalead.com/"; 
 
-        let currentUser = localStorage.getItem('logged_mobile');
-
+        // Check login on startup
         window.onload = function() {
-            if (currentUser && currentUser.length === 10) {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('app-screen').classList.remove('hidden');
-                switchTab('task');
+            let savedUser = localStorage.getItem('logged_mobile');
+            if (savedUser && savedUser.length === 10) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('app-screen').style.display = 'block';
                 updateUI();
-            } else {
-                document.getElementById('login-screen').classList.remove('hidden');
-                document.getElementById('app-screen').classList.add('hidden');
             }
         };
 
         function loginUser() {
-            let mobile = document.getElementById('mobile-input').value.trim();
-            if (mobile.length !== 10) {
-                alert("Sariana 10 digit mobile number-ai ullidavum!");
+            let mobileInput = document.getElementById('mobile-input');
+            let mobile = mobileInput.value.trim();
+            
+            if (mobile.length !== 10 || isNaN(mobile)) {
+                alert("சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்!");
                 return;
             }
+
             localStorage.setItem('logged_mobile', mobile);
             if (!localStorage.getItem('balance_' + mobile)) {
                 localStorage.setItem('balance_' + mobile, '0.00');
             }
-            currentUser = mobile;
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('app-screen').classList.remove('hidden');
-            switchTab('task');
+
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-screen').style.display = 'block';
             updateUI();
         }
 
@@ -195,12 +185,13 @@
 
             if (event && event.currentTarget) {
                 event.currentTarget.classList.add('active');
-            } else {
-                document.querySelectorAll('.nav-item')[0].classList.add('active');
             }
         }
 
         function updateUI() {
+            let currentUser = localStorage.getItem('logged_mobile');
+            if (!currentUser) return;
+
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
             document.getElementById('user-balance').innerText = balance.toFixed(2);
             document.getElementById('profile-mobile').innerText = currentUser;
@@ -218,27 +209,7 @@
             }
             document.getElementById('ad-limit-text').innerText = `Limit: ${adCount}/50 Ads`;
 
-            // 2. Spin Limit (5 Spins per day)
-            let lastSpinDate = localStorage.getItem('last_spin_date_' + currentUser);
-            let spinCount = parseInt(localStorage.getItem('spin_count_' + currentUser) || '0');
-            let spinBtn = document.getElementById('spin-btn');
-
-            if (lastSpinDate !== today) {
-                spinCount = 0;
-                localStorage.setItem('last_spin_date_' + currentUser, today);
-                localStorage.setItem('spin_count_' + currentUser, '0');
-            }
-            document.getElementById('spin-limit-text').innerText = `Spin Limit: ${spinCount}/5 Spins`;
-
-            if (spinCount >= 5) {
-                spinBtn.disabled = true;
-                spinBtn.innerText = "Daily Spin Limit Reached (5/5)";
-            } else {
-                spinBtn.disabled = false;
-                spinBtn.innerText = "Spin Now (Earn upto ₹1)";
-            }
-
-            // 3. Daily Bonus
+            // 2. Daily Bonus
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
             let bonusBtn = document.getElementById('daily-bonus-btn');
             if (lastBonusDate === today) {
@@ -249,7 +220,7 @@
                 bonusBtn.innerText = "Claim Daily ₹2.00";
             }
 
-            // 4. App Install Limit
+            // 3. App Install Limit
             let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
             let installBtn = document.getElementById('install-app-btn');
             let installText = document.getElementById('install-limit-text');
@@ -277,11 +248,12 @@
         }
 
         function claimDailyBonus() {
+            let currentUser = localStorage.getItem('logged_mobile');
             let today = new Date().toDateString();
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
 
             if (lastBonusDate === today) {
-                alert("Bonus already claimed today!");
+                alert("இன்றைய போனஸ் ஏற்கனவே பெறப்பட்டுவிட்டது!");
                 return;
             }
 
@@ -295,6 +267,7 @@
         }
 
         function watchAd() {
+            let currentUser = localStorage.getItem('logged_mobile');
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
             if (adCount >= 50) {
@@ -329,6 +302,7 @@
             let interval = setInterval(() => {
                 if (timeLeft <= 0) {
                     clearInterval(interval);
+                    let currentUser = localStorage.getItem('logged_mobile');
                     let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
                     if (adCount < 50) {
                         btn.disabled = false;
@@ -341,34 +315,8 @@
             }, 1000);
         }
 
-        function spinWheel() {
-            let spinCount = parseInt(localStorage.getItem('spin_count_' + currentUser) || '0');
-            if (spinCount >= 5) {
-                alert("Daily 5 spin limit reached!");
-                return;
-            }
-
-            window.open(MONETAG_LINK, '_blank');
-
-            spinCount++;
-            localStorage.setItem('spin_count_' + currentUser, spinCount);
-
-            let rewards = [0.20, 0.50, 1.00, 0.10];
-            let randomReward = rewards[Math.floor(Math.random() * rewards.length)];
-
-            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            balance += randomReward;
-            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
-
-            let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
-            totalProfit += 0.005; 
-            localStorage.setItem('admin_monetag_profit', totalProfit.toFixed(3));
-
-            alert("🎉 Spin win! ₹" + randomReward.toFixed(2) + " added!");
-            updateUI();
-        }
-
         function installAppCPA() {
+            let currentUser = localStorage.getItem('logged_mobile');
             let today = new Date().toDateString();
             let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
 
@@ -390,6 +338,7 @@
         }
 
         function requestWithdrawal() {
+            let currentUser = localStorage.getItem('logged_mobile');
             let upiId = document.getElementById('upi-id-input').value.trim();
             let amount = parseFloat(document.getElementById('withdraw-amount-input').value);
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
@@ -427,10 +376,37 @@
         }
 
         function loadUserHistory() {
+            let currentUser = localStorage.getItem('logged_mobile');
             let userHistory = JSON.parse(localStorage.getItem('history_' + currentUser) || '[]');
             let listHTML = "";
             if (userHistory.length === 0) {
                 listHTML = "<li>No history yet.</li>";
             } else {
                 userHistory.forEach(item => {
-                    listHTML += `<li><b>₹${ite
+                    listHTML += `<li><b>₹${item.amount}</b> -> UPI: ${item.upi} (${item.date})</li>`;
+                });
+            }
+            document.getElementById('user-history-list').innerHTML = listHTML;
+        }
+
+        function checkAdminAccess() {
+            let currentUser = localStorage.getItem('logged_mobile');
+            if (currentUser === ADMIN_MOBILE) {
+                document.getElementById('admin-panel').classList.remove('hidden');
+                document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
+                
+                let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
+                let listHTML = "";
+                if (adminReqs.length === 0) {
+                    listHTML = "<li>No requests yet.</li>";
+                } else {
+                    adminReqs.forEach(req => {
+                        listHTML += `<li><b>Mob:</b> ${req.mobile} | <b>UPI:</b> ${req.upi} | <b>Amt:</b> ₹${req.amount}</li>`;
+                    });
+                }
+                document.getElementById('admin-withdrawal-list').innerHTML = listHTML;
+            }
+        }
+    </script>
+</body>
+</html>
