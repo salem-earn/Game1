@@ -65,7 +65,6 @@
         <!-- TAB 1: TASK -->
         <div id="tab-task" class="container">
             
-            <!-- TOP BANNER AD (Admin Profit) -->
             <div class="banner-ad">
                 📢 Sponsored Ad Space (Admin Profit)
             </div>
@@ -94,7 +93,6 @@
                 <button class="btn btn-install" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button>
             </div>
 
-            <!-- BOTTOM BANNER AD (Admin Profit) -->
             <div class="banner-ad">
                 📢 Sponsored Ad Space (Admin Profit)
             </div>
@@ -116,7 +114,7 @@
             <div class="card" style="text-align: left;">
                 <h3>📜 Withdrawal History</h3>
                 <ol id="user-history-list" class="history-list">
-                    <li>History empty.</li>
+                    <li>Loading history...</li>
                 </ol>
             </div>
         </div>
@@ -133,9 +131,9 @@
                 <h3>🛠️ Admin Panel</h3>
                 <p><b>Estimated Monetag Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p>
                 <hr style="margin: 10px 0;">
-                <p><b>User Withdrawal Requests (UPI):</b></p>
+                <p><b>User Withdrawal Requests (Google Sheet):</b></p>
                 <ul id="admin-withdrawal-list" style="padding-left: 20px; font-size: 13px; margin-top: 5px;">
-                    <li>No requests yet.</li>
+                    <li>Loading requests...</li>
                 </ul>
             </div>
         </div>
@@ -151,7 +149,8 @@
     <script>
         const ADMIN_MOBILE = "9942610013"; 
         const MONETAG_LINK = "https://uplcm.com/4/12028464"; 
-        const CPALEAD_LINK = "https://www.qckclk.com/wall/f1IBuFU"; // CPAlead Offerwall Link Integrated[span_1](start_span)[span_1](end_span)
+        const CPALEAD_LINK = "https://www.qckclk.com/wall/f1IBuFU"; 
+        const SHEETDB_API = "https://sheetdb.io/api/v1/71qfs8rxufawk"; // SheetDB API Connected
 
         window.onload = function() {
             let savedUser = localStorage.getItem('logged_mobile');
@@ -221,9 +220,8 @@
             document.getElementById('profile-mobile').innerText = currentUser;
 
             let today = new Date().toDateString();
-            
-            let lastDate = localStorage.getItem('last_date_' + currentUser);
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
+            let lastDate = localStorage.getItem('last_date_' + currentUser);
 
             if (lastDate !== today) {
                 adCount = 0;
@@ -358,34 +356,54 @@
             balance -= amount;
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            let userHistory = JSON.parse(localStorage.getItem('history_' + currentUser) || '[]');
-            let record = { upi: upiId, amount: amount, date: new Date().toLocaleDateString() };
-            userHistory.push(record);
-            localStorage.setItem('history_' + currentUser, JSON.stringify(userHistory));
+            // SEND DATA TO SHEETDB (GOOGLE SHEET)
+            let withdrawalData = {
+                Mobile: currentUser,
+                UPI: upiId,
+                Amount: amount,
+                Date: new Date().toLocaleDateString()
+            };
 
-            let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
-            adminReqs.push({ mobile: currentUser, upi: upiId, amount: amount, date: new Date().toLocaleString() });
-            localStorage.setItem('admin_requests', JSON.stringify(adminReqs));
-
-            alert("₹" + amount + " withdrawal request submitted!");
-            document.getElementById('upi-id-input').value = "";
-            document.getElementById('withdraw-amount-input').value = "";
-            updateUI();
-            loadUserHistory();
+            fetch(SHEETDB_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: [withdrawalData] })
+            })
+            .then(res => res.json())
+            .then(response => {
+                alert("₹" + amount + " withdrawal request submitted successfully!");
+                document.getElementById('upi-id-input').value = "";
+                document.getElementById('withdraw-amount-input').value = "";
+                updateUI();
+                loadUserHistory();
+            })
+            .catch(err => {
+                alert("Error sending request to Google Sheet. Please try again!");
+            });
         }
 
         function loadUserHistory() {
             let currentUser = localStorage.getItem('logged_mobile');
-            let userHistory = JSON.parse(localStorage.getItem('history_' + currentUser) || '[]');
-            let listHTML = "";
-            if (userHistory.length === 0) {
-                listHTML = "<li>No history yet.</li>";
-            } else {
-                userHistory.forEach(item => {
-                    listHTML += `<li><b>₹${item.amount}</b> -> UPI: ${item.upi} (${item.date})</li>`;
+            let historyList = document.getElementById('user-history-list');
+            historyList.innerHTML = "<li>Loading history...</li>";
+
+            fetch(SHEETDB_API)
+            .then(res => res.json())
+            .then(data => {
+                let userReqs = data.filter(item => item.Mobile === currentUser);
+                if (userReqs.length === 0) {
+                    historyList.innerHTML = "<li>No history yet.</li>";
+                    return;
+                }
+                let listHTML = "";
+                userReqs.forEach(item => {
+                    listHTML += `<li><b>₹${item.Amount}</b> -> UPI: ${item.UPI} (${item.Date})</li>`;
                 });
-            }
-            document.getElementById('user-history-list').innerHTML = listHTML;
+                historyList.innerHTML = listHTML;
+            })
+            .catch(err => {
+                historyList.innerHTML = "<li>Failed to load history.</li>";
+            });
         }
 
         function checkAdminAccess() {
@@ -394,16 +412,25 @@
                 document.getElementById('admin-panel').classList.remove('hidden');
                 document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
                 
-                let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
-                let listHTML = "";
-                if (adminReqs.length === 0) {
-                    listHTML = "<li>No requests yet.</li>";
-                } else {
-                    adminReqs.forEach(req => {
-                        listHTML += `<li><b>Mob:</b> ${req.mobile} | <b>UPI:</b> ${req.upi} | <b>Amt:</b> ₹${req.amount}</li>`;
+                let adminList = document.getElementById('admin-withdrawal-list');
+                adminList.innerHTML = "<li>Loading requests...</li>";
+
+                fetch(SHEETDB_API)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        adminList.innerHTML = "<li>No requests yet.</li>";
+                        return;
+                    }
+                    let listHTML = "";
+                    data.forEach(req => {
+                        listHTML += `<li><b>Mob:</b> ${req.Mobile} | <b>UPI:</b> ${req.UPI} | <b>Amt:</b> ₹${req.Amount} (${req.Date})</li>`;
                     });
-                }
-                document.getElementById('admin-withdrawal-list').innerHTML = listHTML;
+                    adminList.innerHTML = listHTML;
+                })
+                .catch(err => {
+                    adminList.innerHTML = "<li>Failed to load admin requests.</li>";
+                });
             }
         }
     </script>
