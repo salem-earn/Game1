@@ -88,10 +88,10 @@
             </div>
 
             <div class="card">
-                <h3>App Install Task (CPA)</h3>
-                <p style="color: #666; margin: 10px 0;">App install panni ₹5.00 perungal!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Ready</p>
-                <button class="btn btn-install" id="install-app-btn" onclick="installAppCPA()">Install App (Earn ₹5.00)</button>
+                <h3>App & Offer Wall (CPA)</h3>
+                <p style="color: #666; margin: 10px 0;">Neraya apps & offers parthu bonus perungal!</p>
+                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Unlimited Offers</p>
+                <button class="btn btn-install" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button>
             </div>
 
             <!-- BOTTOM BANNER AD (Admin Profit) -->
@@ -151,7 +151,7 @@
     <script>
         const ADMIN_MOBILE = "9942610013"; 
         const MONETAG_LINK = "https://uplcm.com/4/12028464"; 
-        const CPALEAD_LINK = "https://www.cpalead.com/"; 
+        const CPALEAD_LINK = "https://www.qckclk.com/wall/f1IBuFU"; 
 
         window.onload = function() {
             let savedUser = localStorage.getItem('logged_mobile');
@@ -242,18 +242,6 @@
                 bonusBtn.innerText = "Claim Daily ₹2.00";
             }
 
-            let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
-            let installBtn = document.getElementById('install-app-btn');
-            let installText = document.getElementById('install-limit-text');
-
-            if (lastInstallDate === today) {
-                installBtn.disabled = true;
-                installText.innerText = "Install Completed (Completed)";
-            } else {
-                installBtn.disabled = false;
-                installText.innerText = "Status: Available (1/1)";
-            }
-
             let lastClickTime = parseInt(localStorage.getItem('last_click_' + currentUser) || '0');
             let now = new Date().getTime();
             let diff = (now - lastClickTime) / 1000;
@@ -336,25 +324,15 @@
             }, 1000);
         }
 
-        function installAppCPA() {
+        function openOfferwall() {
             let currentUser = localStorage.getItem('logged_mobile');
-            let today = new Date().toDateString();
-            let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
-
-            if (lastInstallDate === today) {
-                alert("CPA App install already completed today!");
-                return;
-            }
-
             window.open(CPALEAD_LINK, '_blank');
-
-            localStorage.setItem('last_install_date_' + currentUser, today);
 
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
             balance += 5.00; 
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
-            alert("App install reward ₹5.00 added!");
+            alert("Offerwall opened! Complete tasks to claim rewards.");
             updateUI();
         }
 
