@@ -28,7 +28,7 @@
         .btn-spin { background: #ff9800; }
         .btn:disabled { background: #cccccc; cursor: not-allowed; }
 
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); z-index: 100; }
         .nav-item { text-align: center; cursor: pointer; color: #666; font-size: 14px; }
         .nav-item.active { color: #007bff; font-weight: bold; }
 
@@ -40,6 +40,7 @@
 </head>
 <body>
 
+    <!-- 1. LOGIN SCREEN -->
     <div id="login-screen">
         <div class="login-box">
             <h2>Earn Money Pro</h2>
@@ -49,9 +50,11 @@
         </div>
     </div>
 
+    <!-- 2. MAIN APP SCREEN -->
     <div id="app-screen" class="hidden">
         <div class="header">Earn Money Pro</div>
 
+        <!-- TAB 1: TASK -->
         <div id="tab-task" class="container">
             <div class="balance-box">
                 Balance: ₹<span id="user-balance">0.00</span>
@@ -85,6 +88,7 @@
             </div>
         </div>
 
+        <!-- TAB 2: WALLET -->
         <div id="tab-wallet" class="container hidden">
             <div class="card">
                 <h3>UPI Withdrawal</h3>
@@ -104,6 +108,7 @@
             </div>
         </div>
 
+        <!-- TAB 3: PROFILE & ADMIN -->
         <div id="tab-profile" class="container hidden">
             <div class="card">
                 <h3>User Profile</h3>
@@ -122,6 +127,7 @@
             </div>
         </div>
 
+        <!-- BOTTOM NAVIGATION -->
         <div class="bottom-nav">
             <div class="nav-item active" onclick="switchTab('task', event)">🎯 Task</div>
             <div class="nav-item" onclick="switchTab('wallet', event)">👛 Wallet</div>
@@ -137,10 +143,14 @@
         let currentUser = localStorage.getItem('logged_mobile');
 
         window.onload = function() {
-            if (currentUser) {
+            if (currentUser && currentUser.length === 10) {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('app-screen').classList.remove('hidden');
+                switchTab('task');
                 updateUI();
+            } else {
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('app-screen').classList.add('hidden');
             }
         };
 
@@ -157,6 +167,7 @@
             currentUser = mobile;
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('app-screen').classList.remove('hidden');
+            switchTab('task');
             updateUI();
         }
 
@@ -182,7 +193,11 @@
                 checkAdminAccess();
             }
 
-            if(event) event.currentTarget.classList.add('active');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            } else {
+                document.querySelectorAll('.nav-item')[0].classList.add('active');
+            }
         }
 
         function updateUI() {
@@ -192,6 +207,7 @@
 
             let today = new Date().toDateString();
             
+            // 1. Ads Limit
             let lastDate = localStorage.getItem('last_date_' + currentUser);
             let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
 
@@ -202,6 +218,7 @@
             }
             document.getElementById('ad-limit-text').innerText = `Limit: ${adCount}/50 Ads`;
 
+            // 2. Spin Limit (5 Spins per day)
             let lastSpinDate = localStorage.getItem('last_spin_date_' + currentUser);
             let spinCount = parseInt(localStorage.getItem('spin_count_' + currentUser) || '0');
             let spinBtn = document.getElementById('spin-btn');
@@ -221,6 +238,7 @@
                 spinBtn.innerText = "Spin Now (Earn upto ₹1)";
             }
 
+            // 3. Daily Bonus
             let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
             let bonusBtn = document.getElementById('daily-bonus-btn');
             if (lastBonusDate === today) {
@@ -231,6 +249,7 @@
                 bonusBtn.innerText = "Claim Daily ₹2.00";
             }
 
+            // 4. App Install Limit
             let lastInstallDate = localStorage.getItem('last_install_date_' + currentUser);
             let installBtn = document.getElementById('install-app-btn');
             let installText = document.getElementById('install-limit-text');
@@ -416,17 +435,4 @@
             document.getElementById('user-history-list').innerHTML = listHTML;
         }
 
-        function checkAdminAccess() {
-            if (currentUser === ADMIN_MOBILE) {
-                document.getElementById('admin-panel').classList.remove('hidden');
-                document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
-                
-                let adminReqs = JSON.parse(localStorage.getItem('admin_requests') || '[]');
-                let listHTML = "";
-                if (adminReqs.length === 0) {
-                    listHTML = "<li>No requests yet.</li>";
-                } else {
-                    adminReqs.forEach(req => {
-                        listHTML += `<li><b>Mob:</b> ${req.mobile} | <b>UPI:</b> ${req.upi} | <b>Amt:</b> ₹${req.amount}</li>`;
-                    });
-      
+        functi
