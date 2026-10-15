@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Money Pro</title>
+
+    <!-- MONETAG SITE VERIFICATION META TAG -->
+    <meta name="monetag" content="d254d70e6f7f65381cada5090f6e6ba9">
+    
+    <!-- MONETAG IN-PAGE PUSH / BANNER SCRIPT -->
+    <script src="https://3nbf4.com/act/files/tag.min.js" data-zone="12039508" async data-cfasync="false"></script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #f4f4f4; color: #333; padding-bottom: 70px; }
@@ -27,8 +34,7 @@
         .btn-install { background: #17a2b8; }
         .btn:disabled { background: #cccccc; cursor: not-allowed; }
 
-        /* Banner Ad Box styling (Admin Profit Only) */
-        .banner-ad { background: #e9ecef; border: 2px dashed #6c757d; text-align: center; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; color: #495057; }
+        .banner-ad { background: #e9ecef; border: 1px dashed #6c757d; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 12px; color: #6c757d; }
 
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); z-index: 100; }
         .nav-item { text-align: center; cursor: pointer; color: #666; font-size: 14px; }
@@ -59,10 +65,9 @@
         <!-- TAB 1: TASK -->
         <div id="tab-task" class="container">
             
-            <!-- TOP BANNER AD (Admin Profit Only) -->
+            <!-- TOP BANNER AD (Admin Profit) -->
             <div class="banner-ad">
-                <span>📢 Top Banner Ad (Admin Revenue)</span>
-                <!-- இங்கே உங்கள் Monetag Banner / In-Page Push ஸ்கிரிப்டைப் போடலாம் -->
+                📢 Sponsored Ad Space (Admin Profit)
             </div>
 
             <div class="balance-box">
@@ -89,10 +94,9 @@
                 <button class="btn btn-install" id="install-app-btn" onclick="installAppCPA()">Install App (Earn ₹5.00)</button>
             </div>
 
-            <!-- BOTTOM BANNER AD (Admin Profit Only) -->
+            <!-- BOTTOM BANNER AD (Admin Profit) -->
             <div class="banner-ad">
-                <span>📢 Bottom Banner Ad (Admin Revenue)</span>
-                <!-- இங்கே உங்கள் மற்றொரு Monetag பேனர் விளம்பர ஸ்கிரிப்டைப் போடலாம் -->
+                📢 Sponsored Ad Space (Admin Profit)
             </div>
 
         </div>
@@ -299,7 +303,7 @@
             localStorage.setItem('last_click_' + currentUser, new Date().getTime());
 
             let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            balance += 0.20; // Updated to ₹0.20 per watch ad
+            balance += 0.20; 
             localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
 
             let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
