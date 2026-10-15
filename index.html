@@ -50,10 +50,8 @@
         <div class="login-box">
             <h2>Earn Money Pro</h2>
             <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
-            <form id="login-form" onsubmit="handleLogin(event)">
-                <input type="tel" id="mobile-input" value="9942610013" placeholder="Mobile Number (10 digits)" maxlength="10" required>
-                <button type="submit">Login / Register</button>
-            </form>
+            <input type="tel" id="mobile-input" value="9942610013" placeholder="Mobile Number (10 digits)" maxlength="10">
+            <button type="button" onclick="loginUser()">Login / Register</button>
         </div>
     </div>
 
@@ -151,9 +149,12 @@
             }
         };
 
-        function handleLogin(event) {
-            event.preventDefault();
+        function loginUser() {
             let mobileInput = document.getElementById('mobile-input');
+            if (!mobileInput) {
+                alert("Login element not found!");
+                return;
+            }
             let mobile = mobileInput.value.trim();
             
             if (mobile.length !== 10 || isNaN(mobile)) {
@@ -430,3 +431,4 @@
                     });
                     adminList.innerHTML = listHTML;
                 })
+ 
