@@ -50,8 +50,10 @@
         <div class="login-box">
             <h2>Earn Money Pro</h2>
             <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
-            <input type="tel" id="mobile-input" value="9942610013" placeholder="Mobile Number (10 digits)" maxlength="10">
-            <button type="button" onclick="loginUser()">Login / Register</button>
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <input type="tel" id="mobile-input" value="9942610013" placeholder="Mobile Number (10 digits)" maxlength="10" required>
+                <button type="submit">Login / Register</button>
+            </form>
         </div>
     </div>
 
@@ -149,12 +151,9 @@
             }
         };
 
-        function loginUser() {
+        function handleLogin(event) {
+            event.preventDefault();
             let mobileInput = document.getElementById('mobile-input');
-            if (!mobileInput) {
-                alert("Login element not found!");
-                return;
-            }
             let mobile = mobileInput.value.trim();
             
             if (mobile.length !== 10 || isNaN(mobile)) {
@@ -396,7 +395,6 @@
                     let dt = item.Date || item.date || "-";
                     listHTML += `<li><b>₹${amt}</b> -> UPI: ${upi} (${dt})</li>`;
                 });
-                historyList.historyList = listHTML; // syntax fallback
                 historyList.innerHTML = listHTML;
             })
             .catch(err => {
@@ -430,4 +428,5 @@
                         
                         listHTML += `<li><b>Mob:</b> ${mob} | <b>UPI:</b> ${upi} | <b>Amt:</b> ₹${amt} (${dt})</li>`;
                     });
- 
+                    adminList.innerHTML = listHTML;
+                })
