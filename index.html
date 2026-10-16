@@ -2,38 +2,42 @@
 <html lang="ta"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Salem Earn Pro - Final</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<!-- MONETAG REAL AD - Zone 12039702 -->
+<script>(function(s){s.dataset.zone='12039702',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <style>.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.btn{background:#0f766e;color:#fff;padding:10px;border-radius:10px;font-weight:700;width:100%}.btn:disabled{opacity:.5}.gold{background:linear-gradient(45deg,#f59e0b,#eab308)}</style>
 </head><body class="bg-[#f6f7f9] pb-24 font-sans">
 <div class="max-w-md mx-auto p-3">
   <div id="secretHeader" class="flex justify-between items-center bg-emerald-700 text-white p-4 rounded-2xl cursor-pointer select-none">
-    <div><div class="font-bold text-lg">💰 Salem Earn Pro</div><div class="text-[11px] opacity-80">Min Withdraw ₹50</div></div>
+    <div><div class="font-bold text-lg">💰 Salem Earn Pro</div><div class="text-[11px] opacity-80">Min Withdraw ₹50 | <span id="vipBadge"></span></div></div>
     <div class="bg-white text-emerald-700 font-bold px-3 py-1 rounded-full" id="bal">₹0</div>
   </div>
   <div class="text-center text-[10px] text-gray-400 mt-1">Tap header 5 times = Admin Panel</div>
 
-  <div class="mt-3 bg-black rounded-xl text-center"><div class="text-[10px] text-white/60 py-1">ADVERTISEMENT</div><div class="bg-white/10 text-white text-xs py-3">📢 Top Banner Ad</div></div>
+  <!-- REAL MONETAG AD WILL APPEAR HERE AS IN-PAGE PUSH -->
+  <div class="mt-3 bg-black rounded-xl text-center py-2"><div class="text-[10px] text-white/60">ADVERTISEMENT</div><div class="text-white text-xs">Monetag Ad Loading...</div></div>
 
   <div class="card mt-3 bg-green-50 border border-green-200">
-    <div class="font-bold">📅 Daily Check-in - Day <span id="streak">1</span></div>
+    <div class="font-bold">📅 Daily Check-in - Day <span id="streak">1</span> <span id="checkVip"></span></div>
     <button id="checkBtn" onclick="checkIn()" class="btn mt-2">CHECK-IN TODAY (+₹0.50)</button>
-    <div id="checkMsg" class="text-xs text-red-500 mt-1"></div>
   </div>
 
   <div class="card mt-3 text-center">
     <div class="font-bold">🎡 Daily Spin</div>
     <div id="spinRes" class="text-4xl my-2">🎡</div>
     <button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button>
-    <div class="text-[11px] text-gray-400">Daily 1 Spin mattum</div>
+    <div class="text-[11px] text-gray-400">Daily 1 Spin mattum | VIP ku Double Win</div>
   </div>
 
   <div class="card mt-3 gold text-white">
     <div class="font-bold">👑 VIP PLAN - ₹49 Only</div>
+    <div class="text-xs">✅ Spin Double • Ad ₹4 • Check-in ₹1 • Fast Withdraw</div>
     <button onclick="buyVip()" class="bg-white text-yellow-600 font-bold w-full py-2 rounded-lg mt-2">BUY VIP - ₹49</button>
+    <div class="text-center mt-2"><input id="vipCode" placeholder="VIP Code - Telegram la varum" class="text-black p-2 rounded w-full text-xs"><button onclick="activateVip()" class="bg-black text-white text-xs px-3 py-2 rounded mt-1 w-full">ACTIVATE VIP</button></div>
   </div>
 
   <div class="card mt-3">
-    <div class="font-bold">📺 Watch Ad & Earn ₹2</div>
-    <div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20</div>
+    <div class="font-bold">📺 Watch Ad & Earn <span id="adRate">₹2</span></div>
+    <div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20 - Ad paathu ₹2</div>
     <button onclick="watchAd()" class="btn mt-2">WATCH AD</button>
   </div>
 
@@ -57,10 +61,8 @@
     <div class="text-[11px] mt-2">👉 Status ku Bot ah START pannunga: <a href="https://t.me/Salem_earn_pro_bot" target="_blank" class="text-blue-600 font-bold">@Salem_earn_pro_bot</a></div>
   </div>
 
-  <!-- PAID CODE + HISTORY -->
   <div class="card mt-3">
     <div class="font-bold">🔑 Payment Code</div>
-    <div class="text-xs text-gray-500">Admin GPay la pay pannitu Telegram Bot la code anuppuvar</div>
     <input id="paidCode" placeholder="Ex: SALEM50" class="w-full border p-2 rounded mt-2">
     <button onclick="checkPaidCode()" class="btn mt-2 bg-green-600">VERIFY & MARK SUCCESS ✅</button>
   </div>
@@ -70,13 +72,12 @@
     <div id="historyDiv" class="text-sm mt-2">No history yet</div>
   </div>
 
-  <!-- SECRET ADMIN PANEL -->
   <div id="adminPanel" class="card mt-3 hidden bg-yellow-50 border-2 border-yellow-400">
     <div class="font-bold text-yellow-800">🛠️ ADMIN PANEL - SECRET</div>
     <div class="text-sm">Revenue: <b id="adminRev">$0.080</b></div>
     <div class="text-sm">User Payout: <b id="adminPayout">₹0</b></div>
     <div class="text-sm font-bold text-green-700">Net Profit: <b id="adminNet"></b></div>
-
+    <div class="text-sm">VIP Code: <b>VIP49</b></div>
     <div class="mt-3 font-bold border-t pt-2">📩 Withdraw Requests: <span id="reqCount" class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span></div>
     <div id="adminReqs" class="mt-1">No Requests Yet</div>
     <button onclick="clearReqs()" class="bg-gray-500 text-white text-xs px-2 py-1 rounded mt-2">Clear All Requests</button>
@@ -88,121 +89,28 @@
 const MIN_WITHDRAW = 50;
 const BOT_TOKEN = "8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg";
 const CHAT_ID = "8855798269";
-
-function sendTelegram(msg){
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({chat_id: CHAT_ID, text: msg, parse_mode: "HTML"})
-  }).catch(e=>console.log(e));
-}
-
+const ADMIN_UPI = "p.dinesh01@ptyes";
+function sendTelegram(msg){ fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:CHAT_ID,text:msg,parse_mode:"HTML"})}).catch(e=>console.log(e)); }
 let bal = parseFloat(localStorage.getItem('salem_bal')||'21.20');
 let ads = parseInt(localStorage.getItem('salem_ads')||'20');
 let streak = parseInt(localStorage.getItem('salem_streak')||'6');
-let tapCount = 0;
+let isVip = localStorage.getItem('isVip')=='true';
+let tapCount=0;
 function todayKey(){ return new Date().toDateString(); }
-
-document.getElementById('secretHeader').addEventListener('click', function(){
-  tapCount++;
-  if(tapCount>=5){
-    tapCount=0;
-    document.getElementById('adminPanel').classList.remove('hidden');
-    showAdminReqs();
-    alert('Admin Panel Opened! 🤫');
-    document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
-  }
-});
-
-function showAdminReqs(){
-  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
-  document.getElementById('reqCount').innerText = reqs.length;
-  if(reqs.length===0){ document.getElementById('adminReqs').innerHTML='No Requests Yet'; return; }
-  let html = reqs.map((r,i)=>`<div class="bg-white p-2 rounded mt-1 text-xs border"><b>₹${r.amt}</b> - ${r.upi}<br>Code: <b>${r.code}</b><br><span class="text-gray-400">${r.date} - ${r.status}</span><br><button onclick="approveReq(${i})" class="bg-green-600 text-white px-2 py-0.5 rounded mt-1">✅ PAID - Code Anuppu</button></div>`).join('');
-  document.getElementById('adminReqs').innerHTML=html;
-}
-function approveReq(i){
-  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
-  alert('Paid ₹'+reqs[i].amt+' to '+reqs[i].upi+' ✅\n\nIppo Telegram Bot la user ku itha anuppu:\nCode: '+reqs[i].code+'\n\nUn Number theriyathu - Bot la irunthu varum!');
-  reqs[i].status='Paid - Code Sent';
-  localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); showAdminReqs();
-}
+document.getElementById('secretHeader').addEventListener('click', function(){ tapCount++; if(tapCount>=5){ tapCount=0; document.getElementById('adminPanel').classList.remove('hidden'); showAdminReqs(); alert('Admin Panel Opened! 🤫'); document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); }});
+function showAdminReqs(){ let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(reqs.length===0){ document.getElementById('adminReqs').innerHTML='No Requests Yet'; return; } let html=reqs.map((r,i)=>`<div class="bg-white p-2 rounded mt-1 text-xs border"><b>₹${r.amt}</b> - ${r.upi}<br>Code: <b>${r.code}</b><br><span class="text-gray-400">${r.date} - ${r.status}</span><br><button onclick="approveReq(${i})" class="bg-green-600 text-white px-2 py-0.5 rounded mt-1">✅ PAID - Code Anuppu</button></div>`).join(''); document.getElementById('adminReqs').innerHTML=html; }
+function approveReq(i){ let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); alert('Paid ₹'+reqs[i].amt+' to '+reqs[i].upi+' ✅\n\nIppo Telegram Bot la user ku itha anuppu:\nCode: '+reqs[i].code); reqs[i].status='Paid - Code Sent'; localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); showAdminReqs(); }
 function clearReqs(){ if(confirm('Clear all?')){ localStorage.removeItem('withdraw_reqs'); localStorage.removeItem('withdraw_history'); showAdminReqs(); showHistory(); } }
-
-function showHistory(){
-  let h = JSON.parse(localStorage.getItem('withdraw_history')||'[]');
-  if(h.length==0){ document.getElementById('historyDiv').innerHTML='No history yet'; return; }
-  let html = h.map(item=>{
-    let col = item.status=='Success'? 'text-green-600' : 'text-orange-500';
-    let icon = item.status=='Success'? '✅' : '🟡';
-    return `<div class="border p-2 rounded mt-1">₹${item.amt} - <b class="${col}">${icon} ${item.status}</b><br><span class="text-xs text-gray-500">${item.date} | ${item.upi}</span></div>`;
-  }).join('');
-  document.getElementById('historyDiv').innerHTML=html;
-}
-function checkPaidCode(){
-  let code = document.getElementById('paidCode').value.trim().toUpperCase();
-  if(!code) return alert('Code podu bro!');
-  let h = JSON.parse(localStorage.getItem('withdraw_history')||'[]');
-  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
-  let found=false;
-  h.forEach(item=>{ if(item.code==code && item.status=='Pending'){ item.status='Success'; found=true; } });
-  reqs.forEach(r=>{ if(r.code==code) r.status='Success'; });
-  if(found){
-    localStorage.setItem('withdraw_history', JSON.stringify(h));
-    localStorage.setItem('withdraw_reqs', JSON.stringify(reqs));
-    alert('✅ Payment Success! History Updated!'); showHistory(); showAdminReqs();
-  } else alert('❌ Wrong Code bro! Telegram Bot la vantha code ah check pannu!');
-}
-
-function upd(){
-  document.getElementById('bal').innerText='₹'+bal.toFixed(2);
-  document.getElementById('adCount').innerText=ads;
-  document.getElementById('streak').innerText=streak;
-  let need = Math.max(0, MIN_WITHDRAW - bal);
-  document.getElementById('needAmt').innerText = need>0? 'Innum ₹'+need.toFixed(2)+' venum!' : 'Withdraw panna ready!';
-  document.getElementById('prog').style.width = Math.min(100, bal/MIN_WITHDRAW*100)+'%';
-  if(localStorage.getItem('last_checkin')===todayKey()){ document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN TODAY ✅'; }
-  if(localStorage.getItem('last_spin')===todayKey()){ document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE TODAY ✅'; }
-  let rev=0.08+(ads*0.25); document.getElementById('adminRev').innerText='$'+rev.toFixed(3);
-  document.getElementById('adminPayout').innerText='₹'+bal.toFixed(2);
-  document.getElementById('adminNet').innerText='₹'+(rev*83-bal).toFixed(2)+' Profit';
-}
-function checkIn(){
-  if(localStorage.getItem('last_checkin')===todayKey()) return alert('Inniku already check-in pannita!');
-  localStorage.setItem('last_checkin', todayKey()); streak++; bal+=0.5;
-  localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_streak',streak); upd(); alert('Check-in Done! +₹0.50');
-}
-function doSpin(){
-  if(localStorage.getItem('last_spin')===todayKey()) return alert('Inniku spin mudinjiduchu!');
-  localStorage.setItem('last_spin', todayKey());
-  let win=[1,1,2,1,5,1,2,1][Math.floor(Math.random()*8)];
-  bal+=win; localStorage.setItem('salem_bal',bal); upd();
-  document.getElementById('spinRes').innerText='🎉 ₹'+win; alert('You Won ₹'+win+' 🎉');
-}
-function watchAd(){
-  if(ads>=20) return alert('Daily limit over!');
-  ads++; bal+=2; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_ads',ads); upd(); alert('₹2 Added!');
-}
-function buyVip(){ if(confirm('VIP ₹49 vaangava?')){ bal+=5; alert('VIP Activated!'); upd(); } }
+function showHistory(){ let h=JSON.parse(localStorage.getItem('withdraw_history')||'[]'); if(h.length==0){ document.getElementById('historyDiv').innerHTML='No history yet'; return; } let html=h.map(item=>{ let col=item.status=='Success'?'text-green-600':'text-orange-500'; let icon=item.status=='Success'?'✅':'🟡'; return `<div class="border p-2 rounded mt-1">₹${item.amt} - <b class="${col}">${icon} ${item.status}</b><br><span class="text-xs text-gray-500">${item.date} | ${item.upi}</span></div>`; }).join(''); document.getElementById('historyDiv').innerHTML=html; }
+function checkPaidCode(){ let code=document.getElementById('paidCode').value.trim().toUpperCase(); if(!code) return alert('Code podu bro!'); let h=JSON.parse(localStorage.getItem('withdraw_history')||'[]'); let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); let found=false; h.forEach(item=>{ if(item.code==code && item.status=='Pending'){ item.status='Success'; found=true; } }); reqs.forEach(r=>{ if(r.code==code) r.status='Success'; }); if(found){ localStorage.setItem('withdraw_history', JSON.stringify(h)); localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory(); showAdminReqs(); } else alert('❌ Wrong Code bro!'); }
+function upd(){ document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?'👑 VIP':''; document.getElementById('adRate').innerText=isVip?'₹4':'₹2'; document.getElementById('checkVip').innerText=isVip?'(VIP +₹1)':''; document.getElementById('checkBtn').innerText=isVip?'CHECK-IN TODAY (+₹1.00)':'CHECK-IN TODAY (+₹0.50)'; let need=Math.max(0, MIN_WITHDRAW-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw panna ready!'; document.getElementById('prog').style.width=Math.min(100,bal/MIN_WITHDRAW*100)+'%'; if(localStorage.getItem('last_checkin')===todayKey()){ document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN TODAY ✅'; } if(localStorage.getItem('last_spin')===todayKey()){ document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE TODAY ✅'; } let rev=0.08+(ads*0.25); document.getElementById('adminRev').innerText='$'+rev.toFixed(3); document.getElementById('adminPayout').innerText='₹'+bal.toFixed(2); document.getElementById('adminNet').innerText='₹'+(rev*83-bal).toFixed(2)+' Profit'; }
+function checkIn(){ if(localStorage.getItem('last_checkin')===todayKey()) return alert('Inniku already check-in pannita!'); localStorage.setItem('last_checkin', todayKey()); streak++; let amt=isVip?1:0.5; bal+=amt; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_streak',streak); upd(); alert('Check-in Done! +₹'+amt); }
+function doSpin(){ if(localStorage.getItem('last_spin')===todayKey()) return alert('Inniku spin mudinjiduchu!'); localStorage.setItem('last_spin', todayKey()); let base=[1,1,2,1,5,1,2,1][Math.floor(Math.random()*8)]; let win=isVip?base*2:base; bal+=win; localStorage.setItem('salem_bal',bal); upd(); document.getElementById('spinRes').innerText='🎉 ₹'+win; alert('You Won ₹'+win+' 🎉'+(isVip?' (VIP Double!)':'')); }
+function watchAd(){ if(ads>=20) return alert('Daily limit over!'); ads++; let amt=isVip?4:2; bal+=amt; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_ads',ads); upd(); alert('₹'+amt+' Added!'+(isVip?' VIP Bonus!':'')); }
+function buyVip(){ if(confirm('VIP ₹49 vaangava? GPay/Paytm open aagum - Unakku ₹49 pogum')){ let upiLink="upi://pay?pa="+ADMIN_UPI+"&pn=Dinesh&am=49&cu=INR&tn=Salem Earn VIP"; window.location.href=upiLink; sendTelegram(`👑 <b>VIP CLICK!</b>\n\nUser VIP ₹49 pay panna poraan\nUPI: ${ADMIN_UPI}\nTime: ${new Date().toLocaleString()}`); alert("GPay la ₹49 pay pannitu - Telegram Bot @Salem_earn_pro_bot la screenshot anuppu bro! Admin VIP49 code tharuvanga!"); } }
+function activateVip(){ let c=document.getElementById('vipCode').value.trim().toUpperCase(); if(c=='VIP49'){ isVip=true; localStorage.setItem('isVip','true'); bal+=5; localStorage.setItem('salem_bal',bal); upd(); alert('👑 VIP Activated! Ippo ellam Double! +₹5 Bonus!'); } else alert('Wrong Code! Telegram la Admin kudutha code podu'); }
 function copyRef(){ document.getElementById('refLink').select(); document.execCommand('copy'); alert('Copied!'); }
-function withdraw(){
-  let upi=document.getElementById('upi').value.trim();
-  let amtInput = document.getElementById('withdrawAmt').value;
-  let amt = amtInput? parseFloat(amtInput) : bal;
-  if(!upi) return alert('UPI ID podu bro');
-  if(isNaN(amt) || amt < 50) return alert('Min ₹50 bro! Amount 50 kku mela podu');
-  if(amt > bal) return alert('Balance ₹'+bal.toFixed(2)+' thaan irukku bro!');
-  let code = "SALEM" + Math.floor(amt);
-  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
-  reqs.push({upi: upi, amt: amt.toFixed(2), code: code, status:'Pending', date: new Date().toLocaleString()});
-  localStorage.setItem('withdraw_reqs', JSON.stringify(reqs));
-  let hist = JSON.parse(localStorage.getItem('withdraw_history')||'[]');
-  hist.unshift({amt: amt.toFixed(2), upi: upi, code: code, status:'Pending', date: new Date().toLocaleString()});
-  localStorage.setItem('withdraw_history', JSON.stringify(hist));
-  sendTelegram(`🔔 <b>NEW WITHDRAW!</b>\n\n💰 Amount: ₹${amt.toFixed(2)}\n📱 UPI: ${upi}\n🔑 Code: ${code}\n📅 ${new Date().toLocaleString()}`);
-  alert('Withdraw Request Sent! Admin ku Telegram poiruchu ✅');
-  bal = bal - amt; localStorage.setItem('salem_bal', bal); upd(); showAdminReqs(); showHistory();
-}
+function withdraw(){ let upi=document.getElementById('upi').value.trim(); let amtInput=document.getElementById('withdrawAmt').value; let amt=amtInput?parseFloat(amtInput):bal; if(!upi) return alert('UPI ID podu bro'); if(isNaN(amt)||amt<50) return alert('Min ₹50 bro!'); if(amt>bal) return alert('Balance ₹'+bal.toFixed(2)+' thaan irukku bro!'); let code="SALEM"+Math.floor(amt); let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); reqs.push({upi:upi,amt:amt.toFixed(2),code:code,status:'Pending',date:new Date().toLocaleString()}); localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); let hist=JSON.parse(localStorage.getItem('withdraw_history')||'[]'); hist.unshift({amt:amt.toFixed(2),upi:upi,code:code,status:'Pending',date:new Date().toLocaleString()}); localStorage.setItem('withdraw_history', JSON.stringify(hist)); sendTelegram(`🔔 <b>NEW WITHDRAW!</b>\n\n💰 Amount: ₹${amt.toFixed(2)}\n📱 UPI: ${upi}\n🔑 Code: ${code}\n📅 ${new Date().toLocaleString()}`); alert('Withdraw Request Sent! Admin ku Telegram poiruchu ✅'); bal=bal-amt; localStorage.setItem('salem_bal',bal); upd(); showAdminReqs(); showHistory(); }
 upd(); showAdminReqs(); showHistory();
 </script>
 </body></html>
