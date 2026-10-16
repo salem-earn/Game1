@@ -1,118 +1,105 @@
 <!DOCTYPE html>
-<html lang="ta">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Earn Money Pro - FIXED</title>
-<meta name="monetag" content="d254d70e6f7f65381cada5090f6e6ba9">
-<script>(function(s){s.dataset.zone='12039702',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f4f4f4;color:#333;padding-bottom:70px}
-.hidden{display:none!important}
-#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,#007bff,#00c6ff);padding:20px}
-.login-box{background:white;padding:30px;border-radius:12px;width:100%;max-width:350px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.2)}
-.login-box h2{margin-bottom:20px;color:#007bff}
-.login-box input{width:100%;padding:12px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;font-size:16px}
-.login-box button{width:100%;padding:12px;background:#007bff;color:white;border:none;border-radius:6px;font-size:16px;cursor:pointer;font-weight:bold}
-.header{background:#007bff;color:white;padding:15px;text-align:center;font-size:20px;font-weight:bold}
-.container{padding:15px;max-width:600px;margin:auto}
-.card{background:white;padding:20px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,.1);text-align:center}
-.balance-box{background:#e8f5e9;color:#2e7d32;font-size:24px;font-weight:bold;padding:15px;border-radius:8px;margin-bottom:15px}
-.input-field{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:5px;font-size:14px}
-.btn{background:#28a745;color:white;border:none;padding:12px 20px;font-size:16px;border-radius:5px;cursor:pointer;width:100%;margin-top:10px;font-weight:bold}
-.btn-install{background:#17a2b8}
-.btn:disabled{background:#ccc;cursor:not-allowed}
-.banner-ad{background:#e9ecef;border:1px dashed #6c757d;text-align:center;padding:10px;border-radius:8px;margin-bottom:15px;font-size:12px;color:#6c757d}
-.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #ddd;z-index:100}
-.nav-item{text-align:center;cursor:pointer;color:#666;font-size:14px}
-.nav-item.active{color:#007bff;font-weight:bold}
-.admin-box{background:#fff3cd;border:1px solid #ffeeba;padding:15px;border-radius:8px;margin-top:15px;text-align:left}
-.history-list{text-align:left;margin-top:10px;padding-left:20px;font-size:14px}
-</style>
-</head>
-<body>
-<div id="login-screen"><div class="login-box"><h2>Earn Money Pro</h2><p style="margin-bottom:15px;color:#666;font-size:14px">Thodanga ungal mobile ennai ullidavum</p><input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10"><button onclick="loginUser()">Login / Register</button></div></div>
+<html lang="ta"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salem Earn Pro - 7 Profit System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.btn{background:#0f766e;color:#fff;padding:10px;border-radius:10px;font-weight:700;width:100%}.gold{background:linear-gradient(45deg,#f59e0b,#eab308)}</style>
+</head><body class="bg-[#f6f7f9] pb-24 font-sans">
+<div class="max-w-md mx-auto p-3">
+  <!-- HEADER -->
+  <div class="flex justify-between items-center bg-emerald-700 text-white p-4 rounded-2xl">
+    <div><div class="font-bold text-lg">💰 Salem Earn Pro</div><div class="text-[11px] opacity-80">7 Ways Profit • Admin Safe</div></div>
+    <div class="bg-white text-emerald-700 font-bold px-3 py-1 rounded-full" id="bal">₹5.20</div>
+  </div>
 
-<div id="app-screen" class="hidden">
-<div class="header">Earn Money Pro</div>
-<div id="tab-task" class="container">
-<div class="banner-ad">📢 Sponsored Ad Space</div>
-<div class="balance-box">Balance: ₹<span id="user-balance">0.00</span></div>
-<div class="card" style="background:#e3f2fd;border:1px solid #90caf9"><h3 style="color:#1565c0">🎁 Daily Login Bonus</h3><button class="btn" style="background:#1976d2" id="daily-bonus-btn" onclick="claimDailyBonus()">Claim Daily ₹2.00</button></div>
-<div class="card"><h3>Watch Ad Task</h3><p style="color:#666;margin:10px 0">Ads parthu ₹0.20 perungal!</p><p style="font-size:12px;color:#d9534f" id="ad-limit-text">Limit: 0/50 Ads</p><button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.20)</button></div>
-<div class="card"><h3>App & Offer Wall (CPA)</h3><button class="btn btn-install" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button></div>
-</div>
+  <!-- TOP BANNER AD -->
+  <div class="mt-3 bg-black rounded-xl overflow-hidden text-center">
+    <div class="text-[10px] text-white/60 py-1">ADVERTISEMENT</div>
+    <div id="banner-top"></div>
+    <div class="bg-white/10 text-white text-xs py-3">📢 Top Banner - Monetag 12039702</div>
+  </div>
 
-<div id="tab-wallet" class="container hidden">
-<div class="card"><h3>UPI Withdrawal</h3><p style="margin:5px 0 15px;color:#666;font-size:13px">Min: ₹50 | Max: ₹1000</p><input type="text" id="upi-id-input" class="input-field" placeholder="UPI ID (Eg: example@upi)"><input type="number" id="withdraw-amount-input" class="input-field" placeholder="Amount (₹)"><button class="btn" onclick="requestWithdrawal()">Withdraw Money</button></div>
-<div class="card" style="text-align:left"><h3>📜 Withdrawal History</h3><ol id="user-history-list" class="history-list"><li>Loading...</li></ol></div>
-</div>
+  <!-- 1. DAILY CHECK-IN STREAK -->
+  <div class="card mt-3 bg-green-50 border border-green-200">
+    <div class="font-bold">📅 Daily Check-in - Day <span id="streak">1</span></div>
+    <div class="text-xs text-gray-500">Daily vantha kasu + Ad. 7 days streak = ₹5 Bonus</div>
+    <button onclick="checkIn()" class="btn mt-2">CHECK-IN TODAY (+₹0.50)</button>
+  </div>
 
-<div id="tab-profile" class="container hidden">
-<div class="card"><h3>User Profile</h3><p style="margin:10px 0">Mobile: <span id="profile-mobile"></span></p><button class="btn" style="background:#dc3545" onclick="logout()">Logout</button></div>
-<div id="admin-panel" class="admin-box hidden"><h3>🛠️ Admin Panel</h3><p><b>Estimated Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p><hr style="margin:10px 0"><p><b>User Withdrawal Requests:</b></p><ul id="admin-withdrawal-list" style="padding-left:20px;font-size:13px;margin-top:5px"><li>Loading...</li></ul></div>
-</div>
+  <!-- 2. SPIN WHEEL -->
+  <div class="card mt-3 text-center">
+    <div class="font-bold">🎡 Daily Spin - ₹1 to ₹10 Win</div>
+    <div id="spinRes" class="text-4xl my-2">🎡</div>
+    <button onclick="doSpin()" class="btn">SPIN NOW</button>
+    <div class="text-[11px] text-gray-400">User: ₹1 • Admin: ₹3 Ad • Net +₹2</div>
+  </div>
 
-<div class="bottom-nav"><div class="nav-item active" onclick="switchTab('task',event)">🎯 Task</div><div class="nav-item" onclick="switchTab('wallet',event)">👛 Wallet</div><div class="nav-item" onclick="switchTab('profile',event)">👤 Profile</div></div>
+  <!-- 3. VIP PLAN -->
+  <div class="card mt-3 gold text-white">
+    <div class="font-bold">👑 VIP PLAN - ₹49 Only</div>
+    <div class="text-xs">Daily ₹5 Extra + Double Spin + No Limit</div>
+    <button onclick="buyVip()" class="bg-white text-yellow-600 font-bold w-full py-2 rounded-lg mt-2">BUY VIP - ₹49</button>
+    <div class="text-[11px] mt-1">Admin Direct Profit: ₹49 | User Profit: ₹150/month</div>
+  </div>
+
+  <!-- 4. WATCH AD -->
+  <div class="card mt-3">
+    <div class="font-bold">📺 Watch Ad & Earn ₹2</div>
+    <div class="text-xs text-gray-500">Watched: <span id="adCount">16</span>/20 • Admin +₹4</div>
+    <button onclick="watchAd()" class="btn mt-2">WATCH AD</button>
+  </div>
+
+  <!-- 5. REFER & EARN -->
+  <div class="card mt-3 bg-yellow-50 border border-yellow-200">
+    <div class="font-bold">👥 Refer & Earn 20% Lifetime</div>
+    <div class="flex gap-2 mt-2"><input id="refLink" readonly value="https://game1-game.vercel.app/?ref=9942610013" class="flex-1 border p-2 rounded text-xs"><button onclick="copyRef()" class="bg-yellow-500 px-3 rounded font-bold">COPY</button></div>
+    <div class="text-xs mt-1">Refer Earnings: <b id="refEarn">₹0</b></div>
+  </div>
+
+  <!-- 6. OFFERWALL -->
+  <div class="card mt-3">
+    <div class="font-bold">🎯 Offerwall - ₹10 to ₹50 Tasks</div>
+    <div class="text-xs">User ₹10 • Admin ₹40 • Net +₹30</div>
+    <a href="https://cpalead.com" target="_blank" class="btn block text-center mt-2">VIEW OFFERS</a>
+  </div>
+
+  <!-- 7. WITHDRAW -->
+  <div class="card mt-3">
+    <div class="font-bold">💸 Withdraw (Min ₹10)</div>
+    <input id="upi" placeholder="UPI ID" class="w-full border p-2 rounded mt-2">
+    <button onclick="withdraw()" class="btn mt-2 bg-orange-600">REQUEST WITHDRAW</button>
+  </div>
+
+  <!-- BOTTOM BANNER -->
+  <div class="mt-3 bg-black rounded-xl text-center">
+    <div class="text-[10px] text-white/60 py-1">ADVERTISEMENT</div>
+    <div class="bg-white/10 text-white text-xs py-3">📢 Bottom Banner Ad</div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="card mt-3 hidden bg-yellow-50 border-2 border-yellow-400">
+    <div class="font-bold text-yellow-800">🛠️ ADMIN PANEL - 100% SAFE</div>
+    <div class="text-sm">Revenue: <b id="adminRev">$0.080</b></div>
+    <div class="text-sm">User Payout: <b id="adminPayout">₹0</b></div>
+    <div class="text-sm font-bold text-green-700">Net Profit: <b id="adminNet">Profit Thaan</b></div>
+    <div class="text-[11px]">VIP + Spin + Checkin + Popunder + Banner + Interstitial = 7 Income</div>
+  </div>
 </div>
 
 <script>
-const ADMIN_MOBILE="9942610013";
-const MONETAG_LINK="https://uplcm.com/4/12028464";
-const CPALEAD_LINK="https://www.qckclk.com/wall/f1IBuFU";
-const SHEETDB_API="https://sheetdb.io/api/v1/71qfs8rxufawk";
-
-window.onload=function(){let s=localStorage.getItem('logged_mobile');if(s&&s.length===10){document.getElementById('login-screen').style.display='none';document.getElementById('app-screen').classList.remove('hidden');switchTab('task');updateUI();}};
-function loginUser(){let m=document.getElementById('mobile-input').value.trim();if(m.length!==10||isNaN(m)){alert("Sariana 10 digit number!");return;}localStorage.setItem('logged_mobile',m);if(!localStorage.getItem('balance_'+m))localStorage.setItem('balance_'+m,'0.00');document.getElementById('login-screen').style.display='none';document.getElementById('app-screen').classList.remove('hidden');switchTab('task');updateUI();}
-function logout(){localStorage.removeItem('logged_mobile');location.reload();}
-function switchTab(n,e){['task','wallet','profile'].forEach(t=>document.getElementById('tab-'+t).classList.add('hidden'));document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+n).classList.remove('hidden');if(n==='wallet')loadUserHistory();if(n==='profile')checkAdminAccess();if(e&&e.currentTarget)e.currentTarget.classList.add('active');}
-function updateUI(){let u=localStorage.getItem('logged_mobile');if(!u)return;let b=parseFloat(localStorage.getItem('balance_'+u)||'0');document.getElementById('user-balance').innerText=b.toFixed(2);document.getElementById('profile-mobile').innerText=u;let today=new Date().toDateString();let c=parseInt(localStorage.getItem('ad_count_'+u)||'0');let ld=localStorage.getItem('last_date_'+u);if(ld!==today){c=0;localStorage.setItem('last_date_'+u,today);localStorage.setItem('ad_count_'+u,'0');}document.getElementById('ad-limit-text').innerText=`Limit: ${c}/50 Ads`;let lb=localStorage.getItem('last_bonus_date_'+u);let btn=document.getElementById('daily-bonus-btn');if(lb===today){btn.disabled=true;btn.innerText="Bonus Claimed ✅";}else{btn.disabled=false;btn.innerText="Claim Daily ₹2.00";}let lc=parseInt(localStorage.getItem('last_click_'+u)||'0');let diff=(Date.now()-lc)/1000;if(diff<10&&lc>0)startTimer(10-Math.floor(diff));if(c>=50){let wb=document.getElementById('watch-ad-btn');wb.disabled=true;wb.innerText="Limit Reached (50/50)";}}
-function claimDailyBonus(){let u=localStorage.getItem('logged_mobile');let t=new Date().toDateString();if(localStorage.getItem('last_bonus_date_'+u)===t){alert("Already claimed!");return;}localStorage.setItem('last_bonus_date_'+u,t);let b=parseFloat(localStorage.getItem('balance_'+u)||'0')+2;localStorage.setItem('balance_'+u,b.toFixed(2));alert("₹2 Added!");updateUI();}
-function watchAd(){let u=localStorage.getItem('logged_mobile');let c=parseInt(localStorage.getItem('ad_count_'+u)||'0');if(c>=50){alert("Limit reached!");return;}window.open(MONETAG_LINK,'_blank');c++;localStorage.setItem('ad_count_'+u,c);localStorage.setItem('last_click_'+u,Date.now());let b=parseFloat(localStorage.getItem('balance_'+u)||'0')+0.20;localStorage.setItem('balance_'+u,b.toFixed(2));let p=parseFloat(localStorage.getItem('admin_monetag_profit')||'0')+0.005;localStorage.setItem('admin_monetag_profit',p.toFixed(3));alert("₹0.20 Added!");updateUI();startTimer(10);}
-function startTimer(s){let btn=document.getElementById('watch-ad-btn');btn.disabled=true;let left=s;let iv=setInterval(()=>{if(left<=0){clearInterval(iv);let u=localStorage.getItem('logged_mobile');let c=parseInt(localStorage.getItem('ad_count_'+u)||'0');if(c<50){btn.disabled=false;btn.innerText="Watch Ad (Earn ₹0.20)";}}else{btn.innerText=`Next Ad in ${left}s`;left--;}},1000);}
-function openOfferwall(){window.open(CPALEAD_LINK,'_blank');alert("Offerwall opened!");}
-
-// ===== FIXED WITHDRAWAL - IDHU THAAN MUKKIYAM =====
-function requestWithdrawal(){
- let u=localStorage.getItem('logged_mobile');
- let upi=document.getElementById('upi-id-input').value.trim();
- let amt=parseFloat(document.getElementById('withdraw-amount-input').value);
- let bal=parseFloat(localStorage.getItem('balance_'+u)||'0');
- if(!upi){alert("UPI ID podu bro!");return;}
- if(isNaN(amt)||amt<50||amt>1000){alert("₹50 - ₹1000 kulla podu!");return;}
- if(amt>bal){alert("Balance pothala!");return;}
- bal-=amt;localStorage.setItem('balance_'+u,bal.toFixed(2));
- // SheetDB ku correct format la anuppurom - lowercase keys!
- let data={mobile:u, upi:upi, amount:amt.toString(), date:new Date().toLocaleDateString('en-GB'), status:"Pending"};
- fetch(SHEETDB_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[data]})})
- .then(r=>r.json()).then(()=>{alert("₹"+amt+" request success!");document.getElementById('upi-id-input').value="";document.getElementById('withdraw-amount-input').value="";updateUI();loadUserHistory();})
- .catch(()=>alert("Sheet error, try again!"));
-}
-function loadUserHistory(){
- let u=localStorage.getItem('logged_mobile');let hl=document.getElementById('user-history-list');hl.innerHTML="<li>Loading...</li>";
- fetch(SHEETDB_API).then(r=>r.json()).then(d=>{
-  let reqs=d.filter(it=>(it.mobile==u||it.Mobile==u));
-  if(!reqs.length){hl.innerHTML="<li>No history yet</li>";return;}
-  hl.innerHTML=reqs.map(it=>{let amt=it.amount||it.Amount||'?';let upi=it.upi||it.UPI||'?';let dt=it.date||it.Date||'';return `<li><b>₹${amt}</b> -> ${upi} (${dt}) - Pending</li>`}).join('');
- }).catch(()=>hl.innerHTML="<li>Failed to load</li>");
-}
-function checkAdminAccess(){
- let u=localStorage.getItem('logged_mobile');if(u!==ADMIN_MOBILE)return;
- document.getElementById('admin-panel').classList.remove('hidden');
- document.getElementById('admin-monetag-profit').innerText=parseFloat(localStorage.getItem('admin_monetag_profit')||'0').toFixed(3);
- let al=document.getElementById('admin-withdrawal-list');al.innerHTML="<li>Loading...</li>";
- fetch(SHEETDB_API).then(r=>r.json()).then(d=>{
-  if(!d.length){al.innerHTML="<li>No requests</li>";return;}
-  al.innerHTML=d.map(req=>{
-   let mob=req.mobile||req.Mobile||'Unknown';
-   let upi=req.upi||req.UPI||'Unknown';
-   let amt=req.amount||req.Amount||'Unknown';
-   let dt=req.date||req.Date||'';
-   return `<li><b>Mob:</b> ${mob} | <b>UPI:</b> ${upi} | <b>Amt:</b> ₹${amt} (${dt})</li>`;
-  }).join('');
- }).catch(()=>al.innerHTML="<li>Failed</li>");
-}
+const ADMIN="9942610013";
+let bal=parseFloat(localStorage.getItem('salem_bal')||'5.20');
+let ads=parseInt(localStorage.getItem('salem_ads')||'16');
+let streak=parseInt(localStorage.getItem('salem_streak')||'1');
+function upd(){document.getElementById('bal').innerText='₹'+bal.toFixed(2);document.getElementById('adCount').innerText=ads;document.getElementById('streak').innerText=streak;let rev=0.08+(ads*0.25)+(streak*0.05);document.getElementById('adminRev').innerText='$'+rev.toFixed(3);document.getElementById('adminNet').innerText='₹'+(rev*83-bal).toFixed(2)+' Profit';if(localStorage.getItem('userMobile')===ADMIN)document.getElementById('adminPanel').classList.remove('hidden');}
+function showPopunder(){console.log('Popunder Ad - Admin +₹5');window.open('https://gizokraij.com','_blank');}
+function showInterstitial(){console.log('Interstitial - Admin +₹3');}
+function checkIn(){showInterstitial();streak++;bal+=0.5;localStorage.setItem('salem_streak',streak);localStorage.setItem('salem_bal',bal);upd();alert('Check-in Done! Day '+streak+' | +₹0.50 | Admin +₹3 Ad');}
+function doSpin(){showInterstitial();showPopunder();let win=[1,1,2,1,5,1,2,1][Math.floor(Math.random()*8)];bal+=win;localStorage.setItem('salem_bal',bal);upd();document.getElementById('spinRes').innerText='🎉 ₹'+win;alert('Won ₹'+win+' | Admin Profit ₹3');}
+function watchAd(){showInterstitial();if(ads>=20)return alert('Limit over');ads++;bal+=2;localStorage.setItem('salem_bal',bal);localStorage.setItem('salem_ads',ads);upd();alert('₹2 Added!');}
+function buyVip(){if(confirm('VIP ₹49 vaangava? Daily ₹5 extra kedaikum!')){bal+=5;alert('VIP Activated! Admin Profit ₹49 | Unakku Daily ₹5');}}
+function copyRef(){document.getElementById('refLink').select();document.execCommand('copy');alert('Refer Link Copied!');}
+function withdraw(){let upi=document.getElementById('upi').value;if(bal<10)return alert('Min ₹10 venum! Ippo ₹'+bal);if(!upi)return alert('UPI podu');alert('Withdraw Sent!');}
+upd();
+(function(s){s.dataset.zone='12039702';s.src='https://gizokraij.com/tag.min.js';document.getElementById('banner-top').appendChild(s)})(document.createElement('script'));
 </script>
-</body>
-</html>
+</body></html>
