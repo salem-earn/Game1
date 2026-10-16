@@ -1,437 +1,118 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Money Pro</title>
-
-    <!-- MONETAG SITE VERIFICATION META TAG -->
-    <meta name="monetag" content="d254d70e6f7f65381cada5090f6e6ba9">
-    
-    <!-- MONETAG IN-PAGE PUSH / BANNER SCRIPT -->
-    <script>(function(s){s.dataset.zone='12039702',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f4f4f4; color: #333; padding-bottom: 70px; }
-        .hidden { display: none !important; }
-        
-        #login-screen {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; background: linear-gradient(135deg, #007bff, #00c6ff); padding: 20px;
-        }
-        .login-box { background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 350px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .login-box h2 { margin-bottom: 20px; color: #007bff; }
-        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
-        .login-box button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
-
-        .header { background: #007bff; color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; }
-        .container { padding: 15px; max-width: 600px; margin: auto; display: block; }
-        .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .balance-box { background: #e8f5e9; color: #2e7d32; font-size: 24px; font-weight: bold; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .input-field { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
-        .btn { background: #28a745; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
-        .btn-install { background: #17a2b8; }
-        .btn:disabled { background: #cccccc; cursor: not-allowed; }
-
-        .banner-ad { background: #e9ecef; border: 1px dashed #6c757d; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 12px; color: #6c757d; }
-
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); z-index: 100; }
-        .nav-item { text-align: center; cursor: pointer; color: #666; font-size: 14px; }
-        .nav-item.active { color: #007bff; font-weight: bold; }
-
-        .admin-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: left; }
-        .admin-box h3 { color: #856404; margin-bottom: 10px; }
-        .history-list { text-align: left; margin-top: 10px; padding-left: 20px; font-size: 14px; }
-        .history-list li { margin-bottom: 5px; color: #555; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earn Money Pro - FIXED</title>
+<meta name="monetag" content="d254d70e6f7f65381cada5090f6e6ba9">
+<script>(function(s){s.dataset.zone='12039702',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f4f4f4;color:#333;padding-bottom:70px}
+.hidden{display:none!important}
+#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,#007bff,#00c6ff);padding:20px}
+.login-box{background:white;padding:30px;border-radius:12px;width:100%;max-width:350px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.2)}
+.login-box h2{margin-bottom:20px;color:#007bff}
+.login-box input{width:100%;padding:12px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;font-size:16px}
+.login-box button{width:100%;padding:12px;background:#007bff;color:white;border:none;border-radius:6px;font-size:16px;cursor:pointer;font-weight:bold}
+.header{background:#007bff;color:white;padding:15px;text-align:center;font-size:20px;font-weight:bold}
+.container{padding:15px;max-width:600px;margin:auto}
+.card{background:white;padding:20px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,.1);text-align:center}
+.balance-box{background:#e8f5e9;color:#2e7d32;font-size:24px;font-weight:bold;padding:15px;border-radius:8px;margin-bottom:15px}
+.input-field{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:5px;font-size:14px}
+.btn{background:#28a745;color:white;border:none;padding:12px 20px;font-size:16px;border-radius:5px;cursor:pointer;width:100%;margin-top:10px;font-weight:bold}
+.btn-install{background:#17a2b8}
+.btn:disabled{background:#ccc;cursor:not-allowed}
+.banner-ad{background:#e9ecef;border:1px dashed #6c757d;text-align:center;padding:10px;border-radius:8px;margin-bottom:15px;font-size:12px;color:#6c757d}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:white;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #ddd;z-index:100}
+.nav-item{text-align:center;cursor:pointer;color:#666;font-size:14px}
+.nav-item.active{color:#007bff;font-weight:bold}
+.admin-box{background:#fff3cd;border:1px solid #ffeeba;padding:15px;border-radius:8px;margin-top:15px;text-align:left}
+.history-list{text-align:left;margin-top:10px;padding-left:20px;font-size:14px}
+</style>
 </head>
 <body>
+<div id="login-screen"><div class="login-box"><h2>Earn Money Pro</h2><p style="margin-bottom:15px;color:#666;font-size:14px">Thodanga ungal mobile ennai ullidavum</p><input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10"><button onclick="loginUser()">Login / Register</button></div></div>
 
-    <!-- LOGIN SCREEN -->
-    <div id="login-screen">
-        <div class="login-box">
-            <h2>Earn Money Pro</h2>
-            <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Thodanga ungal mobile ennai ullidavum</p>
-            <input type="tel" id="mobile-input" placeholder="Mobile Number (10 digits)" maxlength="10">
-            <button onclick="loginUser()">Login / Register</button>
-        </div>
-    </div>
+<div id="app-screen" class="hidden">
+<div class="header">Earn Money Pro</div>
+<div id="tab-task" class="container">
+<div class="banner-ad">📢 Sponsored Ad Space</div>
+<div class="balance-box">Balance: ₹<span id="user-balance">0.00</span></div>
+<div class="card" style="background:#e3f2fd;border:1px solid #90caf9"><h3 style="color:#1565c0">🎁 Daily Login Bonus</h3><button class="btn" style="background:#1976d2" id="daily-bonus-btn" onclick="claimDailyBonus()">Claim Daily ₹2.00</button></div>
+<div class="card"><h3>Watch Ad Task</h3><p style="color:#666;margin:10px 0">Ads parthu ₹0.20 perungal!</p><p style="font-size:12px;color:#d9534f" id="ad-limit-text">Limit: 0/50 Ads</p><button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.20)</button></div>
+<div class="card"><h3>App & Offer Wall (CPA)</h3><button class="btn btn-install" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button></div>
+</div>
 
-    <!-- MAIN APP SCREEN -->
-    <div id="app-screen" class="hidden">
-        <div class="header">Earn Money Pro</div>
+<div id="tab-wallet" class="container hidden">
+<div class="card"><h3>UPI Withdrawal</h3><p style="margin:5px 0 15px;color:#666;font-size:13px">Min: ₹50 | Max: ₹1000</p><input type="text" id="upi-id-input" class="input-field" placeholder="UPI ID (Eg: example@upi)"><input type="number" id="withdraw-amount-input" class="input-field" placeholder="Amount (₹)"><button class="btn" onclick="requestWithdrawal()">Withdraw Money</button></div>
+<div class="card" style="text-align:left"><h3>📜 Withdrawal History</h3><ol id="user-history-list" class="history-list"><li>Loading...</li></ol></div>
+</div>
 
-        <!-- TAB 1: TASK -->
-        <div id="tab-task" class="container">
-            
-            <div class="banner-ad">
-                📢 Sponsored Ad Space (Admin Profit)
-            </div>
+<div id="tab-profile" class="container hidden">
+<div class="card"><h3>User Profile</h3><p style="margin:10px 0">Mobile: <span id="profile-mobile"></span></p><button class="btn" style="background:#dc3545" onclick="logout()">Logout</button></div>
+<div id="admin-panel" class="admin-box hidden"><h3>🛠️ Admin Panel</h3><p><b>Estimated Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p><hr style="margin:10px 0"><p><b>User Withdrawal Requests:</b></p><ul id="admin-withdrawal-list" style="padding-left:20px;font-size:13px;margin-top:5px"><li>Loading...</li></ul></div>
+</div>
 
-            <div class="balance-box">
-                Balance: ₹<span id="user-balance">0.00</span>
-            </div>
+<div class="bottom-nav"><div class="nav-item active" onclick="switchTab('task',event)">🎯 Task</div><div class="nav-item" onclick="switchTab('wallet',event)">👛 Wallet</div><div class="nav-item" onclick="switchTab('profile',event)">👤 Profile</div></div>
+</div>
 
-            <div class="card" style="background: #e3f2fd; border: 1px solid #90caf9;">
-                <h3 style="color: #1565c0;">🎁 Daily Login Bonus</h3>
-                <p style="color: #555; font-size: 13px; margin: 8px 0;">Dinasari bonus perungal!</p>
-                <button class="btn" style="background: #1976d2;" id="daily-bonus-btn" onclick="claimDailyBonus()">Claim Daily ₹2.00</button>
-            </div>
+<script>
+const ADMIN_MOBILE="9942610013";
+const MONETAG_LINK="https://uplcm.com/4/12028464";
+const CPALEAD_LINK="https://www.qckclk.com/wall/f1IBuFU";
+const SHEETDB_API="https://sheetdb.io/api/v1/71qfs8rxufawk";
 
-            <div class="card">
-                <h3>Watch Ad Task</h3>
-                <p style="color: #666; margin: 10px 0;">Ads parthu ₹0.20 perungal!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="ad-limit-text">Limit: 0/50 Ads</p>
-                <button class="btn" id="watch-ad-btn" onclick="watchAd()">Watch Ad (Earn ₹0.20)</button>
-            </div>
+window.onload=function(){let s=localStorage.getItem('logged_mobile');if(s&&s.length===10){document.getElementById('login-screen').style.display='none';document.getElementById('app-screen').classList.remove('hidden');switchTab('task');updateUI();}};
+function loginUser(){let m=document.getElementById('mobile-input').value.trim();if(m.length!==10||isNaN(m)){alert("Sariana 10 digit number!");return;}localStorage.setItem('logged_mobile',m);if(!localStorage.getItem('balance_'+m))localStorage.setItem('balance_'+m,'0.00');document.getElementById('login-screen').style.display='none';document.getElementById('app-screen').classList.remove('hidden');switchTab('task');updateUI();}
+function logout(){localStorage.removeItem('logged_mobile');location.reload();}
+function switchTab(n,e){['task','wallet','profile'].forEach(t=>document.getElementById('tab-'+t).classList.add('hidden'));document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+n).classList.remove('hidden');if(n==='wallet')loadUserHistory();if(n==='profile')checkAdminAccess();if(e&&e.currentTarget)e.currentTarget.classList.add('active');}
+function updateUI(){let u=localStorage.getItem('logged_mobile');if(!u)return;let b=parseFloat(localStorage.getItem('balance_'+u)||'0');document.getElementById('user-balance').innerText=b.toFixed(2);document.getElementById('profile-mobile').innerText=u;let today=new Date().toDateString();let c=parseInt(localStorage.getItem('ad_count_'+u)||'0');let ld=localStorage.getItem('last_date_'+u);if(ld!==today){c=0;localStorage.setItem('last_date_'+u,today);localStorage.setItem('ad_count_'+u,'0');}document.getElementById('ad-limit-text').innerText=`Limit: ${c}/50 Ads`;let lb=localStorage.getItem('last_bonus_date_'+u);let btn=document.getElementById('daily-bonus-btn');if(lb===today){btn.disabled=true;btn.innerText="Bonus Claimed ✅";}else{btn.disabled=false;btn.innerText="Claim Daily ₹2.00";}let lc=parseInt(localStorage.getItem('last_click_'+u)||'0');let diff=(Date.now()-lc)/1000;if(diff<10&&lc>0)startTimer(10-Math.floor(diff));if(c>=50){let wb=document.getElementById('watch-ad-btn');wb.disabled=true;wb.innerText="Limit Reached (50/50)";}}
+function claimDailyBonus(){let u=localStorage.getItem('logged_mobile');let t=new Date().toDateString();if(localStorage.getItem('last_bonus_date_'+u)===t){alert("Already claimed!");return;}localStorage.setItem('last_bonus_date_'+u,t);let b=parseFloat(localStorage.getItem('balance_'+u)||'0')+2;localStorage.setItem('balance_'+u,b.toFixed(2));alert("₹2 Added!");updateUI();}
+function watchAd(){let u=localStorage.getItem('logged_mobile');let c=parseInt(localStorage.getItem('ad_count_'+u)||'0');if(c>=50){alert("Limit reached!");return;}window.open(MONETAG_LINK,'_blank');c++;localStorage.setItem('ad_count_'+u,c);localStorage.setItem('last_click_'+u,Date.now());let b=parseFloat(localStorage.getItem('balance_'+u)||'0')+0.20;localStorage.setItem('balance_'+u,b.toFixed(2));let p=parseFloat(localStorage.getItem('admin_monetag_profit')||'0')+0.005;localStorage.setItem('admin_monetag_profit',p.toFixed(3));alert("₹0.20 Added!");updateUI();startTimer(10);}
+function startTimer(s){let btn=document.getElementById('watch-ad-btn');btn.disabled=true;let left=s;let iv=setInterval(()=>{if(left<=0){clearInterval(iv);let u=localStorage.getItem('logged_mobile');let c=parseInt(localStorage.getItem('ad_count_'+u)||'0');if(c<50){btn.disabled=false;btn.innerText="Watch Ad (Earn ₹0.20)";}}else{btn.innerText=`Next Ad in ${left}s`;left--;}},1000);}
+function openOfferwall(){window.open(CPALEAD_LINK,'_blank');alert("Offerwall opened!");}
 
-            <div class="card">
-                <h3>App & Offer Wall (CPA)</h3>
-                <p style="color: #666; margin: 10px 0;">Neraya apps & offers parthu bonus perungal!</p>
-                <p style="font-size: 12px; color: #d9534f; margin-bottom: 10px;" id="install-limit-text">Status: Unlimited Offers</p>
-                <button class="btn btn-install" onclick="openOfferwall()">Open Offer Wall (Earn ₹5.00+)</button>
-            </div>
-
-            <div class="banner-ad">
-                📢 Sponsored Ad Space (Admin Profit)
-            </div>
-
-        </div>
-
-        <!-- TAB 2: WALLET -->
-        <div id="tab-wallet" class="container hidden">
-            <div class="card">
-                <h3>UPI Withdrawal</h3>
-                <p style="margin: 5px 0 15px 0; color: #666; font-size: 13px;">Min: ₹50 | Max: ₹1000</p>
-                
-                <input type="text" id="upi-id-input" class="input-field" placeholder="UPI ID (Eg: example@upi)">
-                <input type="number" id="withdraw-amount-input" class="input-field" placeholder="Amount (₹)">
-
-                <button class="btn" onclick="requestWithdrawal()">Withdraw Money</button>
-            </div>
-
-            <div class="card" style="text-align: left;">
-                <h3>📜 Withdrawal History</h3>
-                <ol id="user-history-list" class="history-list">
-                    <li>Loading history...</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- TAB 3: PROFILE & ADMIN -->
-        <div id="tab-profile" class="container hidden">
-            <div class="card">
-                <h3>User Profile</h3>
-                <p style="margin: 10px 0;">Mobile: <span id="profile-mobile"></span></p>
-                <button class="btn" style="background: #dc3545;" onclick="logout()">Logout</button>
-            </div>
-
-            <div id="admin-panel" class="admin-box hidden">
-                <h3>🛠️ Admin Panel</h3>
-                <p><b>Estimated Monetag Revenue:</b> $<span id="admin-monetag-profit">0.00</span></p>
-                <hr style="margin: 10px 0;">
-                <p><b>User Withdrawal Requests (Google Sheet):</b></p>
-                <ul id="admin-withdrawal-list" style="padding-left: 20px; font-size: 13px; margin-top: 5px;">
-                    <li>Loading requests...</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- BOTTOM NAVIGATION -->
-        <div class="bottom-nav">
-            <div class="nav-item active" onclick="switchTab('task', event)">🎯 Task</div>
-            <div class="nav-item" onclick="switchTab('wallet', event)">👛 Wallet</div>
-            <div class="nav-item" onclick="switchTab('profile', event)">👤 Profile</div>
-        </div>
-    </div>
-
-    <script>
-        const ADMIN_MOBILE = "9942610013"; 
-        const MONETAG_LINK = "https://uplcm.com/4/12028464"; 
-        const CPALEAD_LINK = "https://www.qckclk.com/wall/f1IBuFU"; 
-        const SHEETDB_API = "https://sheetdb.io/api/v1/71qfs8rxufawk"; 
-
-        window.onload = function() {
-            let savedUser = localStorage.getItem('logged_mobile');
-            if (savedUser && savedUser.length === 10) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('app-screen').classList.remove('hidden');
-                switchTab('task');
-                updateUI();
-            }
-        };
-
-        function loginUser() {
-            let mobileInput = document.getElementById('mobile-input');
-            let mobile = mobileInput.value.trim();
-            
-            if (mobile.length !== 10 || isNaN(mobile)) {
-                alert("Sariana 10 digit mobile number-ai ullidavum!");
-                return;
-            }
-
-            localStorage.setItem('logged_mobile', mobile);
-            if (!localStorage.getItem('balance_' + mobile)) {
-                localStorage.setItem('balance_' + mobile, '0.00');
-            }
-
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('app-screen').classList.remove('hidden');
-            switchTab('task');
-            updateUI();
-        }
-
-        function logout() {
-            localStorage.removeItem('logged_mobile');
-            location.reload();
-        }
-
-        function switchTab(tabName, event) {
-            document.getElementById('tab-task').classList.add('hidden');
-            document.getElementById('tab-wallet').classList.add('hidden');
-            document.getElementById('tab-profile').classList.add('hidden');
-
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-            if (tabName === 'task') {
-                document.getElementById('tab-task').classList.remove('hidden');
-            } else if (tabName === 'wallet') {
-                document.getElementById('tab-wallet').classList.remove('hidden');
-                loadUserHistory();
-            } else if (tabName === 'profile') {
-                document.getElementById('tab-profile').classList.remove('hidden');
-                checkAdminAccess();
-            }
-
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            } else {
-                document.querySelectorAll('.nav-item')[0].classList.add('active');
-            }
-        }
-
-        function updateUI() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            if (!currentUser) return;
-
-            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            document.getElementById('user-balance').innerText = balance.toFixed(2);
-            document.getElementById('profile-mobile').innerText = currentUser;
-
-            let today = new Date().toDateString();
-            let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
-            let lastDate = localStorage.getItem('last_date_' + currentUser);
-
-            if (lastDate !== today) {
-                adCount = 0;
-                localStorage.setItem('last_date_' + currentUser, today);
-                localStorage.setItem('ad_count_' + currentUser, '0');
-            }
-            document.getElementById('ad-limit-text').innerText = `Limit: ${adCount}/50 Ads`;
-
-            let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
-            let bonusBtn = document.getElementById('daily-bonus-btn');
-            if (lastBonusDate === today) {
-                bonusBtn.disabled = true;
-                bonusBtn.innerText = "Bonus Claimed Today ✅";
-            } else {
-                bonusBtn.disabled = false;
-                bonusBtn.innerText = "Claim Daily ₹2.00";
-            }
-
-            let lastClickTime = parseInt(localStorage.getItem('last_click_' + currentUser) || '0');
-            let now = new Date().getTime();
-            let diff = (now - lastClickTime) / 1000;
-
-            if (diff < 10 && lastClickTime > 0) {
-                startTimer(10 - Math.floor(diff));
-            }
-
-            if (adCount >= 50) {
-                document.getElementById('watch-ad-btn').disabled = true;
-                document.getElementById('watch-ad-btn').innerText = "Today's Limit Reached (50/50)";
-            }
-        }
-
-        function claimDailyBonus() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            let today = new Date().toDateString();
-            let lastBonusDate = localStorage.getItem('last_bonus_date_' + currentUser);
-
-            if (lastBonusDate === today) {
-                alert("Bonus already claimed today!");
-                return;
-            }
-
-            localStorage.setItem('last_bonus_date_' + currentUser, today);
-            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            balance += 2.00;
-            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
-
-            alert("Daily bonus ₹2.00 added successfully!");
-            updateUI();
-        }
-
-        function watchAd() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
-
-            if (adCount >= 50) {
-                alert("Daily 50 ad limit reached!");
-                return;
-            }
-
-            window.open(MONETAG_LINK, '_blank');
-
-            adCount++;
-            localStorage.setItem('ad_count_' + currentUser, adCount);
-            localStorage.setItem('last_click_' + currentUser, new Date().getTime());
-
-            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            balance += 0.20; 
-            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
-
-            let totalProfit = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00');
-            totalProfit += 0.005; 
-            localStorage.setItem('admin_monetag_profit', totalProfit.toFixed(3));
-
-            alert("₹0.20 added successfully!");
-            updateUI();
-            startTimer(10);
-        }
-
-        function startTimer(seconds) {
-            let btn = document.getElementById('watch-ad-btn');
-            btn.disabled = true;
-            let timeLeft = seconds;
-
-            let interval = setInterval(() => {
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    let currentUser = localStorage.getItem('logged_mobile');
-                    let adCount = parseInt(localStorage.getItem('ad_count_' + currentUser) || '0');
-                    if (adCount < 50) {
-                        btn.disabled = false;
-                        btn.innerText = "Watch Ad (Earn ₹0.20)";
-                    }
-                } else {
-                    btn.innerText = `Next Ad in ${timeLeft}s`;
-                    timeLeft--;
-                }
-            }, 1000);
-        }
-
-        function openOfferwall() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            window.open(CPALEAD_LINK, '_blank');
-
-            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-            balance += 5.00; 
-            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
-
-            alert("Offerwall opened! Complete tasks to claim rewards.");
-            updateUI();
-        }
-
-        function requestWithdrawal() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            let upiId = document.getElementById('upi-id-input').value.trim();
-            let amount = parseFloat(document.getElementById('withdraw-amount-input').value);
-            let balance = parseFloat(localStorage.getItem('balance_' + currentUser) || '0.00');
-
-            if (!upiId) {
-                alert("Please enter UPI ID!");
-                return;
-            }
-            if (isNaN(amount) || amount < 50 || amount > 1000) {
-                alert("Amount must be between ₹50 and ₹1000!");
-                return;
-            }
-            if (amount > balance) {
-                alert("Insufficient balance!");
-                return;
-            }
-
-            balance -= amount;
-            localStorage.setItem('balance_' + currentUser, balance.toFixed(2));
-
-            let withdrawalData = {
-                Mobile: currentUser,
-                UPI: upiId,
-                Amount: amount,
-                Date: new Date().toLocaleDateString()
-            };
-
-            fetch(SHEETDB_API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: [withdrawalData] })
-            })
-            .then(res => res.json())
-            .then(response => {
-                alert("₹" + amount + " withdrawal request submitted successfully!");
-                document.getElementById('upi-id-input').value = "";
-                document.getElementById('withdraw-amount-input').value = "";
-                updateUI();
-                loadUserHistory();
-            })
-            .catch(err => {
-                alert("Error sending request to Google Sheet. Please try again!");
-            });
-        }
-
-        function loadUserHistory() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            let historyList = document.getElementById('user-history-list');
-            historyList.innerHTML = "<li>Loading history...</li>";
-
-            fetch(SHEETDB_API)
-            .then(res => res.json())
-            .then(data => {
-                let userReqs = data.filter(item => {
-                    let mob = item.Mobile || item.mobile || item.MOBILE || "";
-                    return String(mob).trim() === String(currentUser).trim();
-                });
-                if (userReqs.length === 0) {
-                    historyList.innerHTML = "<li>No history yet.</li>";
-                    return;
-                }
-                let listHTML = "";
-                userReqs.forEach(item => {
-                    let amt = item.Amount || item.amount || "0";
-                    let upi = item.UPI || item.upi || item.Upi || "-";
-                    let dt = item.Date || item.date || "-";
-                    listHTML += `<li><b>₹${amt}</b> -> UPI: ${upi} (${dt})</li>`;
-                });
-                historyList.innerHTML = listHTML;
-            })
-            .catch(err => {
-                historyList.innerHTML = "<li>Failed to load history.</li>";
-            });
-        }
-
-        function checkAdminAccess() {
-            let currentUser = localStorage.getItem('logged_mobile');
-            if (currentUser === ADMIN_MOBILE) {
-                document.getElementById('admin-panel').classList.remove('hidden');
-                document.getElementById('admin-monetag-profit').innerText = parseFloat(localStorage.getItem('admin_monetag_profit') || '0.00').toFixed(3);
-                
-                let adminList = document.getElementById('admin-withdrawal-list');
-                adminList.innerHTML = "<li>Loading requests...</li>";
-
-                fetch(SHEETDB_API)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length === 0) {
-                        adminList.innerHTML = "<li>No requests yet.</li>";
-                        return;
-                    }
-                    let listHTML = "";
-                    data.forEach(req => {
-                        let mob = req.Mobile || req.mobile || req.MOBILE || "N/A";
-                        let upi = req.UPI || req.upi || req.Upi || "N/A";
-                        let amt = req.Amount || req.amount || "0";
-                        let dt = req.Date || req.date || "-";
-                        
-                        listHTML += 
+// ===== FIXED WITHDRAWAL - IDHU THAAN MUKKIYAM =====
+function requestWithdrawal(){
+ let u=localStorage.getItem('logged_mobile');
+ let upi=document.getElementById('upi-id-input').value.trim();
+ let amt=parseFloat(document.getElementById('withdraw-amount-input').value);
+ let bal=parseFloat(localStorage.getItem('balance_'+u)||'0');
+ if(!upi){alert("UPI ID podu bro!");return;}
+ if(isNaN(amt)||amt<50||amt>1000){alert("₹50 - ₹1000 kulla podu!");return;}
+ if(amt>bal){alert("Balance pothala!");return;}
+ bal-=amt;localStorage.setItem('balance_'+u,bal.toFixed(2));
+ // SheetDB ku correct format la anuppurom - lowercase keys!
+ let data={mobile:u, upi:upi, amount:amt.toString(), date:new Date().toLocaleDateString('en-GB'), status:"Pending"};
+ fetch(SHEETDB_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[data]})})
+ .then(r=>r.json()).then(()=>{alert("₹"+amt+" request success!");document.getElementById('upi-id-input').value="";document.getElementById('withdraw-amount-input').value="";updateUI();loadUserHistory();})
+ .catch(()=>alert("Sheet error, try again!"));
+}
+function loadUserHistory(){
+ let u=localStorage.getItem('logged_mobile');let hl=document.getElementById('user-history-list');hl.innerHTML="<li>Loading...</li>";
+ fetch(SHEETDB_API).then(r=>r.json()).then(d=>{
+  let reqs=d.filter(it=>(it.mobile==u||it.Mobile==u));
+  if(!reqs.length){hl.innerHTML="<li>No history yet</li>";return;}
+  hl.innerHTML=reqs.map(it=>{let amt=it.amount||it.Amount||'?';let upi=it.upi||it.UPI||'?';let dt=it.date||it.Date||'';return `<li><b>₹${amt}</b> -> ${upi} (${dt}) - Pending</li>`}).join('');
+ }).catch(()=>hl.innerHTML="<li>Failed to load</li>");
+}
+function checkAdminAccess(){
+ let u=localStorage.getItem('logged_mobile');if(u!==ADMIN_MOBILE)return;
+ document.getElementById('admin-panel').classList.remove('hidden');
+ document.getElementById('admin-monetag-profit').innerText=parseFloat(localStorage.getItem('admin_monetag_profit')||'0').toFixed(3);
+ let al=document.getElementById('admin-withdrawal-list');al.innerHTML="<li>Loading...</li>";
+ fetch(SHEETDB_API).then(r=>r.json()).then(d=>{
+  if(!d.length){al.innerHTML="<li>No requests</li>";return;}
+  al.innerHTML=d.map(req=>{
+   let mob=req.mobile||req.Mobile||'Unknown';
+   let upi=req.upi||req.UPI||'Unknown';
+   let amt=req.amount||req.Amount||'Unknown';
+   let dt=req.date||req.Date||'';
+   return `<li><b>Mob:</b> ${mob} | <b>UPI:</b> ${upi} | <b>Amt:</b> ₹${amt} (${dt})</li>`;
+  }).join('');
+ }).catch(()=>al.innerHTML="<li>Failed</li>");
+}
+</script>
+</body>
+</html>
