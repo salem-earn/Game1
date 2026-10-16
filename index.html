@@ -1,62 +1,93 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Salem Earn Pro</title>
-<style>
-body{font-family:Arial;background:#f5f5f5;padding:15px}
-.box{background:#fff;padding:15px;border-radius:12px;margin-bottom:12px;box-shadow:0 2px 8px #ddd}
-button{background:#25D366;color:#fff;border:0;padding:12px 20px;border-radius:8px;width:100%;font-weight:bold;margin-top:8px}
-input{width:95%;padding:10px;border:1px solid #ddd;border-radius:8px;margin:5px 0}
-.pending{color:orange;font-weight:bold}
-.success{color:green;font-weight:bold}
-</style>
-</head>
-<body>
+<html lang="ta"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salem Earn Pro - Final</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.btn{background:#0f766e;color:#fff;padding:10px;border-radius:10px;font-weight:700;width:100%}.btn:disabled{opacity:.5}.gold{background:linear-gradient(45deg,#f59e0b,#eab308)}</style>
+</head><body class="bg-[#f6f7f9] pb-24 font-sans">
+<div class="max-w-md mx-auto p-3">
+  <div id="secretHeader" class="flex justify-between items-center bg-emerald-700 text-white p-4 rounded-2xl cursor-pointer select-none">
+    <div><div class="font-bold text-lg">💰 Salem Earn Pro</div><div class="text-[11px] opacity-80">Min Withdraw ₹50</div></div>
+    <div class="bg-white text-emerald-700 font-bold px-3 py-1 rounded-full" id="bal">₹0</div>
+  </div>
+  <div class="text-center text-[10px] text-gray-400 mt-1">Tap header 5 times = Admin Panel</div>
 
-<h2>💰 Salem Earn Pro</h2>
+  <div class="mt-3 bg-black rounded-xl text-center"><div class="text-[10px] text-white/60 py-1">ADVERTISEMENT</div><div class="bg-white/10 text-white text-xs py-3">📢 Top Banner Ad</div></div>
 
-<!-- BALANCE -->
-<div class="box">
-  <h3>Balance: ₹<span id="bal">125.50</span></h3>
-  <p>UPI ID:</p>
-  <input id="upiId" placeholder="yourname@okhdfc">
-  <p>Amount (Min ₹50):</p>
-  <input id="withdrawAmt" type="number" placeholder="50">
-  <button onclick="doWithdraw()">WITHDRAW REQUEST</button>
-  <p style="font-size:12px">👉 Status update ku Telegram Bot ah START pannunga: <a href="https://t.me/Salem_earn_pro_bot" target="_blank">@Salem_earn_pro_bot</a></p>
-</div>
+  <div class="card mt-3 bg-green-50 border border-green-200">
+    <div class="font-bold">📅 Daily Check-in - Day <span id="streak">1</span></div>
+    <button id="checkBtn" onclick="checkIn()" class="btn mt-2">CHECK-IN TODAY (+₹0.50)</button>
+    <div id="checkMsg" class="text-xs text-red-500 mt-1"></div>
+  </div>
 
-<!-- PAID CODE -->
-<div class="box">
-  <h3>🔑 Payment Code Enter Pannunga</h3>
-  <p style="font-size:12px">Admin GPay la pay pannitu Telegram Bot la code anuppuvaar. Atha inga podunga.</p>
-  <input id="paidCode" placeholder="Ex: SALEM52">
-  <button onclick="checkPaidCode()">VERIFY & MARK SUCCESS ✅</button>
-</div>
+  <div class="card mt-3 text-center">
+    <div class="font-bold">🎡 Daily Spin</div>
+    <div id="spinRes" class="text-4xl my-2">🎡</div>
+    <button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button>
+    <div class="text-[11px] text-gray-400">Daily 1 Spin mattum</div>
+  </div>
 
-<!-- HISTORY -->
-<div class="box">
-  <h3>📜 Withdraw History</h3>
-  <div id="historyDiv">No history yet</div>
-</div>
+  <div class="card mt-3 gold text-white">
+    <div class="font-bold">👑 VIP PLAN - ₹49 Only</div>
+    <button onclick="buyVip()" class="bg-white text-yellow-600 font-bold w-full py-2 rounded-lg mt-2">BUY VIP - ₹49</button>
+  </div>
 
-<!-- ADMIN PANEL - Unakku Mattum -->
-<div class="box" style="border:2px dashed #ff9800">
-  <h3>🔐 Admin Panel (Unakku Mattum)</h3>
-  <input id="adminPass" type="password" placeholder="Admin Password">
-  <button onclick="showAdmin()" style="background:#ff9800">LOGIN ADMIN</button>
-  <div id="adminDiv" style="display:none;margin-top:10px">
-    <h4>Pending Withdraws</h4>
-    <div id="adminList"></div>
-    <p style="font-size:11px">GPay la pay pannitu, user ku Telegram la Code anuppu: SALEM + Amount<br>Ex: ₹52 ku code = SALEM52</p>
+  <div class="card mt-3">
+    <div class="font-bold">📺 Watch Ad & Earn ₹2</div>
+    <div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20</div>
+    <button onclick="watchAd()" class="btn mt-2">WATCH AD</button>
+  </div>
+
+  <div class="card mt-3 bg-yellow-50 border border-yellow-200">
+    <div class="font-bold">👥 Refer & Earn 20%</div>
+    <div class="flex gap-2 mt-2"><input id="refLink" readonly value="https://game1-game.vercel.app/?ref=9942610013" class="flex-1 border p-2 rounded text-xs"><button onclick="copyRef()" class="bg-yellow-500 px-3 rounded font-bold">COPY</button></div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="font-bold">🎯 Offerwall</div>
+    <a href="https://cpalead.com" target="_blank" class="btn block text-center mt-2">VIEW OFFERS</a>
+  </div>
+
+  <div class="card mt-3 border-2 border-orange-300">
+    <div class="font-bold">💸 Withdraw (Min ₹50)</div>
+    <div class="text-xs text-gray-500"><span id="needAmt"></span></div>
+    <div class="w-full bg-gray-200 rounded-full h-2 mt-2"><div id="prog" class="bg-orange-500 h-2 rounded-full" style="width:0%"></div></div>
+    <input id="upi" placeholder="UPI ID - ex: 9942610013@okhdfc" class="w-full border p-2 rounded mt-2">
+    <div class="text-xs mt-2">Amount: <input id="withdrawAmt" type="number" placeholder="50" class="border p-1 rounded w-20"></div>
+    <button onclick="withdraw()" class="btn mt-2 bg-orange-600">REQUEST WITHDRAW - MIN ₹50</button>
+    <div class="text-[11px] mt-2">👉 Status ku Bot ah START pannunga: <a href="https://t.me/Salem_earn_pro_bot" target="_blank" class="text-blue-600 font-bold">@Salem_earn_pro_bot</a></div>
+  </div>
+
+  <!-- PAID CODE + HISTORY -->
+  <div class="card mt-3">
+    <div class="font-bold">🔑 Payment Code</div>
+    <div class="text-xs text-gray-500">Admin GPay la pay pannitu Telegram Bot la code anuppuvar</div>
+    <input id="paidCode" placeholder="Ex: SALEM50" class="w-full border p-2 rounded mt-2">
+    <button onclick="checkPaidCode()" class="btn mt-2 bg-green-600">VERIFY & MARK SUCCESS ✅</button>
+  </div>
+
+  <div class="card mt-3">
+    <div class="font-bold">📜 Withdraw History</div>
+    <div id="historyDiv" class="text-sm mt-2">No history yet</div>
+  </div>
+
+  <!-- SECRET ADMIN PANEL -->
+  <div id="adminPanel" class="card mt-3 hidden bg-yellow-50 border-2 border-yellow-400">
+    <div class="font-bold text-yellow-800">🛠️ ADMIN PANEL - SECRET</div>
+    <div class="text-sm">Revenue: <b id="adminRev">$0.080</b></div>
+    <div class="text-sm">User Payout: <b id="adminPayout">₹0</b></div>
+    <div class="text-sm font-bold text-green-700">Net Profit: <b id="adminNet"></b></div>
+
+    <div class="mt-3 font-bold border-t pt-2">📩 Withdraw Requests: <span id="reqCount" class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span></div>
+    <div id="adminReqs" class="mt-1">No Requests Yet</div>
+    <button onclick="clearReqs()" class="bg-gray-500 text-white text-xs px-2 py-1 rounded mt-2">Clear All Requests</button>
+    <button onclick="document.getElementById('adminPanel').classList.add('hidden')" class="bg-red-500 text-white text-xs px-2 py-1 rounded mt-2 ml-1">HIDE PANEL</button>
   </div>
 </div>
 
 <script>
+const MIN_WITHDRAW = 50;
 const BOT_TOKEN = "8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg";
 const CHAT_ID = "8855798269";
-const ADMIN_PASSWORD = "salem123";
 
 function sendTelegram(msg){
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -66,72 +97,112 @@ function sendTelegram(msg){
   }).catch(e=>console.log(e));
 }
 
-function doWithdraw(){
-  let amt = document.getElementById("withdrawAmt").value;
-  let upi = document.getElementById("upiId").value;
-  if(!upi) return alert("UPI ID podu bro!");
-  if(!amt || amt < 50) return alert("Min ₹50 bro!");
-  
-  let history = JSON.parse(localStorage.getItem("withdraw_history") || "[]");
-  let id = Date.now();
-  let code = "SALEM" + amt; // Admin code
-  history.unshift({id:id, amt:amt, upi:upi, status:"Pending", code:code, date:new Date().toLocaleString()});
-  localStorage.setItem("withdraw_history", JSON.stringify(history));
-  
-  // Telegram to Admin - Un number theriyathu, Bot la irunthu varum
-  sendTelegram(`🔔 <b>NEW WITHDRAW!</b>\n\n💰 Amount: ₹${amt}\n📱 UPI: ${upi}\n🆔 ID: ${id}\n🔑 Paid Code: ${code}\n📅 ${new Date().toLocaleString()}\n\nGPay la pay pannitu user ku Telegram Bot la code anuppu`);
-  
-  alert("Withdraw Request Sent! Admin ku Telegram poiruchu!");
-  showHistory();
+let bal = parseFloat(localStorage.getItem('salem_bal')||'21.20');
+let ads = parseInt(localStorage.getItem('salem_ads')||'20');
+let streak = parseInt(localStorage.getItem('salem_streak')||'6');
+let tapCount = 0;
+function todayKey(){ return new Date().toDateString(); }
+
+document.getElementById('secretHeader').addEventListener('click', function(){
+  tapCount++;
+  if(tapCount>=5){
+    tapCount=0;
+    document.getElementById('adminPanel').classList.remove('hidden');
+    showAdminReqs();
+    alert('Admin Panel Opened! 🤫');
+    document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
+  }
+});
+
+function showAdminReqs(){
+  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
+  document.getElementById('reqCount').innerText = reqs.length;
+  if(reqs.length===0){ document.getElementById('adminReqs').innerHTML='No Requests Yet'; return; }
+  let html = reqs.map((r,i)=>`<div class="bg-white p-2 rounded mt-1 text-xs border"><b>₹${r.amt}</b> - ${r.upi}<br>Code: <b>${r.code}</b><br><span class="text-gray-400">${r.date} - ${r.status}</span><br><button onclick="approveReq(${i})" class="bg-green-600 text-white px-2 py-0.5 rounded mt-1">✅ PAID - Code Anuppu</button></div>`).join('');
+  document.getElementById('adminReqs').innerHTML=html;
 }
+function approveReq(i){
+  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
+  alert('Paid ₹'+reqs[i].amt+' to '+reqs[i].upi+' ✅\n\nIppo Telegram Bot la user ku itha anuppu:\nCode: '+reqs[i].code+'\n\nUn Number theriyathu - Bot la irunthu varum!');
+  reqs[i].status='Paid - Code Sent';
+  localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); showAdminReqs();
+}
+function clearReqs(){ if(confirm('Clear all?')){ localStorage.removeItem('withdraw_reqs'); localStorage.removeItem('withdraw_history'); showAdminReqs(); showHistory(); } }
 
 function showHistory(){
-  let h = JSON.parse(localStorage.getItem("withdraw_history") || "[]");
-  if(h.length==0){ document.getElementById("historyDiv").innerHTML="No history"; return; }
-  let html="";
-  h.forEach(item=>{
-    let cls = item.status=="Success" ? "success" : "pending";
-    let icon = item.status=="Success" ? "✅" : "🟡";
-    html += `<div style="border:1px solid #eee;padding:10px;margin:5px;border-radius:8px">₹${item.amt} - <span class="${cls}">${icon} ${item.status}</span><br><small>${item.date} | ${item.upi}</small></div>`;
-  });
-  document.getElementById("historyDiv").innerHTML=html;
+  let h = JSON.parse(localStorage.getItem('withdraw_history')||'[]');
+  if(h.length==0){ document.getElementById('historyDiv').innerHTML='No history yet'; return; }
+  let html = h.map(item=>{
+    let col = item.status=='Success'? 'text-green-600' : 'text-orange-500';
+    let icon = item.status=='Success'? '✅' : '🟡';
+    return `<div class="border p-2 rounded mt-1">₹${item.amt} - <b class="${col}">${icon} ${item.status}</b><br><span class="text-xs text-gray-500">${item.date} | ${item.upi}</span></div>`;
+  }).join('');
+  document.getElementById('historyDiv').innerHTML=html;
 }
-
 function checkPaidCode(){
-  let code = document.getElementById("paidCode").value.trim().toUpperCase();
-  if(!code) return alert("Code podu bro!");
-  let h = JSON.parse(localStorage.getItem("withdraw_history") || "[]");
-  let found = false;
-  h.forEach(item=>{
-    if(item.code == code && item.status=="Pending"){
-      item.status="Success";
-      found=true;
-    }
-  });
+  let code = document.getElementById('paidCode').value.trim().toUpperCase();
+  if(!code) return alert('Code podu bro!');
+  let h = JSON.parse(localStorage.getItem('withdraw_history')||'[]');
+  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
+  let found=false;
+  h.forEach(item=>{ if(item.code==code && item.status=='Pending'){ item.status='Success'; found=true; } });
+  reqs.forEach(r=>{ if(r.code==code) r.status='Success'; });
   if(found){
-    localStorage.setItem("withdraw_history", JSON.stringify(h));
-    alert("✅ Payment Success! History Updated!");
-    showHistory();
-  } else {
-    alert("❌ Wrong Code bro! Telegram Bot la vantha code ah check pannu!");
-  }
+    localStorage.setItem('withdraw_history', JSON.stringify(h));
+    localStorage.setItem('withdraw_reqs', JSON.stringify(reqs));
+    alert('✅ Payment Success! History Updated!'); showHistory(); showAdminReqs();
+  } else alert('❌ Wrong Code bro! Telegram Bot la vantha code ah check pannu!');
 }
 
-function showAdmin(){
-  let p = document.getElementById("adminPass").value;
-  if(p != ADMIN_PASSWORD) return alert("Wrong Password!");
-  document.getElementById("adminDiv").style.display="block";
-  showHistory();
-  // Admin list - Same as history but for admin view
-  let h = JSON.parse(localStorage.getItem("withdraw_history") || "[]");
-  let html="";
-  h.forEach(item=>{
-    html += `<div style="background:#fff3e0;padding:10px;margin:5px;border-radius:8px">₹${item.amt} - ${item.upi} - ${item.status} - Code: <b>${item.code}</b></div>`;
-  });
-  document.getElementById("adminList").innerHTML = html || "No withdraws";
+function upd(){
+  document.getElementById('bal').innerText='₹'+bal.toFixed(2);
+  document.getElementById('adCount').innerText=ads;
+  document.getElementById('streak').innerText=streak;
+  let need = Math.max(0, MIN_WITHDRAW - bal);
+  document.getElementById('needAmt').innerText = need>0? 'Innum ₹'+need.toFixed(2)+' venum!' : 'Withdraw panna ready!';
+  document.getElementById('prog').style.width = Math.min(100, bal/MIN_WITHDRAW*100)+'%';
+  if(localStorage.getItem('last_checkin')===todayKey()){ document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN TODAY ✅'; }
+  if(localStorage.getItem('last_spin')===todayKey()){ document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE TODAY ✅'; }
+  let rev=0.08+(ads*0.25); document.getElementById('adminRev').innerText='$'+rev.toFixed(3);
+  document.getElementById('adminPayout').innerText='₹'+bal.toFixed(2);
+  document.getElementById('adminNet').innerText='₹'+(rev*83-bal).toFixed(2)+' Profit';
 }
-
-showHistory();
+function checkIn(){
+  if(localStorage.getItem('last_checkin')===todayKey()) return alert('Inniku already check-in pannita!');
+  localStorage.setItem('last_checkin', todayKey()); streak++; bal+=0.5;
+  localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_streak',streak); upd(); alert('Check-in Done! +₹0.50');
+}
+function doSpin(){
+  if(localStorage.getItem('last_spin')===todayKey()) return alert('Inniku spin mudinjiduchu!');
+  localStorage.setItem('last_spin', todayKey());
+  let win=[1,1,2,1,5,1,2,1][Math.floor(Math.random()*8)];
+  bal+=win; localStorage.setItem('salem_bal',bal); upd();
+  document.getElementById('spinRes').innerText='🎉 ₹'+win; alert('You Won ₹'+win+' 🎉');
+}
+function watchAd(){
+  if(ads>=20) return alert('Daily limit over!');
+  ads++; bal+=2; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_ads',ads); upd(); alert('₹2 Added!');
+}
+function buyVip(){ if(confirm('VIP ₹49 vaangava?')){ bal+=5; alert('VIP Activated!'); upd(); } }
+function copyRef(){ document.getElementById('refLink').select(); document.execCommand('copy'); alert('Copied!'); }
+function withdraw(){
+  let upi=document.getElementById('upi').value.trim();
+  let amtInput = document.getElementById('withdrawAmt').value;
+  let amt = amtInput? parseFloat(amtInput) : bal;
+  if(!upi) return alert('UPI ID podu bro');
+  if(isNaN(amt) || amt < 50) return alert('Min ₹50 bro! Amount 50 kku mela podu');
+  if(amt > bal) return alert('Balance ₹'+bal.toFixed(2)+' thaan irukku bro!');
+  let code = "SALEM" + Math.floor(amt);
+  let reqs = JSON.parse(localStorage.getItem('withdraw_reqs')||'[]');
+  reqs.push({upi: upi, amt: amt.toFixed(2), code: code, status:'Pending', date: new Date().toLocaleString()});
+  localStorage.setItem('withdraw_reqs', JSON.stringify(reqs));
+  let hist = JSON.parse(localStorage.getItem('withdraw_history')||'[]');
+  hist.unshift({amt: amt.toFixed(2), upi: upi, code: code, status:'Pending', date: new Date().toLocaleString()});
+  localStorage.setItem('withdraw_history', JSON.stringify(hist));
+  sendTelegram(`🔔 <b>NEW WITHDRAW!</b>\n\n💰 Amount: ₹${amt.toFixed(2)}\n📱 UPI: ${upi}\n🔑 Code: ${code}\n📅 ${new Date().toLocaleString()}`);
+  alert('Withdraw Request Sent! Admin ku Telegram poiruchu ✅');
+  bal = bal - amt; localStorage.setItem('salem_bal', bal); upd(); showAdminReqs(); showHistory();
+}
+upd(); showAdminReqs(); showHistory();
 </script>
-</body>
-</html>
+</body></html>
