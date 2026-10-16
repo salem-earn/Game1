@@ -389,14 +389,20 @@
             fetch(SHEETDB_API)
             .then(res => res.json())
             .then(data => {
-                let userReqs = data.filter(item => item.Mobile === currentUser);
+                let userReqs = data.filter(item => {
+                    let mob = item.Mobile || item.mobile || item.MOBILE || "";
+                    return String(mob).trim() === String(currentUser).trim();
+                });
                 if (userReqs.length === 0) {
                     historyList.innerHTML = "<li>No history yet.</li>";
                     return;
                 }
                 let listHTML = "";
                 userReqs.forEach(item => {
-                    listHTML += `<li><b>₹${item.Amount}</b> -> UPI: ${item.UPI} (${item.Date})</li>`;
+                    let amt = item.Amount || item.amount || "0";
+                    let upi = item.UPI || item.upi || item.Upi || "-";
+                    let dt = item.Date || item.date || "-";
+                    listHTML += `<li><b>₹${amt}</b> -> UPI: ${upi} (${dt})</li>`;
                 });
                 historyList.innerHTML = listHTML;
             })
@@ -423,15 +429,9 @@
                     }
                     let listHTML = "";
                     data.forEach(req => {
-                        listHTML += `<li><b>Mob:</b> ${req.Mobile} | <b>UPI:</b> ${req.UPI} | <b>Amt:</b> ₹${req.Amount} (${req.Date})</li>`;
-                    });
-                    adminList.innerHTML = listHTML;
-                })
-                .catch(err => {
-                    adminList.innerHTML = "<li>Failed to load admin requests.</li>";
-                });
-            }
-        }
-    </script>
-</body>
-</html>
+                        let mob = req.Mobile || req.mobile || req.MOBILE || "N/A";
+                        let upi = req.UPI || req.upi || req.Upi || "N/A";
+                        let amt = req.Amount || req.amount || "0";
+                        let dt = req.Date || req.date || "-";
+                        
+                        listHTML += 
