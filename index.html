@@ -2,30 +2,26 @@
 <html lang="ta"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Salem Earn Pro</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<!-- MONETAG MULTITAG 297009 -->
+<!-- MONETAG MULTITAG ONLY - SAFE - 297009 - POPUNDER REMOVED -->
 <script src="https://quge5.com/88/tag.min.js" data-zone="297009" async data-cfasync="false"></script>
-<!-- MONETAG POPUNDER 12052005 -->
-<script>(function(s){s.dataset.zone='12052005',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <style>.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.btn{background:#0f766e;color:#fff;padding:10px;border-radius:10px;font-weight:700;width:100%}.btn:disabled{opacity:.5}.gold{background:linear-gradient(45deg,#f59e0b,#eab308)}.ad-banner{background:#000;color:#fff;text-align:center;padding:6px;border-radius:10px;font-size:11px;min-height:50px;display:flex;align-items:center;justify-content:center}</style>
 </head><body class="bg-[#f6f7f9] pb-24 font-sans">
 
 <div id="loginBox" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
   <div class="bg-white rounded-2xl p-5 w-full max-w-sm text-center">
     <div class="text-2xl font-bold">👋 Welcome to Salem Earn Pro</div>
-    <input id="userMobile" type="tel" placeholder="Mobile Number - ex: 98765xxxxx" class="w-full border p-3 rounded mt-4">
+    <input id="userMobile" type="tel" placeholder="Mobile Number" class="w-full border p-3 rounded mt-4">
     <button onclick="doLogin()" class="btn mt-3">LOGIN & START EARNING</button>
   </div>
 </div>
 
-<!-- AD WATCHING MODAL - TIMER -->
 <div id="adModal" class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4">
   <div class="bg-white rounded-2xl p-5 w-full max-w-sm text-center">
-    <div class="text-3xl">📺</div>
-    <div class="font-bold text-lg mt-2">Ad Watching...</div>
-    <div class="text-sm text-gray-500">Ad ah full ah paaru bro! Close pannatha!</div>
+    <div class="text-3xl">📺</div><div class="font-bold text-lg mt-2">Ad Watching...</div>
+    <div class="text-sm text-gray-500">Wait pannu bro - Timer mudiyattum!</div>
     <div id="timerText" class="text-5xl font-bold text-green-600 my-4">10</div>
     <div class="w-full bg-gray-200 rounded-full h-3"><div id="timerBar" class="bg-green-500 h-3 rounded-full" style="width:100%"></div></div>
-    <div class="text-xs mt-3 text-gray-400">Timer mudinjathum ₹0.20 auto add aagum</div>
+    <div class="text-xs mt-3">Timer mudinjathum ₹0.20 auto add aagum</div>
   </div>
 </div>
 
@@ -35,83 +31,33 @@
     <div class="bg-white text-emerald-700 font-bold px-3 py-1 rounded-full" id="bal">₹0</div>
   </div>
   <div class="text-center text-[10px] text-gray-400 mt-1">Tap header 5 times = Admin Panel</div>
+  <div class="mt-2 ad-banner"><div><div class="text-[9px] opacity-60">ADVERTISEMENT</div><div>Multitag Safe Ads Active ✅</div></div></div>
 
-  <div class="mt-2 ad-banner"><div><div class="text-[9px] opacity-60">ADVERTISEMENT</div><div>Multitag + Popunder Ads Active ✅</div></div></div>
-
-  <div class="card mt-3 bg-green-50 border border-green-200">
-    <div class="font-bold">📅 Daily Check-in - Day <span id="streak">1</span> <span id="checkVip"></span></div>
-    <button id="checkBtn" onclick="checkIn()" class="btn mt-2">CHECK-IN TODAY (+₹0.50)</button>
-  </div>
-
+  <div class="card mt-3 bg-green-50 border border-green-200"><div class="font-bold">📅 Daily Check-in - Day <span id="streak">1</span> <span id="checkVip"></span></div><button id="checkBtn" onclick="checkIn()" class="btn mt-2">CHECK-IN TODAY (+₹0.50)</button></div>
   <div class="mt-3 ad-banner"><div><div class="text-[9px] opacity-60">ADVERTISEMENT</div><div>Banner Ad - Sponsored</div></div></div>
 
-  <div class="card mt-3 text-center">
-    <div class="font-bold">🎡 Daily Spin</div>
-    <div id="spinRes" class="text-4xl my-2">🎡</div>
-    <button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button>
-  </div>
+  <div class="card mt-3 text-center"><div class="font-bold">🎡 Daily Spin</div><div id="spinRes" class="text-4xl my-2">🎡</div><button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button></div>
 
-  <div class="card mt-3 gold text-white">
-    <div class="font-bold">👑 VIP PLAN - ₹49 Only</div>
-    <div class="text-xs">✅ Spin Double • Ad ₹0.40 • Check-in ₹1</div>
-    <button onclick="buyVip()" class="bg-white text-yellow-600 font-bold w-full py-2 rounded-lg mt-2">BUY VIP - ₹49</button>
-    <input id="vipCode" placeholder="VIP Code" class="text-black p-2 rounded w-full text-xs mt-2">
-    <button onclick="activateVip()" class="bg-black text-white text-xs px-3 py-2 rounded mt-1 w-full">ACTIVATE VIP</button>
-  </div>
+  <div class="card mt-3 gold text-white"><div class="font-bold">👑 VIP PLAN - ₹49 Only</div><div class="text-xs">✅ Spin Double • Ad ₹0.40 • Check-in ₹1</div><button onclick="buyVip()" class="bg-white text-yellow-600 font-bold w-full py-2 rounded-lg mt-2">BUY VIP - ₹49</button><input id="vipCode" placeholder="VIP Code" class="text-black p-2 rounded w-full text-xs mt-2"><button onclick="activateVip()" class="bg-black text-white text-xs px-3 py-2 rounded mt-1 w-full">ACTIVATE VIP</button></div>
 
-  <div class="card mt-3">
-    <div class="font-bold">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div>
-    <div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20 - <span id="adDateShow"></span></div>
-    <button onclick="watchAd()" class="btn mt-2">WATCH AD</button>
-    <div class="text-[10px] text-gray-400 mt-1">10 sec wait pannu - Ad open aagum - Close pannama iru</div>
-  </div>
+  <div class="card mt-3"><div class="font-bold">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20 - <span id="adDateShow"></span></div><button onclick="watchAd()" class="btn mt-2">WATCH AD</button><div class="text-[10px] text-gray-400 mt-1">10 sec timer - Safe - No scam ads</div></div>
 
   <div class="mt-3 ad-banner"><div><div class="text-[9px] opacity-60">ADVERTISEMENT</div><div>Offerwall Sponsored</div></div></div>
 
-  <div class="card mt-3 bg-yellow-50 border border-yellow-200">
-    <div class="font-bold">👥 Refer & Earn 20%</div>
-    <div class="flex gap-2 mt-2"><input id="refLink" readonly class="flex-1 border p-2 rounded text-xs"><button onclick="copyRef()" class="bg-yellow-500 px-3 rounded font-bold">COPY</button></div>
-    <div class="text-[11px] mt-1">Code: <b id="myRefCode"></b></div>
-  </div>
+  <div class="card mt-3 bg-yellow-50 border border-yellow-200"><div class="font-bold">👥 Refer & Earn 20%</div><div class="flex gap-2 mt-2"><input id="refLink" readonly class="flex-1 border p-2 rounded text-xs"><button onclick="copyRef()" class="bg-yellow-500 px-3 rounded font-bold">COPY</button></div><div class="text-[11px] mt-1">Code: <b id="myRefCode"></b></div></div>
 
-  <div class="card mt-3">
-    <div class="font-bold">🎯 Offerwall - Real Offers</div>
-    <a href="https://www.cdnflyer.com/wall/0vB9meEf" target="_blank" class="btn block text-center mt-2">VIEW OFFERS - EARN MORE 💰</a>
-  </div>
+  <div class="card mt-3"><div class="font-bold">🎯 Offerwall - Real Offers</div><a href="https://www.cdnflyer.com/wall/0vB9meEf" target="_blank" class="btn block text-center mt-2">VIEW OFFERS - EARN MORE 💰</a></div>
 
-  <div class="card mt-3 border-2 border-orange-300">
-    <div class="font-bold">💸 Withdraw (Min ₹50)</div>
-    <div class="text-xs text-gray-500"><span id="needAmt"></span></div>
-    <div class="w-full bg-gray-200 rounded-full h-2 mt-2"><div id="prog" class="bg-orange-500 h-2 rounded-full" style="width:0%"></div></div>
-    <input id="upi" placeholder="UPI ID" class="w-full border p-2 rounded mt-2">
-    <div class="text-xs mt-2">Amount: <input id="withdrawAmt" type="number" placeholder="50" class="border p-1 rounded w-20"></div>
-    <button onclick="withdraw()" class="btn mt-2 bg-orange-600">REQUEST WITHDRAW</button>
-    <div class="text-[11px] mt-2">👉 Bot: <a href="https://t.me/Salem_earn_pro_bot" target="_blank" class="text-blue-600 font-bold">@Salem_earn_pro_bot</a></div>
-  </div>
+  <div class="card mt-3 border-2 border-orange-300"><div class="font-bold">💸 Withdraw (Min ₹50)</div><div class="text-xs text-gray-500"><span id="needAmt"></span></div><div class="w-full bg-gray-200 rounded-full h-2 mt-2"><div id="prog" class="bg-orange-500 h-2 rounded-full" style="width:0%"></div></div><input id="upi" placeholder="UPI ID" class="w-full border p-2 rounded mt-2"><div class="text-xs mt-2">Amount: <input id="withdrawAmt" type="number" placeholder="50" class="border p-1 rounded w-20"></div><button onclick="withdraw()" class="btn mt-2 bg-orange-600">REQUEST WITHDRAW</button><div class="text-[11px] mt-2">👉 Bot: <a href="https://t.me/Salem_earn_pro_bot" target="_blank" class="text-blue-600 font-bold">@Salem_earn_pro_bot</a></div></div>
 
-  <div class="card mt-3">
-    <div class="font-bold">🔑 Payment Code</div>
-    <input id="paidCode" placeholder="Ex: SALEM50" class="w-full border p-2 rounded mt-2">
-    <button onclick="checkPaidCode()" class="btn mt-2 bg-green-600">VERIFY & MARK SUCCESS ✅</button>
-  </div>
+  <div class="card mt-3"><div class="font-bold">🔑 Payment Code</div><input id="paidCode" placeholder="Ex: SALEM50" class="w-full border p-2 rounded mt-2"><button onclick="checkPaidCode()" class="btn mt-2 bg-green-600">VERIFY & MARK SUCCESS ✅</button></div>
 
-  <div class="card mt-3">
-    <div class="font-bold">📜 Withdraw History</div>
-    <div id="historyDiv" class="text-sm mt-2">No history yet</div>
-  </div>
+  <div class="card mt-3"><div class="font-bold">📜 Withdraw History</div><div id="historyDiv" class="text-sm mt-2">No history yet</div></div>
 
-  <div id="adminPanel" class="card mt-3 hidden bg-yellow-50 border-2 border-yellow-400">
-    <div class="font-bold text-yellow-800">🛠️ ADMIN PANEL</div>
-    <div class="text-sm">VIP Code: <b>VIP49</b> | CPAlead: <b>0vB9meEf</b></div>
-    <div class="text-sm">Multitag: <b>297009 ✅</b> | Popunder: <b>12052005 ✅</b></div>
-    <div class="mt-3 font-bold border-t pt-2">📩 Requests: <span id="reqCount">0</span></div>
-    <div id="adminReqs" class="mt-1">No Requests Yet</div>
-    <button onclick="clearReqs()" class="bg-gray-500 text-white text-xs px-2 py-1 rounded mt-2">Clear All</button>
-    <button onclick="document.getElementById('adminPanel').classList.add('hidden')" class="bg-red-500 text-white text-xs px-2 py-1 rounded mt-2 ml-1">HIDE</button>
-  </div>
+  <div id="adminPanel" class="card mt-3 hidden bg-yellow-50 border-2 border-yellow-400"><div class="font-bold text-yellow-800">🛠️ ADMIN PANEL</div><div class="text-sm">VIP Code: <b>VIP49</b> | CPAlead: <b>0vB9meEf</b></div><div class="text-sm">Multitag: <b>297009 ✅ SAFE</b> | Popunder: <b>REMOVED ❌</b></div><div class="mt-3 font-bold border-t pt-2">📩 Requests: <span id="reqCount">0</span></div><div id="adminReqs" class="mt-1">No Requests Yet</div><button onclick="clearReqs()" class="bg-gray-500 text-white text-xs px-2 py-1 rounded mt-2">Clear All</button><button onclick="document.getElementById('adminPanel').classList.add('hidden')" class="bg-red-500 text-white text-xs px-2 py-1 rounded mt-2 ml-1">HIDE</button></div>
 </div>
 
-<div class="fixed bottom-0 left-0 right-0 bg-black text-white text-center py-2 z-40 text-[11px]"><div class="text-[9px] opacity-60">ADVERTISEMENT</div><div>Multitag + Popunder Active</div></div>
+<div class="fixed bottom-0 left-0 right-0 bg-black text-white text-center py-2 z-40 text-[11px]"><div class="text-[9px] opacity-60">ADVERTISEMENT</div><div>Safe Ads Only - 297009</div></div>
 
 <script>
 const MIN_WITHDRAW=50;
@@ -141,12 +87,10 @@ function checkPaidCode(){ let code=document.getElementById('paidCode').value.tri
 function upd(){ resetAdsIfNewDay(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('adDateShow').innerText=todayKey(); document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?'👑 VIP':''; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('checkVip').innerText=isVip?'(VIP +₹1)':''; document.getElementById('checkBtn').innerText=isVip?'CHECK-IN TODAY (+₹1.00)':'CHECK-IN TODAY (+₹0.50)'; let need=Math.max(0, MIN_WITHDRAW-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw ready!'; document.getElementById('prog').style.width=Math.min(100,bal/MIN_WITHDRAW*100)+'%'; if(localStorage.getItem('last_checkin')===todayKey()){ document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅'; } if(localStorage.getItem('last_spin')===todayKey()){ document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅'; } }
 function checkIn(){ if(localStorage.getItem('last_checkin')===todayKey()) return alert('Inniku already check-in pannita!'); localStorage.setItem('last_checkin', todayKey()); streak++; let amt=isVip?1:0.5; bal+=amt; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_streak',streak); upd(); alert('Check-in Done! +₹'+amt); }
 function doSpin(){ if(localStorage.getItem('last_spin')===todayKey()) return alert('Inniku spin mudinjiduchu!'); localStorage.setItem('last_spin', todayKey()); let base=[1,1,2,1,5,1,2,1][Math.floor(Math.random()*8)]; let win=isVip?base*2:base; bal+=win; localStorage.setItem('salem_bal',bal); upd(); document.getElementById('spinRes').innerText='🎉 ₹'+win; alert('You Won ₹'+win+' 🎉'); }
-// NEW FIXED WATCH AD WITH TIMER
+// SAFE WATCH AD - NO POPUNDER - NO NEW TAB
 function watchAd(){
   resetAdsIfNewDay();
   if(ads>=20) return alert('Daily limit over! 20/20 Mudinjiduchu');
-  // Open Monetag Popunder ad in new tab - user sees ad
-  window.open('https://www.google.com', '_blank');
   document.getElementById('adModal').style.display='flex';
   let sec=10;
   document.getElementById('timerText').innerText=sec;
