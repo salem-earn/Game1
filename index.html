@@ -7,7 +7,6 @@
 <style>.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}.btn{background:#0f766e;color:#fff;padding:10px;border-radius:10px;font-weight:700;width:100%}.btn:disabled{opacity:.5}.gold{background:linear-gradient(45deg,#f59e0b,#eab308)}</style>
 </head><body class="bg-[#f6f7f9] pb-24 font-sans">
 
-<!-- LOGIN POPUP - First Time Only -->
 <div id="loginBox" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
   <div class="bg-white rounded-2xl p-5 w-full max-w-sm text-center">
     <div class="text-2xl font-bold">👋 Welcome to Salem Earn Pro</div>
@@ -24,7 +23,6 @@
     <div class="bg-white text-emerald-700 font-bold px-3 py-1 rounded-full" id="bal">₹0</div>
   </div>
   <div class="text-center text-[10px] text-gray-400 mt-1">Tap header 5 times = Admin Panel</div>
-
   <div class="mt-3 bg-black rounded-xl text-center py-2"><div class="text-[10px] text-white/60">ADVERTISEMENT</div><div class="text-white text-xs">Monetag Ad Loading...</div></div>
 
   <div class="card mt-3 bg-green-50 border border-green-200">
@@ -49,7 +47,7 @@
 
   <div class="card mt-3">
     <div class="font-bold">📺 Watch Ad & Earn <span id="adRate">₹2</span></div>
-    <div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20</div>
+    <div class="text-xs text-gray-500">Watched: <span id="adCount">0</span>/20 - <span id="adDateShow"></span></div>
     <button onclick="watchAd()" class="btn mt-2">WATCH AD</button>
   </div>
 
@@ -90,7 +88,6 @@
     <div class="font-bold text-yellow-800">🛠️ ADMIN PANEL</div>
     <div class="text-sm">VIP Code: <b>VIP49</b></div>
     <div class="text-sm">CPAlead ID: <b>0vB9meEf</b></div>
-    <div class="text-sm">Your Mobile: <b id="adminMobileShow"></b> (Only Admin Sees This)</div>
     <div class="mt-3 font-bold border-t pt-2">📩 Withdraw Requests: <span id="reqCount">0</span></div>
     <div id="adminReqs" class="mt-1">No Requests Yet</div>
     <button onclick="clearReqs()" class="bg-gray-500 text-white text-xs px-2 py-1 rounded mt-2">Clear All</button>
@@ -111,19 +108,28 @@ let isVip=localStorage.getItem('isVip')=='true';
 let myMobile=localStorage.getItem('my_mobile')||'';
 let myCode=localStorage.getItem('my_ref_code')||'';
 
-function genCode(mobile){
-  let h=0; for(let i=0;i<mobile.length;i++){ h=(h*31+mobile.charCodeAt(i))%10000; }
-  return 'SALEM-'+(1000+ (h%9000));
+function todayKey(){ return new Date().toDateString(); }
+
+// --- DAILY RESET FIX - WATCH AD ---
+function resetAdsIfNewDay(){
+  let lastDate = localStorage.getItem('salem_ad_date');
+  let today = todayKey();
+  if(lastDate !== today){
+    ads = 0;
+    localStorage.setItem('salem_ads','0');
+    localStorage.setItem('salem_ad_date', today);
+  }
 }
+resetAdsIfNewDay();
+
+function genCode(mobile){ let h=0; for(let i=0;i<mobile.length;i++){ h=(h*31+mobile.charCodeAt(i))%10000; } return 'SALEM-'+(1000+ (h%9000)); }
 function checkLogin(){
-  if(!myMobile){
-    document.getElementById('loginBox').style.display='flex';
-  } else {
+  if(!myMobile){ document.getElementById('loginBox').style.display='flex'; }
+  else {
     if(!myCode){ myCode=genCode(myMobile); localStorage.setItem('my_ref_code',myCode); }
     document.getElementById('userName').innerText=myMobile.slice(-4)+' User';
     document.getElementById('myRefCode').innerText=myCode;
     document.getElementById('refLink').value='https://game1-game.vercel.app/?ref='+myCode;
-    document.getElementById('adminMobileShow').innerText='Hidden - Only Admin';
   }
 }
 function doLogin(){
@@ -133,24 +139,30 @@ function doLogin(){
   localStorage.setItem('my_mobile',m);
   localStorage.setItem('my_ref_code',myCode);
   document.getElementById('loginBox').style.display='none';
-  // Check if this user was referred
   let urlParams=new URLSearchParams(window.location.search);
   let ref=urlParams.get('ref');
   if(ref && ref!==myCode){ alert('Welcome! Referral: '+ref+' moolam join pannita! Bonus +₹2'); bal+=2; localStorage.setItem('salem_bal',bal); }
   checkLogin(); upd();
 }
 let tapCount=0;
-function todayKey(){ return new Date().toDateString(); }
 document.getElementById('secretHeader').addEventListener('click', function(){ tapCount++; if(tapCount>=5){ tapCount=0; document.getElementById('adminPanel').classList.remove('hidden'); showAdminReqs(); alert('Admin Panel Opened!'); document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); }});
 function showAdminReqs(){ let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(reqs.length===0){ document.getElementById('adminReqs').innerHTML='No Requests Yet'; return; } document.getElementById('adminReqs').innerHTML=reqs.map((r,i)=>`<div class="bg-white p-2 rounded mt-1 text-xs border"><b>₹${r.amt}</b> - ${r.upi}<br>Code: <b>${r.code}</b><br>${r.date} - ${r.status}<br><button onclick="approveReq(${i})" class="bg-green-600 text-white px-2 py-0.5 rounded mt-1">✅ PAID</button></div>`).join(''); }
 function approveReq(i){ let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); alert('Paid ₹'+reqs[i].amt+' to '+reqs[i].upi+'\nCode: '+reqs[i].code); reqs[i].status='Paid'; localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); showAdminReqs(); }
 function clearReqs(){ localStorage.removeItem('withdraw_reqs'); localStorage.removeItem('withdraw_history'); showAdminReqs(); showHistory(); }
 function showHistory(){ let h=JSON.parse(localStorage.getItem('withdraw_history')||'[]'); if(h.length==0){ document.getElementById('historyDiv').innerHTML='No history yet'; return; } document.getElementById('historyDiv').innerHTML=h.map(item=>`<div class="border p-2 rounded mt-1">₹${item.amt} - <b>${item.status}</b><br><span class="text-xs text-gray-500">${item.date} | ${item.upi}</span></div>`).join(''); }
 function checkPaidCode(){ let code=document.getElementById('paidCode').value.trim().toUpperCase(); if(!code) return alert('Code podu bro!'); let h=JSON.parse(localStorage.getItem('withdraw_history')||'[]'); let reqs=JSON.parse(localStorage.getItem('withdraw_reqs')||'[]'); let found=false; h.forEach(item=>{ if(item.code==code && item.status=='Pending'){ item.status='Success'; found=true; } }); reqs.forEach(r=>{ if(r.code==code) r.status='Success'; }); if(found){ localStorage.setItem('withdraw_history', JSON.stringify(h)); localStorage.setItem('withdraw_reqs', JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory(); } else alert('❌ Wrong Code!'); }
-function upd(){ document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?'👑 VIP':''; document.getElementById('adRate').innerText=isVip?'₹4':'₹2'; document.getElementById('checkVip').innerText=isVip?'(VIP +₹1)':''; document.getElementById('checkBtn').innerText=isVip?'CHECK-IN TODAY (+₹1.00)':'CHECK-IN TODAY (+₹0.50)'; let need=Math.max(0, MIN_WITHDRAW-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw ready!'; document.getElementById('prog').style.width=Math.min(100,bal/MIN_WITHDRAW*100)+'%'; if(localStorage.getItem('last_checkin')===todayKey()){ document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅'; } if(localStorage.getItem('last_spin')===todayKey()){ document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅'; } }
+function upd(){ resetAdsIfNewDay(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('adDateShow').innerText=todayKey(); document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?'👑 VIP':''; document.getElementById('adRate').innerText=isVip?'₹4':'₹2'; document.getElementById('checkVip').innerText=isVip?'(VIP +₹1)':''; document.getElementById('checkBtn').innerText=isVip?'CHECK-IN TODAY (+₹1.00)':'CHECK-IN TODAY (+₹0.50)'; let need=Math.max(0, MIN_WITHDRAW-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw ready!'; document.getElementById('prog').style.width=Math.min(100,bal/MIN_WITHDRAW*100)+'%'; if(localStorage.getItem('last_checkin')===todayKey()){ document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅'; } if(localStorage.getItem('last_spin')===todayKey()){ document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅'; } }
 function checkIn(){ if(localStorage.getItem('last_checkin')===todayKey()) return alert('Inniku already check-in pannita!'); localStorage.setItem('last_checkin', todayKey()); streak++; let amt=isVip?1:0.5; bal+=amt; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_streak',streak); upd(); alert('Check-in Done! +₹'+amt); }
 function doSpin(){ if(localStorage.getItem('last_spin')===todayKey()) return alert('Inniku spin mudinjiduchu!'); localStorage.setItem('last_spin', todayKey()); let base=[1,1,2,1,5,1,2,1][Math.floor(Math.random()*8)]; let win=isVip?base*2:base; bal+=win; localStorage.setItem('salem_bal',bal); upd(); document.getElementById('spinRes').innerText='🎉 ₹'+win; alert('You Won ₹'+win+' 🎉'); }
-function watchAd(){ if(ads>=20) return alert('Daily limit over!'); ads++; let amt=isVip?4:2; bal+=amt; localStorage.setItem('salem_bal',bal); localStorage.setItem('salem_ads',ads); upd(); alert('₹'+amt+' Added!'); }
+function watchAd(){
+  resetAdsIfNewDay();
+  if(ads>=20) return alert('Daily limit over!');
+  ads++; let amt=isVip?4:2; bal+=amt;
+  localStorage.setItem('salem_bal',bal);
+  localStorage.setItem('salem_ads',ads);
+  localStorage.setItem('salem_ad_date', todayKey());
+  upd(); alert('₹'+amt+' Added! Watched: '+ads+'/20');
+}
 function buyVip(){ if(confirm('VIP ₹49 vaangava?')){ let upiLink="upi://pay?pa="+ADMIN_UPI+"&pn=Dinesh&am=49&cu=INR&tn=Salem Earn VIP"; window.location.href=upiLink; sendTelegram(`👑 VIP CLICK\nUser: ${myMobile} - ${myCode}`); alert("GPay la ₹49 pay pannitu - Telegram Bot @Salem_earn_pro_bot la screenshot anuppu!"); } }
 function activateVip(){ let c=document.getElementById('vipCode').value.trim().toUpperCase(); if(c=='VIP49'){ isVip=true; localStorage.setItem('isVip','true'); bal+=5; localStorage.setItem('salem_bal',bal); upd(); alert('👑 VIP Activated! +₹5 Bonus!'); } else alert('Wrong Code!'); }
 function copyRef(){ document.getElementById('refLink').select(); document.execCommand('copy'); alert('Copied! Your Link: '+document.getElementById('refLink').value); }
