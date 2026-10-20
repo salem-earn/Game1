@@ -1,14 +1,108 @@
 <!DOCTYPE html>
-<html><body style="text-align:center;padding:30px;font-family:Arial">
-<h1>TEST</h1>
-<input id="m" placeholder="Number" style="padding:12px;width:80%">
-<br><br>
-<button onclick="testLogin()" style="background:green;color:#fff;padding:15px;border:none;border-radius:10px;font-size:18px">LOGIN TEST</button>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salem Earn Pro</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#f6f7f9;padding-bottom:110px}
+.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-top:12px}
+.btn{background:#0f766e;color:#fff;padding:12px;border-radius:10px;font-weight:700;width:100%;border:none;font-size:15px}
+.gold{background:linear-gradient(45deg,#f59e0b,#eab308);color:#fff}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:50}
+.nav button{flex:1;padding:10px 2px;font-size:11px;font-weight:700;border:none;background:#fff}
+.nav button.active{color:#0f766e;border-top:3px solid #0f766e}
+.tab{display:none}.tab.active{display:block}
+input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top:8px}
+</style></head><body>
+
+<div id="loginBox" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px">
+<div style="background:#fff;border-radius:16px;padding:20px;width:100%;max-width:340px;text-align:center">
+<div style="font-size:22px;font-weight:800">👋 Salem Earn Pro</div><div style="font-size:11px;color:#666">100% Secure • No Fake</div>
+<input id="userMobile" type="tel" placeholder="Mobile Number - 10 Digit">
+<button onclick="doLogin()" class="btn" style="margin-top:12px">LOGIN & START EARNING</button>
+</div></div>
+
+<div id="adModal" style="position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:center;justify-content:center;padding:16px">
+<div style="background:#fff;border-radius:16px;padding:20px;width:100%;max-width:340px;text-align:center">
+<div style="font-size:30px">📺</div><div style="font-weight:700">Original Ad Playing...</div>
+<div id="timerText" style="font-size:48px;font-weight:800;color:#16a34a;margin:12px">10</div>
+<div style="width:100%;background:#e5e7eb;border-radius:99px;height:12px"><div id="timerBar" style="background:#22c55e;height:12px;border-radius:99px;width:100%"></div></div>
+<div style="font-size:11px;margin-top:6px">Timer mudinja ₹<span id="adAmtTxt">0.20</span> add aagum</div>
+</div></div>
+
+<div style="max-width:420px;margin:0 auto;padding:12px">
+<div style="background:#0f766e;color:#fff;padding:14px;border-radius:16px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-weight:800;font-size:18px">💰 Salem Earn Pro</div><div style="font-size:11px">Hi <span id="userName">User</span> | <span id="vipBadge"></span></div></div><div style="background:#fff;color:#0f766e;font-weight:800;padding:6px 12px;border-radius:99px" id="bal">₹0</div></div>
+
+<div id="tab-home" class="tab active">
+<div class="card" style="background:#f0fdf4;border:1px solid #bbf7d0"><div style="font-weight:700">📅 Daily Check-in - Day <span id="streak">1</span></div><button id="checkBtn" onclick="checkIn()" class="btn" style="margin-top:8px">CHECK-IN TODAY (+₹0.50)</button></div>
+<div class="card" style="text-align:center"><div style="font-weight:700">🎡 Daily Spin</div><div id="spinRes" style="font-size:36px;margin:8px">🎡</div><button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button></div>
+<div class="card gold"><div style="font-weight:700">👑 VIP PLAN - ₹49 Only - 30 DAYS</div><div style="font-size:12px">✅ Spin Double • Ad ₹0.40 • Check-in ₹1 • <span id="vipLeftTxt">30 Days Full Double Earning</span></div><button onclick="buyVip()" style="background:#fff;color:#d97706;font-weight:800;width:100%;padding:10px;border-radius:10px;border:none;margin-top:8px">BUY VIP - ₹49 / 30 DAYS</button><input id="vipCode" placeholder="VIP Code" style="color:#000"><button onclick="activateVip()" style="background:#000;color:#fff;font-size:12px;padding:10px;border-radius:8px;width:100%;margin-top:6px;border:none">ACTIVATE VIP</button></div>
+</div>
+
+<div id="tab-task" class="tab">
+<div class="card"><div style="font-weight:700">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div style="font-size:12px;color:#666">Watched: <span id="adCount">0</span>/12 • Next Ad: <span id="coolDown">Ready ✅</span></div><button onclick="watchAd()" class="btn" style="margin-top:8px">WATCH AD</button><div style="font-size:10px;color:#999;margin-top:4px">10 sec timer • Daily Limit 12</div></div>
+<div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwall - CPX Only - Daily 1 Must for Withdraw</div><div style="font-size:11px;color:#666">Today: <b id="offerToday">0</b> • <span id="offerStatus">❌ Withdraw ku 1 Offer Must</span></div>
+<button onclick="openOffer()" class="btn" style="background:#2563eb;margin-top:8px">1. CPX RESEARCH - SURVEYS 💰</button>
+<button disabled class="btn" style="background:#999;margin-top:8px">2. ADGEM - COMING SOON (Pending ⏳)</button></div>
+<div class="card"><div style="font-weight:700">👥 Refer & Earn 20%</div><div style="display:flex;gap:6px;margin-top:8px"><input id="refLink" readonly style="flex:1;margin:0"><button onclick="copyRef()" style="background:#eab308;padding:10px;border-radius:8px;border:none;font-weight:700">COPY</button></div><div style="font-size:11px;margin-top:6px">Your Code: <b id="myRefCode"></b></div></div>
+</div>
+
+<div id="tab-wallet" class="tab">
+<div class="card" style="border:2px solid #fdba74"><div style="font-weight:700">💸 Withdraw (Min ₹50)</div><div style="font-size:12px;color:#666"><span id="needAmt"></span></div>
+<input id="upi" placeholder="UPI ID"><div style="font-size:12px;margin-top:8px">Amount: <input id="withdrawAmt" type="number" placeholder="50" style="width:90px;display:inline-block"></div>
+<button onclick="withdraw()" class="btn" style="background:#ea580c;margin-top:8px">REQUEST WITHDRAW</button><div style="font-size:11px;margin-top:6px">👉 Bot: <a href="https://t.me/Salem_earn_pro_bot" target="_blank">@Salem_earn_pro_bot</a></div></div>
+<div class="card"><div style="font-weight:700">🔑 Payment Code</div><input id="paidCode" placeholder="Ex: SALEM50"><button onclick="checkPaidCode()" class="btn" style="background:#16a34a;margin-top:8px">VERIFY & MARK SUCCESS ✅</button></div>
+<div class="card"><div style="font-weight:700">📜 Withdraw History</div><div id="historyDiv" style="font-size:14px;margin-top:6px">No history yet</div></div>
+</div>
+
+<div id="tab-profile" class="tab">
+<div class="card"><div style="font-weight:700">👤 My Profile</div><div style="font-size:14px;margin-top:8px;line-height:1.8">Mobile: <b id="profMobile"></b><br>Refer Code: <b id="profRef"></b><br>Balance: <b id="profBal"></b><br>VIP: <b id="profVip"></b><br>VIP Left: <b id="profVipLeft"></b><br>Ads Today: <b id="profAds"></b></div>
+<button onclick="logout()" class="btn" style="background:#dc2626;margin-top:12px">LOGOUT</button>
+<button onclick="adminLogin()" class="btn" style="background:#1f2937;margin-top:8px">ADMIN PANEL</button></div>
+<div id="adminPanel" class="card" style="display:none;background:#fefce8;border:2px solid #facc15"><div style="font-weight:700">🛠️ ADMIN PANEL</div><div style="font-size:14px">VIP: <b>VIP49 - 30 Days</b> | CPX: <b>37358</b> | Monetag: <b>12075477</b></div><div style="margin-top:10px;font-weight:700">📩 Requests: <span id="reqCount">0</span></div><div id="adminReqs">No Requests Yet</div><button onclick="clearReqs()" style="background:#6b7280;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;border:none;margin-top:8px">Clear All</button></div>
+</div>
+</div>
+
+<div style="position:fixed;bottom:0;left:0;right:0;z-index:60">
+<div style="background:#000;color:#fff;text-align:center;padding:4px;font-size:11px">Bottom Banner - Monetag Safe ✅</div>
+<div class="nav" style="position:relative">
+<button onclick="showTab('home',this)" class="active">🏠<br>Home</button>
+<button onclick="showTab('task',this)">🎯<br>Task</button>
+<button onclick="showTab('wallet',this)">💰<br>Wallet</button>
+<button onclick="showTab('profile',this)">👤<br>Profile</button>
+</div></div>
+
 <script>
-function testLogin(){
-  var n=document.getElementById('m').value;
-  alert('Button Work Aaguthu Bro! Number: '+n);
-  document.body.innerHTML='<h1 style="color:green">✅ SUCCESS! Login Work Aaguthu!</h1><p>Number: '+n+'</p>';
-}
-</script>
-</body></html>
+var _mem={};
+function S_get(k,d){ try{var v=localStorage.getItem(k); return v==null?d:v;}catch(e){return _mem[k]!==undefined?_mem[k]:d;}}
+function S_set(k,v){ try{localStorage.setItem(k,v);}catch(e){} _mem[k]=v; }
+function S_rem(k){ try{localStorage.removeItem(k);}catch(e){} delete _mem[k]; }
+var BOT_TOKEN="8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg"; var CHAT_ID="8855798269"; var ADMIN_UPI="p.dinesh01@ptyes";
+function sendTelegram(m){ try{fetch("https://api.telegram.org/bot"+BOT_TOKEN+"/sendMessage",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:CHAT_ID,text:m})})}catch(e){} }
+var bal=parseFloat(S_get('salem_bal','0')||'0'); var ads=parseInt(S_get('salem_ads','0')||'0'); var streak=parseInt(S_get('salem_streak','1')||'1'); var myMobile=S_get('my_mobile','')||''; var myCode=S_get('my_ref_code','')||''; var lastAdTime=0;
+function todayKey(){return new Date().toDateString();}
+function resetDay(){var ld=S_get('salem_ad_date',''); if(ld!==todayKey()){ads=0;S_set('salem_ads','0');S_set('salem_ad_date',todayKey());S_set('salem_offer_today','0');}}
+resetDay();
+function checkVip(){var exp=parseInt(S_get('vip_exp','0')||'0'); if(!exp) return false; if(Date.now()>exp){S_rem('isVip'); S_rem('vip_exp'); return false;} return true;}
+function vipDaysLeft(){var exp=parseInt(S_get('vip_exp','0')||'0'); if(!exp) return 0; var l=Math.ceil((exp-Date.now())/(1000*60*60*24)); return l>0?l:0;}
+var isVip=checkVip();
+function genCode(m){var h=0;for(var i=0;i<m.length;i++){h=(h*31+m.charCodeAt(i))%10000;}return 'SALEM-'+(1000+(h%9000));}
+function checkLogin(){var box=document.getElementById('loginBox'); if(!myMobile){box.style.display='flex';}else{box.style.display='none'; if(!myCode){myCode=genCode(myMobile);S_set('my_ref_code',myCode);} document.getElementById('userName').innerText=myMobile.slice(-4)+' User'; document.getElementById('myRefCode').innerText=myCode; document.getElementById('profRef').innerText=myCode; document.getElementById('profMobile').innerText=myMobile; document.getElementById('refLink').value='https://game1-game.vercel.app/?ref='+myCode;}}
+function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(m.length<10){alert('Valid Mobile Number podu bro!'); return;} myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); checkLogin(); upd(); alert('Login Success! Welcome Bro!');}
+function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');} document.getElementById('tab-'+name).classList.add('active'); var bs=document.querySelectorAll('.nav button'); for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');} btn.classList.add('active');}
+function openOffer(){var uid=myCode||myMobile||'0013'; var url='https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id='+uid+'&username='+uid; window.open(url,'_blank'); var c=parseInt(S_get('salem_offer_today','0')||'0')+1; S_set('salem_offer_today',c); upd(); alert('Offerwall Open Aagiduchu!');}
+function upd(){try{resetDay(); isVip=checkVip(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('profBal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?('👑 VIP - '+vipDaysLeft()+' Days Left'):''; document.getElementById('profVip').innerText=isVip?'VIP ✅':'Normal'; document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days Left':'-'; document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning'; document.getElementById('profAds').innerText=ads+'/12'; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20'; var need=Math.max(0,50-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw Ready!'; var oc=parseInt(S_get('salem_offer_today','0')||'0'); document.getElementById('offerToday').innerText=oc; document.getElementById('offerStatus').innerText=oc>=1?'✅ Withdraw Ready':'❌ Withdraw ku 1 Offer Must'; if(S_get('last_checkin','')===todayKey()){document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅';} if(S_get('last_spin','')===todayKey()){document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅';}}catch(e){}}
+function checkIn(){if(S_get('last_checkin','')===todayKey()) return alert('Inniku already check-in pannita!'); S_set('last_checkin',todayKey()); streak++; var a=isVip?1:0.5; bal+=a; S_set('salem_bal',bal); S_set('salem_streak',streak); upd(); alert('Check-in Done! +₹'+a);}
+function doSpin(){if(S_get('last_spin','')===todayKey()) return alert('Inniku spin mudinjiduchu!'); S_set('last_spin',todayKey()); var arr=[1,1,2,1,5,1,2,1]; var base=arr[Math.floor(Math.random()*8)]; var w=isVip?base*2:base; bal+=w; S_set('salem_bal',bal); upd(); document.getElementById('spinRes').innerText='🎉 ₹'+w; alert('You Won ₹'+w);}
+function watchAd(){resetDay(); if(ads>=12) return alert('Daily limit 12/12 Mudinjiduchu!'); var now=Date.now(); var diff=Math.floor((now-lastAdTime)/1000); if(lastAdTime!==0 && diff<10) return alert('Wait pannu bro! Next video '+ (10-diff) +' sec ku apram!'); var old=document.getElementById('monetag-script'); if(old) old.remove(); var s=document.createElement('script'); s.id='monetag-script'; s.dataset.zone='12075477'; s.src='https://nap5k.com/tag.min.js'; document.body.appendChild(s); document.getElementById('adModal').style.display='flex'; var sec=10; document.getElementById('timerText').innerText=sec; document.getElementById('timerBar').style.width='100%'; var iv=setInterval(function(){sec--; document.getElementById('timerText').innerText=sec; document.getElementById('timerBar').style.width=(sec*10)+'%'; if(sec<=0){clearInterval(iv); document.getElementById('adModal').style.display='none'; ads++; var amt=isVip?0.40:0.20; bal+=amt; S_set('salem_bal',bal); S_set('salem_ads',ads); S_set('salem_ad_date',todayKey()); lastAdTime=Date.now(); document.getElementById('coolDown').innerText='Next 10 sec ku apram'; setTimeout(function(){document.getElementById('coolDown').innerText='Ready ✅';},10000); upd(); alert('✅ ₹'+amt+' Added! '+ads+'/12');}},1000);}
+function buyVip(){if(confirm('VIP ₹49 - 30 Days ku vaangava?')){var u="upi://pay?pa="+ADMIN_UPI+"&pn=Dinesh&am=49&cu=INR&tn=Salem Earn VIP 30 Days"; window.location.href=u; sendTelegram('VIP CLICK User: '+myMobile); alert('GPay la ₹49 pay pannitu Bot la screenshot anuppu!');}}
+function activateVip(){var c=document.getElementById('vipCode').value.trim().toUpperCase(); if(c=='VIP49'){isVip=true; S_set('isVip','true'); var exp=Date.now()+(30*24*60*60*1000); S_set('vip_exp',exp.toString()); bal+=5; S_set('salem_bal',bal); upd(); alert('👑 VIP Activated! 30 Days ku ₹0.40 / Ad! +₹5 Bonus!');} else alert('Wrong Code!');}
+function copyRef(){document.getElementById('refLink').select(); document.execCommand('copy'); alert('Copied!');}
+function withdraw(){var upi=document.getElementById('upi').value.trim(); var amt=parseFloat(document.getElementById('withdrawAmt').value||bal); if(!upi) return alert('UPI ID podu bro'); if(isNaN(amt)||amt<50) return alert('Min ₹50 bro!'); if(amt>bal) return alert('Balance ₹'+bal.toFixed(2)+' thaan irukku!'); var oc=parseInt(S_get('salem_offer_today','0')||'0'); if(oc<1) return alert('❌ Withdraw ku Minimum 1 Offerwall Use Pannanum!'); var code="SALEM"+Math.floor(amt); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); reqs.push({upi:upi,amt:amt.toFixed(2),code:code,status:'Pending',date:new Date().toLocaleString(),mobile:myMobile}); S_set('withdraw_reqs',JSON.stringify(reqs)); var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); h.unshift({amt:amt.toFixed(2),upi:upi,code:code,status:'Pending',date:new Date().toLocaleString()}); S_set('withdraw_history',JSON.stringify(h)); sendTelegram('NEW WITHDRAW ₹'+amt+' UPI: '+upi+' Mobile: '+myMobile); alert('Withdraw Request Sent!'); bal-=amt; S_set('salem_bal',bal); upd(); showAdminReqs(); showHistory();}
+function showHistory(){var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); if(!h.length){document.getElementById('historyDiv').innerHTML='No history yet'; return;} var html=''; for(var i=0;i<h.length;i++){html+='<div style="border:1px solid #ddd;padding:8px;border-radius:8px;margin-top:6px">₹'+h[i].amt+' - <b>'+h[i].status+'</b><br><span style="font-size:11px;color:#666">'+h[i].date+'</span></div>';} document.getElementById('historyDiv').innerHTML=html;}
+function checkPaidCode(){var c=document.getElementById('paidCode').value.trim().toUpperCase(); if(!c) return alert('Code podu bro!'); var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); var f=false; for(var i=0;i<h.length;i++){if(h[i].code==c && h[i].status=='Pending'){h[i].status='Success';f=true;}} for(var j=0;j<reqs.length;j++){if(reqs[j].code==c) reqs[j].status='Success';} if(f){S_set('withdraw_history',JSON.stringify(h)); S_set('withdraw_reqs',JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory();} else alert('❌ Wrong Code!');}
+function adminLogin(){var p=prompt('Admin Password:'); if(p==='ADMIN123'){document.getElementById('adminPanel').style.display='block'; showAdminReqs(); alert('Welcome Admin!');} else alert('❌ Only Admin Allowed!');}
+function showAdminReqs(){var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(!reqs.length){document.getElementById('adminReqs').innerHTML='No Requests Yet'; return;} var html=''; for(var i=0;i<reqs.length;i++){html+='<div style="background:#fff;padding:8px;border-radius:8px;margin-top:6px;font-size:12px;border:1px solid #ddd"><b>₹'+reqs[i].amt+'</b> - '+reqs[i].upi+'<br>Code: <b>'+reqs[i].code+'</b><br>'+reqs[i].date+' - '+reqs[i].status+'</div>';} document.getElementById('adminReqs').innerHTML=html;}
+function clearReqs(){S_rem('withdraw_reqs'); S_rem('withdraw_history'); showAdminReqs(); showHistory();}
+function logout(){S_rem('my_mobile'); S_rem('my_ref_code'); location.reload();}
+checkLogin(); upd(); showAdminReqs(); showHistory();
+</script></body></html>
