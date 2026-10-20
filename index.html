@@ -41,8 +41,8 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <div id="tab-task" class="tab">
 <div class="card"><div style="font-weight:700">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div style="font-size:12px;color:#666">Watched: <span id="adCount">0</span>/12 • Next Ad: <span id="coolDown">Ready ✅</span></div><button onclick="watchAd()" class="btn" style="margin-top:8px">WATCH AD</button><div style="font-size:10px;color:#999;margin-top:4px">10 sec timer • Daily Limit 12</div></div>
 <div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwall - CPX Only - Daily 1 Must for Withdraw</div><div style="font-size:11px;color:#666">Today: <b id="offerToday">0</b> • <span id="offerStatus">❌ Withdraw ku 1 Offer Must</span></div>
-<button onclick="openOffer()" class="btn" style="background:#2563eb;margin-top:8px">1. CPX RESEARCH - SURVEYS 💰</button>
-<button disabled class="btn" style="background:#999;margin-top:8px">2. ADGEM - COMING SOON (Pending ⏳)</button></div>
+<button onclick="openOffer()" class="btn" style="background:#2563eb;margin-top:8px">1. CPX RESEARCH - SURVEYS 💰 ₹5 BONUS</button>
+<button disabled class="btn" style="background:#999;margin-top:8px">2. ADGEM - COMING SOON (Pending ⏳)</button><div id="cpxMsg" style="font-size:12px;color:#16a34a;margin-top:6px"></div></div>
 <div class="card"><div style="font-weight:700">👥 Refer & Earn 20%</div><div style="display:flex;gap:6px;margin-top:8px"><input id="refLink" readonly style="flex:1;margin:0"><button onclick="copyRef()" style="background:#eab308;padding:10px;border-radius:8px;border:none;font-weight:700">COPY</button></div><div style="font-size:11px;margin-top:6px">Your Code: <b id="myRefCode"></b></div></div>
 </div>
 
@@ -89,7 +89,29 @@ function genCode(m){var h=0;for(var i=0;i<m.length;i++){h=(h*31+m.charCodeAt(i))
 function checkLogin(){var box=document.getElementById('loginBox'); if(!myMobile){box.style.display='flex';}else{box.style.display='none'; if(!myCode){myCode=genCode(myMobile);S_set('my_ref_code',myCode);} document.getElementById('userName').innerText=myMobile.slice(-4)+' User'; document.getElementById('myRefCode').innerText=myCode; document.getElementById('profRef').innerText=myCode; document.getElementById('profMobile').innerText=myMobile; document.getElementById('refLink').value='https://game1-game.vercel.app/?ref='+myCode;}}
 function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(m.length<10){alert('Valid Mobile Number podu bro!'); return;} myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); checkLogin(); upd(); alert('Login Success! Welcome Bro!');}
 function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');} document.getElementById('tab-'+name).classList.add('active'); var bs=document.querySelectorAll('.nav button'); for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');} btn.classList.add('active');}
-function openOffer(){var uid=myCode||myMobile||'0013'; var url='https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id='+uid+'&username='+uid; window.open(url,'_blank'); var c=parseInt(S_get('salem_offer_today','0')||'0')+1; S_set('salem_offer_today',c); upd(); alert('Offerwall Open Aagiduchu!');}
+// ===== CPX ₹5 BONUS LOGIC - UPDATED =====
+function openOffer(){
+  var oc=parseInt(S_get('salem_offer_today','0')||'0');
+  if(oc>=1){ alert('Daily 1 Survey Done Bro! Nalai Vaa! ₹5 Already Added!'); return; }
+  var uid=myCode||myMobile||'0013';
+  var url='https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id='+uid+'&username='+uid;
+  window.open(url,'_blank');
+  sendTelegram('🎯 Offerwall Click\nUser: '+myMobile+' - '+uid);
+  document.getElementById('cpxMsg').innerText='⏳ Survey Pannitu Irukeenga... 2 Min la ₹5 Add Aagum!';
+  // 2 Min Timer - Return Vantha ₹5 Add
+  setTimeout(function(){
+    var nowOffer=parseInt(S_get('salem_offer_today','0')||'0');
+    if(nowOffer==0){
+      bal+=5;
+      S_set('salem_bal',bal);
+      S_set('salem_offer_today','1');
+      document.getElementById('cpxMsg').innerText='✅ ₹5 Added! Survey Bonus!';
+      sendTelegram('✅ CPX BONUS ₹5 - User: '+uid+' - '+myMobile);
+      upd();
+      alert('✅ ₹5 Added! CPX Survey Bonus!');
+    }
+  },120000); // 120000 = 2 Min
+}
 function upd(){try{resetDay(); isVip=checkVip(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('profBal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?('👑 VIP - '+vipDaysLeft()+' Days Left'):''; document.getElementById('profVip').innerText=isVip?'VIP ✅':'Normal'; document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days Left':'-'; document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning'; document.getElementById('profAds').innerText=ads+'/12'; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20'; var need=Math.max(0,50-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw Ready!'; var oc=parseInt(S_get('salem_offer_today','0')||'0'); document.getElementById('offerToday').innerText=oc; document.getElementById('offerStatus').innerText=oc>=1?'✅ Withdraw Ready':'❌ Withdraw ku 1 Offer Must'; if(S_get('last_checkin','')===todayKey()){document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅';} if(S_get('last_spin','')===todayKey()){document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅';}}catch(e){}}
 function checkIn(){if(S_get('last_checkin','')===todayKey()) return alert('Inniku already check-in pannita!'); S_set('last_checkin',todayKey()); streak++; var a=isVip?1:0.5; bal+=a; S_set('salem_bal',bal); S_set('salem_streak',streak); upd(); alert('Check-in Done! +₹'+a);}
 function doSpin(){if(S_get('last_spin','')===todayKey()) return alert('Inniku spin mudinjiduchu!'); S_set('last_spin',todayKey()); var arr=[1,1,2,1,5,1,2,1]; var base=arr[Math.floor(Math.random()*8)]; var w=isVip?base*2:base; bal+=w; S_set('salem_bal',bal); upd(); document.getElementById('spinRes').innerText='🎉 ₹'+w; alert('You Won ₹'+w);}
