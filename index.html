@@ -40,9 +40,10 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 
 <div id="tab-task" class="tab">
 <div class="card"><div style="font-weight:700">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div style="font-size:12px;color:#666">Watched: <span id="adCount">0</span>/12 • Next Ad: <span id="coolDown">Ready ✅</span></div><button onclick="watchAd()" class="btn" style="margin-top:8px">WATCH AD</button><div style="font-size:10px;color:#999;margin-top:4px">10 sec timer • Daily Limit 12</div></div>
-<div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwall - CPX Only - Daily 1 Must for Withdraw</div><div style="font-size:11px;color:#666">Today: <b id="offerToday">0</b> • <span id="offerStatus">❌ Withdraw ku 1 Offer Must</span></div>
+<div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwall - CPX + AdGem - Daily 1 Must for Withdraw</div><div style="font-size:11px;color:#666">Today: <b id="offerToday">0</b> • <span id="offerStatus">❌ Withdraw ku 1 Offer Must</span></div>
 <button onclick="openOffer()" class="btn" style="background:#2563eb;margin-top:8px">1. CPX RESEARCH - SURVEYS 💰 ₹5 BONUS</button>
-<button disabled class="btn" style="background:#999;margin-top:8px">2. ADGEM - COMING SOON (Pending ⏳)</button><div id="cpxMsg" style="font-size:12px;color:#16a34a;margin-top:6px"></div></div>
+<button onclick="openAdGem()" class="btn" style="background:#ea580c;margin-top:8px">2. ADGEM - APP INSTALL & EARN ₹10 💰</button>
+<div id="cpxMsg" style="font-size:12px;color:#16a34a;margin-top:6px"></div></div>
 <div class="card"><div style="font-weight:700">👥 Refer & Earn 20%</div><div style="display:flex;gap:6px;margin-top:8px"><input id="refLink" readonly style="flex:1;margin:0"><button onclick="copyRef()" style="background:#eab308;padding:10px;border-radius:8px;border:none;font-weight:700">COPY</button></div><div style="font-size:11px;margin-top:6px">Your Code: <b id="myRefCode"></b></div></div>
 </div>
 
@@ -58,7 +59,7 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <div class="card"><div style="font-weight:700">👤 My Profile</div><div style="font-size:14px;margin-top:8px;line-height:1.8">Mobile: <b id="profMobile"></b><br>Refer Code: <b id="profRef"></b><br>Balance: <b id="profBal"></b><br>VIP: <b id="profVip"></b><br>VIP Left: <b id="profVipLeft"></b><br>Ads Today: <b id="profAds"></b></div>
 <button onclick="logout()" class="btn" style="background:#dc2626;margin-top:12px">LOGOUT</button>
 <button onclick="adminLogin()" class="btn" style="background:#1f2937;margin-top:8px">ADMIN PANEL</button></div>
-<div id="adminPanel" class="card" style="display:none;background:#fefce8;border:2px solid #facc15"><div style="font-weight:700">🛠️ ADMIN PANEL</div><div style="font-size:14px">VIP: <b>VIP49 - 30 Days</b> | CPX: <b>37358</b> | Monetag: <b>12075477</b></div><div style="margin-top:10px;font-weight:700">📩 Requests: <span id="reqCount">0</span></div><div id="adminReqs">No Requests Yet</div><button onclick="clearReqs()" style="background:#6b7280;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;border:none;margin-top:8px">Clear All</button></div>
+<div id="adminPanel" class="card" style="display:none;background:#fefce8;border:2px solid #facc15"><div style="font-weight:700">🛠️ ADMIN PANEL</div><div style="font-size:14px">VIP: <b>VIP49 - 30 Days</b> | CPX: <b>37358</b> | AdGem: <b>33885</b> | Monetag: <b>12075477</b></div><div style="margin-top:10px;font-weight:700">📩 Requests: <span id="reqCount">0</span></div><div id="adminReqs">No Requests Yet</div><button onclick="clearReqs()" style="background:#6b7280;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;border:none;margin-top:8px">Clear All</button></div>
 </div>
 </div>
 
@@ -97,19 +98,33 @@ function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i
   var uid = urlParams.get('user_id');
   var amt = parseFloat(urlParams.get('amount') || '5');
   var transId = urlParams.get('trans_id') || Date.now().toString();
-
   if (status === '1' && uid) {
     var lastTrans = S_get('last_cpx_trans', '');
-
     if (lastTrans !== transId) {
       S_set('last_cpx_trans', transId);
       bal += amt;
       S_set('salem_bal', bal);
       S_set('salem_offer_today', '1');
       upd();
-
       sendTelegram('✅ REAL CPX SURVEY COMPLETED!\nUser Mobile/ID: ' + uid + '\nAmount Earned: ₹' + amt + '\nTrans ID: ' + transId);
       alert('🎉 Survey Successfully Completed! ₹' + amt + ' Added to Wallet!');
+    }
+  }
+})();
+
+// ===== AUTO RECEIVE ADGEM POSTBACK =====
+(function checkAdGemPostback() {
+  var p = new URLSearchParams(window.location.search);
+  var amt = parseFloat(p.get('amount') || '0');
+  var pid = p.get('playerid');
+  var tx = p.get('transaction_id');
+  if (amt > 0 && pid && tx) {
+    var lastTx = S_get('last_adgem_trans','');
+    if (lastTx !== tx) {
+      S_set('last_adgem_trans', tx);
+      bal += amt; S_set('salem_bal', bal); S_set('salem_offer_today','1'); upd();
+      sendTelegram('✅ ADGEM OFFER COMPLETED!\nPlayer: '+pid+'\nAmount: ₹'+amt+'\nTx: '+tx);
+      alert('🎉 AdGem Offer Completed! ₹'+amt+' Added!');
     }
   }
 })();
@@ -117,18 +132,21 @@ function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i
 // ===== CPX OFFERWALL OPEN BUTTON LOGIC =====
 function openOffer() {
   var oc = parseInt(S_get('salem_offer_today', '0') || '0');
-  if (oc >= 1) { 
-    alert('Daily 1 Survey Limit Completed Bro!'); 
-    return; 
-  }
-
+  if (oc >= 1) { alert('Daily 1 Survey Limit Completed Bro!'); return; }
   var uid = myMobile || myCode || '0013';
   var url = 'https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id=' + uid + '&username=' + uid;
-  
   window.open(url, '_blank');
   sendTelegram('🎯 CPX Survey Clicked\nUser Mobile: ' + myMobile);
-  
   document.getElementById('cpxMsg').innerText = '⏳ Survey Complete Pannadhum Balance Auto-Add Aagum!';
+}
+
+// ===== ADGEM OFFERWALL - APP ID 33885 =====
+function openAdGem() {
+  var uid = myCode || myMobile || 'SALEM-5555';
+  var url = 'https://wall.adgem.com/wall?appid=33885&playerid=' + encodeURIComponent(uid);
+  window.open(url, '_blank');
+  sendTelegram('🎯 AdGem Clicked\nUser: ' + uid + ' | Mobile: ' + myMobile);
+  document.getElementById('cpxMsg').innerText = '⏳ AdGem Offer Complete Pannadhum Balance Auto-Add Aagum!';
 }
 
 function upd(){try{resetDay(); isVip=checkVip(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('profBal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?('👑 VIP - '+vipDaysLeft()+' Days Left'):''; document.getElementById('profVip').innerText=isVip?'VIP ✅':'Normal'; document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days Left':'-'; document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning'; document.getElementById('profAds').innerText=ads+'/12'; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20'; var need=Math.max(0,50-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw Ready!'; var oc=parseInt(S_get('salem_offer_today','0')||'0'); document.getElementById('offerToday').innerText=oc; document.getElementById('offerStatus').innerText=oc>=1?'✅ Withdraw Ready':'❌ Withdraw ku 1 Offer Must'; if(S_get('last_checkin','')===todayKey()){document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅';} if(S_get('last_spin','')===todayKey()){document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅';}}catch(e){}}
@@ -142,8 +160,4 @@ function withdraw(){var upi=document.getElementById('upi').value.trim(); var amt
 function showHistory(){var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); if(!h.length){document.getElementById('historyDiv').innerHTML='No history yet'; return;} var html=''; for(var i=0;i<h.length;i++){html+='<div style="border:1px solid #ddd;padding:8px;border-radius:8px;margin-top:6px">₹'+h[i].amt+' - <b>'+h[i].status+'</b><br><span style="font-size:11px;color:#666">'+h[i].date+'</span></div>';} document.getElementById('historyDiv').innerHTML=html;}
 function checkPaidCode(){var c=document.getElementById('paidCode').value.trim().toUpperCase(); if(!c) return alert('Code podu bro!'); var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); var f=false; for(var i=0;i<h.length;i++){if(h[i].code==c && h[i].status=='Pending'){h[i].status='Success';f=true;}} for(var j=0;j<reqs.length;j++){if(reqs[j].code==c) reqs[j].status='Success';} if(f){S_set('withdraw_history',JSON.stringify(h)); S_set('withdraw_reqs',JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory();} else alert('❌ Wrong Code!');}
 function adminLogin(){var p=prompt('Admin Password:'); if(p==='ADMIN123'){document.getElementById('adminPanel').style.display='block'; showAdminReqs(); alert('Welcome Admin!');} else alert('❌ Only Admin Allowed!');}
-function showAdminReqs(){var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(!reqs.length){document.getElementById('adminReqs').innerHTML='No Requests Yet'; return;} var html=''; for(var i=0;i<reqs.length;i++){html+='<div style="background:#fff;padding:8px;border-radius:8px;margin-top:6px;font-size:12px;border:1px solid #ddd"><b>₹'+reqs[i].amt+'</b> - '+reqs[i].upi+'<br>Code: <b>'+reqs[i].code+'</b><br>'+reqs[i].date+' - '+reqs[i].status+'</div>';} document.getElementById('adminReqs').innerHTML=html;}
-function clearReqs(){S_rem('withdraw_reqs'); S_rem('withdraw_history'); showAdminReqs(); showHistory();}
-function logout(){S_rem('my_mobile'); S_rem('my_ref_code'); location.reload();}
-checkLogin(); upd(); showAdminReqs(); showHistory();
-</script></body></html>
+function showAdminReqs(){var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); docu
