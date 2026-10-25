@@ -46,8 +46,8 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <div class="card"><div style="font-weight:700">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div style="font-size:12px;color:#666">Watched: <span id="adCount">0</span>/12 • Next Ad: <span id="coolDown">Ready ✅</span></div><button onclick="watchAd()" class="btn" style="margin-top:8px">WATCH AD</button><div style="font-size:10px;color:#999;margin-top:4px">10 sec timer • Daily Limit 12</div></div>
 
 <div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwalls - Daily Tasks</div><div style="font-size:11px;color:#666">Today: <b id="offerToday">0</b> • <span id="offerStatus">❌ Withdraw ku 1 Task Must</span></div>
-<button onclick="openOffer()" class="btn" style="background:#2563eb;margin-top:8px">1. CPX RESEARCH - SURVEYS 💰 ₹5 BONUS</button>
-<button onclick="openAdgem()" class="btn" style="background:#059669;margin-top:8px">2. ADGEM - APP INSTALL & EARN ₹10 💰</button>
+<button onclick="openOffer()" class="btn" style="background:#2563eb;margin-top:8px">1. CPX RESEARCH - SURVEYS 💰</button>
+<button onclick="openAdgem()" class="btn" style="background:#059669;margin-top:8px">2. ADGEM - APP INSTALL & EARN 🚀</button>
 <div id="cpxMsg" style="font-size:12px;color:#16a34a;margin-top:6px"></div></div>
 
 <div class="card"><div style="font-weight:700">👥 Refer & Earn 20%</div><div style="display:flex;gap:6px;margin-top:8px"><input id="refLink" readonly style="flex:1;margin:0"><button onclick="copyRef()" style="background:#eab308;padding:10px;border-radius:8px;border:none;font-weight:700">COPY</button></div><div style="font-size:11px;margin-top:6px">Your Code: <b id="myRefCode"></b></div></div>
@@ -94,17 +94,44 @@ function vipDaysLeft(){var exp=parseInt(S_get('vip_exp','0')||'0'); if(!exp) ret
 var isVip=checkVip();
 function genCode(m){var h=0;for(var i=0;i<m.length;i++){h=(h*31+m.charCodeAt(i))%10000;}return 'SALEM-'+(1000+(h%9000));}
 function checkLogin(){var box=document.getElementById('loginBox'); if(!myMobile || myMobile.trim()===""){box.style.display='flex';} else {box.style.display='none'; if(!myCode){myCode=genCode(myMobile);S_set('my_ref_code',myCode);} document.getElementById('userName').innerText=myMobile.slice(-4)+' User'; document.getElementById('myRefCode').innerText=myCode; document.getElementById('profRef').innerText=myCode; document.getElementById('profMobile').innerText=myMobile; document.getElementById('refLink').value='https://game1-game.vercel.app/?ref='+myCode;}}
-function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(!m || m.length<10){alert('10-digit valid Mobile Number podu bro!'); return;} myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); checkLogin(); upd(); alert('Welcome Bro! Login Successful ✅');}
+function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(!m || m.length<10 || isNaN(m)){alert('10-digit valid Mobile Number podu bro!'); return;} myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); checkLogin(); upd(); alert('Welcome Bro! Login Successful ✅');}
 function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');} document.getElementById('tab-'+name).classList.add('active'); var bs=document.querySelectorAll('.nav button'); for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');} btn.classList.add('active');}
 
-// CPX POSTBACK
-(function checkCpxPostback(){var p=new URLSearchParams(window.location.search); var st=p.get('status'); var uid=p.get('user_id'); var amt=parseFloat(p.get('amount')||'5'); var tx=p.get('trans_id')||Date.now().toString(); if(st==='1'&&uid){var last=S_get('last_cpx_trans',''); if(last!==tx){S_set('last_cpx_trans',tx); bal+=amt; S_set('salem_bal',bal); S_set('salem_offer_today','1'); upd(); sendTelegram('✅ CPX COMPLETED!\nUser: '+uid+'\nAmt: ₹'+amt); alert('🎉 Survey Completed! ₹'+amt+' Added!');}}})();
+// --- CPX POSTBACK - CORRECT ---
+(function checkCpx(){
+  var p=new URLSearchParams(window.location.search);
+  var st=p.get('status'); var uid=p.get('user_id'); var amt=parseFloat(p.get('amount')||'5'); var tx=p.get('trans_id')||'';
+  if(st==='1' && uid && tx){
+    var last=S_get('last_cpx_trans','');
+    if(last!==tx){ S_set('last_cpx_trans',tx); bal+=amt; S_set('salem_bal',bal); S_set('salem_offer_today','1'); upd(); sendTelegram('✅ CPX COMPLETED\nUser: '+uid+'\nAmt: ₹'+amt+'\nTx: '+tx); alert('🎉 CPX Survey Completed! ₹'+amt+' Added!'); }
+  }
+})();
 
-// ADGEM POSTBACK - CORRECT
-(function checkAdGemPostback(){var p=new URLSearchParams(window.location.search); var amt=parseFloat(p.get('amount')||'0'); var pid=p.get('playerid'); var tx=p.get('transaction_id'); if(amt>0&&pid&&tx){var last=S_get('last_adgem_trans',''); if(last!==tx){S_set('last_adgem_trans',tx); bal+=amt; S_set('salem_bal',bal); S_set('salem_offer_today','1'); upd(); sendTelegram('✅ ADGEM COMPLETED!\nPlayer: '+pid+'\nAmt: ₹'+amt+'\nTx: '+tx); alert('🎉 AdGem Offer Completed! ₹'+amt+' Added!');}}})();
+// --- ADGEM POSTBACK - CORRECT ---
+(function checkAdGem(){
+  var p=new URLSearchParams(window.location.search);
+  var amt=parseFloat(p.get('amount')||'0'); var pid=p.get('playerid'); var tx=p.get('transaction_id');
+  if(amt>0 && pid && tx){
+    var last=S_get('last_adgem_trans','');
+    if(last!==tx){ S_set('last_adgem_trans',tx); bal+=amt; S_set('salem_bal',bal); S_set('salem_offer_today','1'); upd(); sendTelegram('✅ ADGEM COMPLETED\nPlayer: '+pid+'\nAmt: ₹'+amt+'\nTx: '+tx); alert('🎉 AdGem Offer Completed! ₹'+amt+' Added!'); }
+  }
+})();
 
-function openOffer(){var oc=parseInt(S_get('salem_offer_today','0')||'0'); if(oc>=1){alert('Daily 1 Offer Completed Bro!'); return;} var uid=myMobile||myCode||'0013'; var url='https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id='+uid+'&username='+uid; window.open(url,'_blank'); sendTelegram('🎯 CPX Clicked\nUser: '+myMobile); document.getElementById('cpxMsg').innerText='⏳ CPX Survey load aaguthu...';}
-function openAdgem(){var uid=myCode||myMobile||'SALEM-5555'; var url='https://wall.adgem.com/wall?appid=33885&playerid='+encodeURIComponent(uid); window.open(url,'_blank'); sendTelegram('🚀 AdGem Clicked\nUser: '+uid+' | Mobile: '+myMobile); document.getElementById('cpxMsg').innerText='⏳ AdGem Offer Complete Pannadhum Balance Auto-Add Aagum!';}
+function openOffer(){
+  var oc=parseInt(S_get('salem_offer_today','0')||'0'); if(oc>=1){alert('Daily 1 Offer Completed Bro!'); return;}
+  var uid=myMobile||myCode||'0013';
+  var url='https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id='+encodeURIComponent(uid)+'&username='+encodeURIComponent(uid);
+  window.open(url,'_blank');
+  sendTelegram('🎯 CPX Clicked\nUser: '+myMobile+' | Code: '+myCode);
+  document.getElementById('cpxMsg').innerText='⏳ CPX Survey load aaguthu... Complete pannunga!';
+}
+function openAdgem(){
+  var uid=myCode||myMobile||'SALEM-5555';
+  var url='https://wall.adgem.com/wall?appid=33885&playerid='+encodeURIComponent(uid);
+  window.open(url,'_blank');
+  sendTelegram('🚀 AdGem Clicked\nUser: '+uid+' | Mobile: '+myMobile);
+  document.getElementById('cpxMsg').innerText='⏳ AdGem Offer Complete Pannadhum Balance Auto-Add Aagum!';
+}
 
 function upd(){try{resetDay(); isVip=checkVip(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('profBal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?('👑 VIP - '+vipDaysLeft()+' Days Left'):''; document.getElementById('profVip').innerText=isVip?'VIP ✅':'Normal'; document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days Left':'-'; document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning'; document.getElementById('profAds').innerText=ads+'/12'; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20'; var need=Math.max(0,50-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw Ready!'; var oc=parseInt(S_get('salem_offer_today','0')||'0'); var ot=document.getElementById('offerToday'); if(ot) ot.innerText=oc; var os=document.getElementById('offerStatus'); if(os) os.innerText=oc>=1?'✅ Withdraw Ready':'❌ Withdraw ku 1 Offer Must'; if(S_get('last_checkin','')===todayKey()){document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅';} if(S_get('last_spin','')===todayKey()){document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅';}}catch(e){}}
 function checkIn(){if(S_get('last_checkin','')===todayKey()) return alert('Inniku already check-in pannita!'); S_set('last_checkin',todayKey()); streak++; var a=isVip?1:0.5; bal+=a; S_set('salem_bal',bal); S_set('salem_streak',streak); upd(); alert('Check-in Done! +₹'+a);}
@@ -117,5 +144,4 @@ function withdraw(){var upi=document.getElementById('upi').value.trim(); var amt
 function showHistory(){var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); if(!h.length){document.getElementById('historyDiv').innerHTML='No history yet'; return;} var html=''; for(var i=0;i<h.length;i++){html+='<div style="border:1px solid #ddd;padding:8px;border-radius:8px;margin-top:6px">₹'+h[i].amt+' - <b>'+h[i].status+'</b><br><span style="font-size:11px;color:#666">'+h[i].date+'</span></div>';} document.getElementById('historyDiv').innerHTML=html;}
 function checkPaidCode(){var c=document.getElementById('paidCode').value.trim().toUpperCase(); if(!c) return alert('Code podu bro!'); var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); var f=false; for(var i=0;i<h.length;i++){if(h[i].code==c && h[i].status=='Pending'){h[i].status='Success';f=true;}} for(var j=0;j<reqs.length;j++){if(reqs[j].code==c) reqs[j].status='Success';} if(f){S_set('withdraw_history',JSON.stringify(h)); S_set('withdraw_reqs',JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory();} else alert('❌ Wrong Code!');}
 function adminLogin(){var p=prompt('Admin Password:'); if(p==='ADMIN123'){document.getElementById('adminPanel').style.display='block'; showAdminReqs(); alert('Welcome Admin!');} else alert('❌ Only Admin Allowed!');}
-function showAdminReqs(){var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(!reqs.length){document.getElementById('adminReqs').innerHTML='No Requests Yet'; return;} var html=''; for(var i=0;i<reqs.length;i++){html+='<div style="background:#fff;padding:8px;border-radius:8px;margin-top:6px;font-size:12px;border:1px solid #ddd"><b>₹'+reqs[i].amt+'</b> - '+reqs[i].upi+'<br>Code: <b>'+reqs[i].code+'</b><br>'+reqs[i].date+' - '+reqs[i].status+'</div>';} document.getElementById('adminReqs').innerHTML=html;}
-function clearReqs(){S_rem('withdraw_re
+function showAdminReqs(){var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(!reqs.length){document.getElementById('adminReqs').innerHTML='No Requests Yet'; return;} var html=''; for(var i=0;i<reqs.length;i++){html+='<div style="background:#fff;padding:8px;border-radius:8px;margin-top:6px;font-size:12px;border:1px solid #ddd"><b>₹'+reqs[i].amt+'</b> - '+reqs[i].upi+'<br>Code: <b>
