@@ -77,7 +77,6 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <button onclick="showTab('wallet',this)">💰<br>Wallet</button>
 <button onclick="showTab('profile',this)">👤<br>Profile</button>
 </div></div>
-
 <script>
 var _mem={};
 function S_get(k,d){ try{var v=localStorage.getItem(k); return v==null?d:v;}catch(e){return _mem[k]!==undefined?_mem[k]:d;}}
@@ -94,10 +93,23 @@ function vipDaysLeft(){var exp=parseInt(S_get('vip_exp','0')||'0'); if(!exp) ret
 var isVip=checkVip();
 function genCode(m){var h=0;for(var i=0;i<m.length;i++){h=(h*31+m.charCodeAt(i))%10000;}return 'SALEM-'+(1000+(h%9000));}
 function checkLogin(){var box=document.getElementById('loginBox'); if(!myMobile || myMobile.trim()===""){box.style.display='flex';} else {box.style.display='none'; if(!myCode){myCode=genCode(myMobile);S_set('my_ref_code',myCode);} document.getElementById('userName').innerText=myMobile.slice(-4)+' User'; document.getElementById('myRefCode').innerText=myCode; document.getElementById('profRef').innerText=myCode; document.getElementById('profMobile').innerText=myMobile; document.getElementById('refLink').value='https://game1-game.vercel.app/?ref='+myCode;}}
-function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(!m || m.length<10 || isNaN(m)){alert('10-digit valid Mobile Number podu bro!'); return;} myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); checkLogin(); upd(); alert('Welcome Bro! Login Successful ✅');}
+
+// --- CODE 1: MANUAL REFERRAL ALERT - NEW ---
+function checkRef(){
+  var p=new URLSearchParams(location.search);
+  var ref=p.get('ref');
+  if(ref && myMobile){
+    var already=S_get('ref_sent','');
+    if(already!==ref){
+      S_set('ref_sent',ref);
+      sendTelegram('👥 NEW REFERRAL\nNew User: '+myMobile+'\nReferred By: '+ref+'\nLink: https://game1-game.vercel.app/?ref='+ref);
+    }
+  }
+}
+
+function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(!m || m.length<10 || isNaN(m)){alert('10-digit valid Mobile Number podu bro!'); return;} myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); checkLogin(); upd(); checkRef(); alert('Welcome Bro! Login Successful ✅');}
 function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');} document.getElementById('tab-'+name).classList.add('active'); var bs=document.querySelectorAll('.nav button'); for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');} btn.classList.add('active');}
 
-// --- CPX POSTBACK - CORRECT ---
 (function checkCpx(){
   var p=new URLSearchParams(window.location.search);
   var st=p.get('status'); var uid=p.get('user_id'); var amt=parseFloat(p.get('amount')||'5'); var tx=p.get('trans_id')||'';
@@ -107,7 +119,6 @@ function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i
   }
 })();
 
-// --- ADGEM POSTBACK - CORRECT ---
 (function checkAdGem(){
   var p=new URLSearchParams(window.location.search);
   var amt=parseFloat(p.get('amount')||'0'); var pid=p.get('playerid'); var tx=p.get('transaction_id');
@@ -132,7 +143,6 @@ function openAdgem(){
   sendTelegram('🚀 AdGem Clicked\nUser: '+uid+' | Mobile: '+myMobile);
   document.getElementById('cpxMsg').innerText='⏳ AdGem Offer Complete Pannadhum Balance Auto-Add Aagum!';
 }
-
 function upd(){try{resetDay(); isVip=checkVip(); document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('profBal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?('👑 VIP - '+vipDaysLeft()+' Days Left'):''; document.getElementById('profVip').innerText=isVip?'VIP ✅':'Normal'; document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days Left':'-'; document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning'; document.getElementById('profAds').innerText=ads+'/12'; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20'; var need=Math.max(0,50-bal); document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw Ready!'; var oc=parseInt(S_get('salem_offer_today','0')||'0'); var ot=document.getElementById('offerToday'); if(ot) ot.innerText=oc; var os=document.getElementById('offerStatus'); if(os) os.innerText=oc>=1?'✅ Withdraw Ready':'❌ Withdraw ku 1 Offer Must'; if(S_get('last_checkin','')===todayKey()){document.getElementById('checkBtn').disabled=true; document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅';} if(S_get('last_spin','')===todayKey()){document.getElementById('spinBtn').disabled=true; document.getElementById('spinBtn').innerText='SPIN DONE ✅';}}catch(e){}}
 function checkIn(){if(S_get('last_checkin','')===todayKey()) return alert('Inniku already check-in pannita!'); S_set('last_checkin',todayKey()); streak++; var a=isVip?1:0.5; bal+=a; S_set('salem_bal',bal); S_set('salem_streak',streak); upd(); alert('Check-in Done! +₹'+a);}
 function doSpin(){if(S_get('last_spin','')===todayKey()) return alert('Inniku spin mudinjiduchu!'); S_set('last_spin',todayKey()); var arr=[1,1,2,1,5,1,2,1]; var base=arr[Math.floor(Math.random()*8)]; var w=isVip?base*2:base; bal+=w; S_set('salem_bal',bal); upd(); document.getElementById('spinRes').innerText='🎉 ₹'+w; alert('You Won ₹'+w);}
@@ -142,7 +152,11 @@ function activateVip(){var c=document.getElementById('vipCode').value.trim().toU
 function copyRef(){document.getElementById('refLink').select(); document.execCommand('copy'); alert('Copied!');}
 function withdraw(){var upi=document.getElementById('upi').value.trim(); var amt=parseFloat(document.getElementById('withdrawAmt').value||bal); if(!upi) return alert('UPI ID podu bro'); if(isNaN(amt)||amt<50) return alert('Min ₹50 bro!'); if(amt>bal) return alert('Balance ₹'+bal.toFixed(2)+' thaan irukku!'); var oc=parseInt(S_get('salem_offer_today','0')||'0'); if(oc<1) return alert('❌ Withdraw ku Minimum 1 Offer Use Pannanum!'); var code="SALEM"+Math.floor(amt); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); reqs.push({upi:upi,amt:amt.toFixed(2),code:code,status:'Pending',date:new Date().toLocaleString(),mobile:myMobile}); S_set('withdraw_reqs',JSON.stringify(reqs)); var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); h.unshift({amt:amt.toFixed(2),upi:upi,code:code,status:'Pending',date:new Date().toLocaleString()}); S_set('withdraw_history',JSON.stringify(h)); sendTelegram('NEW WITHDRAW ₹'+amt+' UPI: '+upi+' Mobile: '+myMobile); alert('Withdraw Request Sent!'); bal-=amt; S_set('salem_bal',bal); upd(); showAdminReqs(); showHistory();}
 function showHistory(){var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); if(!h.length){document.getElementById('historyDiv').innerHTML='No history yet'; return;} var html=''; for(var i=0;i<h.length;i++){html+='<div style="border:1px solid #ddd;padding:8px;border-radius:8px;margin-top:6px">₹'+h[i].amt+' - <b>'+h[i].status+'</b><br><span style="font-size:11px;color:#666">'+h[i].date+'</span></div>';} document.getElementById('historyDiv').innerHTML=html;}
-function checkPaidCode(){var c=document.getElementById('paidCode').value.trim().toUpperCase(); if(!c) return alert('Code podu bro!'); var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); var f=false; for(var i=0;i<h.length;i++){if(h[i].code==c && h[i].status=='Pending'){h[i].status='Success';f=true;}} for(var j=0;j<reqs.length;j++){if(reqs[j].code==c) reqs[j].status='Success';} if(f){S_set('withdraw_history',JSON.stringify(h)); S_set('withdraw_reqs',JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory();} else alert('❌ Wrong Code!');}
+function checkPaidCode(){var c=document.getElementById('paidCode').value.trim().toUpperCase(); if(!c) return alert('Code podu bro!');
+// --- CODE 3: REF10 BONUS - NEW ---
+if(c=='REF10'){ var used=S_get('ref10_used',''); if(used=='yes'){alert('REF10 already used!'); return;} S_set('ref10_used','yes'); bal+=10; S_set('salem_bal',bal); upd(); sendTelegram('✅ REF10 Bonus Used\nUser: '+myMobile+' +₹10'); alert('✅ Referral Bonus ₹10 Added!'); return; }
+if(c=='REF50'){ var used2=S_get('ref50_used',''); if(used2=='yes'){alert('Already used!'); return;} S_set('ref50_used','yes'); bal+=50; S_set('salem_bal',bal); upd(); alert('✅ ₹50 Bonus Added!'); return; }
+var h=JSON.parse(S_get('withdraw_history','[]')||'[]'); var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); var f=false; for(var i=0;i<h.length;i++){if(h[i].code==c && h[i].status=='Pending'){h[i].status='Success';f=true;}} for(var j=0;j<reqs.length;j++){if(reqs[j].code==c) reqs[j].status='Success';} if(f){S_set('withdraw_history',JSON.stringify(h)); S_set('withdraw_reqs',JSON.stringify(reqs)); alert('✅ Payment Success!'); showHistory();} else alert('❌ Wrong Code!');}
 function adminLogin(){var p=prompt('Admin Password:'); if(p==='ADMIN123'){document.getElementById('adminPanel').style.display='block'; showAdminReqs(); alert('Welcome Admin!');} else alert('❌ Only Admin Allowed!');}
 function showAdminReqs(){var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('reqCount').innerText=reqs.length; if(!reqs.length){document.getElementById('adminReqs').innerHTML='No Requests Yet'; return;} var html=''; for(var i=0;i<reqs.length;i++){html+='<div style="background:#fff;padding:8px;border-radius:8px;margin-top:6px;font-size:12px;border:1px solid #ddd"><b>₹'+reqs[i].amt+'</b> - '+reqs[i].upi+'<br>Code: <b><b>'+reqs[i].code+'</b><br>'+reqs[i].date+' - '+reqs[i].status+'</div>';} document.getElementById('adminReqs').innerHTML=html;}
 function clearReqs(){S_rem('withdraw_reqs'); S_rem('withdraw_history'); showAdminReqs(); showHistory();}
