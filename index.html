@@ -26,17 +26,8 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 </div></div>
 <div id="policyModal" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:center;justify-content:center;padding:16px">
 <div class="policy-box">
-<div id="privacyContent">
-<h3>🔒 Privacy Policy - Salem Earn Pro</h3>
-<p><b>Last Updated:</b> Oct 2026</p>
-<p>We collect Mobile Number for login. We do not sell your data.</p>
-<p>We share only User ID with CPX, AdGem & BitLabs to track task rewards.</p>
-<p>UPI ID is used only for payment. Contact: support@salemearnpro.com</p>
-</div>
-<div id="termsContent" style="display:none">
-<h3>📜 Terms & Conditions</h3>
-<p><b>1.</b> Fake / VPN = Ban. <b>2.</b> Min Withdraw ₹50. Fee ₹5. <b>3.</b> Offerwall rewards by partners. <b>4.</b> 1 Offer per day must for withdraw. <b>5.</b> VIP ₹49 non-refundable. <b>6.</b> We can block fraud accounts.</p>
-</div>
+<div id="privacyContent"><h3>🔒 Privacy Policy - Salem Earn Pro</h3><p><b>Last Updated:</b> Oct 2026</p><p>We collect Mobile Number for login. We do not sell your data.</p><p>We share only User ID with CPX, AdGem & BitLabs to track task rewards.</p><p>UPI ID is used only for payment. Contact: support@salemearnpro.com</p></div>
+<div id="termsContent" style="display:none"><h3>📜 Terms & Conditions</h3><p><b>1.</b> Fake / VPN = Ban. <b>2.</b> Min Withdraw ₹50. Fee ₹5. <b>3.</b> Offerwall rewards by partners. <b>4.</b> 1 Offer per day must for withdraw. <b>5.</b> VIP ₹49 non-refundable. <b>6.</b> We can block fraud accounts.</p></div>
 <button onclick="closePolicy()" class="btn" style="margin-top:10px">CLOSE</button>
 </div></div>
 <div id="adModal" style="position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:center;justify-content:center;padding:16px">
@@ -61,7 +52,13 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <div class="card" style="text-align:center"><div style="font-weight:700">💬 Customer Service</div><div style="font-size:12px;color:#666">Withdraw Doubt ku Inga Msg Pannu</div><a href="https://t.me/Salem_earn_pro_bot" target="_blank" style="display:block;background:#0f766e;color:#fff;font-weight:700;padding:10px;border-radius:10px;margin-top:8px;text-decoration:none">CHAT WITH SUPPORT 🤖</a></div>
 <div class="card" style="background:#f0fdf4;border:1px solid #bbf7d0"><div style="font-weight:700">📅 Daily Check-in - Day <span id="streak">1</span></div><button id="checkBtn" onclick="checkIn()" class="btn" style="margin-top:8px">CHECK-IN TODAY (+₹0.50)</button></div>
 <div class="card" style="text-align:center"><div style="font-weight:700">🎡 Daily Spin</div><div id="spinRes" style="font-size:36px;margin:8px">🎡</div><button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button></div>
-<div class="card gold"><div style="font-weight:700">👑 VIP PLAN - ₹49 Only - 30 DAYS</div><div style="font-size:12px">✅ Spin Double • Ad ₹0.40 • Check-in ₹1 • <span id="vipLeftTxt">30 Days Full Double Earning</span></div><button onclick="buyVip()" style="background:#fff;color:#d97706;font-weight:800;width:100%;padding:10px;border-radius:10px;border:none;margin-top:8px">BUY VIP - ₹49 / 30 DAYS</button><input id="vipCode" placeholder="VIP Code" style="color:#000"><button onclick="activateVip()" style="background:#000;color:#fff;font-size:12px;padding:10px;border-radius:8px;width:100%;margin-top:6px;border:none">ACTIVATE VIP</button></div>
+<div class="card gold"><div style="font-weight:700">👑 VIP PLAN - ₹49 Only - 30 DAYS</div><div style="font-size:12px">✅ Spin Double • Ad ₹0.40 • Check-in ₹1 • <span id="vipLeftTxt">30 Days Full Double Earning</span></div>
+<button onclick="buyVip()" style="background:#fff;color:#d97706;font-weight:800;width:100%;padding:12px;border-radius:10px;border:none;margin-top:8px">BUY VIP - ₹49 / 30 DAYS</button>
+<div style="font-size:11px;margin-top:5px;color:#fff">UPI: <b>p.dinesh01@ptyes</b> - Click Panna Copy Aagum</div>
+<input id="vipCode" placeholder="VIP Code - Ex: VIP49-XXXX" style="color:#000">
+<button onclick="activateVip()" style="background:#000;color:#fff;font-size:12px;padding:10px;border-radius:8px;width:100%;margin-top:6px;border:none">ACTIVATE VIP</button>
+<div id="vipMsg" style="font-size:12px;margin-top:5px;color:#fff"></div>
+</div>
 </div>
 <div id="tab-task" class="tab">
 <div class="card"><div style="font-weight:700">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div style="font-size:12px;color:#666">Watched: <span id="adCount">0</span>/20 • Next Ad: <span id="coolDown">Ready ✅</span></div><button onclick="watchAd()" class="btn" style="margin-top:8px">WATCH AD</button><div style="font-size:10px;color:#999;margin-top:4px">10 sec timer • Daily Limit 20</div></div>
@@ -88,7 +85,8 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 </div>
 <div class="footer-links"><a href="#" onclick="showPolicy('privacy')">Privacy Policy</a> | <a href="#" onclick="showPolicy('terms')">Terms</a> | <a href="https://t.me/Salem_earn_pro_bot">Contact Us</a><br>© 2026 Salem Earn Pro - All Rights Reserved</div>
 <div id="adminPanel" class="card" style="display:none;background:#fefce8;border:2px solid #facc15"><div style="font-weight:700">🛠️ ADMIN PANEL</div><div style="font-size:14px">VIP: <b>VIP49</b> | CPX: <b>37358</b> | AdGem: <b>33885</b> | Monetag: <b>12075477</b> | BitLabs: <b>a365ab23-0307-4776-b7ca-6c2d84dc1c6</b></div>
-<div style="background:#fff;padding:10px;border-radius:10px;margin-top:10px;border:1px solid #ddd"><div style="font-weight:800">👥 Total Users: <span id="totalUsers">Loading...</span></div><div style="font-size:12px;color:#666">Withdraw Requests: <b id="totalWithdraws">-</b></div><div style="font-size:12px;color:#666">Admin Profit (60%): <b id="adminProfit">₹0</b> - BitLabs Dashboard la Varum</div><button onclick="refreshUsers()" style="background:#0f766e;color:#fff;padding:8px;border-radius:8px;border:none;width:100%;margin-top:6px">REFRESH COUNT</button></div>
+<div style="background:#fff;padding:10px;border-radius:10px;margin-top:10px;border:1px solid #ddd"><div style="font-weight:800">👥 Total Users: <span id="totalUsers">Loading...</span></div><div style="font-size:12px;color:#666">Withdraw Requests: <b id="totalWithdraws">-</b></div><div style="font-size:12px;color:#666">Admin Profit (60%): <b id="adminProfit">₹0</b></div><button onclick="refreshUsers()" style="background:#0f766e;color:#fff;padding:8px;border-radius:8px;border:none;width:100%;margin-top:6px">REFRESH COUNT</button></div>
+<div id="vipGenBox" style="background:#fff;padding:10px;border-radius:10px;margin-top:10px;border:1px solid #ddd"><div style="font-weight:800;color:#000">👑 VIP Code Create Pannu</div><button onclick="genVipCode()" style="background:#0f766e;color:#fff;padding:8px;border:none;border-radius:8px;width:100%;margin-top:6px">GENERATE NEW VIP CODE</button><div id="newVipCode" style="color:#000;font-weight:800;margin-top:6px;text-align:center"></div><div id="vipList" style="color:#000;font-size:12px;margin-top:6px"></div></div>
 <div style="margin-top:10px;font-weight:700">📩 Requests: <span id="reqCount">0</span></div><div id="adminReqs">No Requests Yet</div><button onclick="clearReqs()" style="background:#6b7280;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;border:none;margin-top:8px">Clear All</button></div>
 </div>
 </div>
@@ -107,12 +105,9 @@ function S_set(k,v){ try{localStorage.setItem(k,v);}catch(e){} _mem[k]=v; }
 function S_rem(k){ try{localStorage.removeItem(k);}catch(e){} delete _mem[k]; }
 var BOT_TOKEN="8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg"; var CHAT_ID="8855798269"; var ADMIN_UPI="p.dinesh01@ptyes";
 function sendTelegram(m){ try{fetch("https://api.telegram.org/bot"+BOT_TOKEN+"/sendMessage",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:CHAT_ID,text:m})})}catch(e){} }
-
-// ===== BALANCE FIX - MOBILE KEY =====
 function getBalKey(){ var m=S_get('my_mobile','')||myMobile||''; if(!m) return 'salem_bal'; return 'salem_bal_'+m; }
 function saveBal(){ S_set(getBalKey(), bal.toString()); S_set('salem_bal', bal.toString()); }
 function loadBalForUser(){ var k=getBalKey(); bal=parseFloat(S_get(k,'0')||'0'); var oldBal=parseFloat(S_get('salem_bal','0')||'0'); if(oldBal>0 && bal===0 && S_get('my_mobile','')){ bal=oldBal; S_set(k, bal.toString()); } }
-
 var bal=0; var ads=parseInt(S_get('salem_ads','0')||'0'); var streak=parseInt(S_get('salem_streak','1')||'1'); var myMobile=S_get('my_mobile','')||''; var myCode=S_get('my_ref_code','')||''; var lastAdTime=0;
 loadBalForUser();
 function todayKey(){return new Date().toDateString();}
@@ -129,35 +124,50 @@ function checkLogin(){var box=document.getElementById('loginBox'); if(!myMobile 
 function doLogin(){var m=document.getElementById('userMobile').value.trim(); if(!m || m.length<10 || isNaN(m)){alert('10-digit valid Mobile Number podu bro!'); return;} var isNew=S_get('my_mobile','')==''; myMobile=m; myCode=genCode(m); S_set('my_mobile',m); S_set('my_ref_code',myCode); loadBalForUser(); if(isNew){fetch('https://abacus.jasoncameron.dev/hit/salemearnpro-totalusers').then(r=>r.json()).then(d=>{try{document.getElementById('totalUsers').innerText=d.value;}catch(e){}}).catch(()=>{}); sendTelegram('👤 NEW USER JOINED\nMobile: '+m);} checkLogin(); upd(); alert('Welcome Bro! Balance: ₹'+bal.toFixed(2)+' ✅');}
 function refreshUsers(){fetch('https://abacus.jasoncameron.dev/get/salemearnpro-totalusers').then(r=>r.json()).then(d=>{document.getElementById('totalUsers').innerText=d.value; var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('totalWithdraws').innerText=reqs.length; var prof=parseFloat(S_get('admin_profit_total','0')||'0'); document.getElementById('adminProfit').innerText='₹'+prof.toFixed(2);}).catch(()=>{document.getElementById('totalUsers').innerText='Telegram la Paaru';});}
 function showTab(name,btn){var tabs=document.querySelectorAll('.tab'); for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');} document.getElementById('tab-'+name).classList.add('active'); var bs=document.querySelectorAll('.nav button'); for(var j=0;j<bs.length;j++){bs[j].classList.remove('active');} btn.classList.add('active');}
+function calcUserReward(totalAmt){ var userAmt = totalAmt * 0.40; var adminAmt = totalAmt * 0.60; var prevProf = parseFloat(S_get('admin_profit_total','0')||'0'); S_set('admin_profit_total', (prevProf + adminAmt).toString()); return userAmt; }
+function upd(){ try{ document.getElementById('bal').innerText='₹'+bal.toFixed(2); document.getElementById('adCount').innerText=ads; document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20'; document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20'; document.getElementById('streak').innerText=streak; document.getElementById('vipBadge').innerText=isVip?'👑 VIP':'FREE'; document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning'; document.getElementById('profBal').innerText='₹'+bal.toFixed(2); document.getElementById('profVip').innerText=isVip?'VIP ✅':'FREE'; document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days':'0'; document.getElementById('profAds').innerText=ads; var off=parseInt(S_get('salem_offer_today','0')||'0'); document.getElementById('offerToday').innerText=off; document.getElementById('offerStatus').innerText=off>=1?'✅ Task Completed':'❌ Withdraw ku 1 Task Must'; var need=50-bal; document.getElementById('needAmt').innerText=bal>=50?'Ready to Withdraw ✅':'Innum ₹'+need.toFixed(2)+' Venam'; var hist=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); document.getElementById('historyDiv').innerHTML=hist.length?hist.map(h=>h).join('<br>'):'No history yet'; }catch(e){} }
+function watchAd(){ if(ads>=20){alert('Daily Limit Over Bro!');return;} var now=Date.now(); if(now-lastAdTime<10000 && ads>0){alert('Wait 10 sec!');return;} lastAdTime=now; document.getElementById('adModal').style.display='flex'; var t=10; var iv=setInterval(function(){ t--; document.getElementById('timerText').innerText=t; document.getElementById('timerBar').style.width=(t*10)+'%'; if(t<=0){clearInterval(iv); document.getElementById('adModal').style.display='none'; var amt=isVip?0.40:0.20; bal+=amt; ads++; S_set('salem_ads',ads.toString()); saveBal(); upd(); alert('₹'+amt.toFixed(2)+' Added ✅'); }},1000); }
+function checkIn(){ var d=S_get('salem_checkin',''); if(d===todayKey()){alert('Already Checked-in!');return;} var amt=isVip?1:0.50; bal+=amt; S_set('salem_checkin',todayKey()); streak++; S_set('salem_streak',streak.toString()); saveBal(); upd(); alert('Check-in ₹'+amt+' Added!'); }
+function doSpin(){ var vals=[0,0.10,0.20,0.50,0,1]; var v=vals[Math.floor(Math.random()*vals.length)]; if(isVip) v=v*2; document.getElementById('spinRes').innerText='₹'+v.toFixed(2); bal+=v; saveBal(); upd(); }
+function copyRef(){ var l=document.getElementById('refLink'); l.select(); document.execCommand('copy'); alert('Refer Link Copied!'); }
+function withdraw(){ var upi=document.getElementById('upi').value.trim(); var amt=parseFloat(document.getElementById('withdrawAmt').value||'0'); if(!upi){alert('UPI ID Podu!');return;} if(bal<50){alert('Min ₹50 Venam!');return;} if(amt<50||amt>bal){alert('Correct Amount Podu!');return;} var off=parseInt(S_get('salem_offer_today','0')||'0'); if(off<1){alert('Withdraw ku 1 Offerwall Task Must! Task Page la Pannu!');return;} var reqs=JSON.parse(S_get('withdraw_reqs','[]')||'[]'); reqs.push('₹'+amt+' - '+upi+' - Pending'); S_set('withdraw_reqs',JSON.stringify(reqs)); bal-=amt; saveBal(); sendTelegram('💸 WITHDRAW REQUEST\nUser: '+myMobile+'\nAmt: ₹'+amt+'\nUPI: '+upi); upd(); alert('Withdraw Request Sent!'); }
+function checkPaidCode(){ var c=document.getElementById('paidCode').value.trim().toUpperCase(); if(c==='SALEM50'||c==='REF5'){alert('Payment Verified ✅');}else{alert('Wrong Code!');} }
+function logout(){ S_rem('my_mobile'); location.reload(); }
+function adminLogin(){ var p=prompt("Admin Password:"); if(p==="Dinesh123"){ document.getElementById('adminPanel').style.display='block'; refreshUsers(); alert("Admin Login Success!"); }else{alert("Wrong Password!");} }
+function clearReqs(){ S_set('withdraw_reqs','[]'); document.getElementById('adminReqs').innerHTML='No Requests Yet'; document.getElementById('reqCount').innerText='0'; upd(); }
 
-// ===== SECRET 40/60 CALCULATION - USER KU THERIYATHU =====
-function calcUserReward(totalAmt){
-  // totalAmt = BitLabs/CPX/AdGem la irunthu vantha full amount (USD to INR)
-  var userAmt = totalAmt * 0.40; // User ku 40% only
-  var adminAmt = totalAmt * 0.60; // Admin ku 60%
-  var prevProf = parseFloat(S_get('admin_profit_total','0')||'0');
-  S_set('admin_profit_total', (prevProf + adminAmt).toString());
-  return userAmt;
+// ===== VIP SYSTEM - FIXED + ONE TIME USE =====
+function buyVip(){
+  try{ navigator.clipboard.writeText(ADMIN_UPI); }catch(e){}
+  alert("👑 VIP PLAN ₹49\n\nAdmin UPI: "+ADMIN_UPI+"\n\n1. Copy Panni GPay/PhonePe la ₹49 Pay Pannu\n2. Screenshot ah t.me/Salem_earn_pro_bot la Anuppu\n3. Admin Unakku VIP Code Tharuva!\n\nUPI Copy Aayiduchu ✅");
+  window.location.href = "upi://pay?pa=p.dinesh01@ptyes&pn=SalemEarnPro&am=49&cu=INR&tn=VIP49";
 }
-
-// CPX - 40% USER
-(function checkCpx(){var p=new URLSearchParams(window.location.search);var st=p.get('status');var uid=p.get('user_id');var amt=parseFloat(p.get('amount')||'5');var tx=p.get('trans_id')||'';if(st==='1' && uid && tx){var last=S_get('last_cpx_trans','');if(last!==tx){S_set('last_cpx_trans',tx);var uAmt=calcUserReward(amt); bal+=uAmt; saveBal(); S_set('salem_offer_today','1');upd();sendTelegram('✅ CPX COMPLETED\nUser: '+uid+'\nTotal: ₹'+amt+' | User: ₹'+uAmt.toFixed(2)+' | Admin: ₹'+(amt*0.6).toFixed(2)+'\nTx: '+tx);alert('🎉 Survey Completed! ₹'+uAmt.toFixed(2)+' Added!');}}})();
-
-// ADGEM - 40% USER
-(function checkAdGem(){var p=new URLSearchParams(window.location.search);var amt=parseFloat(p.get('amount')||'0');var pid=p.get('playerid');var tx=p.get('transaction_id');if(amt>0 && pid && tx){var last=S_get('last_adgem_trans','');if(last!==tx){S_set('last_adgem_trans',tx);var uAmt=calcUserReward(amt); bal+=uAmt; saveBal(); S_set('salem_offer_today','1');upd();sendTelegram('✅ ADGEM COMPLETED\nPlayer: '+pid+'\nTotal: ₹'+amt+' | User: ₹'+uAmt.toFixed(2)+'\nTx: '+tx);alert('🎉 Offer Completed! ₹'+uAmt.toFixed(2)+' Added!');}}})();
-
-// BITLABS - 40% USER - SECRET
-(function checkBitlabs(){var p=new URLSearchParams(window.location.search);var st=p.get('status');var amt=parseFloat(p.get('amount')||'0');var tx=p.get('trans_id')||'';if(st==='1' && amt>0 && tx){var last=S_get('last_bitlabs_trans','');if(last!==tx){S_set('last_bitlabs_trans',tx);var uAmt=calcUserReward(amt); bal+=uAmt; saveBal(); S_set('salem_offer_today','1');upd();sendTelegram('✅ BITLABS COMPLETED\nUser: '+myMobile+'\nTotal: ₹'+amt+' | User 40%: ₹'+uAmt.toFixed(2)+' | Admin 60%: ₹'+(amt*0.6).toFixed(2)+'\nTx: '+tx);alert('🎉 BitLabs Survey Completed! ₹'+uAmt.toFixed(2)+' Added!');}}})();
-
+function activateVip(){
+  var code = document.getElementById('vipCode').value.trim().toUpperCase();
+  if(!code){ alert("VIP Code Podu Bro!"); return; }
+  var validCodes = JSON.parse(S_get('vip_codes','[]') || '[]');
+  var usedCodes = JSON.parse(S_get('vip_used','[]') || '[]');
+  var usedBy = JSON.parse(S_get('vip_used_by','{}') || '{}');
+  if(usedCodes.includes(code)){ alert("❌ Itha Code Already Oruvar Use Pannita Bro! Used by: "+usedBy[code]); return; }
+  if(code === "VIP49" || validCodes.includes(code)){
+    usedCodes.push(code); usedBy[code]=myMobile;
+    S_set('vip_used', JSON.stringify(usedCodes)); S_set('vip_used_by', JSON.stringify(usedBy));
+    var exp = Date.now() + (30*24*60*60*1000); S_set('vip_exp', exp.toString()); S_set('isVip','1'); isVip=true;
+    sendTelegram('👑 VIP ACTIVATED\nCode: '+code+'\nUser: '+myMobile+'\nInime Vera Yaarum Use Panna Mudiyathu ❌');
+    alert("🎉 VIP ACTIVATED! 30 Days Double Earning! 👑\nItha Code Inime Vera Yaarum Use Panna Mudiyathu!");
+    upd();
+  } else { alert("❌ Thappana VIP Code Bro! Admin kita Vaangina Code ah Podu!"); }
+}
+function genVipCode(){
+  var newCode = "VIP49-" + Math.floor(1000 + Math.random()*9000);
+  var codes = JSON.parse(S_get('vip_codes','[]') || '[]'); codes.push(newCode); S_set('vip_codes', JSON.stringify(codes));
+  document.getElementById('newVipCode').innerText = "New Code: " + newCode + " - Itha User ku Kodu!";
+  document.getElementById('vipList').innerHTML = "All Codes: " + codes.join(", ");
+  alert("New VIP Code: " + newCode);
+}
 function openOffer(){var oc=parseInt(S_get('salem_offer_today','0')||'0');if(oc>=1){alert('Daily 1 Offer Completed Bro!');return;}var uid=myMobile||myCode||'0013';var url='https://offers.cpx-research.com/index.php?app_id=37358&ext_user_id='+encodeURIComponent(uid)+'&username='+encodeURIComponent(uid);window.open(url,'_blank');sendTelegram('🎯 CPX Clicked\nUser: '+myMobile+' | Code: '+myCode);document.getElementById('cpxMsg').innerText='⏳ CPX Survey load aaguthu... Complete pannunga!';}
 function openAdgem(){var uid=myCode||myMobile||'SALEM-5555';var url='https://wall.adgem.com/wall?appid=33885&playerid='+encodeURIComponent(uid);window.open(url,'_blank');sendTelegram('🚀 AdGem Clicked\nUser: '+uid+' | Mobile: '+myMobile);document.getElementById('cpxMsg').innerText='⏳ AdGem Offer Complete Pannadhum Balance Auto-Add Aagum!';}
-function openBitlabs(){var oc=parseInt(S_get('salem_offer_today','0')||'0');if(oc>=1){alert('Daily 1 Offer Completed Bro!');return;}var uid=myMobile||myCode||'0013';var token='a365ab23-0307-4776-b7ca-6c2d84dc1c6';var url='https://web.bitlabs.ai/?uid='+encodeURIComponent(uid)+'&token='+token;window.open(url,'_blank');sendTelegram('🎯 BitLabs Clicked\nUser: '+myMobile+' | Code: '+myCode);document.getElementById('cpxMsg').innerText='⏳ BitLabs Survey load aaguthu... Complete pannunga!';}
-
-function upd(){try{resetDay();isVip=checkVip();document.getElementById('bal').innerText='₹'+bal.toFixed(2);document.getElementById('profBal').innerText='₹'+bal.toFixed(2);document.getElementById('adCount').innerText=ads;document.getElementById('streak').innerText=streak;document.getElementById('vipBadge').innerText=isVip?('👑 VIP - '+vipDaysLeft()+' Days Left'):'';document.getElementById('profVip').innerText=isVip?'VIP ✅':'Normal';document.getElementById('profVipLeft').innerText=isVip?vipDaysLeft()+' Days Left':'-';document.getElementById('vipLeftTxt').innerText=isVip?vipDaysLeft()+' Days Left':'30 Days Full Double Earning';document.getElementById('profAds').innerText=ads+'/20';document.getElementById('adRate').innerText=isVip?'₹0.40':'₹0.20';document.getElementById('adAmtTxt').innerText=isVip?'0.40':'0.20';var need=Math.max(0,50-bal);document.getElementById('needAmt').innerText=need>0?'Innum ₹'+need.toFixed(2)+' venum!':'Withdraw Ready!';var oc=parseInt(S_get('salem_offer_today','0')||'0');var ot=document.getElementById('offerToday');if(ot) ot.innerText=oc;var os=document.getElementById('offerStatus');if(os) os.innerText=oc>=1?'✅ Withdraw Ready':'❌ Withdraw ku 1 Offer Must';if(S_get('last_checkin','')===todayKey()){document.getElementById('checkBtn').disabled=true;document.getElementById('checkBtn').innerText='ALREADY CHECKED-IN ✅';}if(S_get('last_spin','')===todayKey()){document.getElementById('spinBtn').disabled=true;document.getElementById('spinBtn').innerText='SPIN DONE ✅';}}catch(e){}}
-function checkIn(){if(S_get('last_checkin','')===todayKey()) return alert('Inniku already check-in pannita!');S_set('last_checkin',todayKey());streak++;var a=isVip?1:0.5;bal+=a;saveBal();S_set('salem_streak',streak);upd();alert('Check-in Done! +₹'+a);}
-function doSpin(){if(S_get('last_spin','')===todayKey()) return alert('Inniku spin mudinjiduchu!');S_set('last_spin',todayKey());var arr=[1,1,2,1,5,1,2,1];var base=arr[Math.floor(Math.random()*8)];var w=isVip?base*2:base;bal+=w;saveBal();upd();document.getElementById('spinRes').innerText='🎉 ₹'+w;alert('You Won ₹'+w);}
-function watchAd(){resetDay();if(ads>=20) return alert('Daily limit 20/20 Mudinjiduchu Bro! Nalaiku Va!');var now=Date.now();var diff=Math.floor((now-lastAdTime)/1000);if(lastAdTime!==0 && diff<10) return alert('Wait pannu bro! Next video '+ (10-diff) +' sec ku apram!');var old=document.getElementById('monetag-script');if(old) old.remove();var s=document.createElement('script');s.id='monetag-script';s.src='//libtl.com/sdk.js';s.dataset.zone='12075477';s.dataset.sdk='show_12075477';document.head.appendChild(s);var m=document.getElementById('adModal');m.style.display='flex';var t=10;document.getElementById('timerText').innerText=t;document.getElementById('timerBar').style.width='100%';var iv=setInterval(function(){t--;document.getElementById('timerText').innerText=t;document.getElementById('timerBar').style.width=(t*10)+'%';if(t<=0){clearInterval(iv);m.style.display='none';var a=isVip?0.40:0.20;bal+=a;saveBal();ads++;S_set('salem_ads',ads.toString());lastAdTime=Date.now();upd();alert('Ad Done! +₹'+a);}},1000);}
-// Withdraw, VIP, Admin etc - Un Pazhaya Functions Same ah Vachuko
+function openBitlabs(){var oc=parseInt(S_get('salem_offer_today','0')||'0');if(oc>=1){alert('Daily 1 Offer Completed Bro!');return;}var uid=myMobile||myCode||'0013';var token='a365ab23-0307-4776-b7ca-6c2d84dc1c6';var url='https://web.bitlabs.ai/?uid='+encodeURIComponent(uid)+'&token='+token;window.open(url,'_blank');sendTelegram('🎯 BitLabs Clicked\nUser: '+myMobile);document.getElementById('cpxMsg').innerText='⏳ BitLabs Survey load aaguthu...';}
 checkLogin(); upd();
 </script>
 </body></html>
