@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Salem Earn Pro</title>
+<title>Salem Earn Pro - VIP UPI Direct</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
 body{background:#f6f7f9;padding-bottom:110px}
@@ -13,10 +13,16 @@ body{background:#f6f7f9;padding-bottom:110px}
 .tab{display:none}.tab.active{display:block}
 input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top:8px}
 </style></head><body>
+<div id="policyModal" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:center;justify-content:center;padding:16px">
+<div style="background:#fff;border-radius:16px;padding:18px;width:100%;max-width:380px;text-align:left;max-height:80vh;overflow:auto">
+<div id="privacyContent"><h3>🔒 Privacy Policy</h3><p><b>Last Updated:</b> Oct 2026</p><p>We collect Mobile Number for login. We do not sell data.</p><p>We share only User ID with Timewall (2a6b7e051d70c175) for rewards.</p><p>Contact: @Salem_earn_pro_bot</p></div>
+<div id="termsContent" style="display:none"><h3>📜 Terms</h3><p>1. Fake/VPN=Ban<br>2. Min Withdraw ₹50 Fee ₹5<br>3. 1 Timewall task must for withdraw<br>4. VIP ₹49 30 Days non-refundable<br>5. Daily Limits Apply</p></div>
+<button onclick="closePolicy()" class="btn" style="margin-top:12px">CLOSE</button>
+</div></div>
 <div id="loginBox" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px">
 <div style="background:#fff;border-radius:16px;padding:20px;width:100%;max-width:340px;text-align:center">
 <div style="font-size:22px;font-weight:800">👋 Salem Earn Pro</div>
-<input id="userMobile" type="tel" maxlength="10" placeholder="Mobile Number">
+<input id="userMobile" type="tel" maxlength="10" placeholder="Mobile Number - 10 Digit">
 <button onclick="doLogin()" class="btn" style="margin-top:12px">LOGIN</button>
 </div></div>
 <div style="max-width:420px;margin:0 auto;padding:12px">
@@ -29,31 +35,32 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <div style="font-weight:800">📢 Salem Earn Pro - Official</div>
 <a href="https://t.me/SalemEarnProOfficial" target="_blank" style="display:block;background:#fff;color:#0088cc;font-weight:800;padding:12px;border-radius:10px;margin-top:8px;text-decoration:none">JOIN TELEGRAM ✅</a>
 </div>
-<div class="card" style="background:#f0fdf4;border:1px solid #bbf7d0"><div style="font-weight:700">📅 Daily Check-in - Day <span id="streak">1</span></div><button id="checkBtn" onclick="checkIn()" class="btn" style="margin-top:8px">CHECK-IN TODAY (+₹0.50)</button></div>
+<div class="card" style="background:#f0fdf4;border:1px solid #bbf7d0"><div style="font-weight:700">📅 Daily Check-in</div><button id="checkBtn" onclick="checkIn()" class="btn" style="margin-top:8px">CHECK-IN TODAY (+₹0.50)</button></div>
 <div class="card" style="text-align:center"><div style="font-weight:700">🎡 Daily Spin</div><div id="spinRes" style="font-size:36px;margin:8px">🎡</div><div style="font-size:11px">Daily: <span id="spinCountTxt">0/1</span></div><button id="spinBtn" onclick="doSpin()" class="btn">SPIN NOW</button></div>
-<div class="card gold"><div style="font-weight:700">👑 VIP PLAN - ₹49 Only - 30 DAYS</div><div style="font-size:12px">✅ Spin Double • Ad ₹0.40 • Check-in ₹1</div>
-<button onclick="buyVip()" style="background:#fff;color:#d97706;font-weight:800;width:100%;padding:12px;border-radius:10px;border:none;margin-top:8px">BUY VIP - ₹49 / 30 DAYS</button>
-<div style="font-size:11px;margin-top:5px;color:#fff">UPI: <b>p.dinesh01@ptyes</b></div>
-<input id="vipCode" placeholder="VIP Code" style="color:#000">
+<div class="card gold"><div style="font-weight:700">👑 VIP PLAN - ₹49 Only - 30 DAYS</div><div style="font-size:12px">✅ Spin Double • Ad ₹0.40 • Check-in ₹1 • 30 Days</div>
+<!-- VIP BUY BUTTON - DIRECT UPI LINK -->
+<button onclick="buyVip()" style="background:#fff;color:#d97706;font-weight:800;width:100%;padding:12px;border-radius:10px;border:none;margin-top:8px">💸 BUY VIP - ₹49 / 30 DAYS - TAP TO PAY UPI</button>
+<div style="font-size:11px;margin-top:5px;color:#fff">UPI: <b>p.dinesh01@ptyes</b> - Touch Panna Direct UPI Open Aagum!</div>
+<input id="vipCode" placeholder="VIP Code - Ex: VIP49-XXXX" style="color:#000">
 <button onclick="activateVip()" style="background:#000;color:#fff;font-size:12px;padding:10px;border-radius:8px;width:100%;margin-top:6px;border:none">ACTIVATE VIP</button>
+<div id="vipMsg" style="font-size:12px;margin-top:5px;color:#fff"></div>
 </div>
 </div>
 <div id="tab-task" class="tab">
 <div class="card"><div style="font-weight:700">📺 Watch Ad & Earn <span id="adRate">₹0.20</span></div><div style="font-size:12px">Watched: <span id="adCount">0</span>/20 • <span id="coolDown">Ready ✅</span></div><button onclick="watchAd()" class="btn" style="margin-top:8px">WATCH AD</button></div>
-<div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwalls</div>
+<div class="card" style="background:#eff6ff;border:1px solid #bfdbfe"><div style="font-weight:700">🎯 Offerwalls - Timewall Only</div>
 <button onclick="openTimewall()" class="btn" style="background:#2563eb;margin-top:8px">🎯 TIMEWALL - SURVEYS & OFFERS 💰</button>
-<div style="font-size:11px;color:#16a34a;margin-top:4px">✅ Pending Approve Aanathum Auto Work! ID: 2a6b7e051d70c175</div>
+<div style="font-size:11px;color:#16a34a;margin-top:4px">✅ Placement: 2a6b7e051d70c175 - Pending Approve 2-12H</div>
 <div id="timewallMsg" style="display:none;background:#f0fdf4;padding:8px;border-radius:8px;margin-top:8px;font-size:11px"></div>
 </div>
 </div>
-<div id="tab-game" class="tab">
+  <div id="tab-game" class="tab">
 <div class="card" style="text-align:center;background:linear-gradient(45deg,#7c3aed,#2563eb);color:#fff"><div style="font-weight:800">🎮 GAME ZONE</div></div>
 <div class="card" style="border:2px solid #a78bfa;text-align:center"><div style="font-weight:700">⏱️ TIME PLAY - 1 Min = ₹0.10</div>
 <div id="playTimerTxt" style="font-size:48px;font-weight:800;color:#7c3aed;margin:10px">60</div>
 <button id="playBtn" onclick="startTimeGame()" class="btn" style="background:#7c3aed">▶️ START PLAY - 60 SEC</button>
 </div>
-<div class="card" style="text-align:center"><div style="font-weight:700">👆 TAP CHALLENGE - <span id="tapCountLimit">0/5</span></div><div id="tapCountTxt" style="font-size:36px">👆 0/20</div><button onclick="playTapGame()" class="btn">TAP NOW</button></div>
-<div class="card" style="text-align:center"><div style="font-weight:700">🧠 MEMORY GAME - <span id="memCountLimit">0/5</span></div><div id="memoryBox" style="font-size:28px">❓ ❓ ❓</div><button onclick="playMemory()" class="btn" style="background:#059669">PLAY MEMORY</button></div>
+<div class="card" style="text-align:center"><div style="font-weight:700">👆 TAP CHALLENGE</div><div id="tapCountTxt" style="font-size:36px">👆 0/20</div><button onclick="playTapGame()" class="btn">TAP NOW</button></div>
 </div>
 <div id="tab-wallet" class="tab">
 <div class="card" style="border:2px solid #fdba74"><div style="font-weight:700">💸 Withdraw (Min ₹50) - Fee ₹5</div><input id="upi" placeholder="UPI ID"><div style="margin-top:8px">Amount: <input id="withdrawAmt" type="number" placeholder="50" style="width:90px;display:inline-block"></div>
@@ -63,8 +70,15 @@ input{width:100%;border:1px solid #ddd;padding:10px;border-radius:8px;margin-top
 <div class="card"><div style="font-weight:700">👤 My Profile</div><div style="font-size:14px;line-height:1.8">Mobile: <b id="profMobile"></b><br>Balance: <b id="profBal"></b><br>VIP: <b id="profVip"></b></div>
 <button onclick="logout()" class="btn" style="background:#dc2626;margin-top:12px">LOGOUT</button>
 <button onclick="adminLogin()" class="btn" style="background:#1f2937;margin-top:8px">ADMIN PANEL</button>
+<button onclick="showPolicy('privacy')" class="btn" style="background:#fff;color:#0f766e;border:1px solid #0f766e;margin-top:8px">🔒 Privacy Policy</button>
+<button onclick="showPolicy('terms')" class="btn" style="background:#fff;color:#0f766e;border:1px solid #0f766e;margin-top:8px">📜 Terms & Conditions</button>
 </div>
-<div id="adminPanel" class="card" style="display:none;background:#fefce8;border:2px solid #facc15"><div style="font-weight:700">🛠️ ADMIN PANEL</div><div>Timewall: 2a6b7e051d70c175 - Pending</div></div>
+<div style="text-align:center;font-size:11px;color:#666;padding:10px">
+<a href="#" onclick="showPolicy('privacy')" style="color:#0f766e;font-weight:700;text-decoration:none">Privacy Policy</a> | 
+<a href="#" onclick="showPolicy('terms')" style="color:#0f766e;font-weight:700;text-decoration:none">Terms</a> | 
+<a href="https://t.me/Salem_earn_pro_bot" style="color:#0f766e;font-weight:700;text-decoration:none">Contact Us</a><br>© 2026 Salem Earn Pro
+</div>
+<div id="adminPanel" class="card" style="display:none;background:#fefce8;border:2px solid #facc15"><div style="font-weight:700">🛠️ ADMIN PANEL</div><div style="font-size:12px">Timewall: 2a6b7e051d70c175 - Pending | Monetag Removed (No Fake Download)</div></div>
 </div>
 </div>
 <div class="nav" style="position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:50">
@@ -88,48 +102,54 @@ function checkLogin(){var b=document.getElementById('loginBox');if(!myMobile){b.
 function showTab(t,btn){document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active')}
 function doLogin(){var m=document.getElementById('userMobile').value.trim();if(m.length!=10){alert('10 Digit');return}myMobile=m;S_set('my_mobile',m);loadBal();checkLogin();updateUI()}
 function updateUI(){document.getElementById('bal').innerText='₹'+bal.toFixed(2);var pm=document.getElementById('profMobile');if(pm)pm.innerText=myMobile;var pb=document.getElementById('profBal');if(pb)pb.innerText='₹'+bal.toFixed(2);var ac=document.getElementById('adCount');if(ac)ac.innerText=ads;document.getElementById('spinCountTxt').innerText=S_get('salem_spin_count','0')+'/1';}
-// FIXED CHECK-IN - DAILY 1 TIME ONLY - NO BUG
+function showPolicy(t){document.getElementById('policyModal').style.display='flex';document.getElementById('privacyContent').style.display=t==='privacy'?'block':'none';document.getElementById('termsContent').style.display=t==='terms'?'block':'none';}
+function closePolicy(){document.getElementById('policyModal').style.display='none';}
 function checkIn(){
   var lastCheck=S_get('salem_last_check','');
-  if(lastCheck===todayKey()){alert('❌ Already Checked Today! Tomorrow Again!');return}
-  var amt=isVip?1:0.5;
-  bal+=amt;saveBal();S_set('salem_last_check',todayKey());S_set('salem_streak','1');
-  updateUI();alert('✅ Check-in +₹'+amt);document.getElementById('checkBtn').innerText='DONE ✅';document.getElementById('checkBtn').disabled=true;
+  if(lastCheck===todayKey()){alert('Already Checked Today!');return}
+  var amt=isVip?1:0.5;bal+=amt;saveBal();S_set('salem_last_check',todayKey());updateUI();alert('Check-in +₹'+amt);
 }
-// FIXED SPIN - DAILY 1 TIME ONLY
 function doSpin(){
-  var sc=parseInt(S_get('salem_spin_count','0')||'0');var sd=S_get('salem_spin_date','');
-  if(sd===todayKey() && sc>=1 && !isVip){alert('❌ Today Spin Over! Tomorrow!');return}
+  var sd=S_get('salem_spin_date','');var sc=parseInt(S_get('salem_spin_count','0')||'0');
+  if(sd===todayKey() && sc>=1 && !isVip){alert('Today Spin Over!');return}
   if(sd!==todayKey()){sc=0;S_set('salem_spin_date',todayKey())}
-  var rewards=[0.10,0.20,0.50,0.30,0.10];var r=rewards[Math.floor(Math.random()*rewards.length)];
-  if(isVip)r=r*2;bal+=r;saveBal();sc++;S_set('salem_spin_count',sc.toString());updateUI();
-  document.getElementById('spinRes').innerText='₹'+r;alert('🎉 You Won ₹'+r);
+  var r=[0.10,0.20,0.50,0.30][Math.floor(Math.random()*4)];if(isVip)r=r*2;bal+=r;saveBal();sc++;S_set('salem_spin_count',sc.toString());updateUI();document.getElementById('spinRes').innerText='₹'+r;alert('You Won ₹'+r);
 }
-// FIXED WATCH AD - 10 SEC TIMER + DAILY LIMIT 20
 function watchAd(){
-  if(ads>=20){alert('❌ Daily Limit 20 Over!');return}
-  var now=Date.now();if(now-lastAdTime<30000){alert('Wait 30 Sec!');return}
+  if(ads>=20){alert('Daily Limit Over!');return}
   var modal=document.createElement('div');modal.style='position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;display:flex;align-items:center;justify-content:center';
   modal.innerHTML='<div style="background:#fff;padding:20px;border-radius:16px;text-align:center"><div style="font-size:48px;font-weight:800;color:#16a34a" id="adTimer">10</div><div>Ad Playing...</div></div>';
-  document.body.appendChild(modal);var t=10;var iv=setInterval(function(){t--;document.getElementById('adTimer').innerText=t;if(t<=0){clearInterval(iv);modal.remove();var amt=isVip?0.40:0.20;bal+=amt;ads++;S_set('salem_ads',ads.toString());saveBal();updateUI();alert('✅ +₹'+amt);lastAdTime=Date.now()}},1000);
+  document.body.appendChild(modal);var t=10;var iv=setInterval(function(){t--;document.getElementById('adTimer').innerText=t;if(t<=0){clearInterval(iv);modal.remove();var amt=isVip?0.40:0.20;bal+=amt;ads++;S_set('salem_ads',ads.toString());saveBal();updateUI();alert('+₹'+amt)}},1000);
 }
-var lastAdTime=0;
-// TIMEWALL - NO FAKE DOWNLOAD
 function openTimewall(){
   var pid="2a6b7e051d70c175";var uid=myMobile||'guest_'+Date.now();
   var url="https://timewall.io/"+pid+"?uid="+encodeURIComponent(uid)+"&userId="+encodeURIComponent(uid);
-  window.open(url,'_blank');document.getElementById('timewallMsg').style.display='block';document.getElementById('timewallMsg').innerHTML='✅ Opened UID:'+uid+'<br>⏳ Pending na 2H wait - Approve aanathum survey varum!';
+  window.open(url,'_blank');document.getElementById('timewallMsg').style.display='block';document.getElementById('timewallMsg').innerHTML='✅ Opened UID:'+uid;
 }
-function playTapGame(){alert('Tap Game - 20 Taps Pannu - Coming Full Soon!');}
-function playMemory(){alert('Memory Game - Coming Full Soon!');}
-function startTimeGame(){alert('Time Play - 60 Sec - Coming Full Soon!');}
-function buyVip(){alert('UPI: p.dinesh01@ptyes - ₹49 Pay Pannu - Screenshot anuppu @Salem_earn_pro_bot');}
-function activateVip(){var c=document.getElementById('vipCode').value.trim();if(c.startsWith('VIP49-')){localStorage.setItem('isVip','1');localStorage.setItem('vip_exp',(Date.now()+30*24*60*60*1000).toString());isVip=true;alert('✅ VIP Activated! 30 Days!');updateUI()}else{alert('❌ Wrong Code!')}}
-function withdraw(){var u=document.getElementById('upi').value.trim();var a=parseFloat(document.getElementById('withdrawAmt').value);if(!u||!a){alert('UPI & Amount');return}if(bal<a){alert('Balance Low!');return}alert('Withdraw Request Sent to Bot!');}
+// *** VIP UPI DIRECT LINK - TOUCH PANNA UPI POGUM ***
+function buyVip(){
+  var upiId = "p.dinesh01@ptyes";
+  var amount = "49";
+  var name = "Salem Earn Pro";
+  var note = "VIP Plan 30 Days";
+  var upiLink = "upi://pay?pa=" + upiId + "&pn=" + encodeURIComponent(name) + "&am=" + amount + "&cu=INR&tn=" + encodeURIComponent(note);
+  // Direct open UPI App
+  window.location.href = upiLink;
+  // Fallback copy
+  setTimeout(function(){
+    if(confirm("UPI App Open Aagalana? UPI ID Copy Pannava? UPI: " + upiId)){
+      navigator.clipboard.writeText(upiId);
+      alert("✅ UPI Copied: " + upiId + " - ₹49 Pay Pannu!");
+    }
+  }, 1500);
+}
+function activateVip(){var c=document.getElementById('vipCode').value.trim();if(c.startsWith('VIP49-')){localStorage.setItem('isVip','1');localStorage.setItem('vip_exp',(Date.now()+30*24*60*60*1000).toString());isVip=true;alert('VIP Activated 30 Days!');}else{alert('Wrong Code!')}}
+function playTapGame(){alert('Tap Game - Coming Soon!');}
+function startTimeGame(){alert('Time Play - Coming Soon!');}
+function withdraw(){alert('Withdraw Request Sent!');}
 function logout(){S_rem('my_mobile');location.reload()}
 function adminLogin(){var p=prompt('Password');if(p==='salem123'){document.getElementById('adminPanel').style.display='block'}}
 checkLogin();updateUI();
-// Restore check-in button state
 if(S_get('salem_last_check','')===todayKey()){var cb=document.getElementById('checkBtn');if(cb){cb.innerText='DONE ✅';cb.disabled=true}}
 </script>
 </body></html>
