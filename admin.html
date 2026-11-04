@@ -1,62 +1,62 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Admin - Salem Earn Pro - 1 Month VIP</title>
+<title>Admin - Auto Approval</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<style>body{background:#f4f1ff;font-family:sans-serif}.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);margin-bottom:12px}.btn{padding:10px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer}.btn-p{background:#6d28d9;color:#fff}.btn-g{background:#fff;border:1px solid #ddd}.codebox{background:#111827;color:#0f0;padding:12px;border-radius:12px;font-family:monospace;word-break:break-all;margin-top:8px;font-size:12px}</style>
+<style>body{background:#f4f1ff;font-family:sans-serif}.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);margin-bottom:12px}.btn{padding:12px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer;width:100%}.btn-p{background:#6d28d9;color:#fff}.btn-g{background:#fff;border:1px solid #ddd}</style>
 </head><body class="p-4 max-w-2xl mx-auto">
-<h1 class="font-black text-xl mb-4">👑 Admin - VIP 30 Days | Ref 7 Days</h1>
+<h1 class="font-black text-xl mb-4">👑 Admin - Auto VIP Approve</h1>
+<div class="card" style="background:#dcfce7;border:2px solid #16a34a">
+<div class="font-bold text-green-800">✅ NPoint Connected: 5748cba395c8175aa86a</div>
+<div class="text-xs text-green-700">User app la auto active aagum - No Number!</div>
+</div>
 <div class="card">
 <div class="font-bold">User ID (Telegram la vanthatha)</div>
-<input id="uid" placeholder="Ex: PRO123456" class="w-full p-3 rounded-xl border mt-2"/>
-<div class="flex gap-2 mt-3">
-<button onclick="genVip()" class="btn btn-p flex-1">👑 VIP - 30 Days - ₹49</button>
-<button onclick="genRef()" class="btn btn-g flex-1">💰 REF - 7 Days - ₹10</button>
+<input id="uid" placeholder="Ex: PRO123456" class="w-full p-3 rounded-xl border mt-2 font-bold"/>
+<div class="mt-3 space-y-2">
+<button onclick="approveVip()" class="btn btn-p">✅ APPROVE VIP 30 DAYS - AUTO</button>
+<button onclick="approveRef()" class="btn btn-g">💰 APPROVE REF ₹10 - AUTO</button>
 </div>
-<div id="result"></div>
+<div id="result" class="mt-3 text-sm font-bold"></div>
 </div>
-<div class="card"><div class="font-bold">📋 All Codes - One Time Only</div><div id="list" class="text-xs mt-2"></div><button onclick="clearAll()" class="btn btn-g mt-3 text-xs">Clear All</button></div>
-<div class="card"><div class="font-bold">💸 UPI: p.dinesh01@ptyes</div><div class="text-xs text-gray-500">Check PhonePe - ₹49 vantha than VIP code generate pannu! Ref ku 20 games check pannu!</div></div>
+<div class="card"><div class="font-bold">📋 Current Approved List - Live</div><div id="list" class="text-xs mt-2">Loading...</div><button onclick="loadList()" class="btn btn-g mt-2 text-xs" style="width:auto">🔄 Refresh List</button></div>
 <script>
 const BOT="8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg";const CHAT="8855798269";
+const NPOINT="https://api.npoint.io/5748cba395c8175aa86a";
 function sendTG(m){fetch(`https://api.telegram.org/bot${BOT}/sendMessage?chat_id=${CHAT}&text=${encodeURIComponent(m)}`);}
-function rand(){return Math.random().toString(36).substring(2,6).toUpperCase();}
-function getCodes(){return JSON.parse(localStorage.getItem('admin_codes_v2')||'[]');}
-function saveCodes(c){localStorage.setItem('admin_codes_v2',JSON.stringify(c));}
-function genVip(){
- let uid=document.getElementById('uid').value.trim().toUpperCase();
- if(!uid){alert('User ID!');return;}
- let code=`VIP-${uid}-${rand()}`;
- let expiry = Date.now() + (30*24*60*60*1000);
- let codes=getCodes(); codes.unshift({code,uid,type:'VIP 30 Days',time:new Date().toLocaleString('en-IN'),expiry,expDate:new Date(expiry).toLocaleString('en-IN'),used:false}); saveCodes(codes);
- showResult(code,uid,'VIP 30 Days',expiry);
+function approveVip(){
+ let uid=document.getElementById('uid').value.trim().toUpperCase(); if(!uid){alert('User ID Enter Pannu Bro!');return;}
+ document.getElementById('result').innerText="⏳ Approving...";
+ fetch(NPOINT).then(r=>r.json()).then(data=>{
+   data.vip=data.vip||[];
+   data.vip=data.vip.filter(x=> (typeof x==='string'?x!==uid : x.id!==uid));
+   data.vip.push({id:uid, expiry: Date.now()+30*24*60*60*1000, date:new Date().toLocaleString('en-IN')});
+   return fetch(NPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+ }).then(()=>{ 
+   document.getElementById('result').innerHTML=`✅ <span style="color:green">VIP Approved for ${uid} - 30 Days! User app la 15 sec la auto active aagum!</span>`; 
+   sendTG(`✅ VIP AUTO APPROVED!\nUser ID: ${uid}\nExpiry: 30 Days\nTime: ${new Date().toLocaleString('en-IN')}\nUser app la auto active!`); 
+   loadList(); 
+ }).catch(()=>{document.getElementById('result').innerText="❌ Error - npoint.io/docs/5748cba395c8175aa86a poi Edit pannu - JSON: {\"vip\":[],\"ref\":[]} save panniya?";});
 }
-function genRef(){
- let uid=document.getElementById('uid').value.trim().toUpperCase();
- if(!uid){alert('User ID!');return;}
- let code=`REF-${uid}-${rand()}`;
- let expiry = Date.now() + (7*24*60*60*1000);
- let codes=getCodes(); codes.unshift({code,uid,type:'REF 7 Days ₹10',time:new Date().toLocaleString('en-IN'),expiry,expDate:new Date(expiry).toLocaleString('en-IN'),used:false}); saveCodes(codes);
- showResult(code,uid,'REF 7 Days',expiry);
+function approveRef(){
+ let uid=document.getElementById('uid').value.trim().toUpperCase(); if(!uid){alert('User ID!');return;}
+ document.getElementById('result').innerText="⏳ Approving Ref...";
+ fetch(NPOINT).then(r=>r.json()).then(data=>{
+   data.ref=data.ref||[];
+   data.ref=data.ref.filter(x=> (typeof x==='string'?x!==uid : x.id!==uid));
+   data.ref.push({id:uid, date:new Date().toLocaleString('en-IN')});
+   return fetch(NPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+ }).then(()=>{ 
+   document.getElementById('result').innerHTML=`✅ <span style="color:green">Ref ₹10 Approved for ${uid}! Auto credit!</span>`; 
+   sendTG(`✅ REF BONUS APPROVED!\nUser ID: ${uid}\n₹10\nTime: ${new Date().toLocaleString('en-IN')}`); 
+   loadList(); 
+ });
 }
-function showResult(code,uid,type,expiry){
- let link=`${location.origin}/?redeem=${code}&exp=${expiry}`;
- let html=`<div class="codebox">Code: ${code}<br>Exp: ${new Date(expiry).toLocaleString()}<br>Link: ${link}</div>
- <div class="flex gap-2 mt-3"><button onclick="copyT('${code}')" class="btn btn-g flex-1">Copy Code</button><button onclick="copyT('${link}')" class="btn btn-p flex-1">Copy Link</button></div>
- <div class="flex gap-2 mt-2"><button onclick="sendPrivate('${code}','${uid}','${type}','${expiry}')" class="btn btn-p w-full">📩 Send to Telegram Log</button></div>
- <div class="text-xs bg-yellow-100 p-2 rounded mt-2">User ku WhatsApp la anuppa:<br><b>Hi! Your ${type} code: ${code}\nRedeem Link (Valid ${type.includes('30')?'30 Days':'7 Days'}): ${link}\nOne Time Only! 1 Month ku pinnadi VIP renew pannanum!</b></div>`;
- document.getElementById('result').innerHTML=html; renderList();
+function loadList(){
+ fetch(NPOINT).then(r=>r.json()).then(data=>{
+   let vip=data.vip||[]; let ref=data.ref||[];
+   let h=`<b style="color:#6d28d9">VIP Approved (${vip.length}):</b><br>`+ (vip.length? vip.map(v=> typeof v==='string'?v : `✅ ${v.id} - Exp: ${new Date(v.expiry).toLocaleDateString()} - ${v.date}`).join('<br>') : 'No VIP Yet');
+   h+=`<br><br><b>Ref Approved (${ref.length}):</b><br>`+ (ref.length? ref.map(r=> typeof r==='string'?r : `💰 ${r.id} - ${r.date}`).join('<br>') : 'No Ref Yet');
+   document.getElementById('list').innerHTML=h;
+ }).catch(e=>{document.getElementById('list').innerHTML='❌ Error - First Edit this JSON bin click panni {"vip":[],"ref":[]} save pannu Bro!';});
 }
-function copyT(t){navigator.clipboard.writeText(t);alert('Copied!');}
-function sendPrivate(code,uid,type,expiry){
- let msg=`🎁 CODE - ${type}\n\nUser ID: ${uid}\nCode: ${code}\nExpiry: ${new Date(parseInt(expiry)).toLocaleString()}\nLink: ${location.origin}/?redeem=${code}&exp=${expiry}\n\nOne Time + ${type.includes('30')?'30 Days':'7 Days'} Valid! Send to user WhatsApp Private!`;
- sendTG(msg); alert('✅ Sent to Telegram!');
-}
-function renderList(){
- let codes=getCodes();
- let h=codes.map(c=>{
-   let isExp = Date.now() > c.expiry;
-   return `<div style="border-bottom:1px solid #eee;padding:8px 0;${isExp?'opacity:0.5':''}"><b>${c.type}</b> - ${c.uid} - <span style="color:${isExp?'red':'green'}">${c.code}</span><br>Gen: ${c.time} | Exp: ${c.expDate} ${isExp?'❌ EXPIRED':''}</div>`;
- }).join(''); document.getElementById('list').innerHTML=h||'No codes';
-}
-function clearAll(){if(confirm('Clear?')){localStorage.removeItem('admin_codes_v2');renderList();document.getElementById('result').innerHTML='';}}
-renderList();
+loadList();
 </script></body></html>
