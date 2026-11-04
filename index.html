@@ -1,7 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Salem Earn Pro - Real Money Gaming</title>
-<script data-cfasync="false" src="https://abscloud.org/1/892c731942a7d63c3ea40c5a2cb9a566"></script>
-<script data-cfasync="false" src="https://bauval.org/14/7114b89e9dc6c0f3b308da3218893daf"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>:root{--purple:#6d28d9;--bg:#f4f1ff;--card:#fff;--text:#1f2937;--border:#e5e7eb}*{font-family:'Fredoka',sans-serif}body{background:var(--bg);color:var(--text);margin:0}.topbar{position:sticky;top:0;z-index:40;background:rgba(244,241,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:0}.btn-primary{background:var(--purple);color:#fff}.btn-ghost{background:#fff;border:1px solid var(--border)}.card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:0 6px 20px rgba(17,24,39,.06)}.tab{padding:10px 11px;border-radius:999px;font-weight:700;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:12px}.tab.active{background:var(--text);color:#fff}.progress{height:8px;background:#ede9fe;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:var(--purple);width:0%}.notice{position:fixed;right:12px;bottom:12px;z-index:60;display:flex;flex-direction:column;gap:8px}.toast{background:#111827;color:#fff;padding:10px 12px;border-radius:12px;font-size:13px}.hidden{display:none!important}</style>
@@ -16,11 +14,6 @@
 <div id="home" class="tabpane">
 <div class="card p-4 mb-3"><div class="flex justify-between items-center"><div><div class="text-sm text-gray-500">Total Earnings</div><div class="text-2xl font-black">₹<span id="bal2">0.00</span></div></div><div class="text-right"><div class="text-xs text-gray-500">Today</div><div class="font-bold">₹<span id="todayEarn">0.00</span></div></div></div>
 <div class="progress mt-3"><div id="prog"></div></div><div class="text-xs text-gray-500 mt-1"><span id="progText">0</span>/250 to withdraw</div></div>
-<div class="card p-2 mt-3" style="display:flex;justify-content:center;min-height:280px;align-items:center;flex-direction:column">
-<div style="font-size:11px;text-align:center;color:#888">Advertisement</div>
-<script async="async" data-cfasync="false" src="https://bauval.org/21/e1f6d2ba6e1f8dee5821d627b5b57e4f"></script><div id="container-e1f6d2ba6e1f8dee5821d627b5b57e4f"></div>
-<div class="mt-3"><script>atOptions={'key':'d4f78fcfce55af2e7f6363733ad66d52','format':'iframe','height':250,'width':300,'params':{}};</script><script src="https://bauval.org/22/d4f78fcfce55af2e7f6363733ad66d52"></script></div>
-</div>
 <div class="grid grid-cols-2 gap-3 mt-3">
 <div class="card p-3"><div class="text-sm text-gray-500">Play Games - UNLIMITED!</div><div class="font-black text-lg">₹0.50 / game</div><button onclick="switchTab('games')" class="btn btn-primary w-full mt-2">Play Now</button></div>
 <div class="card p-3"><div class="text-sm text-gray-500">Extra Ads</div><div class="font-black text-lg">₹0.10 each</div><button onclick="openExtraAd()" class="btn btn-ghost w-full mt-2">Watch Ad</button></div>
@@ -38,7 +31,7 @@
 <input id="upiId" placeholder="Enter UPI ID" class="w-full p-3 rounded-xl border" style="border:1px solid var(--border)"/>
 <button onclick="withdraw()" class="btn btn-primary w-full mt-3">Withdraw ₹250</button></div>
 <div class="card p-3"><div class="font-bold mb-2">History</div><div id="hist" class="text-sm text-gray-500">No history yet!</div></div></div>
-<div id="ref" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">Refer & Earn ₹10! (After 20 Games)</div>
+<div id="ref" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">Refer & Earn ₹10!</div>
 <div class="flex gap-2 mt-3"><input id="refLink" class="flex-1 p-3 rounded-xl border" style="border:1px solid var(--border)" readonly/><button onclick="copyRef()" class="btn btn-primary">Copy</button></div>
 <button onclick="shareRef()" class="btn btn-ghost w-full mt-3">📤 Share WhatsApp</button>
 <div class="mt-4 text-sm"><b>Referrals:</b> <span id="refCount">0</span> | <b>Earned:</b> ₹<span id="refEarn">0</span></div></div></div>
@@ -53,13 +46,17 @@
 </div>
 <button onclick="openVip()" class="btn btn-primary w-full mt-4">👑 VIP ₹49 - 30 Days - p.dinesh01@ptyes</button>
 <div id="vipStatus" class="mt-3 text-xs p-2 bg-blue-50 rounded-lg hidden"></div>
-<button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2 text-sm">✅ I Paid ₹49 - Verify Payment (Auto)</button>
+<button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2 text-sm" style="background:#dcfce7;border:2px solid #16a34a">✅ I Paid ₹49 - Verify (Auto)</button>
+</div>
+<div class="card p-3 mt-3" style="border:2px dashed #6d28d9">
+<div class="font-bold">🎁 Redeem Code Backup</div>
+<div class="flex gap-2 mt-2"><input id="redeemInput" placeholder="VIP-PRO123-AB12" class="flex-1 p-3 rounded-xl border" style="border:1px solid var(--border)"/><button onclick="redeemCode()" class="btn btn-primary">Redeem</button></div>
 </div></div>
 <div id="support" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">💬 Support</div>
 <input id="supName" placeholder="Your Name" class="w-full p-3 rounded-xl border mt-3" style="border:1px solid var(--border)"/>
 <textarea id="supMsg" placeholder="Your Doubt..." class="w-full p-3 rounded-xl border mt-2" style="border:1px solid var(--border);min-height:80px"></textarea>
-<button onclick="sendSupport()" class="btn btn-primary w-full mt-3">📩 Send to Admin - Telegram</button></div></div>
-<div class="text-center text-xs text-gray-400 py-6">© 2025 Salem Earn Pro | Admin Panel</div></div>
+<button onclick="sendSupport()" class="btn btn-primary w-full mt-3">📩 Send to Admin</button></div></div>
+<div class="text-center text-xs text-gray-400 py-6">© 2025 Salem Earn Pro</div></div>
 <div id="gameModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;align-items:center;justify-content:center;padding:16px">
 <div class="card p-0 overflow-hidden" style="width:100%;max-width:480px"><div class="p-3 flex justify-between items-center border-b"><div class="font-bold" id="gmTitle">Game</div><button onclick="closeGame()" class="btn btn-ghost" style="padding:6px 10px">✕</button></div>
 <div id="gmBody" style="min-height:320px;background:#fff"></div>
@@ -67,7 +64,7 @@
 <div id="vipModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;align-items:center;justify-content:center;padding:16px">
 <div class="card p-4" style="width:100%;max-width:380px;text-align:center"><div style="font-size:36px">👑</div><div class="font-black text-xl">VIP ₹49 Only! - 30 Days!</div><div class="text-sm text-gray-500 mt-1">UPI: p.dinesh01@ptyes<br>Pay panni Verify click pannu - Auto Active!</div>
 <button onclick="buyVip()" class="btn btn-primary w-full mt-4">💳 Buy VIP via UPI</button>
-<button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2">✅ I Already Paid - Verify Now</button>
+<button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2" style="background:#dcfce7;border:2px solid #16a34a">✅ I Paid - Verify Auto</button>
 <button onclick="closeVip()" class="btn btn-ghost w-full mt-2">Close</button></div></div>
 <div id="notice" class="notice"></div>
 <script>
@@ -85,7 +82,7 @@ function renderGames(){let g=document.getElementById('gamesGrid');if(!g)return;g
 let currentGame=null,gameWon=false;
 function openGame(id){currentGame=GAMES.find(x=>x.id===id);gameWon=false;document.getElementById('gmTitle').innerText=currentGame.name;document.getElementById('gmClaim').classList.add('hidden');document.getElementById('gameModal').classList.remove('hidden');document.getElementById('gameModal').style.display='flex';let body=document.getElementById('gmBody');body.innerHTML='';if(id==='memory')startMemory(body);else if(id==='tap')startTap(body);else if(id==='math')startMath(body);else if(id==='snake')startSnake(body);else if(id==='puzzle')startPuzzle(body);else if(id==='spin')startSpin(body);}
 function closeGame(){document.getElementById('gameModal').classList.add('hidden');document.getElementById('gameModal').style.display='none';}
-function claimGame(){if(!gameWon){toast('Win First!');return;}toast('Opening Ad - Click to Unlock ₹0.50');window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');setTimeout(()=>{let reward=isVip?1.00:0.50;bal+=reward;todayEarn+=reward;gamesPlayed++;S_set('proplay_gp',gamesPlayed.toString());saveBal();updateUI();toast('✅ +₹'+reward.toFixed(2));closeGame();if(gamesPlayed===20){let myRef=S_get('my_referrer','');if(myRef){sendTelegramMsg(`✅ REFERRAL 20 GAMES DONE!\nFriend ID: ${S_get('proplay_userid','')}\nOwner Ref Code: ${myRef}\nOwner ku ₹10 Kudu!`);}}},1000);}
+function claimGame(){if(!gameWon){toast('Win First!');return;}toast('Opening Ad - Unlocking ₹0.50');window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');setTimeout(()=>{let reward=isVip?1.00:0.50;bal+=reward;todayEarn+=reward;gamesPlayed++;S_set('proplay_gp',gamesPlayed.toString());saveBal();updateUI();toast('✅ +₹'+reward.toFixed(2));closeGame();},1000);}
 function winGame(){gameWon=true;document.getElementById('gmClaim').classList.remove('hidden');}
 function startMemory(body){let emojis=['🍎','🍌','🍇','🍓','🍒','🍑'];let pairs=[...emojis,...emojis].sort(()=>Math.random()-.5);let first=null,second=null,matched=0,lock=false;let grid=document.createElement('div');grid.style='display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px';pairs.forEach((em)=>{let card=document.createElement('div');card.style='aspect-ratio:1;background:#ede9fe;border-radius:12px;display:grid;place-items:center;font-size:24px;cursor:pointer;border:2px solid #ddd';card.innerText='?';card.dataset.em=em;card.dataset.open='0';card.onclick=()=>{if(lock||card.dataset.open==='1')return;card.innerText=card.dataset.em;card.dataset.open='1';if(!first){first=card;}else{second=card;lock=true;if(first.dataset.em===second.dataset.em){matched+=2;first=null;second=null;lock=false;if(matched===12)winGame();}else{setTimeout(()=>{first.innerText='?';first.dataset.open='0';second.innerText='?';second.dataset.open='0';first=null;second=null;lock=false;},600);}}};grid.appendChild(card);});body.appendChild(grid);}
 function startTap(body){let count=0,time=10;let display=document.createElement('div');display.style='text-align:center;padding:20px';display.innerHTML='<div style="font-size:48px;font-weight:900" id="tapCount">0</div><div>Need 40 Taps!</div><div>Time: <b id="tapTime">10</b>s</div><button id="tapBtn" style="margin-top:16px;background:#6d28d9;color:#fff;padding:24px 48px;border-radius:20px;font-size:28px;font-weight:900;border:0">TAP!</button>';body.appendChild(display);let btn=display.querySelector('#tapBtn');btn.onclick=()=>{count++;display.querySelector('#tapCount').innerText=count;if(count>=40){winGame();btn.innerText='WON!';}};let iv=setInterval(()=>{time--;let et=display.querySelector('#tapTime');if(et)et.innerText=time;if(time<=0){clearInterval(iv);}},1000);}
@@ -96,51 +93,16 @@ function startSpin(body){body.innerHTML='<div style="padding:20px;text-align:cen
 function openExtraAd(){var ed=parseInt(S_get('extra_ad_done','0')||'0');if(ed>=10 && !isVip){if(confirm("Daily 10 Over! VIP?")){openVip();}return;}if(ed>=30){toast('Daily 30 Over!');return}var modal=document.createElement('div');modal.style='position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;display:flex;align-items:center;justify-content:center';modal.innerHTML='<div style="background:#fff;padding:20px;border-radius:16px;text-align:center;max-width:300px"><div style="font-size:28px;font-weight:800;color:#4f46e5" id="extraTimer">15</div><div>Extra Ad - 15 Sec!</div></div>';document.body.appendChild(modal);var t=15;var iv=setInterval(function(){t--;var el=document.getElementById('extraTimer');if(el)el.innerText=t;if(t<=0){clearInterval(iv);modal.remove();var amt=isVip?0.40:0.10;bal+=amt;todayEarn+=amt;ed++;S_set('extra_ad_done',ed.toString());saveBal();updateUI();toast('✅ +₹'+amt);try{window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');}catch(e){}}},1000);}
 function openVip(){document.getElementById('vipModal').classList.remove('hidden');document.getElementById('vipModal').style.display='flex';}
 function closeVip(){document.getElementById('vipModal').classList.add('hidden');document.getElementById('vipModal').style.display='none';}
-function buyVip(){var upi='p.dinesh01@ptyes';var url='upi://pay?pa='+encodeURIComponent(upi)+'&pn=SalemEarnProVIP&am=49&cu=INR&tn=VIP49';window.location.href=url;let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let msg=`👑 NEW VIP PURCHASE REQUEST!\n\nUser ID: ${userId}\nUPI: ${upi}\nAmount: ₹49\nBalance: ₹${bal.toFixed(2)}\nGames: ${gamesPlayed}\nTime: ${new Date().toLocaleString('en-IN')}\n\nCheck GPay - ₹49 Received?\nIf Yes - Approve in Admin Panel - Auto Active!`;sendTelegramMsg(msg);setTimeout(function(){toast('✅ Request Sent! Pay ₹49 then click Verify Payment! Admin approve panna auto active aagum!');},1500);}
-function verifyPayment(){
- let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));
- let statusDiv=document.getElementById('vipStatus');
- statusDiv.classList.remove('hidden');
- statusDiv.innerText=`⏳ Checking Approval for ${userId}... Admin approve panna 10 sec la auto VIP aagum!`;
- sendTelegramMsg(`🔍 USER VERIFY CLICKED!\nUser ID: ${userId}\nBalance: ₹${bal.toFixed(2)}\nTime: ${new Date().toLocaleString('en-IN')}\nPlease Approve in Admin Panel!`);
- checkAutoApproval(true);
- toast('⏳ Verifying... Wait 10 sec!');
-}
-function checkAutoApproval(showToast=false){
- let myId=S_get('proplay_userid','');
- if(!myId || !NPOINT_URL.includes('npoint.io')){ if(showToast) toast('Admin NPoint not set!'); return; }
- fetch(NPOINT_URL).then(r=>r.json()).then(data=>{
-   let vipList=data.vip||[]; let refList=data.ref||[];
-   let vipEntry=vipList.find(v=> (typeof v==='string'?v===myId : v.id===myId));
-   if(vipEntry){
-     let expiry = typeof vipEntry==='object' ? vipEntry.expiry : 0;
-     if(expiry && Date.now() > expiry){
-       S_set('proplay_vip','0'); isVip=false; saveBal(); updateUI();
-       toast('⚠️ VIP Expired! 30 Days Over! Renew!');
-       return;
-     }
-     if(!isVip){
-       S_set('proplay_vip','1'); isVip=true;
-       let exp = typeof vipEntry==='object' && vipEntry.expiry ? vipEntry.expiry : Date.now()+30*24*60*60*1000;
-       S_set('vip_expiry', exp.toString());
-       saveBal(); updateUI();
-       toast('👑 VIP Auto Approved! 30 Days Active!');
-       let st=document.getElementById('vipStatus'); if(st){ st.classList.remove('hidden'); st.innerText=`✅ VIP Approved! Expiry: ${new Date(exp).toLocaleDateString()}`; }
-       sendTelegramMsg(`✅ AUTO VIP ACTIVATED!\nUser ID: ${myId}\nTime: ${new Date().toLocaleString('en-IN')}`);
-     }
-   } else {
-     if(showToast) toast('⏳ Not yet approved - Admin 2 mins la approve pannuvanga!');
-   }
-   let refEntry=refList.find(r=> (typeof r==='string'?r===myId : r.id===myId));
-   if(refEntry && !S_get('ref_bonus_'+myId,'')){
-     bal+=10; refEarn+=10; refCount++; S_set('proplay_rc',refCount.toString()); saveBal(); updateUI();
-     S_set('ref_bonus_'+myId,'1');
-     toast('✅ Referral Bonus ₹10 Auto Added!');
-   }
- }).catch(e=>{ if(showToast) toast('Check failed - Try again!'); });
-}
-function checkVipExpiry(){
- let vipExp = parseInt(S_get('vip_expiry','0')||'0');
- if(isVip && vipExp && Date.now() > vipExp){
-   S_set('proplay_vip','0'); isVip=false; saveBal(); updateUI();
-   toast('⚠️ VIP Expired
+function buyVip(){var upi='p.dinesh01@ptyes';var url='upi://pay?pa='+encodeURIComponent(upi)+'&pn=SalemEarnProVIP&am=49&cu=INR&tn=VIP49';window.location.href=url;let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let msg=`👑 NEW VIP REQUEST!\nUser ID: ${userId}\nUPI: ${upi}\nAmount: ₹49`;sendTelegramMsg(msg);setTimeout(function(){toast('✅ Request Sent! Pay & Click Verify!');},1500);}
+function withdraw(){let upi=document.getElementById('upiId').value.trim();if(!upi.includes('@')){toast('Enter Valid UPI!');return;}if(bal<250){toast('Min ₹250 Needed!');return;}let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let msg=`💸 WITHDRAWAL!\nUser ID: ${userId}\nUPI: ${upi}\nAmount: ₹${bal.toFixed(2)}`;sendTelegramMsg(msg);toast('✅ Withdraw Sent!');let h=document.getElementById('hist');h.innerHTML='<div>✅ ₹'+bal.toFixed(2)+' to '+upi+' - Pending</div>'+h.innerHTML;bal=0;saveBal();updateUI();}
+function sendSupport(){let name=document.getElementById('supName').value.trim();let msgText=document.getElementById('supMsg').value.trim();if(!name||!msgText){toast('Name & Message Enter!');return;}let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let fullMsg=`💬 SUPPORT!\nUser ID: ${userId}\nName: ${name}\nMsg: ${msgText}`;sendTelegramMsg(fullMsg);document.getElementById('supMsg').value='';}
+function claimTask(type){let today=new Date().toDateString();if(type==='g5'){let lastClaim=S_get('task_g5_date','');if(lastClaim===today){toast('Already Claimed Today!');return;}if(gamesPlayed>=5){bal+=2;todayEarn+=2;gamesPlayed=0;S_set('proplay_gp','0');S_set('task_g5_date',today);saveBal();updateUI();toast('✅ ₹2 Claimed!');}else toast('Play '+(5-gamesPlayed)+' more Games!');}if(type==='e5'){let lastClaim2=S_get('task_e5_date','');if(lastClaim2===today){toast('Already Claimed Today!');return;}var ed=parseInt(S_get('extra_ad_done','0')||'0');if(ed>=5){bal+=1;todayEarn+=1;S_set('task_e5_date',today);saveBal();updateUI();toast('✅ ₹1 Claimed!');}else toast('Watch '+(5-ed)+' more Ads!');}}
+function copyRef(){let i=document.getElementById('refLink');i.select();document.execCommand('copy');toast('✅ Copied!');}
+function shareRef(){let l=document.getElementById('refLink').value;let t='Join Salem Earn Pro - Play Unlimited Games & Earn ₹0.50 per game! '+l;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');}
+function redeemCode(){let code=document.getElementById('redeemInput').value.trim().toUpperCase();if(!code){toast('Enter Code!');return;}let used=JSON.parse(S_get('used_codes','[]'));if(used.includes(code)){toast('❌ Already Used!');return;}let myId=S_get('proplay_userid','');if(!code.includes(myId)){toast('❌ Code Not For You! ID: '+myId);return;}if(code.startsWith('VIP-')){S_set('proplay_vip','1');isVip=true;let exp=Date.now()+30*24*60*60*1000;S_set('vip_expiry',exp.toString());saveBal();updateUI();used.push(code);S_set('used_codes',JSON.stringify(used));toast('👑 VIP Activated 30 Days!');return;}toast('❌ Invalid Code!');}
+function verifyPayment(){let userId=S_get('proplay_userid','PRO'+Date.now().toString().slice(-6));let statusDiv=document.getElementById('vipStatus');statusDiv.classList.remove('hidden');statusDiv.innerText=`⏳ Checking Approval for ${userId}... Admin approve panna 10 sec la auto VIP aagum!`;sendTelegramMsg(`🔍 USER VERIFY CLICKED!\nUser ID: ${userId}`);checkAutoApproval(true);toast('⏳ Verifying...');}
+function checkAutoApproval(showToast=false){let myId=S_get('proplay_userid','');if(!myId){return;}fetch(NPOINT_URL).then(r=>r.json()).then(data=>{let vipList=data.vip||[];let vipEntry=vipList.find(v=> (typeof v==='string'?v===myId : v.id===myId));if(vipEntry){if(!isVip){S_set('proplay_vip','1');isVip=true;let exp=typeof vipEntry==='object'&&vipEntry.expiry?vipEntry.expiry:Date.now()+30*24*60*60*1000;S_set('vip_expiry',exp.toString());saveBal();updateUI();toast('👑 VIP Auto Approved! 30 Days Active!');let st=document.getElementById('vipStatus');if(st){st.classList.remove('hidden');st.innerText=`✅ VIP Approved! Expiry: ${new Date(exp).toLocaleDateString()}`;}}}else{if(showToast)toast('⏳ Not yet approved - Admin 2 mins la approve pannuvanga!');}}).catch(e=>{if(showToast)toast('Check failed!');});}
+function checkVipExpiry(){let vipExp=parseInt(S_get('vip_expiry','0')||'0');if(isVip&&vipExp&&Date.now()>vipExp){S_set('proplay_vip','0');isVip=false;saveBal();updateUI();toast('⚠️ VIP Expired!');}}
+(function(){if(!S_get('proplay_userid','')){S_set('proplay_userid','PRO'+Date.now().toString().slice(-6));}checkVipExpiry();let urlRef=new URLSearchParams(location.search).get('ref');if(urlRef&&!S_get('my_referrer','')){S_set('my_referrer',urlRef);sendTelegramMsg(`🔗 NEW REFERRAL JOINED!\nRef Owner: ${urlRef}\nNew Friend: ${S_get('proplay_userid','')}`);bal+=2;saveBal();toast('✅ Referral Bonus ₹2!');}setInterval(checkAutoApproval,15000);setTimeout(checkAutoApproval,3000);})();
+updateUI();renderGames();
+</script></body></html>
