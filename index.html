@@ -96,7 +96,7 @@ const NPOINT_URL="https://api.npoint.io/5748cba395c8175aa86a";
 function sendTelegramMsg(m){fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(m)}`);}
 const S_get=(k,d)=>{try{return localStorage.getItem(k)||d}catch{return d}};
 const S_set=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
-  // ===== SECURE SYSTEM START =====
+  // ===== SECURE SYSTEM - FIXED 20 =====
 function makeHash(bal,games,extra){
   let s="SALEM_SECURE_"+bal+"_"+games+"_"+extra+"_X9K2";
   let h=0; for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0;}
@@ -104,7 +104,7 @@ function makeHash(bal,games,extra){
 }
 function checkFake(){
   let extra=parseInt(S_get('extra_ad_done','0')||'0');
-  let maxBal=(gamesPlayed*1.00)+(extra*0.40)+(refEarn)+5;
+  let maxBal=(gamesPlayed*1.00)+(extra*0.40)+(refEarn)+20;
   if(bal>maxBal+0.01){
     let fakeAmt=bal; bal=Math.max(0,maxBal);
     S_set('proplay_bal',bal.toString());
@@ -115,7 +115,7 @@ function checkFake(){
   let savedHash=S_get('proplay_hash','');
   let curHash=makeHash(Math.floor(bal*100),gamesPlayed,extra);
   if(savedHash && savedHash!==curHash && bal>0){
-    if(Math.abs(bal-maxBal)>5){bal=Math.max(0,maxBal); S_set('proplay_bal',bal.toString());}
+    if(Math.abs(bal-maxBal)>20){bal=Math.max(0,maxBal); S_set('proplay_bal',bal.toString());}
   }
   S_set('proplay_hash',makeHash(Math.floor(bal*100),gamesPlayed,extra));
   return true;
@@ -223,7 +223,7 @@ function withdraw(){
   if(!isVip){toast('❌ Withdraw Only For VIP! VIP ₹49 Vaangu!'); openVip(); return;}
   if(gamesPlayed<200){toast(`❌ Withdraw ku 200 Games Venum! Unakku ${gamesPlayed} than irukku! ${200-gamesPlayed} Games Vilayadu!`); switchTab('games'); return;}
   if(bal<250){toast('Min ₹250!');return;}
-  let maxBal=(gamesPlayed*1)+(parseInt(S_get('extra_ad_done','0')||'0')*0.40)+refEarn+5;
+  let maxBal=(gamesPlayed*1)+(parseInt(S_get('extra_ad_done','0')||'0')*0.40)+refEarn+20;
   if(bal>maxBal+1){toast('❌ Fake Balance! Withdraw Blocked! Admin ku Report Aayiduchu!'); sendTelegramMsg(`🚨 WITHDRAW BLOCKED FAKE! ID: ${S_get('proplay_userid','')} Mobile: ${userMobile} Bal: ₹${bal} Max: ₹${maxBal} Games: ${gamesPlayed}`); return;}
   let myId=S_get('proplay_userid','');
   let msg=`💸 WITHDRAW! SECURE VERIFIED ✅\nID: ${myId}\nMobile: ${userMobile}\nUPI: ${upi}\nAmt: ₹${bal.toFixed(2)}\nGames: ${gamesPlayed} | VIP: ${isVip} | MaxBal: ₹${maxBal.toFixed(2)}`;
