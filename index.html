@@ -3,11 +3,11 @@
 <title>Salem Earn Pro</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- MONETAG - VIGNETTE REELS - 12202984 - HIGH CPM -->
+<!-- MONETAG - VIGNETTE - 12202984 -->
 <script>(function(s){s.dataset.zone='12202984',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <!-- MONETAG - IN-PAGE PUSH - 12203171 -->
 <script>(function(s){s.dataset.zone='12203171',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<!-- MONETAG - ONCLICK POPUNDER - CLAIM - 12206343 -->
+<!-- MONETAG - ONCLICK POPUNDER - 12206343 -->
 <script>(function(s){s.dataset.zone='12206343',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <style>
 :root{--purple:#6d28d9;--bg:#f4f1ff;--card:#fff;--text:#1f2937;--border:#e5e7eb}
@@ -22,65 +22,79 @@
 .notice{position:fixed;right:12px;bottom:12px;z-index:60;display:flex;flex-direction:column;gap:8px}
 .toast{background:#111827;color:#fff;padding:10px 12px;border-radius:12px;font-size:13px}.hidden{display:none!important}
 .reel-box{aspect-ratio:9/13;background:#000;border-radius:20px;overflow:hidden;position:relative;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}
+.spin-wheel{width:200px;height:200px;border-radius:50%;border:8px solid #6d28d9;background:conic-gradient(#f59e0b 0 60deg,#fff 60deg 120deg,#16a34a 120deg 180deg,#ef4444 180deg 240deg,#3b82f6 240deg 300deg,#a855f7 300deg 360deg);display:grid;place-items:center;margin:0 auto;transition:transform 2s cubic-bezier(.17,.67,.12,1.05)}
 </style>
 </head><body>
 <div class="topbar"><div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
 <div class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl bg-black text-white grid place-items-center font-black">S</div><div class="font-black text-lg">Salem Earn Pro 🔒</div><div class="text-xs bg-green-100 px-2 py-1 rounded-full ml-2" id="mobShow">📱 No Login</div></div>
-<div class="flex items-center gap-2"><div class="card px-3 py-1.5 text-sm font-bold">₹<span id="bal">0.00</span></div><button onclick="openVip()" class="btn btn-primary text-sm" style="padding:8px 14px">👑 VIP ₹99</button></div></div></div>
+<div class="flex items-center gap-2"><div class="card px-3 py-1.5 text-sm font-bold">🪙 <span id="balCoin">0</span> | ₹<span id="bal">0.00</span></div><button onclick="openVip()" class="btn btn-primary text-sm" style="padding:8px 14px">👑 VIP ₹99</button></div></div></div>
 <div class="max-w-6xl mx-auto px-4 py-4">
 <div class="flex gap-1 mb-4 overflow-auto">
-<button class="tab active" data-tab="home" onclick="switchTab('home')">Home</button><button class="tab" data-tab="reels" onclick="switchTab('reels')">🎬 Reels</button><button class="tab" data-tab="games" onclick="switchTab('games')">Games</button><button class="tab" data-tab="tasks" onclick="switchTab('tasks')">Tasks</button><button class="tab" data-tab="wallet" onclick="switchTab('wallet')">Wallet</button><button class="tab" data-tab="ref" onclick="switchTab('ref')">Refer</button><button class="tab" data-tab="profile" onclick="switchTab('profile')">Profile</button><button class="tab" data-tab="support" onclick="switchTab('support')">Support</button>
+<button class="tab active" data-tab="home" onclick="switchTab('home')">Home</button><button class="tab" data-tab="reels" onclick="switchTab('reels')">🎬 Reels</button><button class="tab" data-tab="games" onclick="switchTab('games')">Games</button><button class="tab" data-tab="spin" onclick="switchTab('spin')">🎡 Spin</button><button class="tab" data-tab="tasks" onclick="switchTab('tasks')">Tasks</button><button class="tab" data-tab="wallet" onclick="switchTab('wallet')">Wallet</button><button class="tab" data-tab="ref" onclick="switchTab('ref')">Refer</button><button class="tab" data-tab="profile" onclick="switchTab('profile')">Profile</button><button class="tab" data-tab="support" onclick="switchTab('support')">Support</button>
 </div>
 <div id="home" class="tabpane">
-<div class="card p-4 mb-3"><div class="flex justify-between items-center"><div><div class="text-sm text-gray-500">Total Earnings</div><div class="text-2xl font-black">₹<span id="bal2">0.00</span></div></div><div class="text-right"><div class="text-xs text-gray-500">Today</div><div class="font-bold">₹<span id="todayEarn">0.00</span></div></div></div>
-<div class="progress mt-3"><div id="prog"></div></div><div class="text-xs text-gray-500 mt-1"><span id="progText">0</span>/250 to withdraw | Games: <span id="homeGames">0</span>/200 Needed | VIP ₹99 Must</div></div>
+<div class="card p-4 mb-3"><div class="flex justify-between items-center"><div><div class="text-sm text-gray-500">Total Earnings - 100 Coin = ₹1</div><div class="text-2xl font-black">🪙 <span id="balCoin2">0</span> Coin = ₹<span id="bal2">0.00</span></div></div><div class="text-right"><div class="text-xs text-gray-500">Today</div><div class="font-bold">🪙 <span id="todayCoin">0</span> Coin</div></div></div>
+<div class="progress mt-3"><div id="prog"></div></div><div class="text-xs text-gray-500 mt-1"><span id="progText">0 Coin</span> / 25000 Coin to withdraw (₹250) | Games: <span id="homeGames">0</span>/200 Needed | VIP ₹99 Must</div></div>
 <div style="margin:12px 0;display:flex;justify-content:center">
+<!-- ADSTERRA -->
 <script async="async" data-cfasync="false" src="https://bauval.org/21/e1f6d2ba6e1f8dee5821d627b5b57e4f"></script>
 <div id="container-e1f6d2ba6e1f8dee5821d627b5b57e4f"></div>
 </div>
 <div class="grid grid-cols-2 gap-3 mt-3">
-<div class="card p-3"><div class="text-sm text-gray-500">🎬 Reels - 3 Reels = Reward!</div><div class="font-black text-lg">₹0.30 / ₹0.60 VIP</div><button onclick="switchTab('reels')" class="btn btn-primary w-full mt-2">Watch Reels</button></div>
-<div class="card p-3"><div class="text-sm text-gray-500">Play Games - UNLIMITED!</div><div class="font-black text-lg">₹0.50 / game</div><button onclick="switchTab('games')" class="btn btn-primary w-full mt-2">Play Now</button></div>
-<div class="card p-3"><div class="text-sm text-gray-500">Extra Ads - Daily 20x!</div><div class="font-black text-lg">₹0.10 each</div><button onclick="openExtraAd()" class="btn btn-ghost w-full mt-2">Watch Ad (<span id="extraCount">0</span>/20)</button></div>
-<div class="card p-3" style="background:#fef3c7"><div class="text-sm text-gray-500">👑 VIP Plan</div><div class="font-black text-lg">₹99 / 30 Days - 2x Reward!</div><button onclick="openVip()" class="btn btn-primary w-full mt-2">Buy VIP ₹99</button></div>
+<div class="card p-3"><div class="text-sm text-gray-500">🎬 Reels - 3 Reels = Reward!</div><div class="font-black text-lg">30 Coin / 60 VIP</div><button onclick="switchTab('reels')" class="btn btn-primary w-full mt-2">Watch Reels</button></div>
+<div class="card p-3"><div class="text-sm text-gray-500">Play Games - UNLIMITED!</div><div class="font-black text-lg">10 Coin / game</div><button onclick="switchTab('games')" class="btn btn-primary w-full mt-2">Play Now</button></div>
+<div class="card p-3"><div class="text-sm text-gray-500">🎡 Spin Wheel - Daily!</div><div class="font-black text-lg">0 to 100 Coin!</div><button onclick="switchTab('spin')" class="btn btn-primary w-full mt-2">Spin Now</button></div>
+<div class="card p-3"><div class="text-sm text-gray-500">Extra Ads - Daily 20x!</div><div class="font-black text-lg">10 Coin each</div><button onclick="openExtraAd()" class="btn btn-ghost w-full mt-2">Watch Ad (<span id="extraCount">0</span>/20)</button></div>
+<div class="card p-3" style="background:#fef3c7"><div class="text-sm text-gray-500">👑 VIP Plan</div><div class="font-black text-lg">₹99 / 30 Days - 2x Coin!</div><button onclick="openVip()" class="btn btn-primary w-full mt-2">Buy VIP ₹99</button></div>
 </div></div>
 <div id="reels" class="tabpane hidden">
-<div class="card p-3 mb-3 font-bold">🎬 Reels Earn - 3 Reels Paatha = ₹0.30 | VIP ₹0.60 | Daily Max 20 Claims | Monetag Ad Varum!</div>
+<div class="card p-3 mb-3 font-bold">🎬 Reels Earn - 3 Reels Paatha = 30 Coin (₹0.30) | VIP 60 Coin | Daily Max 20 Claims | 100 Coin = ₹1</div>
 <div class="card p-4" style="max-width:400px;margin:0 auto">
 <div class="reel-box" id="reelBox"><div><div style="font-size:50px" id="reelEmoji">🎬</div><div class="font-bold text-lg mt-2" id="reelTitle">Reel 1 - Funny Video</div><div class="text-xs opacity-70 mt-1">15 Sec Paaru - Ad Varum</div></div></div>
 <div class="flex justify-between mt-3 text-sm font-bold"><span id="reelCount">0 / 3 Reels Done</span><span>Today Claims: <span id="reelClaims">0</span>/20</span></div>
 <div class="progress mt-2"><div id="reelProg" style="width:0%"></div></div>
 <button onclick="nextReel()" class="btn btn-primary w-full mt-3">Next Reel 👉 - Ad Paaru</button>
-<button id="claimReelBtn" onclick="claimReelsReward()" class="btn w-full mt-2 hidden" style="background:#16a34a;color:#fff">Claim ₹0.30</button>
-<div class="text-xs text-gray-500 text-center mt-2">3 Reels = 3 Ads = Admin ku 3x Profit - Unakku 1x Reward!</div>
+<button id="claimReelBtn" onclick="claimReelsReward()" class="btn w-full mt-2 hidden" style="background:#16a34a;color:#fff">Claim 30 Coin</button>
+<div class="text-xs text-gray-500 text-center mt-2">100 Coin = ₹1 | 25000 Coin = ₹250 Withdraw</div>
 </div></div>
 <div id="games" class="tabpane hidden">
-<div class="card p-3 mb-3 font-bold">🎮 Play & Earn - Unlimited! ₹0.50 per Game | VIP ₹1.00 | Min 8 Sec Per Game</div>
+<div class="card p-3 mb-3 font-bold">🎮 Play & Earn - Unlimited! 10 Coin per Game | VIP 20 Coin | 100 Coin = ₹1 | Min 8 Sec Per Game</div>
 <div id="gamesGrid" class="grid grid-cols-2 gap-3"></div></div>
+<div id="spin" class="tabpane hidden">
+<div class="card p-4 text-center" style="max-width:400px;margin:0 auto">
+<div class="font-black text-xl">🎡 Lucky Spin Wheel</div>
+<div class="text-xs text-gray-500">1 Spin = 1 Ad Watch Pannu! | 50% Time 0 Coin Varum! | 100 Coin = ₹1</div>
+<div class="my-4"><div class="spin-wheel" id="spinWheel"><div style="background:#fff;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;font-size:30px">🎡</div></div></div>
+<div id="spinResult" class="font-bold">Spin Pannu Bro!</div>
+<div class="text-sm mt-1">🪙 <span id="spinCoins">0</span> Coin = ₹<span id="spinINR">0.00</span></div>
+<button onclick="doSpinWheel()" class="btn btn-primary w-full mt-3">🎡 SPIN - Ad Paaru</button>
+<div class="grid grid-cols-3 gap-2 mt-3 text-xs"><div class="card p-2">0 Coin<br><b>50%</b></div><div class="card p-2">5 Coin<br><b>30%</b></div><div class="card p-2">10 Coin<br><b>12%</b></div><div class="card p-2">20 Coin<br><b>5%</b></div><div class="card p-2">50 Coin<br><b>2%</b></div><div class="card p-2">100 Coin<br><b>1%</b></div></div>
+<div class="text-xs text-gray-500 mt-2">Background la 2 Ad Extra Odum - Unakku 1 Ad than Theriyum!</div>
+</div></div>
 <div id="tasks" class="tabpane hidden">
-<div class="card p-3 mb-3 font-bold">📋 Daily Tasks - Daily 1 Time Only!</div>
-<div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Play 5 Games</div><div class="text-xs text-gray-500">Reward ₹2 - Daily 1x</div></div><button onclick="claimTask('g5')" class="btn btn-ghost text-sm">Claim</button></div>
-<div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Watch 5 Ads</div><div class="text-xs text-gray-500">Reward ₹1 - Daily 1x</div></div><button onclick="claimTask('e5')" class="btn btn-ghost text-sm">Claim</button></div>
-<div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Watch 9 Reels (3 Claims)</div><div class="text-xs text-gray-500">Reward ₹2 - Daily 1x</div></div><button onclick="claimTask('r9')" class="btn btn-ghost text-sm">Claim</button></div>
+<div class="card p-3 mb-3 font-bold">📋 Daily Tasks - Daily 1 Time Only! | 100 Coin = ₹1</div>
+<div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Play 5 Games</div><div class="text-xs text-gray-500">Reward 200 Coin (₹2) - Daily 1x</div></div><button onclick="claimTask('g5')" class="btn btn-ghost text-sm">Claim</button></div>
+<div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Watch 5 Ads</div><div class="text-xs text-gray-500">Reward 100 Coin (₹1) - Daily 1x</div></div><button onclick="claimTask('e5')" class="btn btn-ghost text-sm">Claim</button></div>
+<div class="card p-3 mb-2 flex justify-between items-center"><div><div class="font-bold">Watch 9 Reels (3 Claims)</div><div class="text-xs text-gray-500">Reward 200 Coin (₹2) - Daily 1x</div></div><button onclick="claimTask('r9')" class="btn btn-ghost text-sm">Claim</button></div>
 </div>
 <div id="wallet" class="tabpane hidden">
-<div class="card p-4 mb-3"><div class="font-bold text-lg mb-2">Wallet - ₹<span id="bal3">0.00</span> - Min ₹250</div>
-<div class="text-xs p-2 bg-yellow-50 rounded-lg mb-2">⚠️ Withdraw Rules: VIP ₹99 Must + 200 Games Must + Balance Must Match Games. Fake = Ban!</div>
-<div class="card p-3 mb-2" style="background:#f0fdf4"><div class="font-bold text-sm">💸 Withdrawal Fees - 10%</div><div class="text-xs text-gray-600 mt-1">Example: ₹250 Withdraw panna Fees ₹25, Unakku Varum ₹225<br>₹500 Withdraw panna Fees ₹50, Unakku Varum ₹450<br>Fees Admin + UPI Charges ku!</div><div class="text-sm font-bold mt-2">Unakku Kidaikkum: ₹<span id="netAmt">0.00</span> <span class="text-xs text-gray-500">(Fees: ₹<span id="feeAmt">0.00</span>)</span></div></div>
+<div class="card p-4 mb-3"><div class="font-bold text-lg mb-2">Wallet - 🪙 <span id="balCoin3">0</span> Coin = ₹<span id="bal3">0.00</span> - Min 25000 Coin (₹250)</div>
+<div class="text-xs p-2 bg-yellow-50 rounded-lg mb-2">⚠️ Withdraw Rules: VIP ₹99 Must + 200 Games Must + 25000 Coin Must + 100 Coin = ₹1. Fake = Ban!</div>
+<div class="card p-3 mb-2" style="background:#f0fdf4"><div class="font-bold text-sm">💸 Withdrawal Fees - 10%</div><div class="text-xs text-gray-600 mt-1">Example: 25000 Coin (₹250) Withdraw panna Fees ₹25, Unakku Varum ₹225<br>50000 Coin (₹500) Withdraw panna Fees ₹50, Unakku Varum ₹450<br>Fees Admin + UPI Charges ku!</div><div class="text-sm font-bold mt-2">Unakku Kidaikkum: ₹<span id="netAmt">0.00</span> <span class="text-xs text-gray-500">(Fees: ₹<span id="feeAmt">0.00</span>)</span></div></div>
 <input id="upiId" placeholder="Enter UPI ID" class="w-full p-3 rounded-xl border" style="border:1px solid var(--border)"/>
-<button onclick="withdraw()" class="btn btn-primary w-full mt-3">Withdraw ₹250 - VIP Only</button>
+<button onclick="withdraw()" class="btn btn-primary w-full mt-3">Withdraw 25000 Coin (₹250) - VIP Only</button>
 <div class="text-xs text-center text-gray-500 mt-2" id="vipWithdrawMsg">VIP Active Irunda Mattum Than Withdraw Request Admin ku Pogum!</div></div>
 <div class="card p-3"><div class="font-bold mb-2">History</div><div id="hist" class="text-sm text-gray-500">No history yet!</div></div></div>
-<div id="ref" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">Refer & Earn ₹10!</div>
+<div id="ref" class="tabpane hidden"><div class="card p-4"><div class="font-bold text-lg">Refer & Earn 1000 Coin (₹10)!</div>
 <div class="flex gap-2 mt-3"><input id="refLink" class="flex-1 p-3 rounded-xl border" style="border:1px solid var(--border)" readonly/><button onclick="copyRef()" class="btn btn-primary">Copy</button></div>
 <button onclick="shareRef()" class="btn btn-ghost w-full mt-3">📤 Share WhatsApp</button>
-<div class="mt-4 text-sm"><b>Referrals:</b> <span id="refCount">0</span> | <b>Earned:</b> ₹<span id="refEarn">0</span></div></div></div>
+<div class="mt-4 text-sm"><b>Referrals:</b> <span id="refCount">0</span> | <b>Earned:</b> 🪙 <span id="refEarn">0</span> Coin</div></div></div>
 <div id="profile" class="tabpane hidden">
 <div class="card p-4"><div class="font-bold text-lg">👤 My Profile - Auto VIP</div>
 <div class="mt-3 space-y-2 text-sm">
 <div class="flex justify-between"><span class="text-gray-500">Mobile:</span><b id="pMob">Not Login</b></div>
 <div class="flex justify-between"><span class="text-gray-500">User ID:</span><b id="pId">PRO123</b></div>
-<div class="flex justify-between"><span class="text-gray-500">Balance:</span><b>₹<span id="pBal">0.00</span></b></div>
+<div class="flex justify-between"><span class="text-gray-500">Balance:</span><b>🪙 <span id="pCoin">0</span> Coin = ₹<span id="pBal">0.00</span></b></div>
 <div class="flex justify-between"><span class="text-gray-500">VIP:</span><b id="pVip">No</b></div>
 <div class="flex justify-between"><span class="text-gray-500">VIP Expiry:</span><b id="pVipExp">-</b></div>
 <div class="flex justify-between"><span class="text-gray-500">Games:</span><b id="pGp">0</b></div>
@@ -100,154 +114,127 @@
 <input id="supName" placeholder="Your Name" class="w-full p-3 rounded-xl border mt-3" style="border:1px solid var(--border)"/>
 <textarea id="supMsg" placeholder="Your Doubt..." class="w-full p-3 rounded-xl border mt-2" style="border:1px solid var(--border);min-height:80px"></textarea>
 <button onclick="sendSupport()" class="btn btn-primary w-full mt-3">📩 Send to Admin</button>
-<div class="card p-3 mt-3" style="background:#eff6ff"><div class="font-bold text-sm">📢 Official Channel:</div><a href="https://t.me/SalemEarnPro" target="_blank" style="color:#6d28d9;font-weight:700">t.me/SalemEarnPro</a><div class="text-xs text-gray-500 mt-1">Payment Proof + Update Inga Than Varum!</div></div></div></div>
+<div class="card p-3 mt-3" style="background:#eff6ff"><div class="font-bold text-sm">📢 Official Channel:</div><a href="https://t.me/SalemEarnProOfficial" target="_blank" style="color:#6d28d9;font-weight:700">t.me/SalemEarnProOfficial</a><div class="text-xs text-gray-500 mt-1">Payment Proof + Update Inga Than Varum!</div></div></div></div>
 <div class="card p-4 mt-3" style="text-align:center">
 <div class="font-bold">📢 Official Telegram Channel</div>
-<div class="text-xs text-gray-500 mt-1">Payment Proof + New Update + VIP Offer - Inga than Varum!</div>
-<a href="https://t.me/SalemEarnPro" target="_blank" class="btn btn-primary w-full mt-3">📲 Join Telegram Channel</a>
+<div class="text-xs text-gray-500 mt-1">Payment Proof + New Update + VIP Offer - Inga than Varum! | 100 Coin = ₹1</div>
+<a href="https://t.me/SalemEarnProOfficial" target="_blank" class="btn btn-primary w-full mt-3">📲 Join Telegram Channel</a>
 <a href="https://t.me/SalemEarnProSupport" target="_blank" class="btn btn-ghost w-full mt-2">💬 Support Telegram</a>
 </div>
 <div class="text-center text-xs text-gray-500 py-4" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
 <a href="#" onclick="openPrivacy();return false;" style="color:#6d28d9;font-weight:700">Privacy Policy</a> |
 <a href="#" onclick="openTerms();return false;" style="color:#6d28d9;font-weight:700">Terms & Conditions</a> |
 <a href="#" onclick="openRefund();return false;" style="color:#6d28d9;font-weight:700">Refund Policy</a>
-<div style="width:100%">© 2025 Salem Earn Pro - All Rights Reserved</div>
+<div style="width:100%">© 2025 Salem Earn Pro - All Rights Reserved | 100 Coin = ₹1</div>
 </div></div>
 <div id="loginModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;align-items:center;justify-content:center;padding:16px"><div class="card p-4" style="width:100%;max-width:360px;text-align:center"><div style="font-size:32px">📱</div><div class="font-black text-xl">Mobile Login</div><div class="text-xs text-gray-500 mt-1">Entha mobile la login pannalum same balance varum!</div><input id="loginMob" type="tel" placeholder="10 Digit Mobile Number" maxlength="10" class="w-full p-3 rounded-xl border mt-3" style="border:1px solid var(--border);text-align:center;font-size:18px;font-weight:700"/><button onclick="doLogin()" class="btn btn-primary w-full mt-3">🔓 Login & Sync Balance</button><div class="text-xs text-gray-400 mt-2">Ex: 9876543210</div><button onclick="closeLogin()" class="btn btn-ghost w-full mt-2">Close</button></div></div>
-<div id="gameModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;align-items:center;justify-content:center;padding:16px"><div class="card p-0 overflow-hidden" style="width:100%;max-width:480px"><div class="p-3 flex justify-between items-center border-b"><div class="font-bold" id="gmTitle">Game</div><button onclick="closeGame()" class="btn btn-ghost" style="padding:6px 10px">✕</button></div><div id="gmBody" style="min-height:320px;background:#fff"></div><div class="p-3 border-t flex justify-between items-center"><div class="text-sm">Reward: <b>₹0.50</b></div><button id="gmClaim" onclick="claimGame()" class="btn btn-primary hidden">Claim ₹0.50 - Watch Ad</button></div></div></div>
-<div id="vipModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;align-items:center;justify-content:center;padding:16px"><div class="card p-4" style="width:100%;max-width:380px;text-align:center"><div style="font-size:36px">👑</div><div class="font-black text-xl">VIP ₹99 Only! - 30 Days!</div><div class="text-sm text-gray-500 mt-1">UPI: p.dinesh01@ptyes<br>Note la <b id="vipNoteShow">VIP-PRO123</b> nu varum</div><div class="text-xs p-2 bg-yellow-50 rounded-lg mt-2">✅ 2x Reward | ✅ Withdraw Fast | ✅ Daily Limit Double | ✅ No Ads Limit</div><button onclick="buyVip()" class="btn btn-primary w-full mt-3">💳 Buy VIP via UPI - ₹99</button><div class="card p-3 mt-3 text-left" style="background:#fefce8"><div class="font-bold text-sm">📤 Payment Proof - UTR Number:</div><div class="text-xs text-gray-500">GPay la pay panna piragu 12 digit UTR varum</div><input id="utrInput" placeholder="UTR: Ex 123456789012" class="w-full p-2 rounded-lg border mt-2" style="border:1px solid #ddd"/><input id="utrMob" placeholder="Your Mobile Number" class="w-full p-2 rounded-lg border mt-2" style="border:1px solid #ddd"/><button onclick="submitUTR()" class="btn btn-primary w-full mt-2 text-sm">✅ Submit UTR</button></div><button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2" style="background:#dcfce7;border:2px solid #16a34a">✅ I Paid ₹99 - Verify Auto</button><button onclick="closeVip()" class="btn btn-ghost w-full mt-2">Close</button></div></div>
-<div id="privacyModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;align-items:flex-start;justify-content:center;padding:16px;overflow:auto"><div class="card p-4" style="width:100%;max-width:500px;margin-top:20px"><div class="font-black text-lg">🔒 Privacy Policy - Salem Earn Pro</div><div class="text-xs text-gray-500">Last Updated: 06 Nov 2026</div><div class="text-sm mt-3" style="line-height:1.6;max-height:60vh;overflow:auto"><b>1. Data We Collect:</b><br>Mobile Number, User ID, Balance, Games, Reels, Device Info.<br><br><b>2. Why:</b><br>Balance Sync, Withdraw Verify, Fake Detect ku mattum.<br><br><b>3. Ads:</b><br>Monetag & Adsterra Ads kaamikkurom. Avanga Cookies / Device ID use pannuvanga. Casino / Betting / Fake Prize Ads ah Block pannirukkom.<br><br><b>4. We Don't Share:</b><br>Un Mobile / UPI ah yarukkum vikkamattom. Telegram Admin ku mattum Withdraw Verify ku anuppuvom.<br><br><b>5. Npoint:</b><br>Balance Backup ku Npoint use pannurom.<br><br><b>6. Delete:</b><br>Delete pannanum na @SalemEarnProSupport la sollu - 7 Days la delete panniduvom.<br><br><b>Contact:</b> Telegram - @SalemEarnProSupport</div><button onclick="closePrivacy()" class="btn btn-primary w-full mt-3">Close</button></div></div>
-<div id="termsModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;align-items:flex-start;justify-content:center;padding:16px;overflow:auto"><div class="card p-4" style="width:100%;max-width:500px;margin-top:20px"><div class="font-black text-lg">📜 Terms & Conditions</div><div class="text-sm mt-3" style="line-height:1.6;max-height:60vh;overflow:auto"><b>1. Age:</b> 18+ mattum.<br><br><b>2. Earnings:</b> Games / Reels / Ads paatha than kasu. Fake / Bot / Inspect use panna Ban!<br><br><b>3. Withdraw:</b> Min ₹250, VIP ₹99 Must, 200 Games Must, Fees 10%. 24-48 Hours la Process.<br><br><b>4. VIP ₹99 / 30 Days:</b> 2x Reward, Fast Withdraw. VIP Non-Refundable.<br><br><b>5. Fake:</b> Oru Mobile ku Oru Account. VPN / Fake UTR kudutha Ban!<br><br><b>6. Admin Rights:</b> Rules Meera panna Account Delete panna rights irukku.</div><button onclick="closeTerms()" class="btn btn-primary w-full mt-3">Close</button></div></div>
-<div id="refundModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;align-items:flex-start;justify-content:center;padding:16px;overflow:auto"><div class="card p-4" style="width:100%;max-width:500px;margin-top:20px"><div class="font-black text-lg">💰 Refund Policy - VIP ₹99</div><div class="text-sm mt-3" style="line-height:1.6">VIP ₹99 is Digital Service. Once Activated, <b>No Refund</b>.<br><br><b>Refund Kidaikkum:</b> Payment Success aana VIP Activate aagala na, 24 Hours kulla Telegram la UTR anuppu - Full Refund / Activate panniduvom.<br><br><b>Refund Kidaikkaathu:</b> VIP vaangi use pannitu refund kekka mudiyathu.<br><br><b>Contact:</b> @SalemEarnProSupport</div><button onclick="closeRefund()" class="btn btn-primary w-full mt-3">Close</button></div></div>
+<div id="gameModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;align-items:center;justify-content:center;padding:16px"><div class="card p-0 overflow-hidden" style="width:100%;max-width:480px"><div class="p-3 flex justify-between items-center border-b"><div class="font-bold" id="gmTitle">Game</div><button onclick="closeGame()" class="btn btn-ghost" style="padding:6px 10px">✕</button></div><div id="gmBody" style="min-height:320px;background:#fff"></div><div class="p-3 border-t flex justify-between items-center"><div class="text-sm">Reward: <b>10 Coin</b> <span class="text-xs text-gray-500">(100 Coin = ₹1)</span></div><button id="gmClaim" onclick="claimGame()" class="btn btn-primary hidden">Claim 10 Coin - Watch Ad</button></div></div></div>
+<div id="vipModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;align-items:center;justify-content:center;padding:16px"><div class="card p-4" style="width:100%;max-width:380px;text-align:center"><div style="font-size:36px">👑</div><div class="font-black text-xl">VIP ₹99 Only! - 30 Days!</div><div class="text-sm text-gray-500 mt-1">UPI: p.dinesh01@ptyes<br>Note la <b id="vipNoteShow">VIP-PRO123</b> nu varum</div><div class="text-xs p-2 bg-yellow-50 rounded-lg mt-2">✅ 2x Coin | ✅ Withdraw Fast | ✅ Daily Limit Double | ✅ No Ads Limit</div><button onclick="buyVip()" class="btn btn-primary w-full mt-3">💳 Buy VIP via UPI - ₹99</button><div class="card p-3 mt-3 text-left" style="background:#fefce8"><div class="font-bold text-sm">📤 Payment Proof - UTR Number:</div><div class="text-xs text-gray-500">GPay la pay panna piragu 12 digit UTR varum</div><input id="utrInput" placeholder="UTR: Ex 123456789012" class="w-full p-2 rounded-lg border mt-2" style="border:1px solid #ddd"/><input id="utrMob" placeholder="Your Mobile Number" class="w-full p-2 rounded-lg border mt-2" style="border:1px solid #ddd"/><button onclick="submitUTR()" class="btn btn-primary w-full mt-2 text-sm">✅ Submit UTR</button></div><button onclick="verifyPayment()" class="btn btn-ghost w-full mt-2" style="background:#dcfce7;border:2px solid #16a34a">✅ I Paid ₹99 - Verify Auto</button><button onclick="closeVip()" class="btn btn-ghost w-full mt-2">Close</button></div></div>
+<div id="privacyModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;align-items:flex-start;justify-content:center;padding:16px;overflow:auto"><div class="card p-4" style="width:100%;max-width:500px;margin-top:20px"><div class="font-black text-lg">🔒 Privacy Policy - Salem Earn Pro</div><div class="text-xs text-gray-500">Last Updated: 06 Nov 2026</div><div class="text-sm mt-3" style="line-height:1.6;max-height:60vh;overflow:auto"><b>1. Data We Collect:</b><br>Mobile Number, User ID, Coins, Games, Reels, Device Info. 100 Coin = ₹1<br><br><b>2. Why:</b><br>Balance Sync, Withdraw Verify, Fake Detect ku mattum.<br><br><b>3. Ads:</b><br>Monetag & Adsterra Ads kaamikkurom.<br><br><b>4. We Don't Share:</b><br>Un Mobile / UPI ah yarukkum vikkamattom.<br><br><b>5. Npoint:</b><br>Balance Backup ku Npoint use pannurom.<br><br><b>6. Delete:</b><br>Delete pannanum na @SalemEarnProSupport la sollu.<br><br><b>Contact:</b> Telegram - @SalemEarnProSupport</div><button onclick="closePrivacy()" class="btn btn-primary w-full mt-3">Close</button></div></div>
+<div id="termsModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;align-items:flex-start;justify-content:center;padding:16px;overflow:auto"><div class="card p-4" style="width:100%;max-width:500px;margin-top:20px"><div class="font-black text-lg">📜 Terms & Conditions</div><div class="text-sm mt-3" style="line-height:1.6;max-height:60vh;overflow:auto"><b>1. Age:</b> 18+ mattum.<br><br><b>2. Earnings:</b> 100 Coin = ₹1. Games / Reels / Ads / Spin paatha than Coin. Fake / Bot / Inspect use panna Ban!<br><br><b>3. Withdraw:</b> Min 25000 Coin (₹250), VIP ₹99 Must, 200 Games Must, Fees 10%. 24-48 Hours la Process.<br><br><b>4. VIP ₹99 / 30 Days:</b> 2x Coin, Fast Withdraw. VIP Non-Refundable.<br><br><b>5. Fake:</b> Oru Mobile ku Oru Account. VPN / Fake UTR kudutha Ban!<br><br><b>6. Admin Rights:</b> Rules Meera panna Account Delete panna rights irukku.</div><button onclick="closeTerms()" class="btn btn-primary w-full mt-3">Close</button></div></div>
+<div id="refundModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:120;align-items:flex-start;justify-content:center;padding:16px;overflow:auto"><div class="card p-4" style="width:100%;max-width:500px;margin-top:20px"><div class="font-black text-lg">💰 Refund Policy - VIP ₹99</div><div class="text-sm mt-3" style="line-height:1.6">VIP ₹99 is Digital Service. Once Activated, <b>No Refund</b>.<br><br><b>Refund Kidaikkum:</b> Payment Success aana VIP Activate aagala na, 24 Hours kulla Telegram la UTR anuppu.<br><br><b>Contact:</b> @SalemEarnProSupport</div><button onclick="closeRefund()" class="btn btn-primary w-full mt-3">Close</button></div></div>
 <div id="notice" class="notice"></div>
 <script>
 const TELEGRAM_BOT_TOKEN="8647484868:AAFzFvyxFQJoA65SrVhh-UrT8bq6MEFs0jg";
 const TELEGRAM_CHAT_ID="8855798269";
-const TELEGRAM_CHANNEL="https://t.me/SalemEarnPro";
-const NPOINT_URL="https://api.npoint.io/5748cba395c8175aa86a";
+const TELEGRAM_CHANNEL="https://t.me/SalemEarnProOfficial";
+const NPOINT_URL="https://api.npoint.io/5748cba395c8175aa";
 const VIP_PRICE=99; const WITHDRAW_FEE_PERCENT=10;
 let lastSmartLink=0;
 function sendTelegramMsg(m){fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodeURIComponent(m)}`);}
 const S_get=(k,d)=>{try{return localStorage.getItem(k)||d}catch{return d}};
 const S_set=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
-function makeHash(bal,games,extra){let s="SALEM_SECURE_"+bal+"_"+games+"_"+extra+"_X9K2";let h=0; for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0;} return h.toString(36);}
-function checkFake(){let extra=parseInt(S_get('extra_ad_done','0')||'0');let reelsC=parseInt(S_get('reels_claims_total','0')||'0');let maxBal=(gamesPlayed*1.00)+(extra*0.40)+(reelsC*0.60)+(refEarn)+20;if(bal>maxBal+0.01){let fakeAmt=bal; bal=Math.max(0,maxBal);S_set('proplay_bal',bal.toString());let el=document.getElementById('pSecure'); if(el){el.innerText='⚠️ Fake Detected - Reset'; el.style.color='red';}sendTelegramMsg(`🚨 FAKE BLOCKED! ID: ${S_get('proplay_userid','')} Mobile: ${userMobile} Tried: ₹${fakeAmt.toFixed(2)} Real Max: ₹${maxBal.toFixed(2)} Games: ${gamesPlayed} Extra: ${extra} Reels: ${reelsC}`);toast('⚠️ Fake Balance Detected! Reset to ₹'+bal.toFixed(2));}let savedHash=S_get('proplay_hash','');let curHash=makeHash(Math.floor(bal*100),gamesPlayed,extra);if(savedHash && savedHash!==curHash && bal>0){if(Math.abs(bal-maxBal)>20){bal=Math.max(0,maxBal); S_set('proplay_bal',bal.toString());}}S_set('proplay_hash',makeHash(Math.floor(bal*100),gamesPlayed,extra));return true;}
-function isGameTooFast(){let last=parseInt(S_get('last_game_time','0')||'0');return (Date.now()-last<8000);}
-function isVipActive(){if(!isVip)return false;let exp=parseInt(S_get('vip_expiry','0')||'0');if(exp && Date.now()>exp){isVip=false; S_set('proplay_vip','0'); return false;} return true;}
-// PROFIT KURAIYAMA - SmartLink 5 Mins ku 1 Time mattum!
-function openSmartLinkOnce(){
-  let now=Date.now();
-  if(now-lastSmartLink > 5*60*1000){
-    lastSmartLink=now;
-    window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');
-  }
-}
-let bal=parseFloat(S_get('proplay_bal','0')||'0');
-let todayEarn=parseFloat(S_get('proplay_today','0')||'0');
+let coins=parseInt(S_get('proplay_coins','0')||'0');
+let todayCoin=parseInt(S_get('proplay_today_coin','0')||'0');
+let bal=coins/100;
+let todayEarn=todayCoin/100;
 let isVip=S_get('proplay_vip','0')==='1';
 let gamesPlayed=parseInt(S_get('proplay_gp','0')||'0');
 let refCount=parseInt(S_get('proplay_rc','0')||'0');
-let refEarn=parseFloat(S_get('proplay_re','0')||'0');
+let refEarn=parseInt(S_get('proplay_re','0')||'0');
 let userMobile=S_get('proplay_mobile','');
 let reelsWatched=0;
 let reelsClaimsToday=parseInt(S_get('reels_today','0')||'0');
 let reelsClaimsTotal=parseInt(S_get('reels_claims_total','0')||'0');
 const REELS_DATA=[{e:'😂',t:'Funny Reel - Comedy'},{e:'🔥',t:'Trending Reel - Viral'},{e:'🎵',t:'Music Reel - Dance'},{e:'🏏',t:'Cricket Reel - IPL'},{e:'🍔',t:'Food Reel - Tasty'},{e:'🐶',t:'Cute Dog Reel'}];
-function saveBal(){S_set('proplay_bal',bal.toString());S_set('proplay_today',todayEarn.toString());S_set('proplay_gp',gamesPlayed.toString());S_set('reels_today',reelsClaimsToday.toString());S_set('reels_claims_total',reelsClaimsTotal.toString());checkFake();syncToCloud();}
-function updateUI(){
-  checkFake();
-  document.querySelectorAll('#bal,#bal2,#bal3,#pBal').forEach(e=>{if(e)e.innerText=bal.toFixed(2)});
-  document.querySelectorAll('#todayEarn').forEach(e=>{if(e)e.innerText=todayEarn.toFixed(2)});
-  let fee=bal*WITHDRAW_FEE_PERCENT/100; let net=bal-fee;
-  let fe=document.getElementById('feeAmt'); if(fe)fe.innerText=fee.toFixed(2);
-  let ne=document.getElementById('netAmt'); if(ne)ne.innerText=net.toFixed(2);
-  let p=Math.min(100,Math.floor(bal/2.5)); let el=document.getElementById('prog'); if(el)el.style.width=p+'%';
-  let pt=document.getElementById('progText'); if(pt)pt.innerText=Math.floor(bal);
-  let hg=document.getElementById('homeGames'); if(hg)hg.innerText=gamesPlayed;
-  let rc=document.getElementById('refCount'); if(rc)rc.innerText=refCount;
-  let re=document.getElementById('refEarn'); if(re)re.innerText=refEarn.toFixed(2);
-  let rl=document.getElementById('refLink'); if(rl)rl.value=location.origin+location.pathname+'?ref='+S_get('proplay_userid','PRO123');
-  let gp=document.getElementById('pGp'); if(gp)gp.innerText=gamesPlayed;
-  let pr=document.getElementById('pReels'); if(pr)pr.innerText=reelsClaimsTotal;
-  let pv=document.getElementById('pVip'); if(pv)pv.innerText=isVipActive()?'VIP Active ✅ (₹99)':'No - Buy ₹99';
-  let pve=document.getElementById('pVipExp'); if(pve){let ve=parseInt(S_get('vip_expiry','0')||'0'); pve.innerText=ve?new Date(ve).toLocaleDateString('en-IN'):'-';}
-  let pid=document.getElementById('pId'); if(pid)pid.innerText=S_get('proplay_userid','PRO123');
-  let pm=document.getElementById('pMob'); if(pm)pm.innerText=userMobile||'Not Login';
-  let ms=document.getElementById('mobShow'); if(ms)ms.innerText=userMobile?'📱 '+userMobile:'📱 No Login';
-  let vn=document.getElementById('vipNoteShow'); if(vn)vn.innerText='VIP-'+S_get('proplay_userid','PRO123');
-  let rct=document.getElementById('reelClaims'); if(rct)rct.innerText=reelsClaimsToday;
-  let rcc=document.getElementById('reelCount'); if(rcc)rcc.innerText=reelsWatched+' / 3 Reels Done';
-  let rp=document.getElementById('reelProg'); if(rp)rp.style.width=(reelsWatched/3*100)+'%';
-  let vw=document.getElementById('vipWithdrawMsg'); if(vw)vw.innerText=isVipActive()?'✅ VIP Active - Withdraw Request Admin ku Pogum!':'❌ VIP Illa - Withdraw Request Pogathu! VIP ₹99 Vaangu!';
-  let ec=document.getElementById('extraCount'); if(ec)ec.innerText=parseInt(S_get('extra_ad_done','0')||'0');
+function makeHash(c,g,e){let s="SALEM_SECURE_"+c+"_"+g+"_"+e+"_X9K2";let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0;}return h.toString(36);}
+function checkFake(){let extra=parseInt(S_get('extra_ad_done','0')||'0');let maxCoin=(gamesPlayed*20)+(extra*40)+(reelsClaimsTotal*60)+(refEarn)+2000;if(coins>maxCoin+1){coins=Math.max(0,maxCoin);S_set('proplay_coins',coins.toString());let el=document.getElementById('pSecure');if(el){el.innerText='⚠️ Fake Detected - Reset';el.style.color='red';}sendTelegramMsg(`🚨 FAKE BLOCKED! ID: ${S_get('proplay_userid','')} Mobile: ${userMobile} Coins: ${coins} Max: ${maxCoin}`);toast('⚠️ Fake Detected! Reset!');}bal=coins/100;}
+function isGameTooFast(){let last=parseInt(S_get('last_game_time','0')||'0');return (Date.now()-last<8000);}
+function isVipActive(){if(!isVip)return false;let exp=parseInt(S_get('vip_expiry','0')||'0');if(exp && Date.now()>exp){isVip=false;S_set('proplay_vip','0');return false;}return true;}
+function openSmartLinkOnce(){let now=Date.now();if(now-lastSmartLink>5*60*1000){lastSmartLink=now;window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');}}
+function saveBal(){bal=coins/100;todayEarn=todayCoin/100;S_set('proplay_coins',coins.toString());S_set('proplay_today_coin',todayCoin.toString());S_set('proplay_bal',bal.toString());S_set('proplay_gp',gamesPlayed.toString());S_set('reels_today',reelsClaimsToday.toString());S_set('reels_claims_total',reelsClaimsTotal.toString());S_set('proplay_hash',makeHash(coins,gamesPlayed,parseInt(S_get('extra_ad_done','0')||'0')));checkFake();syncToCloud();}
+function updateUI(){checkFake();bal=coins/100;document.querySelectorAll('#bal,#bal2,#bal3,#pBal,#spinINR').forEach(e=>{if(e)e.innerText=bal.toFixed(2)});document.querySelectorAll('#balCoin,#balCoin2,#balCoin3,#pCoin,#spinCoins').forEach(e=>{if(e)e.innerText=coins});let tc=document.getElementById('todayCoin');if(tc)tc.innerText=todayCoin;let fee=bal*WITHDRAW_FEE_PERCENT/100;let net=bal-fee;let fe=document.getElementById('feeAmt');if(fe)fe.innerText=fee.toFixed(2);let ne=document.getElementById('netAmt');if(ne)ne.innerText=net.toFixed(2);let p=Math.min(100,Math.floor(coins/250));let el=document.getElementById('prog');if(el)el.style.width=p+'%';let pt=document.getElementById('progText');if(pt)pt.innerText=coins+' Coin';let hg=document.getElementById('homeGames');if(hg)hg.innerText=gamesPlayed;let rc=document.getElementById('refCount');if(rc)rc.innerText=refCount;let re=document.getElementById('refEarn');if(re)re.innerText=refEarn;let rl=document.getElementById('refLink');if(rl)rl.value=location.origin+location.pathname+'?ref='+S_get('proplay_userid','PRO123');let gp=document.getElementById('pGp');if(gp)gp.innerText=gamesPlayed;let pr=document.getElementById('pReels');if(pr)pr.innerText=reelsClaimsTotal;let pv=document.getElementById('pVip');if(pv)pv.innerText=isVipActive()?'VIP Active ✅ (₹99)':'No - Buy ₹99';let pve=document.getElementById('pVipExp');if(pve){let ve=parseInt(S_get('vip_expiry','0')||'0');pve.innerText=ve?new Date(ve).toLocaleDateString('en-IN'):'-';}let pid=document.getElementById('pId');if(pid)pid.innerText=S_get('proplay_userid','PRO123');let pm=document.getElementById('pMob');if(pm)pm.innerText=userMobile||'Not Login';let ms=document.getElementById('mobShow');if(ms)ms.innerText=userMobile?'📱 '+userMobile:'📱 No Login';let vn=document.getElementById('vipNoteShow');if(vn)vn.innerText='VIP-'+S_get('proplay_userid','PRO123');let rct=document.getElementById('reelClaims');if(rct)rct.innerText=reelsClaimsToday;let rcc=document.getElementById('reelCount');if(rcc)rcc.innerText=reelsWatched+' / 3 Reels Done';let rp=document.getElementById('reelProg');if(rp)rp.style.width=(reelsWatched/3*100)+'%';let vw=document.getElementById('vipWithdrawMsg');if(vw)vw.innerText=isVipActive()?'✅ VIP Active - Withdraw Request Admin ku Pogum!':'❌ VIP Illa - Withdraw Request Pogathu! VIP ₹99 Vaangu!';let ec=document.getElementById('extraCount');if(ec)ec.innerText=parseInt(S_get('extra_ad_done','0')||'0');}
+function toast(m){let n=document.getElementById('notice');let t=document.createElement('div');t.className='toast';t.innerText=m;n.appendChild(t);setTimeout(()=>t.remove(),4000);}
+function switchTab(t){document.querySelectorAll('.tabpane').forEach(e=>e.classList.add('hidden'));document.getElementById(t).classList.remove('hidden');document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));let btn=document.querySelector('[data-tab='+t+']');if(btn)btn.classList.add('active');if(t==='games')renderGames();}
+function nextReel(){if(reelsClaimsToday>=20){toast('⚠️ Daily Reels Limit Done!');return;}if(reelsWatched>=3){toast('Claim Pannu Bro!');return;}let random=REELS_DATA[Math.floor(Math.random()*REELS_DATA.length)];document.getElementById('reelEmoji').innerText=random.e;document.getElementById('reelTitle').innerText=random.t;reelsWatched++;updateUI();if(reelsWatched>=3){let reward=isVipActive()?60:30;let btn=document.getElementById('claimReelBtn');btn.classList.remove('hidden');btn.innerText='Claim '+reward+' Coin - Ad Paathaachu!';toast('🎉 3 Reels Done! Claim Pannu!');}else{toast('Reel '+reelsWatched+'/3 Done ✅');}}
+function claimReelsReward(){if(reelsWatched<3){toast('3 Reels Paaru Bro!');return;}if(reelsClaimsToday>=20){toast('Daily Limit Done!');return;}openSmartLinkOnce();let reward=isVipActive()?60:30;coins+=reward;todayCoin+=reward;reelsClaimsToday++;reelsClaimsTotal++;reelsWatched=0;document.getElementById('claimReelBtn').classList.add('hidden');saveBal();updateUI();toast('✅ Reels +'+reward+' Coin!');}
+function openPrivacy(){document.getElementById('privacyModal').classList.remove('hidden');document.getElementById('privacyModal').style.display='flex';}
+function closePrivacy(){document.getElementById('privacyModal').classList.add('hidden');document.getElementById('privacyModal').style.display='none';}
+function openTerms(){document.getElementById('termsModal').classList.remove('hidden');document.getElementById('termsModal').style.display='flex';}
+function closeTerms(){document.getElementById('termsModal').classList.add('hidden');document.getElementById('termsModal').style.display='none';}
+function openRefund(){document.getElementById('refundModal').classList.remove('hidden');document.getElementById('refundModal').style.display='flex';}
+function closeRefund(){document.getElementById('refundModal').classList.add('hidden');document.getElementById('refundModal').style.display='none';}
+let spinning=false;
+function doSpinWheel(){
+if(spinning){toast('Wait Pannu!');return;}
+spinning=true;
+openSmartLinkOnce();
+setTimeout(()=>{window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');},600);
+setTimeout(()=>{let f=document.createElement('iframe');f.style.display='none';f.src='https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27';document.body.appendChild(f);setTimeout(()=>f.remove(),3000);},1200);
+let wheel=document.getElementById('spinWheel');
+let deg=360*5+Math.floor(Math.random()*360);
+wheel.style.transform='rotate('+deg+'deg)';
+setTimeout(()=>{
+let r=Math.random()*100;let win=0;
+if(r<50)win=0;else if(r<80)win=5;else if(r<92)win=10;else if(r<97)win=20;else if(r<99)win=50;else win=100;
+coins+=win;todayCoin+=win;saveBal();updateUI();
+document.getElementById('spinResult').innerText=win===0?'😢 0 Coin! Next Spin Try Pannu!':'🎉 You Won '+win+' Coin! (100 Coin = ₹1)';
+toast(win===0?'0 Coin!':'🎉 +'+win+' Coin!');
+spinning=false;
+},2100);
 }
-function toast(m){let n=document.getElementById('notice'); let t=document.createElement('div'); t.className='toast'; t.innerText=m; n.appendChild(t); setTimeout(()=>t.remove(),4000);}
-function switchTab(t){document.querySelectorAll('.tabpane').forEach(e=>e.classList.add('hidden')); document.getElementById(t).classList.remove('hidden'); document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active')); let btn=document.querySelector('[data-tab='+t+']'); if(btn)btn.classList.add('active'); if(t==='games')renderGames();}
-function nextReel(){
-  if(reelsClaimsToday>=20){toast('⚠️ Daily Reels Limit Done! Naaliku Vaa!');return;}
-  if(reelsWatched>=3){toast('Claim Pannu Bro!');return;}
-  let random=REELS_DATA[Math.floor(Math.random()*REELS_DATA.length)];
-  document.getElementById('reelEmoji').innerText=random.e;
-  document.getElementById('reelTitle').innerText=random.t;
-  reelsWatched++; updateUI();
-  if(reelsWatched>=3){let reward=isVipActive()?0.60:0.30;let btn=document.getElementById('claimReelBtn');btn.classList.remove('hidden');btn.innerText='Claim ₹'+reward.toFixed(2)+' - Ad Paathaachu!';toast('🎉 3 Reels Done! Claim Pannu!');} else {toast('Reel ' + reelsWatched + '/3 Done - Ad Paathaachu ✅');}
-}
-function claimReelsReward(){
-  if(reelsWatched<3){toast('3 Reels Paaru Bro!');return;}
-  if(reelsClaimsToday>=20){toast('Daily Limit Done!');return;}
-  openSmartLinkOnce();
-  let reward=isVipActive()?0.60:0.30;
-  bal+=reward; todayEarn+=reward; reelsClaimsToday++; reelsClaimsTotal++;
-  reelsWatched=0; document.getElementById('claimReelBtn').classList.add('hidden');
-  saveBal(); updateUI(); toast('✅ Reels +₹'+reward.toFixed(2)+' Added!');
-}
-function openPrivacy(){document.getElementById('privacyModal').classList.remove('hidden'); document.getElementById('privacyModal').style.display='flex';}
-function closePrivacy(){document.getElementById('privacyModal').classList.add('hidden'); document.getElementById('privacyModal').style.display='none';}
-function openTerms(){document.getElementById('termsModal').classList.remove('hidden'); document.getElementById('termsModal').style.display='flex';}
-function closeTerms(){document.getElementById('termsModal').classList.add('hidden'); document.getElementById('termsModal').style.display='none';}
-function openRefund(){document.getElementById('refundModal').classList.remove('hidden'); document.getElementById('refundModal').style.display='flex';}
-function closeRefund(){document.getElementById('refundModal').classList.add('hidden'); document.getElementById('refundModal').style.display='none';}
-  const GAMES=[{id:'memory',name:'Memory Match',icon:'🧠',desc:'Find pairs'},{id:'tap',name:'Tap Speed',icon:'⚡',desc:'Tap fast'},{id:'math',name:'Math Quiz',icon:'🔢',desc:'Solve 5'},{id:'snake',name:'Snake Dot',icon:'🐍',desc:'Collect 5'},{id:'puzzle',name:'Word Puzzle',icon:'🧩',desc:'Guess word'},{id:'spin',name:'Lucky Spin',icon:'🎡',desc:'Spin'}];
-function renderGames(){let g=document.getElementById('gamesGrid'); if(!g)return; g.innerHTML=''; GAMES.forEach(gm=>{let d=document.createElement('div'); d.className='card p-3'; d.innerHTML='<div style="font-size:28px">'+gm.icon+'</div><div class="font-bold mt-1">'+gm.name+'</div><div class="text-xs text-gray-500">'+gm.desc+' - Unlimited!</div><button class="btn btn-primary w-full mt-2" onclick="openGame(\''+gm.id+'\')">Play - ₹0.50</button>'; g.appendChild(d);});}
+  const GAMES=[{id:'memory',name:'Memory Match',icon:'🧠',desc:'Find pairs'},{id:'tap',name:'Tap Speed',icon:'⚡',desc:'Tap fast'},{id:'math',name:'Math Quiz',icon:'🔢',desc:'Solve 5'},{id:'snake',name:'Snake Dot',icon:'🐍',desc:'Collect 5'},{id:'puzzle',name:'Word Puzzle',icon:'🧩',desc:'Guess word'},{id:'spin',name:'Lucky Spin',icon:'🎡',desc:'Spin'},{id:'carrom',name:'Carrom Flick',icon:'🥏',desc:'Flick 10 - Single Player'}];
+function renderGames(){let g=document.getElementById('gamesGrid');if(!g)return;g.innerHTML='';GAMES.forEach(gm=>{let d=document.createElement('div');d.className='card p-3';d.innerHTML='<div style="font-size:28px">'+gm.icon+'</div><div class="font-bold mt-1">'+gm.name+'</div><div class="text-xs text-gray-500">'+gm.desc+' - Unlimited!</div><button class="btn btn-primary w-full mt-2" onclick="openGame(\''+gm.id+'\')">Play - 10 Coin</button>';g.appendChild(d);});}
 let currentGame=null,gameWon=false,gameStartTime=0;
-function openGame(id){currentGame=GAMES.find(x=>x.id===id); gameWon=false; gameStartTime=Date.now();document.getElementById('gmTitle').innerText=currentGame.name;document.getElementById('gmClaim').classList.add('hidden');document.getElementById('gameModal').classList.remove('hidden'); document.getElementById('gameModal').style.display='flex';let body=document.getElementById('gmBody'); body.innerHTML='';if(id==='memory')startMemory(body); else if(id==='tap')startTap(body); else if(id==='math')startMath(body); else if(id==='snake')startSnake(body); else if(id==='puzzle')startPuzzle(body); else if(id==='spin')startSpin(body);}
-function closeGame(){document.getElementById('gameModal').classList.add('hidden'); document.getElementById('gameModal').style.display='none';}
-function claimGame(){if(!gameWon){toast('Win First!');return;}if(Date.now()-gameStartTime<8000){toast('⚠️ Too Fast! 8 Sec Wait Pannu!');return;}if(isGameTooFast()){toast('⚠️ Too Fast! Slow ah Vilayadu!');return;}S_set('last_game_time',Date.now().toString());openSmartLinkOnce();setTimeout(()=>{let reward=isVipActive()?1.00:0.50; bal+=reward; todayEarn+=reward; gamesPlayed++; saveBal(); updateUI(); toast('✅ +₹'+reward.toFixed(2)); closeGame();},800);}
-function winGame(){gameWon=true; document.getElementById('gmClaim').classList.remove('hidden');}
-function startMemory(body){let emojis=['🍎','🍌','🍇','🍓','🍒','🍑']; let pairs=[...emojis,...emojis].sort(()=>Math.random()-.5);let first=null,second=null,matched=0,lock=false; let grid=document.createElement('div'); grid.style='display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px';pairs.forEach((em)=>{let card=document.createElement('div'); card.style='aspect-ratio:1;background:#ede9fe;border-radius:12px;display:grid;place-items:center;font-size:24px;cursor:pointer;border:2px solid #ddd'; card.innerText='?'; card.dataset.em=em; card.dataset.open='0';card.onclick=()=>{if(lock||card.dataset.open==='1')return; card.innerText=card.dataset.em; card.dataset.open='1'; if(!first){first=card;} else{second=card; lock=true; if(first.dataset.em===second.dataset.em){matched+=2; first=null; second=null; lock=false; if(matched===12)winGame();} else{setTimeout(()=>{first.innerText='?'; first.dataset.open='0'; second.innerText='?'; second.dataset.open='0'; first=null; second=null; lock=false;},600);}}}; grid.appendChild(card);}); body.appendChild(grid);}
-function startTap(body){let c=0; body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Tap 20 Times!</div><div style="font-size:40px" id="tapC">0</div><button class="btn btn-primary" style="width:120px;height:120px;border-radius:50%;font-size:40px" onclick="tapInc()">👆</button></div>'; window.tapInc=()=>{c++; document.getElementById('tapC').innerText=c; if(c>=20)winGame();};}
-function startMath(body){let q=0,score=0; function nextQ(){if(q>=5){winGame(); body.innerHTML='<div style="padding:20px;text-align:center" class="font-bold">✅ Done! Claim Pannu!</div>'; return;} let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1,ans=a+b; body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">'+a+' + '+b+' = ?</div><div style="display:flex;gap:8px;justify-content:center;margin-top:12px"><button class="btn btn-ghost" onclick="mathAns('+ans+','+ans+')">'+ans+'</button><button class="btn btn-ghost" onclick="mathAns('+(ans+1)+','+ans+')">'+(ans+1)+'</button><button class="btn btn-ghost" onclick="mathAns('+(ans+2)+','+ans+')">'+(ans+2)+'</button></div><div class="text-xs mt-2">'+q+'/5</div></div>'; window.mathAns=(v,correct)=>{if(v===correct){q++; score++; nextQ();} else toast('Thappu!');};} nextQ();}
-function startSnake(body){let c=0; body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Click Dot 5 Times!</div><div style="font-size:40px" id="snakeC">🐍 0/5</div><button class="btn btn-primary mt-3" onclick="snakeInc()">🍎 Collect</button></div>'; window.snakeInc=()=>{c++; document.getElementById('snakeC').innerText='🐍 '+c+'/5'; if(c>=5)winGame();};}
-function startPuzzle(body){let words=['CAT','DOG','SUN','WIN']; let w=words[Math.floor(Math.random()*words.length)]; body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Guess Word: '+w[0]+' _ '+w[2]+'</div><input id="puzIn" placeholder="Full Word" class="w-full p-3 rounded-xl border mt-3" style="border:1px solid #ddd;text-align:center"/><button class="btn btn-primary w-full mt-2" onclick="checkPuz(\''+w+'\')">Check</button></div>'; window.checkPuz=(correct)=>{let v=document.getElementById('puzIn').value.toUpperCase(); if(v===correct)winGame(); else toast('Thappu! Try Again!');};}
-function startSpin(body){body.innerHTML='<div style="padding:20px;text-align:center"><div style="font-size:60px" id="spinE">🎡</div><button class="btn btn-primary mt-3" onclick="doSpin()">Spin!</button></div>'; window.doSpin=()=>{let arr=['🎉','⭐','💎','🎁']; document.getElementById('spinE').innerText=arr[Math.floor(Math.random()*arr.length)]; setTimeout(winGame,500);};}
-function openExtraAd(){let extra=parseInt(S_get('extra_ad_done','0')||'0'); if(extra>=20){toast('Daily Extra Ad Limit Done! 20/20');return;} openSmartLinkOnce(); setTimeout(()=>{bal+=0.10; todayEarn+=0.10; S_set('extra_ad_done',(extra+1).toString()); saveBal(); updateUI(); toast('✅ +₹0.10 Extra Ad - '+(extra+1)+'/20');},800);}
-function claimTask(type){let todayKey='task_'+type+'_'+new Date().toDateString(); if(S_get(todayKey,'0')==='1'){toast('Already Claimed Today!');return;} let ok=false,rew=0; if(type==='g5'&&gamesPlayed>=5){ok=true;rew=2;} if(type==='e5'&&parseInt(S_get('extra_ad_done','0')||'0')>=5){ok=true;rew=1;} if(type==='r9'&&reelsClaimsTotal>=3){ok=true;rew=2;} if(!ok){toast('Task Mudiyala!');return;} S_set(todayKey,'1'); bal+=rew; todayEarn+=rew; saveBal(); updateUI(); toast('✅ Task +₹'+rew);}
-// ===== WITHDRAW - VIP ONLY + FEES 10% =====
+function openGame(id){currentGame=GAMES.find(x=>x.id===id);gameWon=false;gameStartTime=Date.now();document.getElementById('gmTitle').innerText=currentGame.name;document.getElementById('gmClaim').classList.add('hidden');document.getElementById('gmClaim').innerText='Claim '+(isVipActive()?20:10)+' Coin - Watch Ad';document.getElementById('gameModal').classList.remove('hidden');document.getElementById('gameModal').style.display='flex';let body=document.getElementById('gmBody');body.innerHTML='';if(id==='memory')startMemory(body);else if(id==='tap')startTap(body);else if(id==='math')startMath(body);else if(id==='snake')startSnake(body);else if(id==='puzzle')startPuzzle(body);else if(id==='spin')startSpin(body);else if(id==='carrom')startCarrom(body);}
+function closeGame(){document.getElementById('gameModal').classList.add('hidden');document.getElementById('gameModal').style.display='none';}
+function claimGame(){if(!gameWon){toast('Win First!');return;}if(Date.now()-gameStartTime<8000){toast('⚠️ Too Fast! 8 Sec Wait Pannu!');return;}if(isGameTooFast()){toast('⚠️ Too Fast! Slow ah Vilayadu!');return;}S_set('last_game_time',Date.now().toString());openSmartLinkOnce();setTimeout(()=>{window.open('https://araplhn.org/4/69486a0ba85e1ba54d445e63ddcb5c27','_blank');},500);setTimeout(()=>{let reward=isVipActive()?20:10;coins+=reward;todayCoin+=reward;gamesPlayed++;saveBal();updateUI();toast('✅ +'+reward+' Coin! (100 Coin = ₹1)');closeGame();},800);}
+function winGame(){gameWon=true;document.getElementById('gmClaim').classList.remove('hidden');}
+function startMemory(body){let emojis=['🍎','🍌','🍇','🍓','🍒','🍑'];let pairs=[...emojis,...emojis].sort(()=>Math.random()-.5);let first=null,second=null,matched=0,lock=false;let grid=document.createElement('div');grid.style='display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px';pairs.forEach((em)=>{let card=document.createElement('div');card.style='aspect-ratio:1;background:#ede9fe;border-radius:12px;display:grid;place-items:center;font-size:24px;cursor:pointer;border:2px solid #ddd';card.innerText='?';card.dataset.em=em;card.dataset.open='0';card.onclick=()=>{if(lock||card.dataset.open==='1')return;card.innerText=card.dataset.em;card.dataset.open='1';if(!first){first=card;}else{second=card;lock=true;if(first.dataset.em===second.dataset.em){matched+=2;first=null;second=null;lock=false;if(matched===12)winGame();}else{setTimeout(()=>{first.innerText='?';first.dataset.open='0';second.innerText='?';second.dataset.open='0';first=null;second=null;lock=false;},600);}}};grid.appendChild(card);});body.appendChild(grid);}
+function startTap(body){let c=0;body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Tap 20 Times!</div><div style="font-size:40px" id="tapC">0</div><button class="btn btn-primary" style="width:120px;height:120px;border-radius:50%;font-size:40px" onclick="tapInc()">👆</button></div>';window.tapInc=()=>{c++;document.getElementById('tapC').innerText=c;if(c>=20)winGame();};}
+function startMath(body){let q=0;function nextQ(){if(q>=5){winGame();body.innerHTML='<div style="padding:20px;text-align:center" class="font-bold">✅ Done! Claim Pannu!</div>';return;}let a=Math.floor(Math.random()*10)+1,b=Math.floor(Math.random()*10)+1,ans=a+b;body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">'+a+' + '+b+' = ?</div><div style="display:flex;gap:8px;justify-content:center;margin-top:12px"><button class="btn btn-ghost" onclick="mathAns('+ans+','+ans+')">'+ans+'</button><button class="btn btn-ghost" onclick="mathAns('+(ans+1)+','+ans+')">'+(ans+1)+'</button><button class="btn btn-ghost" onclick="mathAns('+(ans+2)+','+ans+')">'+(ans+2)+'</button></div><div class="text-xs mt-2">'+q+'/5</div></div>';window.mathAns=(v,correct)=>{if(v===correct){q++;nextQ();}else toast('Thappu!');};}nextQ();}
+function startSnake(body){let c=0;body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Click Dot 5 Times!</div><div style="font-size:40px" id="snakeC">🐍 0/5</div><button class="btn btn-primary mt-3" onclick="snakeInc()">🍎 Collect</button></div>';window.snakeInc=()=>{c++;document.getElementById('snakeC').innerText='🐍 '+c+'/5';if(c>=5)winGame();};}
+function startPuzzle(body){let words=['CAT','DOG','SUN','WIN'];let w=words[Math.floor(Math.random()*words.length)];body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Guess Word: '+w[0]+' _ '+w[2]+'</div><input id="puzIn" placeholder="Full Word" class="w-full p-3 rounded-xl border mt-3" style="border:1px solid #ddd;text-align:center"/><button class="btn btn-primary w-full mt-2" onclick="checkPuz(\''+w+'\')">Check</button></div>';window.checkPuz=(correct)=>{let v=document.getElementById('puzIn').value.toUpperCase();if(v===correct)winGame();else toast('Thappu! Try Again!');};}
+function startSpin(body){body.innerHTML='<div style="padding:20px;text-align:center"><div style="font-size:60px" id="spinE">🎡</div><button class="btn btn-primary mt-3" onclick="doSpin()">Spin!</button></div>';window.doSpin=()=>{let arr=['🎉','⭐','💎','🎁'];document.getElementById('spinE').innerText=arr[Math.floor(Math.random()*arr.length)];setTimeout(winGame,500);};}
+// CARROM - 10 FLICK - UPDATED!
+function startCarrom(body){let s=0;body.innerHTML='<div style="padding:20px;text-align:center"><div class="font-bold">Carrom Flick - Single Player!</div><div class="text-xs text-gray-500">10 Flick Pannu - 10 Coin Vaangu!</div><div style="font-size:60px;margin:10px">🥏</div><div>Score: <span id="carromScore">0</span>/10</div><div class="progress mt-2"><div id="carromProg" style="width:0%"></div></div><button class="btn btn-primary mt-3" onclick="carromHit()">🏏 Flick!</button></div>';window.carromHit=()=>{s++;document.getElementById('carromScore').innerText=s;document.getElementById('carromProg').style.width=(s/10*100)+'%';if(s>=10)winGame();};}
+function openExtraAd(){let extra=parseInt(S_get('extra_ad_done','0')||'0');if(extra>=20){toast('Daily Extra Ad Limit Done! 20/20');return;}openSmartLinkOnce();setTimeout(()=>{coins+=10;todayCoin+=10;S_set('extra_ad_done',(extra+1).toString());saveBal();updateUI();toast('✅ +10 Coin Extra Ad - '+(extra+1)+'/20');},800);}
+function claimTask(type){let todayKey='task_'+type+'_'+new Date().toDateString();if(S_get(todayKey,'0')==='1'){toast('Already Claimed Today!');return;}let ok=false,rew=0;if(type==='g5'&&gamesPlayed>=5){ok=true;rew=200;}if(type==='e5'&&parseInt(S_get('extra_ad_done','0')||'0')>=5){ok=true;rew=100;}if(type==='r9'&&reelsClaimsTotal>=3){ok=true;rew=200;}if(!ok){toast('Task Mudiyala!');return;}S_set(todayKey,'1');coins+=rew;todayCoin+=rew;saveBal();updateUI();toast('✅ Task +'+rew+' Coin');}
 function withdraw(){
-  let upi=document.getElementById('upiId').value.trim();
-  if(!upi.includes('@')){toast('Valid UPI Kudu!');return;}
-  if(bal<250){toast('Min ₹250 Venum! Ipo ₹'+bal.toFixed(2));return;}
-  if(!isVipActive()){toast('❌ VIP Illa! VIP ₹99 Vaangina Mattum Than Withdraw Request Admin ku Pogum!');openVip(); return;}
-  if(gamesPlayed<200){toast('200 Games Venum! Ipo '+gamesPlayed);return;}
-  let fee=bal*WITHDRAW_FEE_PERCENT/100; let net=bal-fee;
-  sendTelegramMsg(`💸 WITHDRAW REQ - VIP ✅\nID: ${S_get('proplay_userid','')}\nMobile: ${userMobile}\nUPI: ${upi}\nTotal: ₹${bal.toFixed(2)}\nFees (10%): ₹${fee.toFixed(2)}\nPay To User: ₹${net.toFixed(2)}\nGames: ${gamesPlayed} Reels: ${reelsClaimsTotal}\nVIP Expiry: ${new Date(parseInt(S_get('vip_expiry','0'))).toLocaleDateString('en-IN')}`);
-  document.getElementById('hist').innerHTML=`Withdraw ₹${bal.toFixed(2)} Requested<br>Fees ₹${fee.toFixed(2)} - You Get ₹${net.toFixed(2)}<br>Status: Pending - VIP ✅`;
-  toast('✅ Withdraw Request Sent! VIP ✅ - Fees ₹'+fee.toFixed(2)+' - You Get ₹'+net.toFixed(2));
+let upi=document.getElementById('upiId').value.trim();
+if(!upi.includes('@')){toast('Valid UPI Kudu!');return;}
+if(coins<25000){toast('Min 25000 Coin Venum! Ipo '+coins+' Coin = ₹'+(coins/100).toFixed(2));return;}
+if(!isVipActive()){toast('❌ VIP Illa! VIP ₹99 Vaangina Mattum Than Withdraw Request Admin ku Pogum!');openVip();return;}
+if(gamesPlayed<200){toast('200 Games Venum! Ipo '+gamesPlayed);return;}
+let totalINR=coins/100;let fee=totalINR*WITHDRAW_FEE_PERCENT/100;let net=totalINR-fee;
+sendTelegramMsg(`💸 WITHDRAW REQ - VIP ✅\nID: ${S_get('proplay_userid','')}\nMobile: ${userMobile}\nUPI: ${upi}\nCoins: ${coins}\nTotal: ₹${totalINR.toFixed(2)}\nFees (10%): ₹${fee.toFixed(2)}\nPay To User: ₹${net.toFixed(2)}\nGames: ${gamesPlayed} Reels: ${reelsClaimsTotal}\nVIP Expiry: ${new Date(parseInt(S_get('vip_expiry','0'))).toLocaleDateString('en-IN')}`);
+document.getElementById('hist').innerHTML=`Withdraw ${coins} Coin (₹${totalINR.toFixed(2)}) Requested<br>Fees ₹${fee.toFixed(2)} - You Get ₹${net.toFixed(2)}<br>Status: Pending - VIP ✅`;
+toast('✅ Withdraw Request Sent! VIP ✅ - You Get ₹'+net.toFixed(2));
 }
-function copyRef(){let el=document.getElementById('refLink'); el.select(); document.execCommand('copy'); toast('Copied!');}
-function shareRef(){let link=document.getElementById('refLink').value; window.open('https://wa.me/?text='+encodeURIComponent('Salem Earn Pro - Daily Earn Pannu! '+link));}
-function openLogin(){document.getElementById('loginModal').classList.remove('hidden'); document.getElementById('loginModal').style.display='flex';}
-function closeLogin(){document.getElementById('loginModal').classList.add('hidden'); document.getElementById('loginModal').style.display='none';}
-function doLogin(){let m=document.getElementById('loginMob').value.trim(); if(m.length!==10){toast('10 Digit Number Kudu!');return;} userMobile=m; S_set('proplay_mobile',m); if(!S_get('proplay_userid',''))S_set('proplay_userid','PRO'+m.slice(-4)); updateUI(); closeLogin(); toast('✅ Login Done!'); syncToCloud();}
-function openVip(){document.getElementById('vipModal').classList.remove('hidden'); document.getElementById('vipModal').style.display='flex';}
-function closeVip(){document.getElementById('vipModal').classList.add('hidden'); document.getElementById('vipModal').style.display='none';}
-function buyVip(){let uid=S_get('proplay_userid','PRO123'); let upi='p.dinesh01@ptyes'; window.location.href='upi://pay?pa='+upi+'&pn=SalemEarnPro&am=99&cu=INR&tn=VIP-'+uid;}
-function submitUTR(){let utr=document.getElementById('utrInput').value.trim(); let mob=document.getElementById('utrMob').value.trim(); if(utr.length<10){toast('UTR Correct ah Kudu!');return;} sendTelegramMsg(`👑 VIP UTR ₹99! ID: ${S_get('proplay_userid','')} Mobile: ${mob||userMobile} UTR: ${utr} Amt: ₹99`); toast('✅ UTR Sent! Admin Verify Pannuvar!');}
-function verifyPayment(){sendTelegramMsg(`🔍 VIP VERIFY REQ ₹99! ID: ${S_get('proplay_userid','')} Mobile: ${userMobile} Pls Check Payment ₹99`); toast('Verify Request Sent!');}
-function redeemCode(){let c=document.getElementById('redeemInput').value.trim(); if(c==='VIP-'+S_get('proplay_userid','')+'-AB12'){isVip=true; S_set('proplay_vip','1'); S_set('vip_expiry',(Date.now()+30*24*60*60*1000).toString()); updateUI(); toast('✅ VIP Activated!');} else toast('Invalid Code!');}
-function sendSupport(){let n=document.getElementById('supName').value; let m=document.getElementById('supMsg').value; sendTelegramMsg(`💬 SUPPORT! Name: ${n} Mobile: ${userMobile} Msg: ${m}`); toast('✅ Sent to Admin!');}
-async function syncToCloud(){try{let uid=S_get('proplay_userid',''); if(!uid)return; let data={userid:uid,mobile:userMobile,bal:bal,games:gamesPlayed,reels:reelsClaimsTotal,vip:isVip?1:0}; await fetch(NPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{});}catch{}}
+function copyRef(){let el=document.getElementById('refLink');el.select();document.execCommand('copy');toast('Copied!');}
+function shareRef(){let link=document.getElementById('refLink').value;window.open('https://wa.me/?text='+encodeURIComponent('Salem Earn Pro - Daily Earn Pannu! 100 Coin = ₹1 - '+link));}
+function openLogin(){document.getElementById('loginModal').classList.remove('hidden');document.getElementById('loginModal').style.display='flex';}
+function closeLogin(){document.getElementById('loginModal').classList.add('hidden');document.getElementById('loginModal').style.display='none';}
+function doLogin(){let m=document.getElementById('loginMob').value.trim();if(m.length!==10){toast('10 Digit Number Kudu!');return;}userMobile=m;S_set('proplay_mobile',m);if(!S_get('proplay_userid',''))S_set('proplay_userid','PRO'+m.slice(-4));updateUI();closeLogin();toast('✅ Login Done!');syncToCloud();}
+function openVip(){document.getElementById('vipModal').classList.remove('hidden');document.getElementById('vipModal').style.display='flex';}
+function closeVip(){document.getElementById('vipModal').classList.add('hidden');document.getElementById('vipModal').style.display='none';}
+function buyVip(){let uid=S_get('proplay_userid','PRO123');let upi='p.dinesh01@ptyes';window.location.href='upi://pay?pa='+upi+'&pn=SalemEarnPro&am=99&cu=INR&tn=VIP-'+uid;}
+function submitUTR(){let utr=document.getElementById('utrInput').value.trim();let mob=document.getElementById('utrMob').value.trim();if(utr.length<10){toast('UTR Correct ah Kudu!');return;}sendTelegramMsg(`👑 VIP UTR ₹99! ID: ${S_get('proplay_userid','')} Mobile: ${mob||userMobile} UTR: ${utr} Amt: ₹99`);toast('✅ UTR Sent! Admin Verify Pannuvar!');}
+function verifyPayment(){sendTelegramMsg(`🔍 VIP VERIFY REQ ₹99! ID: ${S_get('proplay_userid','')} Mobile: ${userMobile} Pls Check Payment ₹99`);toast('Verify Request Sent!');}
+function redeemCode(){let c=document.getElementById('redeemInput').value.trim();if(c==='VIP-'+S_get('proplay_userid','')+'-AB12'){isVip=true;S_set('proplay_vip','1');S_set('vip_expiry',(Date.now()+30*24*60*60*1000).toString());updateUI();toast('✅ VIP Activated!');}else toast('Invalid Code!');}
+function sendSupport(){let n=document.getElementById('supName').value;let m=document.getElementById('supMsg').value;sendTelegramMsg(`💬 SUPPORT! Name: ${n} Mobile: ${userMobile} Msg: ${m}`);toast('✅ Sent to Admin!');}
+async function syncToCloud(){try{let uid=S_get('proplay_userid','');if(!uid)return;let data={userid:uid,mobile:userMobile,coins:coins,bal:coins/100,games:gamesPlayed,reels:reelsClaimsTotal,vip:isVip?1:0};await fetch(NPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{});}catch{}}
 if(!S_get('proplay_userid',''))S_set('proplay_userid','PRO'+Math.floor(100+Math.random()*900));
-let urlP=new URLSearchParams(location.search); if(urlP.get('ref')){S_set('proplay_rc',(parseInt(S_get('proplay_rc','0')||'0')+1).toString());}
-updateUI(); renderGames();
+let urlP=new URLSearchParams(location.search);if(urlP.get('ref')){S_set('proplay_rc',(parseInt(S_get('proplay_rc','0')||'0')+1).toString());}
+updateUI();renderGames();
 </script></body></html>
